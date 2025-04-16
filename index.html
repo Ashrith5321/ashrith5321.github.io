@@ -12,38 +12,22 @@
     </style>
   </head>
   <body class="bg-white text-black transition-colors duration-300" id="pageBody">
-    <header class="bg-blue-900 text-white sticky top-0 z-50 shadow-md">
-      <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-        <h1 class="text-2xl font-bold">Ashrith Edukulla</h1>
-        <div class="flex space-x-4">
-          <nav class="hidden md:flex space-x-4">
-            <a href="#education" class="hover:underline">Education</a>
-            <a href="#experience" class="hover:underline">Experience</a>
-            <a href="#projects" class="hover:underline">Projects</a>
-            <a href="#skills" class="hover:underline">Skills</a>
-            <a href="#contact" class="hover:underline">Contact</a>
-          </nav>
-          <button
-            id="toggleTheme"
-            class="bg-gray-200 text-black px-2 py-1 rounded hover:bg-gray-300 transition"
-          >
-            🌙
-          </button>
+    <!-- Hero Section with Image and Info -->
+    <section class="bg-white dark:bg-black text-center px-6 py-12 shadow">
+      <div class="flex flex-col items-center gap-4">
+        <img src="ashrith.jpg" alt="Ashrith Edukulla" class="w-36 h-36 rounded-2xl shadow-md object-cover" />
+        <div>
+          <h1 class="text-3xl font-bold text-black dark:text-white">Ashrith Edukulla</h1>
+          <p class="text-gray-700 dark:text-gray-300 text-lg">Robotics @ University of Michigan</p>
+          <p class="text-sm text-gray-500 dark:text-gray-400">📍 Ann Arbor, MI, US</p>
+          <p class="mt-1 text-green-500">● Building Intelligent Systems</p>
+        </div>
+        <div class="mt-4 flex flex-wrap justify-center gap-6">
+          <a href="mailto:ashed@umich.edu" class="text-sm text-blue-500 hover:underline">ashed@umich.edu</a>
+          <a href="https://www.linkedin.com/in/ashrith-edukulla-633b141a7/" target="_blank" class="text-sm text-blue-500 hover:underline">LinkedIn</a>
+          <a href="Ashrith_Edukulla_Resume.pdf" download class="text-sm text-blue-500 hover:underline">📄 Download Resume</a>
         </div>
       </div>
-    </header>
-
-    <section class="text-center py-12">
-      <p class="text-lg">
-        He/Him | <a href="mailto:ashed@umich.edu" class="text-blue-600 underline">ashed@umich.edu</a> |
-        (248) 734-3391
-      </p>
-      <p class="mt-2 text-blue-600 underline">
-        <a href="https://www.linkedin.com/in/ashrith-edukulla-633b141a7/" target="_blank">LinkedIn Profile</a>
-      </p>
-      <p class="mt-2">
-        <a href="Ashrith_Edukulla_Resume.pdf" download class="underline text-blue-500">📄 Download Resume</a>
-      </p>
     </section>
 
     <!-- Projects Gallery Section -->
@@ -79,6 +63,7 @@
       </form>
     </section>
 
+    <!-- Theme Toggle Script -->
     <script>
       const toggleBtn = document.getElementById("toggleTheme");
       const body = document.getElementById("pageBody");
@@ -91,7 +76,7 @@
         toggleBtn.textContent = "☀️";
       }
 
-      toggleBtn.addEventListener("click", () => {
+      toggleBtn?.addEventListener("click", () => {
         const isDark = body.classList.contains("bg-gray-900");
 
         if (!isDark) {
