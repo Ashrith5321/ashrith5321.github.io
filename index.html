@@ -18,7 +18,11 @@
         <button id="menuToggle" class="md:hidden text-xl px-2 py-1 rounded bg-gray-200 dark:bg-gray-700">☰</button>
         <nav id="navMenu" class="hidden md:flex flex-wrap gap-4 text-sm md:text-base items-center justify-center bg-gray-100 dark:bg-gray-900 md:bg-transparent md:dark:bg-transparent px-4 py-2 rounded-lg md:rounded-none">
           <a href="#intro" class="hover:underline">Intro</a>
+          <a href="#education" class="hover:underline">Education</a>
+          <a href="#experience" class="hover:underline">Work</a>
           <a href="#projects" class="hover:underline">Projects</a>
+          <a href="#skills" class="hover:underline">Stack</a>
+          <a href="#awards" class="hover:underline">Awards</a>
           <a href="#contact" class="hover:underline">Contact</a>
           <button id="toggleTheme" class="text-xl px-2 py-1 rounded bg-gray-200 dark:bg-gray-700">🌙</button>
         </nav>
@@ -36,6 +40,39 @@
         <a href="mailto:ashed@umich.edu" class="underline text-blue-500">Email</a>
         <a href="https://www.linkedin.com/in/ashrith-edukulla-633b141a7/" target="_blank" class="underline text-blue-500">LinkedIn</a>
         <a href="Ashrith_Edukulla_Resume.pdf" download class="underline text-blue-500">📄 Download Resume</a>
+      </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="max-w-4xl mx-auto px-4 py-10">
+      <h2 class="text-2xl font-bold mb-4">Education 🎓</h2>
+      <p><strong>University of Michigan, Ann Arbor</strong></p>
+      <p>Bachelors of Engineering in Robotics (Aug 2024 – May 2027)</p>
+      <ul class="list-disc list-inside mt-2">
+        <li>GPA: 3.96/4.0</li>
+        <li>Honors: Rank 3 - World Robotics Olympiad, 4x IYRC Medalist, 3x AMC Qualifier, 2x AIME Qualifier</li>
+        <li>Relevant Coursework: Data Structures, Circuit Design, Linear Algebra, Robotics System Control</li>
+      </ul>
+    </section>
+
+    <!-- Work Experience Section -->
+    <section id="experience" class="max-w-4xl mx-auto px-4 py-10">
+      <h2 class="text-2xl font-bold mb-4">Work Experience 💼</h2>
+      <div class="mb-4">
+        <h3 class="font-semibold">Michigan Mars Rover – Embedded Software Engineer</h3>
+        <p class="text-sm italic">Nov 2024 – May 2025</p>
+        <ul class="list-disc list-inside">
+          <li>Developed embedded software using STM32Cube IDE for interfacing with motors, LEDs, and sensors</li>
+          <li>Collaborated with the team to ensure seamless hardware integration</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-semibold">LeapLabs – Robotics Assistant Intern</h3>
+        <p class="text-sm italic">Apr 2023 – Jul 2023</p>
+        <ul class="list-disc list-inside">
+          <li>Taught robotics concepts, helped build prototypes and supported student projects</li>
+          <li>Co-developed educational content and helped debug hardware</li>
+        </ul>
       </div>
     </section>
 
@@ -61,6 +98,27 @@
       </div>
     </section>
 
+    <!-- Skills Section -->
+    <section id="skills" class="max-w-4xl mx-auto px-4 py-10">
+      <h2 class="text-2xl font-bold mb-4">Tech Stack 🛠️</h2>
+      <ul class="list-disc list-inside">
+        <li><strong>Languages:</strong> C++, Julia, MATLAB</li>
+        <li><strong>Hardware:</strong> STM32, Arduino, Sensors & Actuators</li>
+        <li><strong>Tools:</strong> SolidWorks, Optimization, DEs, Electromagnetism</li>
+        <li><strong>Soft Skills:</strong> Teaching, Leadership, Collaboration, Research</li>
+      </ul>
+    </section>
+
+    <!-- Awards Section -->
+    <section id="awards" class="max-w-4xl mx-auto px-4 py-10">
+      <h2 class="text-2xl font-bold mb-4">Awards & Achievements 🏆</h2>
+      <ul class="list-disc list-inside">
+        <li>Rank 3 - World Robotics Olympiad</li>
+        <li>4x IYRC Medalist</li>
+        <li>3x AMC Qualifier, 2x AIME Qualifier</li>
+      </ul>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact" class="max-w-2xl mx-auto px-4 py-16">
       <h2 class="text-2xl font-semibold mb-4">Let's talk</h2>
@@ -75,7 +133,6 @@
     <!-- Theme & Menu Script -->
     <script>
       const toggleBtn = document.getElementById("toggleTheme");
-      const body = document.getElementById("pageBody");
       const savedTheme = localStorage.getItem("theme");
 
       if (savedTheme === "dark") {
