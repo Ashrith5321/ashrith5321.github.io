@@ -11,54 +11,62 @@
       }
     </style>
   </head>
-  <body class="bg-white text-black transition-colors duration-300" id="pageBody">
-    <!-- Hero Section with Image and Info -->
-    <section class="bg-white dark:bg-black text-center px-6 py-12 shadow">
-      <div class="flex flex-col items-center gap-4">
-        <img src="ashrith.jpg" alt="Ashrith Edukulla" class="w-36 h-36 rounded-2xl shadow-md object-cover" />
-        <div>
-          <h1 class="text-3xl font-bold text-black dark:text-white">Ashrith Edukulla</h1>
-          <p class="text-gray-700 dark:text-gray-300 text-lg">Robotics @ University of Michigan</p>
-          <p class="text-sm text-gray-500 dark:text-gray-400">📍 Ann Arbor, MI, US</p>
-          <p class="mt-1 text-green-500">● Building Intelligent Systems</p>
-        </div>
-        <div class="mt-4 flex flex-wrap justify-center gap-6">
-          <a href="mailto:ashed@umich.edu" class="text-sm text-blue-500 hover:underline">ashed@umich.edu</a>
-          <a href="https://www.linkedin.com/in/ashrith-edukulla-633b141a7/" target="_blank" class="text-sm text-blue-500 hover:underline">LinkedIn</a>
-          <a href="Ashrith_Edukulla_Resume.pdf" download class="text-sm text-blue-500 hover:underline">📄 Download Resume</a>
-        </div>
+  <body class="bg-white text-black dark:bg-black dark:text-white transition duration-300" id="pageBody">
+    <!-- Navigation -->
+    <header class="sticky top-0 z-50 bg-white dark:bg-black shadow border-b dark:border-gray-800">
+      <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+        <nav class="flex flex-wrap gap-4 text-sm md:text-base">
+          <a href="#intro" class="hover:underline">Intro</a>
+          <a href="#projects" class="hover:underline">Projects</a>
+          <a href="#contact" class="hover:underline">Contact</a>
+        </nav>
+        <button id="toggleTheme" class="text-xl">🌙</button>
+      </div>
+    </header>
+
+    <!-- Intro Section -->
+    <section id="intro" class="max-w-4xl mx-auto px-4 py-16 text-center">
+      <img src="ashrith.jpg" alt="Ashrith Edukulla" class="w-32 h-32 mx-auto rounded-xl object-cover" />
+      <h1 class="text-3xl font-bold mt-4">Ashrith Edukulla</h1>
+      <p class="text-lg text-gray-600 dark:text-gray-400">Robotics @ University of Michigan</p>
+      <p class="text-sm text-gray-500 dark:text-gray-500">📍 Ann Arbor, MI, US</p>
+      <p class="mt-1 text-green-500 text-sm">● Building Intelligent Systems</p>
+      <div class="flex flex-wrap justify-center gap-4 mt-4">
+        <a href="mailto:ashed@umich.edu" class="underline text-blue-500">Email</a>
+        <a href="https://www.linkedin.com/in/ashrith-edukulla-633b141a7/" target="_blank" class="underline text-blue-500">LinkedIn</a>
+        <a href="Ashrith_Edukulla_Resume.pdf" download class="underline text-blue-500">📄 Download Resume</a>
       </div>
     </section>
 
-    <!-- Projects Gallery Section -->
-    <section class="max-w-5xl mx-auto px-4 py-10" id="projects">
-      <h2 class="text-3xl font-bold text-blue-900 mb-6">Project Gallery</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow p-4">
-          <img src="project1.jpg" alt="Motion-Sensing Robotic Limb" class="w-full h-48 object-cover rounded mb-2">
-          <h3 class="font-semibold text-lg">Motion-Sensing Robotic Limb</h3>
-          <p class="text-sm">Control system using accelerometers to move robotic fingers.</p>
+    <!-- Projects Section -->
+    <section id="projects" class="max-w-6xl mx-auto px-4 py-10">
+      <h2 class="text-2xl font-semibold mb-6">Best Projects so far... 🔧🤖💡</h2>
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4">
+          <img src="project1.jpg" class="w-full h-40 object-cover rounded mb-2" alt="Motion-Sensing Robotic Limb">
+          <h3 class="font-bold">Motion-Sensing Robotic Limb</h3>
+          <p class="text-sm">Accelerometer-based robotic fingers.</p>
         </div>
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow p-4">
-          <img src="project2.jpg" alt="FROST" class="w-full h-48 object-cover rounded mb-2">
-          <h3 class="font-semibold text-lg">FROST</h3>
-          <p class="text-sm">Black ice detection robot using mechanical and sensor design.</p>
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4">
+          <img src="project2.jpg" class="w-full h-40 object-cover rounded mb-2" alt="FROST">
+          <h3 class="font-bold">FROST</h3>
+          <p class="text-sm">Black ice detection with mechanical & sensor design.</p>
         </div>
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow p-4">
-          <img src="project3.jpg" alt="HighWay Go" class="w-full h-48 object-cover rounded mb-2">
-          <h3 class="font-semibold text-lg">HighWay Go</h3>
-          <p class="text-sm">Agricultural robot with autonomous irrigation and 3D printed parts.</p>
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4">
+          <img src="project3.jpg" class="w-full h-40 object-cover rounded mb-2" alt="HighWay Go">
+          <h3 class="font-bold">HighWay Go</h3>
+          <p class="text-sm">Agri robot with solar-powered irrigation.</p>
         </div>
       </div>
     </section>
 
     <!-- Contact Section -->
-    <section class="max-w-2xl mx-auto px-4 py-10" id="contact">
-      <h2 class="text-3xl font-bold text-blue-900 mb-4">Contact Me</h2>
+    <section id="contact" class="max-w-2xl mx-auto px-4 py-16">
+      <h2 class="text-2xl font-semibold mb-4">Let's talk</h2>
       <form class="space-y-4">
-        <input type="text" placeholder="Name" class="w-full border rounded p-2" required>
-        <input type="email" placeholder="Email" class="w-full border rounded p-2" required>
-        <textarea placeholder="Your message" class="w-full border rounded p-2 h-32" required></textarea>
+        <input type="text" placeholder="Your name" class="w-full p-2 border rounded dark:bg-gray-800" required />
+        <input type="email" placeholder="Your email address" class="w-full p-2 border rounded dark:bg-gray-800" required />
+        <textarea placeholder="Message" class="w-full p-2 border rounded h-32 dark:bg-gray-800" required></textarea>
         <button type="submit" class="bg-blue-900 text-white px-4 py-2 rounded hover:bg-blue-700">Send Message</button>
       </form>
     </section>
@@ -68,28 +76,16 @@
       const toggleBtn = document.getElementById("toggleTheme");
       const body = document.getElementById("pageBody");
 
-      // Apply saved theme on page load
       const savedTheme = localStorage.getItem("theme");
       if (savedTheme === "dark") {
-        body.classList.remove("bg-white", "text-black");
-        body.classList.add("bg-gray-900", "text-white");
+        document.documentElement.classList.add("dark");
         toggleBtn.textContent = "☀️";
       }
 
-      toggleBtn?.addEventListener("click", () => {
-        const isDark = body.classList.contains("bg-gray-900");
-
-        if (!isDark) {
-          body.classList.remove("bg-white", "text-black");
-          body.classList.add("bg-gray-900", "text-white");
-          toggleBtn.textContent = "☀️";
-          localStorage.setItem("theme", "dark");
-        } else {
-          body.classList.remove("bg-gray-900", "text-white");
-          body.classList.add("bg-white", "text-black");
-          toggleBtn.textContent = "🌙";
-          localStorage.setItem("theme", "light");
-        }
+      toggleBtn.addEventListener("click", () => {
+        const isDark = document.documentElement.classList.toggle("dark");
+        toggleBtn.textContent = isDark ? "☀️" : "🌙";
+        localStorage.setItem("theme", isDark ? "dark" : "light");
       });
     </script>
   </body>
