@@ -89,36 +89,53 @@
       </section>
   
   <!-- Projects Section -->
-  <section id="projects" class="max-w-6xl mx-auto px-4 py-10">
-    <h2 class="text-2xl font-semibold mb-6">Best Projects so far... 🔧🤖💡</h2>
-    <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
-      <div class="project-card bg-white dark:bg-gray-800 rounded-xl shadow-md p-4">
-        <img src="robotic_arm.jpg" class="w-full h-40 object-cover rounded mb-2" alt="Motion-Sensing Robotic Limb">
-        <h3 class="font-bold">Motion-Sensing Robotic Limb</h3>
-        <p class="text-sm">Accelerometer-based robotic fingers.</p>
+    <section id="projects" class="max-w-6xl mx-auto px-4 py-10">
+      <h2 class="text-2xl font-semibold mb-6">Best Projects so far... 🔧🤖💡</h2>
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+
+        <!-- Project Card Template -->
+        <div class="project-card relative bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden group">
+          <img src="robotic_arm.jpg" class="w-full h-48 object-cover group-hover:opacity-20 transition duration-300" alt="Motion-Sensing Robotic Limb">
+          <div class="absolute inset-0 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition duration-300 text-center px-4">
+            <h3 class="font-bold text-lg mb-2">Motion-Sensing Robotic Limb</h3>
+            <p class="text-sm">Built an accelerometer-based robotic limb with precise real-time finger control and motion sensing.</p>
+          </div>
+        </div>
+
+        <div class="project-card relative bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden group">
+          <img src="frost.png" class="w-full h-48 object-cover group-hover:opacity-20 transition duration-300" alt="FROST">
+          <div class="absolute inset-0 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition duration-300 text-center px-4">
+            <h3 class="font-bold text-lg mb-2">FROST</h3>
+            <p class="text-sm">Designed a robotic system for detecting and alerting pedestrians to black ice hazards using sensor fusion.</p>
+          </div>
+        </div>
+
+        <div class="project-card relative bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden group">
+          <img src="highwaygo.png" class="w-full h-48 object-cover group-hover:opacity-20 transition duration-300" alt="HighWay Go">
+          <div class="absolute inset-0 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition duration-300 text-center px-4">
+            <h3 class="font-bold text-lg mb-2">HighWay Go</h3>
+            <p class="text-sm">Built an autonomous robot to water highway divider plants using solar panels and 3D-printed tools.</p>
+          </div>
+        </div>
+
+        <div class="project-card relative bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden group">
+          <img src="smartwheel.jpg" class="w-full h-48 object-cover group-hover:opacity-20 transition duration-300" alt="SmartWheel">
+          <div class="absolute inset-0 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition duration-300 text-center px-4">
+            <h3 class="font-bold text-lg mb-2">SmartWheel</h3>
+            <p class="text-sm">Developed a dual-energy harvesting system from pressure and heat to power EV batteries autonomously.</p>
+          </div>
+        </div>
+
+        <div class="project-card relative bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden group">
+          <img src="autofarm.jpg" class="w-full h-48 object-cover group-hover:opacity-20 transition duration-300" alt="AutoFarm">
+          <div class="absolute inset-0 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition duration-300 text-center px-4">
+            <h3 class="font-bold text-lg mb-2">AutoFarm</h3>
+            <p class="text-sm">Created an agricultural robot to plough, sow, water, and accelerate indoor crop growth via artificial light.</p>
+          </div>
+        </div>
+
       </div>
-      <div class="project-card bg-white dark:bg-gray-800 rounded-xl shadow-md p-4">
-        <img src="frost.png" class="w-full h-40 object-cover rounded mb-2" alt="FROST">
-        <h3 class="font-bold">FROST</h3>
-        <p class="text-sm">Black ice detection with mechanical & sensor design.</p>
-      </div>
-      <div class="project-card bg-white dark:bg-gray-800 rounded-xl shadow-md p-4">
-        <img src="highwaygo.png" class="w-full h-40 object-cover rounded mb-2" alt="HighWay Go">
-        <h3 class="font-bold">HighWay Go</h3>
-        <p class="text-sm">Agri robot with solar-powered irrigation.</p>
-      </div>
-      <div class="project-card bg-white dark:bg-gray-800 rounded-xl shadow-md p-4">
-        <img src="smartwheel.png" class="w-full h-40 object-cover rounded mb-2" alt="SmartWheel">
-        <h3 class="font-bold">SmartWheel</h3>
-        <p class="text-sm">Harvests energy using piezo and Peltier modules from wheel pressure and heat.</p>
-      </div>
-      <div class="project-card bg-white dark:bg-gray-800 rounded-xl shadow-md p-4">
-        <img src="autofarm.png" class="w-full h-40 object-cover rounded mb-2" alt="AutoFarm">
-        <h3 class="font-bold">AutoFarm</h3>
-        <p class="text-sm">Automated robot for ploughing, seed sowing, watering, and indoor plant lighting.</p>
-      </div>
-    </div>
-  </section>
+    </section>
 
   
       <!-- Skills Section -->
