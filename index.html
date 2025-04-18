@@ -30,6 +30,7 @@
         <button id="menuToggle" aria-label="Toggle menu" title="Toggle menu" class="md:hidden text-xl px-2 py-1 rounded bg-gray-700 theme-transition">☰</button>
         <nav id="navMenu" class="hidden md:flex flex-wrap gap-4 text-sm md:text-base items-center justify-center bg-gray-900 md:bg-transparent px-4 py-2 rounded-lg md:rounded-none theme-transition">
           <a href="#intro" class="hover:underline">Intro</a>
+          <a href="#about" class="hover:underline">About</a>
           <a href="#education" class="hover:underline">Education</a>
           <a href="#experience" class="hover:underline">Work</a>
           <a href="#projects" class="hover:underline">Projects</a>
@@ -40,20 +41,49 @@
       </div>
     </header>
 
-    <!-- Rest of the content remains unchanged... -->
-   <!-- Intro Section -->
-    <section id="intro" class="max-w-4xl mx-auto px-4 py-16 text-center">
-        <img src="ashrith.jpg" alt="Ashrith Edukulla" class="w-32 h-32 mx-auto rounded-xl object-cover" />
-        <h1 class="text-3xl font-bold mt-4">Ashrith Edukulla</h1>
-        <p class="text-lg text-gray-600 dark:text-gray-400">Robotics @ University of Michigan</p>
-        <p class="text-sm text-gray-500 dark:text-gray-500">📍 Ann Arbor, MI, US</p>
-        <p class="mt-1 text-green-500 text-sm">● Building Intelligent Systems</p>
-        <div class="flex flex-wrap justify-center gap-4 mt-4">
-          <a href="mailto:ashed@umich.edu" class="underline text-blue-500">Email</a>
-          <a href="https://www.linkedin.com/in/ashrith-edukulla-633b141a7/" target="_blank" class="underline text-blue-500">LinkedIn</a>
-          <a href="Ashrith_Edukulla_Resume.pdf" download class="underline text-blue-500">📄 Download Resume</a>
+    <!-- Header Section (Styled like Trushant's) -->
+    <section id="intro" class="max-w-4xl mx-auto px-4 py-16 text-left">
+      <div class="flex flex-col md:flex-row items-center gap-6">
+        <img src="ashrith.jpg" alt="Ashrith Edukulla" class="w-36 h-36 rounded-xl object-cover border border-gray-700 shadow-lg" />
+        <div>
+          <h1 class="text-4xl font-bold">Ashrith Edukulla</h1>
+          <p class="text-xl text-gray-400 mt-1">Robotics @ University of Michigan</p>
+          <p class="text-md text-gray-400">📍 Ann Arbor, MI, US</p>
+          <p class="mt-1 text-green-400 text-md">● Building Intelligent Systems</p>
+          <div class="flex flex-wrap gap-4 mt-4 text-sm">
+            <a href="mailto:ashed@umich.edu" class="flex items-center gap-1 text-blue-400 underline"><span>📧</span>ashed@umich.edu</a>
+            <a href="eashrith@gmail.com" class="flex items-center gap-1 text-blue-400 underline"><span>📩</span>trushantedukulla99@gmail.com</a>
+            <a href="Ashrith_Edukulla_Resume.pdf" download class="flex items-center gap-1 text-blue-400 underline"><span>📄</span>Download CV</a>
+            <a href="https://github.com/" target="_blank" class="flex items-center gap-1 text-blue-400 underline"><span>🦁</span>GitHub</a>
+            <a href="https://linkedin.com/in/ashrith-edukulla-633b141a7" target="_blank" class="flex items-center gap-1 text-blue-400 underline"><span>🔗</span>LinkedIn</a>
+          </div>
         </div>
-      </section>
+      </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about" class="max-w-4xl mx-auto px-4 py-10">
+      <h2 class="text-2xl font-bold mb-4">About Me 👋</h2>
+      <p class="text-gray-300 leading-relaxed">
+        I'm <strong>Ashrith Edukulla</strong>, a curious and passionate <strong>Robotics Engineer</strong> currently pursuing my undergraduate degree at the <a href="https://umich.edu" target="_blank" class="text-blue-400 underline">University of Michigan</a>.
+        I thrive at the intersection of software, hardware, and intelligent systems.
+      </p>
+      <br />
+      <p class="text-gray-300 leading-relaxed">
+        My current interests include <strong>self-balancing robots</strong>, <strong>decentralized swarm systems</strong>, and <strong>robot perception & control</strong>. 
+        I'm actively developing a Mars Rover with embedded sensing + ROS simulation and a warehouse logistics swarm for autonomous material handling.
+      </p>
+      <br />
+      <p class="text-gray-300 leading-relaxed">
+        With experience ranging from teaching robotics to prototyping embedded systems with STM32 and Arduino, I enjoy blending control theory, real-time programming, and physical prototyping to bring ideas to life.
+        I’ve also built intelligent robotic limbs, smart agriculture robots, and a highway plant watering robot using solar energy.
+      </p>
+      <br />
+      <p class="text-gray-300 leading-relaxed">
+        I'm always excited to collaborate and push the boundaries of what's possible with robotics. Let's connect and build the future together!
+      </p>
+    </section>
+
   
       <!-- Education Section -->
       <section id="education" class="max-w-4xl mx-auto px-4 py-10">
