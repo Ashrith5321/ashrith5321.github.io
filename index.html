@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ashrith Edukulla</title>
     <meta name="description" content="Ashrith Edukulla | Robotics @ UMich | Projects, Resume, Contact" />
+    <link rel="icon" href="ashrith-icon.png" type="image/png">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
       html {
         scroll-behavior: smooth;
-        zoom: 0.8; /* Simulates 80% zoom */
       }
       .theme-transition {
         transition: background-color 0.5s, color 0.5s;
@@ -21,14 +21,53 @@
         transform: translateY(-6px) scale(1.03);
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
       }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .animate-fadeIn {
+        animation: fadeIn 0.8s ease-out both;
+      }
+      .glow-text {
+        text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+      }
+      .scroll-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 4px;
+        background: #3b82f6;
+        z-index: 9999;
+        width: 0%;
+      }
     </style>
   </head>
-  <body class="bg-black text-white theme-transition" id="pageBody">
+  <body class="bg-black text-white theme-transition text-[0.8rem] md:text-[0.95rem] lg:text-[1rem]" id="pageBody">
 
-    <!-- Your complete HTML remains unchanged below this -->
-    <!-- Just insert all your working content that you already finalized -->
-    <!-- From your current <header> down to the closing </html> -->
-    <!-- Navigation -->
+    <div class="scroll-progress" id="progressBar"></div>
+
+    <script>
+      window.onscroll = function() {
+        var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        var scrolled = (winScroll / height) * 100;
+        document.getElementById("progressBar").style.width = scrolled + "%";
+      };
+
+      if (localStorage.getItem('theme') === 'dark') {
+        document.documentElement.classList.add('dark');
+      }
+    </script>
+
+    <section class="max-w-4xl mx-auto px-4 py-4 animate-fadeIn">
+      <div class="flex justify-between items-center">
+        <h2 class="text-2xl font-bold glow-text">Ashrith Edukulla</h2>
+        <span class="bg-yellow-800 text-yellow-300 px-3 py-1 rounded-full text-xs">🚧 Currently building: BallBot Controller</span>
+      </div>
+    </section>
+
+    <!-- Continue your existing content here -->
+        <!-- Navigation -->
     <header class="sticky top-0 z-50 bg-black shadow border-b border-gray-800 theme-transition">
       <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
         <button id="menuToggle" aria-label="Toggle menu" title="Toggle menu" class="md:hidden text-xl px-2 py-1 rounded bg-gray-700 theme-transition">☰</button>
@@ -331,7 +370,85 @@
           <p>
             📧 <strong>Email:</strong>
             <a href="mailto:ashed@umich.edu" class="text-blue-500 underline">ashed@umich.edu</a>
-          </p>
+          </p><!DOCTYPE html>
+          <html lang="en" class="scroll-smooth">
+            <head>
+              <meta charset="UTF-8" />
+              <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+              <title>Ashrith Edukulla</title>
+              <meta name="description" content="Ashrith Edukulla | Robotics @ UMich | Projects, Resume, Contact" />
+              <link rel="icon" href="ashrith-icon.png" type="image/png">
+              <script src="https://cdn.tailwindcss.com"></script>
+              <style>
+                html {
+                  font-size: 100%;
+                }
+                .theme-transition {
+                  transition: background-color 0.5s, color 0.5s;
+                }
+                .project-card {
+                  transition: transform 0.3s ease, box-shadow 0.3s ease;
+                }
+                .project-card:hover {
+                  transform: translateY(-6px) scale(1.03);
+                  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+                }
+                @keyframes fadeIn {
+                  from { opacity: 0; transform: translateY(20px); }
+                  to { opacity: 1; transform: translateY(0); }
+                }
+                .animate-fadeIn {
+                  animation: fadeIn 0.8s ease-out both;
+                }
+                .glow-text {
+                  text-shadow: 0 0 12px rgba(0, 255, 255, 0.75);
+                  animation: pulseGlow 1.8s infinite alternate;
+                }
+                @keyframes pulseGlow {
+                  from { text-shadow: 0 0 6px rgba(0, 255, 255, 0.4); }
+                  to { text-shadow: 0 0 12px rgba(0, 255, 255, 1); }
+                }
+                .scroll-progress {
+                  position: fixed;
+                  top: 0;
+                  left: 0;
+                  height: 4px;
+                  background: #3b82f6;
+                  z-index: 9999;
+                  width: 0%;
+                }
+              </style>
+            </head>
+          
+            <body class="bg-black text-white theme-transition" id="pageBody">
+              <!-- Scroll Progress Bar -->
+              <div class="scroll-progress" id="progressBar"></div>
+          
+          
+              <!-- Hero Banner + Glow Name -->
+              <section class="max-w-4xl mx-auto px-4 py-4 animate-fadeIn">
+                <div class="flex justify-between items-center">
+                  <h2 class="text-2xl font-bold glow-text">Ashrith Edukulla</h2>
+                  <span class="bg-yellow-800 text-yellow-300 px-3 py-1 rounded-full text-xs">🚧 Currently building: BallBot Controller</span>
+                </div>
+              </section>
+          
+              <!-- ALL YOUR FINALIZED CONTENT BELOW (Header, About, Education...) -->
+              <!-- Just paste your existing HTML starting from <header> to </html> here -->
+              <!-- That content is kept unchanged and will inherit all the new global styling above -->
+          
+              <!-- Scroll Bar Script -->
+              <script>
+                window.onscroll = function () {
+                  var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                  var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                  var scrolled = (winScroll / height) * 100;
+                  document.getElementById("progressBar").style.width = scrolled + "%";
+                };
+              </script>
+          
+
+          
           <p>
             📞 <strong>Phone:</strong>
             <a href="tel:+12487343391" class="text-blue-500 underline">(248) 734-3391</a>
@@ -366,5 +483,6 @@
           navMenu.classList.toggle("hidden");
         });
     </script>
+
   </body>
 </html>
