@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ashrith Edukulla</title>
+    <meta name="description" content="Ashrith Edukulla | Robotics @ UMich | Projects, Resume, Contact" />
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
       html {
@@ -16,7 +17,7 @@
     <!-- Navigation -->
     <header class="sticky top-0 z-50 bg-white dark:bg-black shadow border-b dark:border-gray-800">
       <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-        <button id="menuToggle" class="md:hidden text-xl px-2 py-1 rounded bg-gray-200 dark:bg-gray-700">☰</button>
+        <button id="menuToggle" aria-label="Toggle menu" title="Toggle menu" class="md:hidden text-xl px-2 py-1 rounded bg-gray-200 dark:bg-gray-700">☰</button>
         <nav id="navMenu" class="hidden md:flex flex-wrap gap-4 text-sm md:text-base items-center justify-center bg-gray-100 dark:bg-gray-900 md:bg-transparent md:dark:bg-transparent px-4 py-2 rounded-lg md:rounded-none">
           <a href="#intro" class="hover:underline">Intro</a>
           <a href="#education" class="hover:underline">Education</a>
@@ -25,7 +26,7 @@
           <a href="#skills" class="hover:underline">Stack</a>
           <a href="#awards" class="hover:underline">Awards</a>
           <a href="#contact" class="hover:underline">Contact</a>
-          <button id="toggleTheme" class="text-xl px-2 py-1 rounded bg-gray-200 dark:bg-gray-700">🌙</button>
+          <button id="toggleTheme" aria-label="Toggle theme" title="Toggle dark/light mode" class="text-xl px-2 py-1 rounded bg-gray-200 dark:bg-gray-700">🌙</button>
         </nav>
       </div>
     </header>
@@ -119,22 +120,19 @@
         <li>3x AMC Qualifier, 2x AIME Qualifier</li>
       </ul>
     </section>
-    
+
     <!-- Contact Me Section -->
-<section id="contact" class="bg-white py-12 border-t">
-  <div class="max-w-5xl mx-auto px-4 text-center">
-    <h2 class="text-3xl font-bold text-primary mb-6">Contact Me</h2>
-    <p class="text-lg mb-4">I'd love to connect — feel free to reach out!</p>
-
-    <div class="space-y-2 text-lg">
-      <p><strong>Email:</strong> <a href="mailto:ashed@umich.edu" class="text-blue-600 underline">ashed@umich.edu</a></p>
-      <p><strong>Phone:</strong> <a href="tel:+12487343391" class="text-blue-600 underline">(248) 734-3391</a></p>
-      <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/ashrith-edukulla-633b141a7/" target="_blank" class="text-blue-600 underline">linkedin.com/in/ashrith-edukulla</a></p>
-    </div>
-  </div>
-</section>
-
-
+    <section id="contact" class="bg-white py-12 border-t dark:bg-black">
+      <div class="max-w-5xl mx-auto px-4 text-center">
+        <h2 class="text-3xl font-bold text-blue-700 dark:text-blue-400 mb-6">Contact Me</h2>
+        <p class="text-lg mb-4">I'd love to connect — feel free to reach out!</p>
+        <div class="space-y-2 text-lg">
+          <p><strong>Email:</strong> <a href="mailto:ashed@umich.edu" class="text-blue-600 underline">ashed@umich.edu</a></p>
+          <p><strong>Phone:</strong> <a href="tel:+12487343391" class="text-blue-600 underline">(248) 734-3391</a></p>
+          <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/ashrith-edukulla-633b141a7/" target="_blank" class="text-blue-600 underline">linkedin.com/in/ashrith-edukulla</a></p>
+        </div>
+      </div>
+    </section>
 
     <!-- Theme & Menu Script -->
     <script>
