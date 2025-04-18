@@ -13,18 +13,15 @@
       .theme-transition {
         transition: background-color 0.5s, color 0.5s;
       }
-      .dark .dark\:bg-black {
-        background-color: #000 !important;
-      }
     </style>
   </head>
-  <body class="bg-white text-black theme-transition" id="pageBody">
+  <body class="bg-black text-white theme-transition" id="pageBody">
 
     <!-- Navigation -->
-    <header class="sticky top-0 z-50 bg-white shadow border-b theme-transition">
+    <header class="sticky top-0 z-50 bg-black shadow border-b border-gray-800 theme-transition">
       <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-        <button id="menuToggle" aria-label="Toggle menu" title="Toggle menu" class="md:hidden text-xl px-2 py-1 rounded bg-gray-200 theme-transition">☰</button>
-        <nav id="navMenu" class="hidden md:flex flex-wrap gap-4 text-sm md:text-base items-center justify-center bg-gray-100 md:bg-transparent px-4 py-2 rounded-lg md:rounded-none theme-transition">
+        <button id="menuToggle" aria-label="Toggle menu" title="Toggle menu" class="md:hidden text-xl px-2 py-1 rounded bg-gray-700 theme-transition">☰</button>
+        <nav id="navMenu" class="hidden md:flex flex-wrap gap-4 text-sm md:text-base items-center justify-center bg-gray-900 md:bg-transparent px-4 py-2 rounded-lg md:rounded-none theme-transition">
           <a href="#intro" class="hover:underline">Intro</a>
           <a href="#education" class="hover:underline">Education</a>
           <a href="#experience" class="hover:underline">Work</a>
@@ -36,8 +33,8 @@
       </div>
     </header>
 
-
-    <!-- Intro Section -->
+    <!-- Rest of the content remains unchanged... -->
+   <!-- Intro Section -->
     <section id="intro" class="max-w-4xl mx-auto px-4 py-16 text-center">
         <img src="ashrith.jpg" alt="Ashrith Edukulla" class="w-32 h-32 mx-auto rounded-xl object-cover" />
         <h1 class="text-3xl font-bold mt-4">Ashrith Edukulla</h1>
@@ -142,12 +139,12 @@
 
     <!-- Menu Script -->
     <script>
-        const menuToggle = document.getElementById("menuToggle");
-        const navMenu = document.getElementById("navMenu");
-  
-        menuToggle?.addEventListener("click", () => {
-          navMenu.classList.toggle("hidden");
-        });
-      </script>
-    </body>
-  </html>
+      const menuToggle = document.getElementById("menuToggle");
+      const navMenu = document.getElementById("navMenu");
+
+      menuToggle?.addEventListener("click", () => {
+        navMenu.classList.toggle("hidden");
+      });
+    </script>
+  </body>
+</html>
