@@ -13,6 +13,13 @@
       .theme-transition {
         transition: background-color 0.5s, color 0.5s;
       }
+      .project-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .project-card:hover {
+        transform: translateY(-6px) scale(1.03);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      }
     </style>
   </head>
   <body class="bg-black text-white theme-transition" id="pageBody">
@@ -81,21 +88,21 @@
         </div>
       </section>
   
-      <!-- Projects Section -->
-      <section id="projects" class="max-w-6xl mx-auto px-4 py-10">
+    <!-- Projects Section -->
+    <section id="projects" class="max-w-6xl mx-auto px-4 py-10">
         <h2 class="text-2xl font-semibold mb-6">Best Projects so far... 🔧🤖💡</h2>
         <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
-          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4">
+          <div class="project-card bg-white dark:bg-gray-800 rounded-xl shadow-md p-4">
             <img src="project1.jpg" class="w-full h-40 object-cover rounded mb-2" alt="Motion-Sensing Robotic Limb">
             <h3 class="font-bold">Motion-Sensing Robotic Limb</h3>
             <p class="text-sm">Accelerometer-based robotic fingers.</p>
           </div>
-          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4">
+          <div class="project-card bg-white dark:bg-gray-800 rounded-xl shadow-md p-4">
             <img src="frost.png" class="w-full h-40 object-cover rounded mb-2" alt="FROST">
             <h3 class="font-bold">FROST</h3>
             <p class="text-sm">Black ice detection with mechanical & sensor design.</p>
           </div>
-          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4">
+          <div class="project-card bg-white dark:bg-gray-800 rounded-xl shadow-md p-4">
             <img src="project3.jpg" class="w-full h-40 object-cover rounded mb-2" alt="HighWay Go">
             <h3 class="font-bold">HighWay Go</h3>
             <p class="text-sm">Agri robot with solar-powered irrigation.</p>
@@ -139,12 +146,13 @@
 
     <!-- Menu Script -->
     <script>
-      const menuToggle = document.getElementById("menuToggle");
-      const navMenu = document.getElementById("navMenu");
-
-      menuToggle?.addEventListener("click", () => {
-        navMenu.classList.toggle("hidden");
-      });
-    </script>
-  </body>
-</html>
+        const menuToggle = document.getElementById("menuToggle");
+        const navMenu = document.getElementById("navMenu");
+  
+        menuToggle?.addEventListener("click", () => {
+          navMenu.classList.toggle("hidden");
+        });
+      </script>
+    </body>
+  </html>
+  
