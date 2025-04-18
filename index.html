@@ -10,15 +10,21 @@
       html {
         scroll-behavior: smooth;
       }
+      .theme-transition {
+        transition: background-color 0.5s, color 0.5s;
+      }
+      .dark .dark\:bg-black {
+        background-color: #000 !important;
+      }
     </style>
   </head>
-  <body class="bg-white text-black dark:bg-black dark:text-white transition duration-300" id="pageBody">
+  <body class="bg-white text-black dark:bg-black dark:text-white theme-transition" id="pageBody">
 
     <!-- Navigation -->
-    <header class="sticky top-0 z-50 bg-white dark:bg-black shadow border-b dark:border-gray-800">
+    <header class="sticky top-0 z-50 bg-white dark:bg-black shadow border-b dark:border-gray-800 theme-transition">
       <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-        <button id="menuToggle" aria-label="Toggle menu" title="Toggle menu" class="md:hidden text-xl px-2 py-1 rounded bg-gray-200 dark:bg-gray-700">☰</button>
-        <nav id="navMenu" class="hidden md:flex flex-wrap gap-4 text-sm md:text-base items-center justify-center bg-gray-100 dark:bg-gray-900 md:bg-transparent md:dark:bg-transparent px-4 py-2 rounded-lg md:rounded-none">
+        <button id="menuToggle" aria-label="Toggle menu" title="Toggle menu" class="md:hidden text-xl px-2 py-1 rounded bg-gray-200 dark:bg-gray-700 theme-transition">☰</button>
+        <nav id="navMenu" class="hidden md:flex flex-wrap gap-4 text-sm md:text-base items-center justify-center bg-gray-100 dark:bg-gray-900 md:bg-transparent md:dark:bg-transparent px-4 py-2 rounded-lg md:rounded-none theme-transition">
           <a href="#intro" class="hover:underline">Intro</a>
           <a href="#education" class="hover:underline">Education</a>
           <a href="#experience" class="hover:underline">Work</a>
@@ -26,123 +32,131 @@
           <a href="#skills" class="hover:underline">Stack</a>
           <a href="#awards" class="hover:underline">Awards</a>
           <a href="#contact" class="hover:underline">Contact</a>
-          <button id="toggleTheme" aria-label="Toggle theme" title="Toggle dark/light mode" class="text-xl px-2 py-1 rounded bg-gray-200 dark:bg-gray-700">🌙</button>
+          <button id="toggleTheme" aria-label="Toggle theme" title="Toggle dark/light mode" class="text-xl px-2 py-1 rounded bg-gray-200 dark:bg-gray-700 theme-transition">🌙</button>
         </nav>
       </div>
     </header>
 
+
     <!-- Intro Section -->
     <section id="intro" class="max-w-4xl mx-auto px-4 py-16 text-center">
-      <img src="ashrith.jpg" alt="Ashrith Edukulla" class="w-32 h-32 mx-auto rounded-xl object-cover" />
-      <h1 class="text-3xl font-bold mt-4">Ashrith Edukulla</h1>
-      <p class="text-lg text-gray-600 dark:text-gray-400">Robotics @ University of Michigan</p>
-      <p class="text-sm text-gray-500 dark:text-gray-500">📍 Ann Arbor, MI, US</p>
-      <p class="mt-1 text-green-500 text-sm">● Building Intelligent Systems</p>
-      <div class="flex flex-wrap justify-center gap-4 mt-4">
-        <a href="mailto:ashed@umich.edu" class="underline text-blue-500">Email</a>
-        <a href="https://www.linkedin.com/in/ashrith-edukulla-633b141a7/" target="_blank" class="underline text-blue-500">LinkedIn</a>
-        <a href="Ashrith_Edukulla_Resume.pdf" download class="underline text-blue-500">📄 Download Resume</a>
-      </div>
-    </section>
-
-    <!-- Education Section -->
-    <section id="education" class="max-w-4xl mx-auto px-4 py-10">
-      <h2 class="text-2xl font-bold mb-4">Education 🎓</h2>
-      <p><strong>University of Michigan, Ann Arbor</strong></p>
-      <p>Bachelors of Engineering in Robotics (Aug 2024 – May 2027)</p>
-      <ul class="list-disc list-inside mt-2">
-        <li>GPA: 3.96/4.0</li>
-        <li>Honors: Rank 3 - World Robotics Olympiad, 4x IYRC Medalist, 3x AMC Qualifier, 2x AIME Qualifier</li>
-        <li>Relevant Coursework: Data Structures, Circuit Design, Linear Algebra, Robotics System Control</li>
-      </ul>
-    </section>
-
-    <!-- Work Experience Section -->
-    <section id="experience" class="max-w-4xl mx-auto px-4 py-10">
-      <h2 class="text-2xl font-bold mb-4">Work Experience 💼</h2>
-      <div class="mb-4">
-        <h3 class="font-semibold">Michigan Mars Rover – Embedded Software Engineer</h3>
-        <p class="text-sm italic">Nov 2024 – May 2025</p>
-        <ul class="list-disc list-inside">
-          <li>Developed embedded software using STM32Cube IDE for interfacing with motors, LEDs, and sensors</li>
-          <li>Collaborated with the team to ensure seamless hardware integration</li>
+        <img src="ashrith.jpg" alt="Ashrith Edukulla" class="w-32 h-32 mx-auto rounded-xl object-cover" />
+        <h1 class="text-3xl font-bold mt-4">Ashrith Edukulla</h1>
+        <p class="text-lg text-gray-600 dark:text-gray-400">Robotics @ University of Michigan</p>
+        <p class="text-sm text-gray-500 dark:text-gray-500">📍 Ann Arbor, MI, US</p>
+        <p class="mt-1 text-green-500 text-sm">● Building Intelligent Systems</p>
+        <div class="flex flex-wrap justify-center gap-4 mt-4">
+          <a href="mailto:ashed@umich.edu" class="underline text-blue-500">Email</a>
+          <a href="https://www.linkedin.com/in/ashrith-edukulla-633b141a7/" target="_blank" class="underline text-blue-500">LinkedIn</a>
+          <a href="Ashrith_Edukulla_Resume.pdf" download class="underline text-blue-500">📄 Download Resume</a>
+        </div>
+      </section>
+  
+      <!-- Education Section -->
+      <section id="education" class="max-w-4xl mx-auto px-4 py-10">
+        <h2 class="text-2xl font-bold mb-4">Education 🎓</h2>
+        <p><strong>University of Michigan, Ann Arbor</strong></p>
+        <p>Bachelors of Engineering in Robotics (Aug 2024 – May 2027)</p>
+        <ul class="list-disc list-inside mt-2">
+          <li>GPA: 3.96/4.0</li>
+          <li>Honors: Rank 3 - World Robotics Olympiad, 4x IYRC Medalist, 3x AMC Qualifier, 2x AIME Qualifier</li>
+          <li>Relevant Coursework: Data Structures, Circuit Design, Linear Algebra, Robotics System Control</li>
         </ul>
-      </div>
-      <div>
-        <h3 class="font-semibold">LeapLabs – Robotics Assistant Intern</h3>
-        <p class="text-sm italic">Apr 2023 – Jul 2023</p>
+      </section>
+  
+      <!-- Work Experience Section -->
+      <section id="experience" class="max-w-4xl mx-auto px-4 py-10">
+        <h2 class="text-2xl font-bold mb-4">Work Experience 💼</h2>
+        <div class="mb-4">
+          <h3 class="font-semibold">Michigan Mars Rover – Embedded Software Engineer</h3>
+          <p class="text-sm italic">Nov 2024 – May 2025</p>
+          <ul class="list-disc list-inside">
+            <li>Developed embedded software using STM32Cube IDE for interfacing with motors, LEDs, and sensors</li>
+            <li>Collaborated with the team to ensure seamless hardware integration</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-semibold">LeapLabs – Robotics Assistant Intern</h3>
+          <p class="text-sm italic">Apr 2023 – Jul 2023</p>
+          <ul class="list-disc list-inside">
+            <li>Taught robotics concepts, helped build prototypes and supported student projects</li>
+            <li>Co-developed educational content and helped debug hardware</li>
+          </ul>
+        </div>
+      </section>
+  
+      <!-- Projects Section -->
+      <section id="projects" class="max-w-6xl mx-auto px-4 py-10">
+        <h2 class="text-2xl font-semibold mb-6">Best Projects so far... 🔧🤖💡</h2>
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4">
+            <img src="project1.jpg" class="w-full h-40 object-cover rounded mb-2" alt="Motion-Sensing Robotic Limb">
+            <h3 class="font-bold">Motion-Sensing Robotic Limb</h3>
+            <p class="text-sm">Accelerometer-based robotic fingers.</p>
+          </div>
+          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4">
+            <img src="project2.jpg" class="w-full h-40 object-cover rounded mb-2" alt="FROST">
+            <h3 class="font-bold">FROST</h3>
+            <p class="text-sm">Black ice detection with mechanical & sensor design.</p>
+          </div>
+          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4">
+            <img src="project3.jpg" class="w-full h-40 object-cover rounded mb-2" alt="HighWay Go">
+            <h3 class="font-bold">HighWay Go</h3>
+            <p class="text-sm">Agri robot with solar-powered irrigation.</p>
+          </div>
+        </div>
+      </section>
+  
+      <!-- Skills Section -->
+      <section id="skills" class="max-w-4xl mx-auto px-4 py-10">
+        <h2 class="text-2xl font-bold mb-4">Tech Stack 🛠️</h2>
         <ul class="list-disc list-inside">
-          <li>Taught robotics concepts, helped build prototypes and supported student projects</li>
-          <li>Co-developed educational content and helped debug hardware</li>
+          <li><strong>Languages:</strong> C++, Julia, MATLAB</li>
+          <li><strong>Hardware:</strong> STM32, Arduino, Sensors & Actuators</li>
+          <li><strong>Tools:</strong> SolidWorks, Optimization, DEs, Electromagnetism</li>
+          <li><strong>Soft Skills:</strong> Teaching, Leadership, Collaboration, Research</li>
         </ul>
-      </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="max-w-6xl mx-auto px-4 py-10">
-      <h2 class="text-2xl font-semibold mb-6">Best Projects so far... 🔧🤖💡</h2>
-      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4">
-          <img src="project1.jpg" class="w-full h-40 object-cover rounded mb-2" alt="Motion-Sensing Robotic Limb">
-          <h3 class="font-bold">Motion-Sensing Robotic Limb</h3>
-          <p class="text-sm">Accelerometer-based robotic fingers.</p>
+      </section>
+  
+      <!-- Awards Section -->
+      <section id="awards" class="max-w-4xl mx-auto px-4 py-10">
+        <h2 class="text-2xl font-bold mb-4">Awards & Achievements 🏆</h2>
+        <ul class="list-disc list-inside">
+          <li>Rank 3 - World Robotics Olympiad</li>
+          <li>4x IYRC Medalist</li>
+          <li>3x AMC Qualifier, 2x AIME Qualifier</li>
+        </ul>
+      </section>
+  
+      <!-- Contact Me Section -->
+      <section id="contact" class="bg-white py-12 border-t dark:bg-black">
+        <div class="max-w-5xl mx-auto px-4 text-center">
+          <h2 class="text-3xl font-bold text-blue-700 dark:text-blue-400 mb-6">Contact Me</h2>
+          <p class="text-lg mb-4">I'd love to connect — feel free to reach out!</p>
+          <div class="space-y-2 text-lg">
+            <p><strong>Email:</strong> <a href="mailto:ashed@umich.edu" class="text-blue-600 underline">ashed@umich.edu</a></p>
+            <p><strong>Phone:</strong> <a href="tel:+12487343391" class="text-blue-600 underline">(248) 734-3391</a></p>
+            <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/ashrith-edukulla-633b141a7/" target="_blank" class="text-blue-600 underline">linkedin.com/in/ashrith-edukulla</a></p>
+          </div>
         </div>
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4">
-          <img src="project2.jpg" class="w-full h-40 object-cover rounded mb-2" alt="FROST">
-          <h3 class="font-bold">FROST</h3>
-          <p class="text-sm">Black ice detection with mechanical & sensor design.</p>
-        </div>
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-4">
-          <img src="project3.jpg" class="w-full h-40 object-cover rounded mb-2" alt="HighWay Go">
-          <h3 class="font-bold">HighWay Go</h3>
-          <p class="text-sm">Agri robot with solar-powered irrigation.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="max-w-4xl mx-auto px-4 py-10">
-      <h2 class="text-2xl font-bold mb-4">Tech Stack 🛠️</h2>
-      <ul class="list-disc list-inside">
-        <li><strong>Languages:</strong> C++, Julia, MATLAB</li>
-        <li><strong>Hardware:</strong> STM32, Arduino, Sensors & Actuators</li>
-        <li><strong>Tools:</strong> SolidWorks, Optimization, DEs, Electromagnetism</li>
-        <li><strong>Soft Skills:</strong> Teaching, Leadership, Collaboration, Research</li>
-      </ul>
-    </section>
-
-    <!-- Awards Section -->
-    <section id="awards" class="max-w-4xl mx-auto px-4 py-10">
-      <h2 class="text-2xl font-bold mb-4">Awards & Achievements 🏆</h2>
-      <ul class="list-disc list-inside">
-        <li>Rank 3 - World Robotics Olympiad</li>
-        <li>4x IYRC Medalist</li>
-        <li>3x AMC Qualifier, 2x AIME Qualifier</li>
-      </ul>
-    </section>
-
-    <!-- Contact Me Section -->
-    <section id="contact" class="bg-white py-12 border-t dark:bg-black">
-      <div class="max-w-5xl mx-auto px-4 text-center">
-        <h2 class="text-3xl font-bold text-blue-700 dark:text-blue-400 mb-6">Contact Me</h2>
-        <p class="text-lg mb-4">I'd love to connect — feel free to reach out!</p>
-        <div class="space-y-2 text-lg">
-          <p><strong>Email:</strong> <a href="mailto:ashed@umich.edu" class="text-blue-600 underline">ashed@umich.edu</a></p>
-          <p><strong>Phone:</strong> <a href="tel:+12487343391" class="text-blue-600 underline">(248) 734-3391</a></p>
-          <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/ashrith-edukulla-633b141a7/" target="_blank" class="text-blue-600 underline">linkedin.com/in/ashrith-edukulla</a></p>
-        </div>
-      </div>
-    </section>
+      </section>
 
     <!-- Theme & Menu Script -->
     <script>
       const toggleBtn = document.getElementById("toggleTheme");
       const savedTheme = localStorage.getItem("theme");
 
-      if (savedTheme === "dark") {
-        document.documentElement.classList.add("dark");
-        toggleBtn.textContent = "☀️";
+      function applyTheme(theme) {
+        if (theme === "dark") {
+          document.documentElement.classList.add("dark");
+          toggleBtn.textContent = "☀️";
+        } else {
+          document.documentElement.classList.remove("dark");
+          toggleBtn.textContent = "🌙";
+        }
       }
+
+      applyTheme(savedTheme || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
 
       toggleBtn?.addEventListener("click", () => {
         const isDark = document.documentElement.classList.toggle("dark");
