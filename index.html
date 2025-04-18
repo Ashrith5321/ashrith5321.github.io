@@ -18,13 +18,13 @@
       }
     </style>
   </head>
-  <body class="bg-white text-black dark:bg-black dark:text-white theme-transition" id="pageBody">
+  <body class="bg-white text-black theme-transition" id="pageBody">
 
     <!-- Navigation -->
-    <header class="sticky top-0 z-50 bg-white dark:bg-black shadow border-b dark:border-gray-800 theme-transition">
+    <header class="sticky top-0 z-50 bg-white shadow border-b theme-transition">
       <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-        <button id="menuToggle" aria-label="Toggle menu" title="Toggle menu" class="md:hidden text-xl px-2 py-1 rounded bg-gray-200 dark:bg-gray-700 theme-transition">☰</button>
-        <nav id="navMenu" class="hidden md:flex flex-wrap gap-4 text-sm md:text-base items-center justify-center bg-gray-100 dark:bg-gray-900 md:bg-transparent md:dark:bg-transparent px-4 py-2 rounded-lg md:rounded-none theme-transition">
+        <button id="menuToggle" aria-label="Toggle menu" title="Toggle menu" class="md:hidden text-xl px-2 py-1 rounded bg-gray-200 theme-transition">☰</button>
+        <nav id="navMenu" class="hidden md:flex flex-wrap gap-4 text-sm md:text-base items-center justify-center bg-gray-100 md:bg-transparent px-4 py-2 rounded-lg md:rounded-none theme-transition">
           <a href="#intro" class="hover:underline">Intro</a>
           <a href="#education" class="hover:underline">Education</a>
           <a href="#experience" class="hover:underline">Work</a>
@@ -32,7 +32,6 @@
           <a href="#skills" class="hover:underline">Stack</a>
           <a href="#awards" class="hover:underline">Awards</a>
           <a href="#contact" class="hover:underline">Contact</a>
-          <button id="toggleTheme" aria-label="Toggle theme" title="Toggle dark/light mode" class="text-xl px-2 py-1 rounded bg-gray-200 dark:bg-gray-700 theme-transition">🌙</button>
         </nav>
       </div>
     </header>
@@ -141,35 +140,14 @@
         </div>
       </section>
 
-    <!-- Theme & Menu Script -->
+    <!-- Menu Script -->
     <script>
-      const toggleBtn = document.getElementById("toggleTheme");
-      const savedTheme = localStorage.getItem("theme");
-
-      function applyTheme(theme) {
-        if (theme === "dark") {
-          document.documentElement.classList.add("dark");
-          toggleBtn.textContent = "☀️";
-        } else {
-          document.documentElement.classList.remove("dark");
-          toggleBtn.textContent = "🌙";
-        }
-      }
-
-      applyTheme(savedTheme || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
-
-      toggleBtn?.addEventListener("click", () => {
-        const isDark = document.documentElement.classList.toggle("dark");
-        toggleBtn.textContent = isDark ? "☀️" : "🌙";
-        localStorage.setItem("theme", isDark ? "dark" : "light");
-      });
-
-      const menuToggle = document.getElementById("menuToggle");
-      const navMenu = document.getElementById("navMenu");
-
-      menuToggle?.addEventListener("click", () => {
-        navMenu.classList.toggle("hidden");
-      });
-    </script>
-  </body>
-</html>
+        const menuToggle = document.getElementById("menuToggle");
+        const navMenu = document.getElementById("navMenu");
+  
+        menuToggle?.addEventListener("click", () => {
+          navMenu.classList.toggle("hidden");
+        });
+      </script>
+    </body>
+  </html>
