@@ -6,10 +6,15 @@
     <title>Ashrith Edukulla</title>
     <meta name="description" content="Ashrith Edukulla | Robotics @ UMich | Projects, Resume, Contact" />
     <link rel="icon" href="ashrith-icon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
       html {
         scroll-behavior: smooth;
+        font-family: 'Inter', sans-serif;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-family: 'Poppins', sans-serif;
       }
       .theme-transition {
         transition: background-color 0.5s, color 0.5s;
@@ -129,27 +134,38 @@
     </section>
 
   
-      <!-- Education Section -->
-      <section id="education" class="max-w-4xl mx-auto px-4 py-10">
-        <h2 class="text-2xl font-bold mb-10">Education 🎓</h2>
+<!-- Education Section -->
+<section id="education" class="max-w-4xl mx-auto px-4 py-10">
+  <h2 class="text-2xl font-bold mb-10 text-cyan-400">Education</h2>
 
-        <div class="relative border-l border-gray-700 pl-6 space-y-12">
+  <div class="relative border-l border-gray-700 pl-6 space-y-12">
+    <!-- University of Michigan -->
+    <div class="relative">
+      <div class="absolute -left-3 top-1 w-3 h-3 bg-green-400 rounded-full"></div>
 
-          <!-- University of Michigan -->
-          <div class="relative">
-            <div class="absolute -left-3 top-1 w-3 h-3 bg-green-400 rounded-full"></div>
-            <p class="text-sm text-gray-400">📍 Ann Arbor, MI, USA</p>
-            <div class="flex justify-between items-center">
-              <h3 class="text-lg font-semibold text-white">B.E. in Robotics Engineering</h3>
-              <p class="text-sm text-gray-400">Aug 2024 – May 2027</p>
-            </div>
-            <p class="text-sm text-gray-300 mb-1">University of Michigan</p>
-            <p class="text-sm text-white font-semibold">GPA 3.96/4.0</p>
-            <p class="text-sm text-gray-300">Relevant Courses: Data Structures, Circuit Design, Linear Algebra, Robotics System Control</p>
+      <div class="flex justify-between items-start md:items-center flex-col md:flex-row gap-4">
+        <!-- Logo + Degree Info -->
+        <div class="flex items-center gap-4">
+          <img src="michigan_logo.png" alt="UMich Logo" class="w-12 h-12 object-contain rounded-md">
+          <div>
+            <p class="text-lg font-bold text-yellow-300">University of Michigan</p>
+            <p class="italic text-sm text-gray-300">B.E. in Robotics Engineering (Sophomore) – GPA: 3.96/4.0</p>
           </div>
-
         </div>
-      </section>
+
+        <!-- Location + Date -->
+        <div class="text-sm text-gray-400 mt-2 md:mt-0 text-right space-y-1">
+          <p>📍 Ann Arbor, MI, United States</p>
+          <p>📅 Aug 2024 – May 2027</p>
+        </div>
+      </div>
+
+      <!-- Relevant Courses -->
+      <p class="text-sm text-gray-300 mt-2">Relevant Courses: Data Structures, Circuit Design, Linear Algebra, Robotics System Control</p>
+    </div>
+  </div>
+</section>
+
 
 <!-- Work Experience Section -->
 <section id="experience" class="max-w-4xl mx-auto px-4 py-10">
@@ -207,54 +223,83 @@
 
 
 
-  <!-- Projects Section -->
-  <section id="projects" class="max-w-4xl mx-auto px-4 py-10">
-    <h2 class="text-2xl font-semibold mb-6">Best Projects so far... 🔧🤖💡</h2>
-    <div class="grid sm:grid-cols-2 md:grid-cols-2 gap-6">
+<!-- Projects Section -->
+<section id="projects" class="max-w-6xl mx-auto px-4 py-16">
+  <h2 class="text-3xl font-bold mb-10 text-white">🔧 Projects</h2>
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
-      <!-- Project Card Template -->
-      <div class="project-card relative bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden group">
-        <img src="robotic_arm.jpg" class="w-full h-64 object-contain group-hover:opacity-20 transition duration-300 bg-black" alt="Motion-Sensing Robotic Limb">
-        <div class="absolute inset-0 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition duration-300 text-center px-4">
-          <h3 class="font-bold text-lg mb-2">Motion-Sensing Robotic Limb</h3>
-          <p class="text-sm">Built an accelerometer-based robotic limb with precise real-time finger control and motion sensing.</p>
+    <!-- Project Card -->
+    <div class="project-card bg-gray-900 rounded-2xl shadow-lg overflow-hidden group transform transition duration-300 hover:rotate-1 hover:scale-105 hover:shadow-[0_0_20px_rgba(0,255,255,0.3)]">
+      <img src="robotic_arm.jpg" alt="Robotic Arm" class="w-full h-48 object-contain bg-black" />
+      <div class="p-5">
+        <h3 class="text-xl font-semibold mb-2">Motion-Sensing Robotic Limb</h3>
+        <p class="text-gray-300 mb-3">Built an accelerometer-based robotic limb with precise real-time finger control and motion sensing.</p>
+        <div class="flex flex-wrap gap-2 text-xs font-semibold">
+          <span class="bg-blue-700 text-white px-2 py-1 rounded">#RoboticArm</span>
+          <span class="bg-green-700 text-white px-2 py-1 rounded">#C++</span>
+          <span class="bg-yellow-600 text-white px-2 py-1 rounded">#STM32</span>
         </div>
       </div>
-
-      <div class="project-card relative bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden group">
-        <img src="frost.png" class="w-full h-64 object-contain group-hover:opacity-20 transition duration-300 bg-black" alt="FROST">
-        <div class="absolute inset-0 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition duration-300 text-center px-4">
-          <h3 class="font-bold text-lg mb-2">FROST</h3>
-          <p class="text-sm">Designed a robotic system for detecting and alerting pedestrians to black ice hazards using sensor fusion.</p>
-        </div>
-      </div>
-
-      <div class="project-card relative bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden group">
-        <img src="highwaygo.png" class="w-full h-64 object-contain group-hover:opacity-20 transition duration-300 bg-black" alt="HighWay Go">
-        <div class="absolute inset-0 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition duration-300 text-center px-4">
-          <h3 class="font-bold text-lg mb-2">HighWay Go</h3>
-          <p class="text-sm">Built an autonomous robot to water highway divider plants using solar panels and 3D-printed tools.</p>
-        </div>
-      </div>
-
-      <div class="project-card relative bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden group">
-        <img src="smartwheel.png" class="w-full h-64 object-contain group-hover:opacity-20 transition duration-300 bg-black" alt="SmartWheel">
-        <div class="absolute inset-0 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition duration-300 text-center px-4">
-          <h3 class="font-bold text-lg mb-2">SmartWheel</h3>
-          <p class="text-sm">Developed a dual-energy harvesting system from pressure and heat to power EV batteries autonomously.</p>
-        </div>
-      </div>
-
-      <div class="project-card relative bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden group">
-        <img src="autofarm.png" class="w-full h-64 object-contain group-hover:opacity-20 transition duration-300 bg-black" alt="AutoFarm">
-        <div class="absolute inset-0 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition duration-300 text-center px-4">
-          <h3 class="font-bold text-lg mb-2">AutoFarm</h3>
-          <p class="text-sm">Created an agricultural robot to plough, sow, water, and accelerate indoor crop growth via artificial light.</p>
-        </div>
-      </div>
-
     </div>
-  </section>
+
+    <!-- Project Card -->
+    <div class="project-card bg-gray-900 rounded-2xl shadow-lg overflow-hidden group transform transition duration-300 hover:rotate-1 hover:scale-105 hover:shadow-[0_0_20px_rgba(0,255,255,0.3)]">
+      <img src="frost.png" alt="FROST" class="w-full h-48 object-contain bg-black" />
+      <div class="p-5">
+        <h3 class="text-xl font-semibold mb-2">FROST</h3>
+        <p class="text-gray-300 mb-3">Black ice detection robot using sensor fusion, alerts pedestrians using LEDs + audio module.</p>
+        <div class="flex flex-wrap gap-2 text-xs font-semibold">
+          <span class="bg-indigo-700 text-white px-2 py-1 rounded">#SensorFusion</span>
+          <span class="bg-purple-700 text-white px-2 py-1 rounded">#Embedded</span>
+          <span class="bg-gray-600 text-white px-2 py-1 rounded">#Microcontroller</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project Card -->
+    <div class="project-card bg-gray-900 rounded-2xl shadow-lg overflow-hidden group transform transition duration-300 hover:rotate-1 hover:scale-105 hover:shadow-[0_0_20px_rgba(0,255,255,0.3)]">
+      <img src="highwaygo.png" alt="HighWay Go" class="w-full h-48 object-contain bg-black" />
+      <div class="p-5">
+        <h3 class="text-xl font-semibold mb-2">HighWay Go</h3>
+        <p class="text-gray-300 mb-3">Solar-powered robot that waters plants on highway medians using a robotic arm.</p>
+        <div class="flex flex-wrap gap-2 text-xs font-semibold">
+          <span class="bg-yellow-700 text-white px-2 py-1 rounded">#SolarEnergy</span>
+          <span class="bg-green-700 text-white px-2 py-1 rounded">#Embedded</span>
+          <span class="bg-blue-700 text-white px-2 py-1 rounded">#Agritech</span>
+        </div>
+      </div>
+    </div>
+
+      <!-- Project Card -->
+    <div class="project-card bg-gray-900 rounded-2xl shadow-lg overflow-hidden group transform transition duration-300 hover:rotate-1 hover:scale-105 hover:shadow-[0_0_20px_rgba(0,255,255,0.3)]">
+      <img src="smartwheel.png" alt="SmartWheel" class="w-full h-48 object-contain bg-black" />
+      <div class="p-5">
+        <h3 class="text-xl font-semibold mb-2">SmartWheel</h3>
+        <p class="text-gray-300 mb-3">Developed a dual-energy harvesting system from pressure and heat to power EV batteries autonomously.</p>
+        <div class="flex flex-wrap gap-2 text-xs font-semibold">
+          <span class="bg-pink-700 text-white px-2 py-1 rounded">#EnergyHarvesting</span>
+          <span class="bg-red-600 text-white px-2 py-1 rounded">#PowerSystems</span>
+          <span class="bg-green-700 text-white px-2 py-1 rounded">#Sustainability</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project Card -->
+    <div class="project-card bg-gray-900 rounded-2xl shadow-lg overflow-hidden group transform transition duration-300 hover:rotate-1 hover:scale-105 hover:shadow-[0_0_20px_rgba(0,255,255,0.3)]">
+      <img src="autofarm.png" alt="AutoFarm" class="w-full h-48 object-contain bg-black" />
+      <div class="p-5">
+        <h3 class="text-xl font-semibold mb-2">AutoFarm</h3>
+        <p class="text-gray-300 mb-3">Created an agricultural robot to plough, sow, water, and accelerate indoor crop growth via artificial light.</p>
+        <div class="flex flex-wrap gap-2 text-xs font-semibold">
+          <span class="bg-lime-600 text-white px-2 py-1 rounded">#Agritech</span>
+          <span class="bg-teal-700 text-white px-2 py-1 rounded">#Automation</span>
+          <span class="bg-orange-700 text-white px-2 py-1 rounded">#IndoorFarming</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
 
   <!--skills and tech stack section-->
   <section id="skills" class="max-w-6xl mx-auto px-4 py-10">
@@ -491,7 +536,7 @@
           </p>
           <p>
             📄 <strong>Resume:</strong>
-            <a href="Ashrith_Edukulla_Resume.pdf" download class="text-blue-500 underline">Download PDF</a>
+            <a href="resume.pdf" target="_blank" class="text-blue-500 underline">View Resume</a>
           </p>
         </div>
       </div>
@@ -499,7 +544,7 @@
       <!-- Optional Contact Buttons (for fun / accessibility) -->
       <div class="flex flex-col gap-3">
         <a href="mailto:ashed@umich.edu" class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 text-center transition">📧 Send an Email</a>
-        <a href="tel:+12487343391" class="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 text-center transition">📞 Call Me</a>
+        
         <a href="https://www.linkedin.com/in/ashrith-edukulla-633b141a7/" target="_blank" class="bg-gray-800 text-white py-2 px-4 rounded-lg hover:bg-gray-700 text-center transition">🔗 LinkedIn Profile</a>
       </div>
     </div>
