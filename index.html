@@ -401,57 +401,109 @@
   </div>
 </section>
 
-  <!-- Tech Stack Section -->
-  <section id="skills" class="max-w-6xl mx-auto px-4 py-10">
-    <h2 class="text-2xl font-bold mb-6">Tech Stack 🛠️</h2>
-    <div class="grid md:grid-cols-2 gap-6">
+<!-- Tech Stack Section -->
+<section id="skills" class="max-w-6xl mx-auto px-4 py-10">
+  <h2 class="text-2xl font-bold mb-6">Tech Stack 🛠️</h2>
+  <div class="grid md:grid-cols-2 gap-6">
 
-      <!-- Programming & Core Tools -->
-      <div class="bg-[#111827] text-white p-6 rounded-xl shadow-md">
-        <h3 class="text-blue-400 font-semibold mb-4">💻 Programming & Tools</h3>
-        <p class="font-semibold">Languages</p>
-        <p class="text-sm mb-2">→ C++, Julia, MATLAB, Python (learning)</p>
-        <p class="font-semibold">Software & Dev Tools</p>
-        <p class="text-sm mb-2">→ Linux, Git, CMake, VS Code Remote, sockets &amp; IPC</p>
-        <p class="font-semibold">Version Control & Collaboration</p>
-        <p class="text-sm">→ GitHub, project-based branching, build system debugging</p>
-      </div>
+    <!-- Programming & Core Tools -->
+    <div class="bg-[#111827] text-white p-6 rounded-xl shadow-md">
+      <h3 class="text-blue-400 font-semibold mb-4">💻 Programming & Tools</h3>
+      <p class="font-semibold">Languages</p>
+      <p class="text-sm mb-2">→ C++, Python, Julia, MATLAB</p>
 
-      <!-- Robotics & Embedded Systems -->
-      <div class="bg-[#111827] text-white p-6 rounded-xl shadow-md">
-        <h3 class="text-green-400 font-semibold mb-4">🤖 Robotics & Embedded Systems</h3>
-        <p class="font-semibold">Frameworks & Platforms</p>
-        <p class="text-sm mb-2">→ ROS 2, RViz, Arduino, STM32Cube IDE, colcon build</p>
-        <p class="font-semibold">Hardware & Interfaces</p>
-        <p class="text-sm mb-2">→ I²C, PWM, sensors &amp; actuators integration</p>
-        <p class="font-semibold">Robot Development</p>
-        <p class="text-sm">→ Embedded control, motor tuning, real-time debugging</p>
-      </div>
+      <p class="font-semibold">Software & Dev Tools</p>
+      <p class="text-sm mb-2">
+        → Linux, Git, CMake, VS Code Remote, gdb, memory debugging, profiling
+      </p>
 
-      <!-- Control, Perception & Algorithms -->
-      <div class="bg-[#0f172a] text-white p-6 rounded-xl shadow-md">
-        <h3 class="text-cyan-400 font-semibold mb-4">⚙️ Control, Perception & Algorithms</h3>
-        <p class="font-semibold">Control & Dynamics</p>
-        <p class="text-sm mb-2">→ State-space modeling, linearization, PID control, feedback linearization</p>
-        <p class="font-semibold">Localization & Mapping</p>
-        <p class="text-sm mb-2">→ Odometry, SLAM, particle filters, sensor models, coordinate transforms</p>
-        <p class="font-semibold">Data Structures & Algorithms</p>
-        <p class="text-sm">→ Trees, heaps, STL containers, recursion, sorting, queues</p>
-      </div>
+      <p class="font-semibold">Algorithms & Data Structures (EECS 281)</p>
+      <p class="text-sm mb-2">
+        → Graph algorithms, shortest paths (Dijkstra, A*), dynamic programming, 
+        greedy methods, priority queues, balanced trees, hash maps, recursion, STL
+      </p>
 
-      <!-- Math, Modeling & Design -->
-      <div class="bg-[#0f172a] text-white p-6 rounded-xl shadow-md">
-        <h3 class="text-yellow-400 font-semibold mb-4">📘 Math, Modeling & Design</h3>
-        <p class="font-semibold">Analytical & Computational Methods</p>
-        <p class="text-sm mb-2">→ Linear algebra, ODEs, optimization, numerical methods</p>
-        <p class="font-semibold">Mechanical & CAD Design</p>
-        <p class="text-sm mb-2">→ SolidWorks, robot chassis modeling, motion visualization</p>
-        <p class="font-semibold">System Integration</p>
-        <p class="text-sm">→ Hardware–software synchronization, performance tuning, testing workflows</p>
-      </div>
-
+      <p class="font-semibold">Version Control & Collaboration</p>
+      <p class="text-sm">
+        → GitHub, project branching, CI-style builds, code reviews, reproducible builds
+      </p>
     </div>
-  </section>
+
+    <!-- Robotics & Embedded Systems -->
+    <div class="bg-[#111827] text-white p-6 rounded-xl shadow-md">
+      <h3 class="text-green-400 font-semibold mb-4">🤖 Robotics & Embedded Systems</h3>
+
+      <p class="font-semibold">Frameworks & Platforms</p>
+      <p class="text-sm mb-2">
+        → ROS 2, RViz, Gazebo/Isaac Sim, colcon build, rosbag, transforms (tf2)
+      </p>
+
+      <p class="font-semibold">Hardware & Interfaces</p>
+      <p class="text-sm mb-2">
+        → Arduino, STM32, I²C, PWM, encoders, IMUs, sensor fusion integration
+      </p>
+
+      <p class="font-semibold">Planning & Integration (ROB 320)</p>
+      <p class="text-sm mb-2">
+        → Motion planning pipelines, collision checking, sampling-based planners (RRT),
+        occupancy grids, action models, ROS middleware, node graph design
+      </p>
+
+      <p class="font-semibold">Robot Development</p>
+      <p class="text-sm">
+        → Embedded control, actuator tuning, hardware bring-up, real-time debugging
+      </p>
+    </div>
+
+    <!-- Control, Perception & Algorithms -->
+    <div class="bg-[#0f172a] text-white p-6 rounded-xl shadow-md">
+      <h3 class="text-cyan-400 font-semibold mb-4">⚙️ Control, Perception & Algorithms</h3>
+
+      <p class="font-semibold">Control & Dynamics (ROB 415)</p>
+      <p class="text-sm mb-2">
+        → State-space modeling, linearization, controllability/observability,
+        PID tuning, LQR, feedback linearization, transfer functions, stability analysis
+      </p>
+
+      <p class="font-semibold">Localization & Mapping (ROB 330)</p>
+      <p class="text-sm mb-2">
+        → Particle filters, Bayes filters, sensor models, inverse sensor models,
+        coordinate transforms, odometry, Kalman filtering, mapping, probabilistic robotics
+      </p>
+
+      <p class="font-semibold">Planning & Robotics Algorithms</p>
+      <p class="text-sm">
+        → Graph search (A*, D*), RRT, occupancy mapping, path smoothing, 
+        trajectory generation, cost functions, multi-step prediction
+      </p>
+    </div>
+
+    <!-- Math, Modeling & Design -->
+    <div class="bg-[#0f172a] text-white p-6 rounded-xl shadow-md">
+      <h3 class="text-yellow-400 font-semibold mb-4">📘 Math, Modeling & Design</h3>
+
+      <p class="font-semibold">Analytical & Computational Methods</p>
+      <p class="text-sm mb-2">
+        → Linear algebra, ODEs/PDEs, optimization, numerical solvers,
+        eigenanalysis, Jacobians, least-squares estimation
+      </p>
+
+      <p class="font-semibold">Mechanical & CAD Design</p>
+      <p class="text-sm mb-2">
+        → SolidWorks, linkages & joint modeling, robot chassis design,
+        motion visualization, kinematics modeling
+      </p>
+
+      <p class="font-semibold">System Integration</p>
+      <p class="text-sm">
+        → Hardware–software synchronization, performance tuning,
+        testing workflows, reproducible experiments, robotics pipelines
+      </p>
+    </div>
+
+  </div>
+</section>
+
 
 
 
