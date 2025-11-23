@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ashrith Edukulla — Robotics & AI Roadmap</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Tailwind via CDN (same style as your main site) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bg: "#020617",
+          },
+        },
+      },
+    };
+  </script>
+</head>
+<body class="bg-bg text-zinc-100 min-h-screen">
+  <div class="max-w-4xl mx-auto px-4 py-10 md:py-16">
+    <!-- Header -->
+    <header class="mb-8 md:mb-10">
+      <a href="/" class="text-xs text-sky-400/80 hover:text-sky-300">&larr; Back to main site</a>
+      <h1 class="mt-3 text-3xl md:text-4xl font-semibold flex items-center gap-2">
+        <span class="text-2xl">🤖</span>
+        <span>ASHRITH EDUKULLA — ROBOTICS &amp; AI ROADMAP</span>
+      </h1>
+      <p class="mt-2 text-sm md:text-base text-zinc-400 italic">
+        On this path: learn, prototype, refine, repeat.
+      </p>
+    </header>
+
+    <!-- Overall Progress -->
+    <section class="mb-8">
+      <div class="flex items-center justify-between mb-2">
+        <h2 class="text-sm font-semibold tracking-[0.16em] uppercase text-zinc-400">
+          Overall Progress
+        </h2>
+        <span id="overall-percent" class="text-sm text-sky-300 font-mono">0%</span>
+      </div>
+      <div class="w-full h-2 rounded-full bg-zinc-800 overflow-hidden">
+        <div id="overall-bar" class="h-full bg-sky-500 transition-all duration-300" style="width: 0%;"></div>
+      </div>
+    </section>
+
+    <!-- Helper note -->
+    <p class="text-xs text-zinc-500 mb-6">
+      Your progress is saved in this browser using <span class="font-mono">localStorage</span>.  
+      You can check and uncheck items any time.
+    </p>
+
+    <!-- PHASE 1 -->
+    <section class="mb-8 border border-zinc-800 rounded-2xl bg-zinc-900/40">
+      <div class="border-b border-zinc-800 px-4 md:px-6 py-3 flex items-center justify-between">
+        <div>
+          <p class="text-xs uppercase tracking-[0.16em] text-sky-400">Period 1 — Winter Break</p>
+          <h2 class="text-lg md:text-xl font-semibold">Foundation: Machine Learning + DL Fundamentals</h2>
+        </div>
+        <label class="flex items-center gap-2 text-xs text-zinc-400">
+          <input type="checkbox" class="phase-toggle rounded" data-key="phase1-complete" />
+          Mark phase done
+        </label>
+      </div>
+
+      <div class="px-4 md:px-6 py-4 space-y-4">
+        <div>
+          <h3 class="text-sm font-semibold text-zinc-200 mb-2">🎓 Required Courses</h3>
+          <ul class="space-y-1 text-sm text-zinc-300">
+            <li>
+              <label class="inline-flex items-center gap-2">
+                <input type="checkbox" class="plan-checkbox rounded" data-key="p1-cs229" />
+                <span>CS229 — Machine Learning (Stanford)</span>
+              </label>
+            </li>
+            <li>
+              <label class="inline-flex items-center gap-2">
+                <input type="checkbox" class="plan-checkbox rounded" data-key="p1-cs231n-subset" />
+                <span>CS231n — Deep Learning for Vision (subset)</span>
+              </label>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-sm font-semibold text-zinc-200 mb-2">📌 Assignments</h3>
+          <ul class="space-y-1 text-sm text-zinc-300">
+            <li>
+              <label class="inline-flex items-center gap-2">
+                <input type="checkbox" class="plan-checkbox rounded" data-key="p1-ps1" />
+                <span>CS229 Problem Set 1</span>
+              </label>
+            </li>
+            <li>
+              <label class="inline-flex items-center gap-2">
+                <input type="checkbox" class="plan-checkbox rounded" data-key="p1-ps2" />
+                <span>CS229 Problem Set 2</span>
+              </label>
+            </li>
+            <li>
+              <label class="inline-flex items-center gap-2">
+                <input type="checkbox" class="plan-checkbox rounded" data-key="p1-ps3" />
+                <span>CS229 Problem Set 3</span>
+              </label>
+            </li>
+            <li>
+              <label class="inline-flex items-center gap-2">
+                <input type="checkbox" class="plan-checkbox rounded" data-key="p1-cs231n-a1" />
+                <span>CS231n Assignment 1</span>
+              </label>
+            </li>
+            <li>
+              <label class="inline-flex items-center gap-2">
+                <input type="checkbox" class="plan-checkbox rounded" data-key="p1-cs231n-a2" />
+                <span>CS231n Assignment 2</span>
+              </label>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-sm font-semibold text-zinc-200 mb-2">📈 Milestone Deliverables</h3>
+          <ul class="space-y-1 text-sm text-zinc-300">
+            <li>
+              <label class="inline-flex items-center gap-2">
+                <input type="checkbox" class="plan-checkbox rounded" data-key="p1-mini-model" />
+                <span>
+                  Small ML model with interpretation (bias/variance, regularization)
+                </span>
+              </label>
+            </li>
+            <li>
+              <label class="inline-flex items-center gap-2">
+                <input type="checkbox" class="plan-checkbox rounded" data-key="p1-notes-repo" />
+                <span>
+                  Publish GitHub Notes Repo: <span class="font-mono">CS229-Theory-Notes-Ashrith</span>
+                </span>
+              </label>
+            </li>
+          </ul>
+        </div>
+
+        <div class="border-t border-zinc-800 pt-3">
+          <p class="text-xs text-zinc-400">
+            🏆 XP Target: ≈ 900 XP (courses + assignments + mini-project)
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PHASE 2 -->
+    <section class="mb-8 border border-zinc-800 rounded-2xl bg-zinc-900/40">
+      <div class="border-b border-zinc-800 px-4 md:px-6 py-3 flex items-center justify-between">
+        <div>
+          <p class="text-xs uppercase tracking-[0.16em] text-sky-400">Period 2 — Winter Semester</p>
+          <h2 class="text-lg md:text-xl font-semibold">Applied Perception + Robotics Systems</h2>
+        </div>
+        <label class="flex items-center gap-2 text-xs text-zinc-400">
+          <input type="checkbox" class="phase-toggle rounded" data-key="phase2-complete" />
+          Mark phase done
+        </label>
+      </div>
+
+      <div class="px-4 md:px-6 py-4 space-y-4">
+        <div>
+          <h3 class="text-sm font-semibold text-zinc-200 mb-2">🎓 Courses (Concurrent)</h3>
+          <ul class="space-y-1 text-sm text-zinc-300">
+            <li>
+              <label class="inline-flex items-center gap-2">
+                <input type="checkbox" class="plan-checkbox rounded" data-key="p2-rob430" />
+                <span>ROB 430 — Deep Learning for Perception</span>
+              </label>
+            </li>
+            <li>
+              <label class="inline-flex items-center gap-2">
+                <input type="checkbox" class="plan-checkbox rounded" data-key="p2-rob530" />
+                <span>ROB 530 — Multi-Robot Systems</span>
+              </label>
+            </li>
+            <li>
+              <label class="inline-flex items-center gap-2">
+                <input type="checkbox" class="plan-checkbox rounded" data-key="p2-vnav" />
+                <span>MIT VNAV — Visual Navigation (SLAM/VIO)</span>
+              </label>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-sm font-semibold text-zinc-200 mb-2">📈 Hybrid VO Project</h3>
+          <ul class="space-y-1 text-sm text-zinc-300">
+            <li>
+              <label class="inline-flex items-center gap-2">
+                <input type="checkbox" class="plan-checkbox rounded" data-key="p2-orb-part" />
+                <span>Implement baseline ORB-based VO</span>
+              </label>
+            </li>
+            <li>
+              <label class="inline-flex items-center gap-2">
+                <input type="checkbox" class="plan-checkbox rounded" data-key="p2-superpoint" />
+                <span>Integrate SuperPoint features</span>
+              </label>
+            </li>
+            <li>
+              <label class="inline-flex items-center gap-2">
+                <input type="checkbox" class="plan-checkbox rounded" data-key="p2-superglue" />
+                <span>Integrate SuperGlue matching</span>
+              </label>
+            </li>
+            <li>
+              <label class="inline-flex items-center gap-2">
+                <input type="checkbox" class="plan-checkbox rounded" data-key="p2-eval" />
+                <span>Evaluate drift &amp; runtime, document results</span>
+              </label>
+            </li>
+            <li>
+              <label class="inline-flex items-center gap-2">
+                <input type="checkbox" class="plan-checkbox rounded" data-key="p2-repo" />
+                <span>Create repo: <span class="font-mono">Hybrid-VO-System</span></span>
+              </label>
+            </li>
+          </ul>
+        </div>
+
+        <div class="border-t border-zinc-800 pt-3">
+          <p class="text-xs text-zinc-400">
+            🏆 XP Target: Prototype + blog + demo ≈ 1700 XP
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PHASE 3 -->
+    <section class="mb-8 border border-zinc-800 rounded-2xl bg-zinc-900/40">
+      <div class="border-b border-zinc-800 px-4 md:px-6 py-3 flex items-center justify-between">
+        <div>
+          <p class="text-xs uppercase tracking-[0.16em] text-sky-400">Period 3 — Summer</p>
+          <h2 class="text-lg md:text-xl font-semibold">Reinforcement Learning + Generative Models</h2>
+        </div>
+        <label class="flex items-center gap-2 text-xs text-zinc-400">
+          <input type="checkbox" class="phase-toggle rounded" data-key="phase3-complete" />
+          Mark phase done
+        </label>
+      </div>
+
+      <div class="px-4 md:px-6 py-4 space-y-4">
+        <div>
+          <h3 class="text-sm font-semibold text-zinc-200 mb-2">🎓 Courses</h3>
+          <ul class="space-y-1 text-sm text-zinc-300">
+            <li>
+              <label class="inline-flex items-center gap-2">
+                <input type="checkbox" class="plan-checkbox rounded" data-key="p3-silver" />
+                <span>David Silver RL (DeepMind/UCL)</span>
+              </label>
+            </li>
+            <li>
+              <label class="inline-flex items-center gap-2">
+                <input type="checkbox" class="plan-checkbox rounded" data-key="p3-cs285" />
+                <span>CS285 — Deep RL (Berkeley)</span>
+              </label>
+            </li>
+            <li>
+              <label class="inline-flex items-center gap-2">
+                <input type="checkbox" class="plan-checkbox rounded" data-key="p3-eecs498" />
+                <span>EECS 498 — Generative AI (JJ Park)</span>
+              </label>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-sm font-semibold text-zinc-200 mb-2">🎯 Capstone Project (pick one or more)</h3>
+          <ul class="space-y-1 text-sm text-zinc-300">
+            <li>
+              <label class="inline-flex items-center gap-2">
+                <input type="checkbox" class="plan-checkbox rounded" data-key="p3-capstone-rl-slam" />
+                <span>RL frontier exploration + learned SLAM reward</span>
+              </label>
+            </li>
+            <li>
+              <label class="inline-flex items-center gap-2">
+                <input type="checkbox" class="plan-checkbox rounded" data-key="p3-capstone-nerf" />
+                <span>NeRF-based perception + mapping</span>
+              </label>
+            </li>
+            <li>
+              <label class="inline-flex items-center gap-2">
+                <input type="checkbox" class="plan-checkbox rounded" data-key="p3-capstone-locomotion" />
+                <span>RL locomotion + deep perception + domain randomization in Isaac</span>
+              </label>
+            </li>
+            <li>
+              <label class="inline-flex items-center gap-2">
+                <input type="checkbox" class="plan-checkbox rounded" data-key="p3-capstone-repo" />
+                <span>Create repo: <span class="font-mono">Summer-RL-Perception-Capstone</span></span>
+              </label>
+            </li>
+          </ul>
+        </div>
+
+        <div class="border-t border-zinc-800 pt-3">
+          <p class="text-xs text-zinc-400">
+            🏆 XP Target: Courses + capstone + write-up ≈ 3100 XP
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PHASE 4 -->
+    <section class="mb-8 border border-zinc-800 rounded-2xl bg-zinc-900/40">
+      <div class="border-b border-zinc-800 px-4 md:px-6 py-3 flex items-center justify-between">
+        <div>
+          <p class="text-xs uppercase tracking-[0.16em] text-sky-400">Period 4 — Fall</p>
+          <h2 class="text-lg md:text-xl font-semibold">Research Identity + Advanced Systems</h2>
+        </div>
+        <label class="flex items-center gap-2 text-xs text-zinc-400">
+          <input type="checkbox" class="phase-toggle rounded" data-key="phase4-complete" />
+          Mark phase done
+        </label>
+      </div>
+
+      <div class="px-4 md:px-6 py-4 space-y-4">
+        <div>
+          <h3 class="text-sm font-semibold text-zinc-200 mb-2">🎓 Courses / Self-study</h3>
+          <ul class="space-y-1 text-sm text-zinc-300">
+            <li>
+              <label class="inline-flex items-center gap-2">
+                <input type="checkbox" class="plan-checkbox rounded" data-key="p4-cs336" />
+                <span>CS336 — Robot Learning</span>
+              </label>
+            </li>
+            <li>
+              <label class="inline-flex items-center gap-2">
+                <input type="checkbox" class="plan-checkbox rounded" data-key="p4-cmu-16385" />
+                <span>CMU 16-385 — 3D Vision</span>
+              </label>
+            </li>
+            <li>
+              <label class="inline-flex items-center gap-2">
+                <input type="checkbox" class="plan-checkbox rounded" data-key="p4-papers" />
+                <span>Weekly papers (SLAM, RL, NeRF) with notes</span>
+              </label>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-sm font-semibold text-zinc-200 mb-2">🤖 Final System</h3>
+          <p class="text-sm text-zinc-300 mb-2">
+            Embodied AI Agent capable of mapping, perception, and decision-making in Isaac Sim.
+          </p>
+          <ul class="space-y-1 text-sm text-zinc-300">
+            <li>
+              <label class="inline-flex items-center gap-2">
+                <input type="checkbox" class="plan-checkbox rounded" data-key="p4-system-design" />
+                <span>Design overall system architecture</span>
+              </label>
+            </li>
+            <li>
+              <label class="inline-flex items-center gap-2">
+                <input type="checkbox" class="plan-checkbox rounded" data-key="p4-system-impl" />
+                <span>Implement integrated mapping + perception + RL policy</span>
+              </label>
+            </li>
+            <li>
+              <label class="inline-flex items-center gap-2">
+                <input type="checkbox" class="plan-checkbox rounded" data-key="p4-system-eval" />
+                <span>Evaluate performance and document experiments</span>
+              </label>
+            </li>
+            <li>
+              <label class="inline-flex items-center gap-2">
+                <input type="checkbox" class="plan-checkbox rounded" data-key="p4-system-repo" />
+                <span>Create repo: <span class="font-mono">Embodied-AI-System-AE</span></span>
+              </label>
+            </li>
+          </ul>
+        </div>
+
+        <div class="border-t border-zinc-800 pt-3">
+          <p class="text-xs text-zinc-400">
+            🏆 XP Target: Integrated system + demo + write-up ≈ 2700 XP
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PHASE 5 -->
+    <section class="mb-8 border border-zinc-800 rounded-2xl bg-zinc-900/40">
+      <div class="border-b border-zinc-800 px-4 md:px-6 py-3 flex items-center justify-between">
+        <div>
+          <p class="text-xs uppercase tracking-[0.16em] text-sky-400">Phase 5 — Portfolio &amp; Recruiting</p>
+          <h2 class="text-lg md:text-xl font-semibold">Portfolio + Recruiting Mode</h2>
+        </div>
+        <label class="flex items-center gap-2 text-xs text-zinc-400">
+          <input type="checkbox" class="phase-toggle rounded" data-key="phase5-complete" />
+          Mark phase done
+        </label>
+      </div>
+
+      <div class="px-4 md:px-6 py-4 space-y-4">
+        <div>
+          <h3 class="text-sm font-semibold text-zinc-200 mb-2">📦 Requirements</h3>
+          <ul class="space-y-1 text-sm text-zinc-300">
+            <li>
+              <label class="inline-flex items-center gap-2">
+                <input type="checkbox" class="plan-checkbox rounded" data-key="p5-repo-clean" />
+                <span>All final projects have clean repos</span>
+              </label>
+            </li>
+            <li>
+              <label class="inline-flex items-center gap-2">
+                <input type="checkbox" class="plan-checkbox rounded" data-key="p5-demos" />
+                <span>All final projects have demo videos</span>
+              </label>
+            </li>
+            <li>
+              <label class="inline-flex items-center gap-2">
+                <input type="checkbox" class="plan-checkbox rounded" data-key="p5-writeups" />
+                <span>All final projects have polished write-ups</span>
+              </label>
+            </li>
+            <li>
+              <label class="inline-flex items-center gap-2">
+                <input type="checkbox" class="plan-checkbox rounded" data-key="p5-resume" />
+                <span>Resume updated with metrics + bullets for each project</span>
+              </label>
+            </li>
+            <li>
+              <label class="inline-flex items-center gap-2">
+                <input type="checkbox" class="plan-checkbox rounded" data-key="p5-website-refresh" />
+                <span>Robotics AI portfolio website refresh complete</span>
+              </label>
+            </li>
+          </ul>
+        </div>
+
+        <div class="border-t border-zinc-800 pt-3">
+          <p class="text-xs text-zinc-400">
+            🏁 At this point: ready to show this plan + projects to recruiters, labs, and mentors.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- REFLECTION + LEVEL -->
+    <section class="mb-10 border border-zinc-800 rounded-2xl bg-zinc-900/40 px-4 md:px-6 py-4 space-y-4">
+      <div>
+        <h3 class="text-sm font-semibold text-zinc-200 mb-2">🧪 Reflection</h3>
+        <p class="text-xs text-zinc-400 mb-2">
+          _What did I learn that changed how I think?_
+        </p>
+        <textarea
+          class="w-full h-24 rounded-lg bg-zinc-950/70 border border-zinc-800 text-sm text-zinc-200 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-sky-500"
+          placeholder="Write a short reflection here..."
+          id="reflection-box"
+        ></textarea>
+        <p class="mt-1 text-[11px] text-zinc-500">
+          (This reflection text is also saved locally in your browser.)
+        </p>
+      </div>
+
+      <div class="border-t border-zinc-800 pt-3">
+        <h3 class="text-sm font-semibold text-zinc-200 mb-1">🧩 Level Progression (Manual)</h3>
+        <p class="text-xs text-zinc-400">
+          Level XP Threshold = Level × 1200 &nbsp;|&nbsp;
+          Suggested Start: <span class="font-mono text-sky-300">Level 04 — Applied Robotics Learner</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-zinc-800 pt-4 text-xs text-zinc-500">
+      <p>Email: <a href="mailto:ashed@umich.edu" class="text-sky-400 hover:text-sky-300">ashed@umich.edu</a></p>
+      <p>GitHub: <a href="https://github.com/Ashrith5321" target="_blank" class="text-sky-400 hover:text-sky-300">Ashrith5321</a></p>
+      <p>LinkedIn: <a href="https://www.linkedin.com/in/ashrith-edukulla-633b141a7/" target="_blank" class="text-sky-400 hover:text-sky-300">/in/ashrith-edukulla-633b141a7</a></p>
+      <p>Website: <a href="https://ashrith5321.github.io" class="text-sky-400 hover:text-sky-300">ashrith5321.github.io</a></p>
+      <p class="mt-2 italic text-zinc-600">– A.E.</p>
+    </footer>
+  </div>
+
+  <!-- Progress + localStorage script -->
+  <script>
+    (function () {
+      const STORAGE_PREFIX = "ash-plan-";
+      const checkboxes = document.querySelectorAll(".plan-checkbox, .phase-toggle");
+      const overallPercentEl = document.getElementById("overall-percent");
+      const overallBarEl = document.getElementById("overall-bar");
+      const reflectionBox = document.getElementById("reflection-box");
+
+      function storageKey(key) {
+        return STORAGE_PREFIX + key;
+      }
+
+      function loadState() {
+        checkboxes.forEach(cb => {
+          const key = cb.dataset.key;
+          if (!key) return;
+          const saved = localStorage.getItem(storageKey(key));
+          if (saved === "true") cb.checked = true;
+        });
+
+        const reflection = localStorage.getItem(storageKey("reflection"));
+        if (reflectionBox && reflection) {
+          reflectionBox.value = reflection;
+        }
+
+        updateProgress();
+      }
+
+      function saveCheckboxState(cb) {
+        const key = cb.dataset.key;
+        if (!key) return;
+        localStorage.setItem(storageKey(key), cb.checked ? "true" : "false");
+      }
+
+      function updateProgress() {
+        const actionable = document.querySelectorAll(".plan-checkbox");
+        const total = actionable.length;
+        let done = 0;
+        actionable.forEach(cb => {
+          if (cb.checked) done++;
+        });
+        const percent = total > 0 ? Math.round((done / total) * 100) : 0;
+        if (overallPercentEl) overallPercentEl.textContent = percent + "%";
+        if (overallBarEl) overallBarEl.style.width = percent + "%";
+      }
+
+      // Event listeners
+      checkboxes.forEach(cb => {
+        cb.addEventListener("change", () => {
+          saveCheckboxState(cb);
+          updateProgress();
+        });
+      });
+
+      if (reflectionBox) {
+        reflectionBox.addEventListener("input", () => {
+          localStorage.setItem(storageKey("reflection"), reflectionBox.value);
+        });
+      }
+
+      loadState();
+    })();
+  </script>
+</body>
+</html>
