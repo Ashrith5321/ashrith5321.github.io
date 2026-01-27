@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Full-Stack AV — IEKF Localization + Deep Learning</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-black text-white">
+  <!-- Top Nav -->
+  <header class="sticky top-0 z-50 backdrop-blur bg-black/70 border-b border-white/10">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="index.html" class="text-sm text-cyan-300 hover:text-cyan-200">← Back to Home</a>
+
+      <div class="hidden md:flex items-center gap-3 text-xs text-gray-400">
+        <a href="#overview" class="hover:text-white">Overview</a>
+        <span class="opacity-40">•</span>
+        <a href="#system-map" class="hover:text-white">System Map</a>
+        <span class="opacity-40">•</span>
+        <a href="#deliverables" class="hover:text-white">Deliverables</a>
+        <span class="opacity-40">•</span>
+        <a href="#plan" class="hover:text-white">Step-by-Step</a>
+        <span class="opacity-40">•</span>
+        <a href="#ros2" class="hover:text-white">ROS 2 Graph</a>
+        <span class="opacity-40">•</span>
+        <a href="#evaluation" class="hover:text-white">Evaluation</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="overview" class="max-w-6xl mx-auto px-4 py-12">
+    <div class="bg-gray-900/60 border border-white/10 rounded-3xl p-8 shadow-lg">
+      <h1 class="text-3xl md:text-4xl font-bold mb-3">
+        🚗📍 Full-Stack AV — IEKF Localization + Deep Learning Modules
+      </h1>
+
+      <p class="text-gray-300 leading-relaxed max-w-4xl">
+        This project builds an autonomous-vehicle-grade localization stack centered on an
+        <span class="text-white font-semibold">Invariant EKF (IEKF)</span> that fuses
+        <span class="text-white font-semibold">IMU</span>, <span class="text-white font-semibold">wheel odometry</span>,
+        <span class="text-white font-semibold">GNSS/RTK</span>, <span class="text-white font-semibold">camera VO/VIO</span>
+        (stereo + optional monocular), and <span class="text-white font-semibold">LiDAR scan-to-map</span>.
+        Deep learning components improve robustness via
+        <span class="text-white font-semibold">learned matching</span>,
+        <span class="text-white font-semibold">learned uncertainty calibration</span>,
+        <span class="text-white font-semibold">slip detection</span>,
+        <span class="text-white font-semibold">semantic map corrections</span>,
+        and <span class="text-white font-semibold">global relocalization recovery</span>.
+      </p>
+
+      <div class="mt-6 flex flex-wrap gap-2 text-xs font-semibold">
+        <span class="bg-indigo-700 text-white px-2 py-1 rounded">#IEKF</span>
+        <span class="bg-green-700 text-white px-2 py-1 rounded">#SensorFusion</span>
+        <span class="bg-blue-700 text-white px-2 py-1 rounded">#IMU</span>
+        <span class="bg-purple-700 text-white px-2 py-1 rounded">#WheelOdom</span>
+        <span class="bg-gray-600 text-white px-2 py-1 rounded">#GNSS/RTK</span>
+        <span class="bg-pink-700 text-white px-2 py-1 rounded">#StereoVO</span>
+        <span class="bg-teal-700 text-white px-2 py-1 rounded">#LiDARToMap</span>
+        <span class="bg-cyan-700 text-white px-2 py-1 rounded">#DeepLearning</span>
+        <span class="bg-orange-700 text-white px-2 py-1 rounded">#ROS2</span>
+      </div>
+
+      <div class="mt-6 grid md:grid-cols-3 gap-4">
+        <div class="bg-black/60 border border-white/10 rounded-2xl p-4">
+          <div class="text-gray-400 text-xs">Primary Output</div>
+          <div class="font-semibold">Pose + Covariance</div>
+          <div class="text-gray-300 text-sm mt-1">/odometry/filtered + /tf (map → base_link)</div>
+        </div>
+        <div class="bg-black/60 border border-white/10 rounded-2xl p-4">
+          <div class="text-gray-400 text-xs">Reliability Output</div>
+          <div class="font-semibold">Sensor Health + Gating</div>
+          <div class="text-gray-300 text-sm mt-1">Innovation checks + learned confidence scaling</div>
+        </div>
+        <div class="bg-black/60 border border-white/10 rounded-2xl p-4">
+          <div class="text-gray-400 text-xs">Recovery Output</div>
+          <div class="font-semibold">Relocalization</div>
+          <div class="text-gray-300 text-sm mt-1">Place recognition + re-init scan-to-map</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- System Map -->
+  <section id="system-map" class="max-w-6xl mx-auto px-4 pb-12">
+    <h2 class="text-2xl font-bold mb-4">System Map (Localization + ML Modules)</h2>
+
+    <div class="grid lg:grid-cols-2 gap-6">
+      <div class="bg-gray-900/60 border border-white/10 rounded-3xl p-6">
+        <p class="text-gray-300 mb-4">
+          The IEKF runs continuously. Sensors provide updates. Deep learning modules improve the
+          <span class="text-white font-semibold">quality</span> and
+          <span class="text-white font-semibold">trustworthiness</span> of measurements (and can trigger relocalization).
+        </p>
+
+        <div class="bg-black border border-white/10 rounded-2xl p-4 overflow-x-auto">
+<pre class="text-xs md:text-sm text-gray-200 leading-relaxed">
+                         (RTK Corrections / NTRIP / Base Station)
+                                        |
+                                        v
+      +--------------------------------------------------------------+
+      |                         IEKF Core                            |
+      |  State: {R, p, v, bg, ba, (optional: wheel_scale, cam_scale)}|
+      |  Cov:   P                                                    |
+      |  Outputs: /odometry/filtered, /tf (map->base_link), diag      |
+      +--------------------------^-----------------------------------+
+                                 |
+                 IMU propagation |
+[IMU] ---> Strapdown integration + covariance propagation
+            |
+            +--> (DL/ML Health): detect saturation / vibration / dropouts
+
+Measurement Update Inputs (with ML modules):
+--------------------------------------------
+[Wheel Encoders + Steering] ---> Vehicle model ---> (Update)
+     |                                          \
+     |                                           +--> (ML Slip Detector) -> down-weight wheel updates
+     v
+(ML Slip Classifier: slip/no-slip + slip score)
+
+[GNSS/RTK] ----------------------------------------------> (Update)
+   |
+   +--> (ML GNSS reliability) -> multipath suspicion -> inflate R or reject
+
+[Stereo Camera] --> (CNN keypoints+matching: SuperPoint + LightGlue) --> Stereo VO --> (Update)
+   |                                                                  |
+   |                                                                  +--> (ML Uncertainty Calibrator) -> scale R_vo
+   |
+   +--> (Optional CNN stereo depth) -> denser 3D points -> stronger VO constraints
+
+[LiDAR] --> scan-to-map (NDT/ICP) --> pose correction --> (Update)
+   |
+   +--> (ML/heuristic degeneracy + uncertainty calibration) -> scale R_lidar
+
+Semantic Map Localization (DL + Geometry):
+-----------------------------------------
+[Camera] -> (DL lane/sign/pole detection) -> associate to HD semantic map -> absolute pose -> (Update)
+
+Global Recovery (Relocalization):
+--------------------------------
+[LiDAR or Camera] -> (Place Recognition / Descriptor Retrieval) -> coarse global pose -> re-init scan-to-map + IEKF
+</pre>
+        </div>
+      </div>
+
+      <div class="bg-gray-900/60 border border-white/10 rounded-3xl p-6">
+        <h3 class="text-xl font-semibold mb-3">What Deep Learning Changes</h3>
+        <ul class="text-gray-300 space-y-2 list-disc list-inside">
+          <li><span class="text-white font-semibold">Better visual constraints:</span> learned matching stabilizes VO under blur/lighting/low texture.</li>
+          <li><span class="text-white font-semibold">Better filter consistency:</span> learned confidence scales measurement noise to prevent divergence.</li>
+          <li><span class="text-white font-semibold">Vehicle realism:</span> slip detection prevents wheel odometry from corrupting the estimate.</li>
+          <li><span class="text-white font-semibold">Map-locked accuracy:</span> semantic landmarks give absolute corrections even when GNSS degrades.</li>
+          <li><span class="text-white font-semibold">Recovery:</span> relocalization finds the right area in the map after failures.</li>
+        </ul>
+
+        <div class="mt-6">
+          <h3 class="text-xl font-semibold mb-3">Core Outputs</h3>
+          <ul class="text-gray-300 space-y-2 list-disc list-inside">
+            <li><span class="text-white font-semibold">Pose:</span> <code class="text-cyan-200">T_map_base</code>, <code class="text-cyan-200">T_odom_base</code></li>
+            <li><span class="text-white font-semibold">Velocity:</span> world/body velocity + yaw-rate</li>
+            <li><span class="text-white font-semibold">Biases:</span> IMU gyro bias <code class="text-cyan-200">bg</code>, accel bias <code class="text-cyan-200">ba</code></li>
+            <li><span class="text-white font-semibold">Covariance:</span> full state covariance matrix</li>
+            <li><span class="text-white font-semibold">Health:</span> per-sensor trust score + rejection reasons</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Deliverables -->
+  <section id="deliverables" class="max-w-6xl mx-auto px-4 pb-12">
+    <h2 class="text-2xl font-bold mb-4">Deliverables (Software + ML + Results)</h2>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="bg-gray-900/60 border border-white/10 rounded-3xl p-6">
+        <h3 class="text-xl font-semibold mb-3">Software Deliverables</h3>
+        <ul class="text-gray-300 space-y-2 list-disc list-inside">
+          <li><span class="text-white font-semibold">ROS 2 IEKF localizer</span> (propagation + measurement updates + tf publishing)</li>
+          <li><span class="text-white font-semibold">Sensor adapters</span>: IMU, wheel/steering, GNSS, stereo VO, LiDAR scan-to-map</li>
+          <li><span class="text-white font-semibold">Deep matching node</span>: SuperPoint + LightGlue/SuperGlue (stereo correspondences)</li>
+          <li><span class="text-white font-semibold">Uncertainty calibration node</span>: learned confidence → adaptive measurement noise scaling</li>
+          <li><span class="text-white font-semibold">Slip detection node</span>: classifier → down-weight wheel updates during low traction</li>
+          <li><span class="text-white font-semibold">Semantic localization node</span>: lanes/landmarks detection → map alignment → absolute update</li>
+          <li><span class="text-white font-semibold">Relocalization node</span>: place recognition → coarse pose init → recovery pipeline</li>
+          <li><span class="text-white font-semibold">Evaluation toolkit</span>: ATE/RPE, yaw error, dropout drift curves, innovation stats</li>
+          <li><span class="text-white font-semibold">Reproducibility</span>: launch files, config YAMLs, calibration docs, bag datasets</li>
+        </ul>
+      </div>
+
+      <div class="bg-gray-900/60 border border-white/10 rounded-3xl p-6">
+        <h3 class="text-xl font-semibold mb-3">Results Deliverables</h3>
+        <ul class="text-gray-300 space-y-2 list-disc list-inside">
+          <li><span class="text-white font-semibold">Ablation plots</span>: IMU+wheel → +GNSS → +VO → +LiDAR-to-map → +semantics → +relocalization</li>
+          <li><span class="text-white font-semibold">Dropout tests</span>: GNSS denied segments (10–60s), camera blackout, LiDAR degeneracy</li>
+          <li><span class="text-white font-semibold">Consistency checks</span>: innovation gating rates, residual histograms, “overconfidence” prevention</li>
+          <li><span class="text-white font-semibold">Robustness wins</span>: learned matching + uncertainty scaling reduces failures</li>
+          <li><span class="text-white font-semibold">Final report</span>: system architecture + design decisions + quantitative metrics + failure analysis</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Step-by-step plan -->
+  <section id="plan" class="max-w-6xl mx-auto px-4 pb-16">
+    <h2 class="text-2xl font-bold mb-4">Step-by-Step Build Plan (Full Stack, Very Detailed)</h2>
+
+    <div class="space-y-6">
+
+      <!-- Phase 0 -->
+      <div class="bg-gray-900/60 border border-white/10 rounded-3xl p-6">
+        <h3 class="text-xl font-semibold mb-2">Phase 0 — Specs, Frames, State, and Success Metrics</h3>
+        <ol class="text-gray-300 space-y-2 list-decimal list-inside">
+          <li><span class="text-white font-semibold">Choose conventions:</span> ENU vs NED, yaw definition, right-handed frames.</li>
+          <li><span class="text-white font-semibold">Define frames:</span> <code class="text-cyan-200">map</code>, <code class="text-cyan-200">odom</code>, <code class="text-cyan-200">base_link</code>, sensor frames.</li>
+          <li><span class="text-white font-semibold">State vector:</span> SE(3) (R,p,v,bg,ba) or SE(2)+attitude; optionally wheel scale + camera scale.</li>
+          <li><span class="text-white font-semibold">Measurement list:</span> wheel speed/steering, GNSS position/vel, VO increment, LiDAR-to-map pose, semantic landmark pose.</li>
+          <li><span class="text-white font-semibold">Success metrics:</span> RMS position error, yaw error, drift under GNSS dropout, failure rate, relocalization time.</li>
+        </ol>
+      </div>
+
+      <!-- Phase 1 -->
+      <div class="bg-gray-900/60 border border-white/10 rounded-3xl p-6">
+        <h3 class="text-xl font-semibold mb-2">Phase 1 — Data Plumbing, Time Sync, and Calibration</h3>
+        <ol class="text-gray-300 space-y-2 list-decimal list-inside">
+          <li><span class="text-white font-semibold">Timestamp discipline:</span> ring buffers per sensor + interpolation to measurement time.</li>
+          <li><span class="text-white font-semibold">Extrinsics:</span> calibrate <code class="text-cyan-200">T_base_imu</code>, <code class="text-cyan-200">T_base_cam</code>, <code class="text-cyan-200">T_base_lidar</code>, GNSS lever arm.</li>
+          <li><span class="text-white font-semibold">Noise characterization:</span> IMU noise/bias; wheel quantization; GNSS quality flags; VO feature stats.</li>
+          <li><span class="text-white font-semibold">Unit checks:</span> rad/s, m/s², meters, seconds — no hidden conversions.</li>
+          <li><span class="text-white font-semibold">tf tree validation:</span> static transforms correct; no frame flips; consistent orientation.</li>
+        </ol>
+      </div>
+
+      <!-- Phase 2 -->
+      <div class="bg-gray-900/60 border border-white/10 rounded-3xl p-6">
+        <h3 class="text-xl font-semibold mb-2">Phase 2 — IEKF Core (Propagation + Covariance)</h3>
+        <ol class="text-gray-300 space-y-2 list-decimal list-inside">
+          <li><span class="text-white font-semibold">IMU strapdown:</span> integrate R,v,p with bias-corrected gyro/accel.</li>
+          <li><span class="text-white font-semibold">Bias model:</span> random walk for <code class="text-cyan-200">bg</code>, <code class="text-cyan-200">ba</code>.</li>
+          <li><span class="text-white font-semibold">Covariance propagation:</span> continuous-time error dynamics → discretize → update P.</li>
+          <li><span class="text-white font-semibold">Sanity guards:</span> dt bounds, NaN checks, accel magnitude clamps, bias bounds.</li>
+          <li><span class="text-white font-semibold">Baseline output:</span> publish propagation-only odom (no updates) to validate stability.</li>
+        </ol>
+      </div>
+
+      <!-- Phase 3 -->
+      <div class="bg-gray-900/60 border border-white/10 rounded-3xl p-6">
+        <h3 class="text-xl font-semibold mb-2">Phase 3 — Wheel + Steering Update (With ML Slip Detection)</h3>
+        <ol class="text-gray-300 space-y-2 list-decimal list-inside">
+          <li><span class="text-white font-semibold">Vehicle model:</span> bicycle model (preferred) using steering angle; else velocity-only.</li>
+          <li><span class="text-white font-semibold">Wheel measurement:</span> ticks → wheel speed → forward velocity (and yaw-rate if available).</li>
+          <li><span class="text-white font-semibold">Slip detector (ML):</span> train classifier using features:
+            IMU accel spikes, wheel-vs-IMU inconsistency, yaw-rate mismatch, sudden wheel speed changes.</li>
+          <li><span class="text-white font-semibold">Fusion rule:</span> when slip score high → inflate wheel measurement noise (or reject update).</li>
+          <li><span class="text-white font-semibold">Validation:</span> compare wheel velocity to GNSS velocity (when available), and analyze slip-trigger events.</li>
+        </ol>
+      </div>
+
+      <!-- Phase 4 -->
+      <div class="bg-gray-900/60 border border-white/10 rounded-3xl p-6">
+        <h3 class="text-xl font-semibold mb-2">Phase 4 — GNSS/RTK Update (With Reliability ML)</h3>
+        <ol class="text-gray-300 space-y-2 list-decimal list-inside">
+          <li><span class="text-white font-semibold">Measurement model:</span> GNSS position/velocity in map frame; include lever arm from base.</li>
+          <li><span class="text-white font-semibold">Quality gating:</span> filter by fix type (RTK fixed/float), HDOP/VDOP thresholds, innovation gating.</li>
+          <li><span class="text-white font-semibold">GNSS reliability ML:</span> predict multipath risk using quality flags + innovation patterns → scale GNSS noise.</li>
+          <li><span class="text-white font-semibold">Dropout testing:</span> remove GNSS for 10–60 seconds and measure drift growth curves.</li>
+        </ol>
+      </div>
+
+      <!-- Phase 5 -->
+      <div class="bg-gray-900/60 border border-white/10 rounded-3xl p-6">
+        <h3 class="text-xl font-semibold mb-2">Phase 5 — Stereo VO/VIO (With CNN Matching + Uncertainty Calibration)</h3>
+        <ol class="text-gray-300 space-y-2 list-decimal list-inside">
+          <li><span class="text-white font-semibold">Start baseline:</span> classic stereo VO with feature tracking + RANSAC + triangulation.</li>
+          <li><span class="text-white font-semibold">Upgrade front-end (CNN):</span> SuperPoint keypoints + LightGlue/SuperGlue matching.</li>
+          <li><span class="text-white font-semibold">Pose extraction:</span> estimate relative motion Δpose from stereo constraints; compute inlier stats.</li>
+          <li><span class="text-white font-semibold">Uncertainty calibration (ML):</span> model predicts VO confidence from inliers, reprojection error,
+            track length, blur/brightness metrics → scale <code class="text-cyan-200">R_vo</code>.</li>
+          <li><span class="text-white font-semibold">Failure detection:</span> low inliers / high reprojection error → reject update.</li>
+          <li><span class="text-white font-semibold">(Optional)</span> CNN stereo depth for denser points in low-texture scenes.</li>
+        </ol>
+      </div>
+
+      <!-- Phase 6 -->
+      <div class="bg-gray-900/60 border border-white/10 rounded-3xl p-6">
+        <h3 class="text-xl font-semibold mb-2">Phase 6 — LiDAR Scan-to-Map (With Degeneracy + Confidence Scaling)</h3>
+        <ol class="text-gray-300 space-y-2 list-decimal list-inside">
+          <li><span class="text-white font-semibold">Map:</span> create/load a pointcloud map (PCD) of your environment.</li>
+          <li><span class="text-white font-semibold">Localization:</span> NDT/ICP scan-to-map matching yields pose correction.</li>
+          <li><span class="text-white font-semibold">Degeneracy checks:</span> low overlap, high condition number, planar scene → reduce trust.</li>
+          <li><span class="text-white font-semibold">Uncertainty scaling:</span> use match fitness + degeneracy to scale <code class="text-cyan-200">R_lidar</code>.</li>
+          <li><span class="text-white font-semibold">Initialization:</span> GNSS/IEKF prior initializes scan-to-map to avoid wrong minima.</li>
+        </ol>
+      </div>
+
+      <!-- Phase 7 -->
+      <div class="bg-gray-900/60 border border-white/10 rounded-3xl p-6">
+        <h3 class="text-xl font-semibold mb-2">Phase 7 — Semantic Map Localization (DL + Geometry)</h3>
+        <ol class="text-gray-300 space-y-2 list-decimal list-inside">
+          <li><span class="text-white font-semibold">Semantic perception:</span> lane segmentation + pole/sign/landmark detection (CNN).</li>
+          <li><span class="text-white font-semibold">Association:</span> match detected semantics to a semantic HD map (landmark database).</li>
+          <li><span class="text-white font-semibold">Pose correction:</span> solve pose from landmark geometry (PnP / alignment) and update IEKF.</li>
+          <li><span class="text-white font-semibold">Confidence:</span> use detection confidence + association score to scale measurement noise.</li>
+        </ol>
+      </div>
+
+      <!-- Phase 8 -->
+      <div class="bg-gray-900/60 border border-white/10 rounded-3xl p-6">
+        <h3 class="text-xl font-semibold mb-2">Phase 8 — Global Relocalization Recovery (Place Recognition)</h3>
+        <ol class="text-gray-300 space-y-2 list-decimal list-inside">
+          <li><span class="text-white font-semibold">Trigger conditions:</span> large residual spikes, repeated update rejections, scan-to-map failure, pose jump.</li>
+          <li><span class="text-white font-semibold">Place recognition:</span> compute global descriptor (LiDAR scan descriptor or image descriptor) and retrieve best map region.</li>
+          <li><span class="text-white font-semibold">Coarse init:</span> use retrieved region to seed scan-to-map and reset/realign IEKF to map.</li>
+          <li><span class="text-white font-semibold">Verification:</span> accept recovery only if subsequent scan-to-map fitness is strong.</li>
+        </ol>
+      </div>
+
+      <!-- Phase 9 -->
+      <div class="bg-gray-900/60 border border-white/10 rounded-3xl p-6">
+        <h3 class="text-xl font-semibold mb-2">Phase 9 — Evaluation, Ablations, and “Production” Hardening</h3>
+        <ol class="text-gray-300 space-y-2 list-decimal list-inside">
+          <li><span class="text-white font-semibold">Ablations:</span> turn modules on/off and compare metrics.</li>
+          <li><span class="text-white font-semibold">Latency audits:</span> measure delay for VO/LiDAR/DL nodes; compensate by buffering and applying correct timestamps.</li>
+          <li><span class="text-white font-semibold">Consistency:</span> track innovation distributions, gating rates, covariance growth during dropouts.</li>
+          <li><span class="text-white font-semibold">Failure analysis:</span> multipath, slip, motion blur, textureless scenes, degeneracy corridors.</li>
+          <li><span class="text-white font-semibold">Finalize:</span> stable configs + README + bag files + plotted report.</li>
+        </ol>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ROS 2 Node Graph -->
+  <section id="ros2" class="max-w-6xl mx-auto px-4 pb-16">
+    <h2 class="text-2xl font-bold mb-4">ROS 2 Node Graph (Full Stack)</h2>
+
+    <div class="bg-gray-900/60 border border-white/10 rounded-3xl p-6">
+      <div class="bg-black border border-white/10 rounded-2xl p-4 overflow-x-auto">
+<pre class="text-xs md:text-sm text-gray-200 leading-relaxed">
+Sensors:
+  /imu_driver        -> /imu/data
+  /wheel_driver      -> /wheel/encoders
+  /steering_driver   -> /vehicle/steering
+  /gnss_driver       -> /gnss/fix, /gnss/vel, /gnss/status
+  /stereo_cam        -> /stereo/left/image, /stereo/right/image
+  /lidar_driver      -> /points_raw
+
+Deep Learning Modules:
+  /dl_matching       : (left/right images) -> /vo/matches, /vo/quality
+  /dl_slip_detector  : (imu + wheel + steering) -> /wheel/slip_score
+  /dl_uncertainty    : (vo/lidar/gnss stats) -> /trust/scale_vo, /trust/scale_lidar, /trust/scale_gnss
+  /dl_semantics      : (camera) -> /sem/lanes, /sem/landmarks
+  /relocalizer       : (lidar/cam) -> /recovery/coarse_pose
+
+Classical Geometry:
+  /stereo_vo         : (matches + stereo) -> /vo/odom, /vo/diag
+  /lidar_scan_match  : (points + map) -> /lidar/pose, /lidar/fitness
+  /semantic_localize : (semantics + map) -> /sem/pose, /sem/score
+
+Estimator:
+  /iekf_localizer    : fuses everything -> /odometry/filtered, /tf, /diagnostics, /health
+
+Offline:
+  /mapping_pipeline  -> map.pcd, semantic_landmarks.json, descriptor_db.bin
+</pre>
+      </div>
+
+      <p class="text-gray-300 mt-4">
+        Key design rule: <span class="text-white font-semibold">IEKF owns the state</span>.
+        DL nodes produce either (1) better measurements, or (2) better measurement trust (adaptive noise),
+        or (3) recovery proposals (relocalization seed).
+      </p>
+    </div>
+  </section>
+
+  <!-- Evaluation -->
+  <section id="evaluation" class="max-w-6xl mx-auto px-4 pb-16">
+    <h2 class="text-2xl font-bold mb-4">Evaluation Plan (Metrics + Tests + Ablations)</h2>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="bg-gray-900/60 border border-white/10 rounded-3xl p-6">
+        <h3 class="text-xl font-semibold mb-3">Metrics</h3>
+        <ul class="text-gray-300 space-y-2 list-disc list-inside">
+          <li><span class="text-white font-semibold">ATE/RPE:</span> absolute/relative trajectory error (position + yaw)</li>
+          <li><span class="text-white font-semibold">Yaw error:</span> especially critical for lane-level planning</li>
+          <li><span class="text-white font-semibold">Drift under dropout:</span> growth rate during GNSS denial</li>
+          <li><span class="text-white font-semibold">Update rejection rate:</span> how often gating rejects sensors</li>
+          <li><span class="text-white font-semibold">Recovery time:</span> time from failure → relocalized</li>
+          <li><span class="text-white font-semibold">Consistency:</span> innovation histograms + “overconfidence” events</li>
+        </ul>
+      </div>
+
+      <div class="bg-gray-900/60 border border-white/10 rounded-3xl p-6">
+        <h3 class="text-xl font-semibold mb-3">Ablations (Required Plots)</h3>
+        <ul class="text-gray-300 space-y-2 list-disc list-inside">
+          <li>IMU + wheel only (dead reckoning baseline)</li>
+          <li>+ GNSS/RTK</li>
+          <li>+ Stereo VO (classic) vs + Stereo VO (CNN matching)</li>
+          <li>+ LiDAR scan-to-map</li>
+          <li>+ Learned uncertainty scaling (VO/LiDAR/GNSS)</li>
+          <li>+ Slip detection enabled</li>
+          <li>+ Semantic map localization enabled</li>
+          <li>+ Relocalization enabled (full robustness)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-6 bg-gray-900/60 border border-white/10 rounded-3xl p-6">
+      <h3 class="text-xl font-semibold mb-3">Test Scenarios</h3>
+      <div class="grid md:grid-cols-3 gap-4 text-gray-300">
+        <div class="bg-black/60 border border-white/10 rounded-2xl p-4">
+          <div class="font-semibold text-white">GNSS Multipath</div>
+          <div class="text-sm mt-1">Downtown / tree cover → reliability ML inflates GNSS noise.</div>
+        </div>
+        <div class="bg-black/60 border border-white/10 rounded-2xl p-4">
+          <div class="font-semibold text-white">Wheel Slip</div>
+          <div class="text-sm mt-1">Hard accel / wet surface → slip detector down-weights wheel updates.</div>
+        </div>
+        <div class="bg-black/60 border border-white/10 rounded-2xl p-4">
+          <div class="font-semibold text-white">Low Texture / Blur</div>
+          <div class="text-sm mt-1">Stereo VO baseline fails → CNN matching stabilizes correspondences.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/10 py-10">
+    <div class="max-w-6xl mx-auto px-4 text-gray-500 text-sm flex flex-col md:flex-row gap-2 md:items-center md:justify-between">
+      <div>© Ashrith Edukulla — Full-Stack AV Localization (IEKF + Deep Learning)</div>
+      <div class="text-gray-600">Built with Tailwind CSS</div>
+    </div>
+  </footer>
+</body>
+</html>
