@@ -1,0 +1,1887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ashrith Edukulla</title>
+  <meta name="description" content="Ashrith Edukulla — Robotics Engineering at the University of Michigan. Perception, SLAM, Control, Autonomous Systems." />
+  <link rel="icon" href="../michigan_logo.png" type="image/png" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- GSAP + plugins -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+
+  <style>
+    /* ============================================================
+       RESET & BASE
+       ============================================================ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: auto; /* GSAP handles smooth scroll */ }
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: #000;
+      color: #e8e8ed;
+      overflow-x: hidden;
+      cursor: none;
+    }
+    a { color: inherit; text-decoration: none; }
+    ::selection { background: rgba(0, 229, 255, 0.3); color: #fff; }
+
+    /* ============================================================
+       CUSTOM CURSOR
+       ============================================================ */
+    .cursor-dot {
+      position: fixed;
+      top: 0; left: 0;
+      width: 8px; height: 8px;
+      background: #00e5ff;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99999;
+      mix-blend-mode: difference;
+      transition: width 0.2s, height 0.2s, margin 0.2s;
+    }
+    .cursor-ring {
+      position: fixed;
+      top: 0; left: 0;
+      width: 40px; height: 40px;
+      border: 1.5px solid rgba(0, 229, 255, 0.5);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99998;
+      transition: width 0.3s, height 0.3s, margin 0.3s, border-color 0.3s;
+    }
+    .cursor-dot.hovering { width: 50px; height: 50px; margin: -21px 0 0 -21px; background: rgba(0,229,255,0.15); }
+    .cursor-ring.hovering { width: 60px; height: 60px; margin: -9px 0 0 -9px; border-color: #00e5ff; }
+
+    /* ============================================================
+       LOADING SCREEN
+       ============================================================ */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      z-index: 100000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.8s ease;
+    }
+    #loader.done { opacity: 0; pointer-events: none; }
+    .loader-text {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #00e5ff;
+    }
+    .loader-bar-track {
+      width: 200px;
+      height: 2px;
+      background: rgba(255,255,255,0.08);
+      margin-top: 24px;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .loader-bar {
+      height: 100%;
+      width: 0%;
+      background: #00e5ff;
+      transition: width 0.3s ease;
+    }
+
+    /* ============================================================
+       NOISE OVERLAY
+       ============================================================ */
+    .noise-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9998;
+      pointer-events: none;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 256px 256px;
+    }
+
+    /* ============================================================
+       THREE.JS CANVASES
+       ============================================================ */
+    #hero-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+    }
+
+    /* ============================================================
+       NAVIGATION
+       ============================================================ */
+    #main-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 9000;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      mix-blend-mode: difference;
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.3rem;
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-links a {
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #fff;
+      position: relative;
+      padding-bottom: 2px;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 1px;
+      background: #00e5ff;
+      transition: width 0.3s ease;
+    }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* Mobile nav */
+    .nav-mobile-btn {
+      display: none;
+      background: none; border: none;
+      color: #fff; font-size: 1.5rem;
+      cursor: pointer;
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-mobile-btn { display: block; }
+      #main-nav { padding: 16px 24px; }
+    }
+    .mobile-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.95);
+      z-index: 8999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .mobile-overlay.open { opacity: 1; pointer-events: all; }
+    .mobile-overlay a {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.05em;
+    }
+
+    /* ============================================================
+       HERO SECTION
+       ============================================================ */
+    #hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+    }
+    .hero-content {
+      text-align: center;
+      z-index: 2;
+      position: relative;
+    }
+    .hero-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(3rem, 10vw, 9rem);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      color: #fff;
+      overflow: hidden;
+    }
+    .hero-name .line { display: block; overflow: hidden; }
+    .hero-name .line-inner {
+      display: block;
+      transform: translateY(110%);
+    }
+    .hero-sub {
+      font-size: clamp(0.75rem, 1.5vw, 1rem);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(0, 229, 255, 0.8);
+      margin-bottom: 16px;
+      opacity: 0;
+    }
+    .hero-tagline {
+      font-size: clamp(0.9rem, 2vw, 1.15rem);
+      color: rgba(255,255,255,0.4);
+      margin-top: 24px;
+      font-weight: 300;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      opacity: 0;
+    }
+    .hero-scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+    }
+    .hero-scroll-indicator span {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+    }
+    .scroll-line {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, rgba(0,229,255,0.6), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 1; transform: scaleY(1); }
+      50% { opacity: 0.3; transform: scaleY(0.5); transform-origin: top; }
+    }
+
+    /* ============================================================
+       SVG WAVE DIVIDERS
+       ============================================================ */
+    .wave-divider {
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+      position: relative;
+      z-index: 2;
+    }
+    .wave-divider svg {
+      display: block;
+      width: 100%;
+      height: 120px;
+    }
+    .wave-divider path {
+      fill: none;
+      stroke: rgba(0, 229, 255, 0.12);
+      stroke-width: 1;
+    }
+
+    /* ============================================================
+       SECTION BASE
+       ============================================================ */
+    .section-wrap {
+      position: relative;
+      z-index: 2;
+      background: #000;
+    }
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 120px 40px;
+    }
+    @media (max-width: 768px) {
+      .section-inner { padding: 80px 24px; }
+    }
+
+    /* Section label */
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #00e5ff;
+      margin-bottom: 12px;
+      opacity: 0;
+    }
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 48px;
+      overflow: hidden;
+    }
+    .section-title .line { display: block; overflow: hidden; }
+    .section-title .line-inner { display: block; transform: translateY(110%); }
+
+    /* ============================================================
+       ABOUT SECTION
+       ============================================================ */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 80px;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+    .about-image-wrap {
+      position: relative;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    .about-image {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 16px;
+      filter: grayscale(0.3) contrast(1.05);
+      transition: filter 0.5s ease;
+    }
+    .about-image-wrap:hover .about-image {
+      filter: grayscale(0) contrast(1);
+    }
+    .about-image-border {
+      position: absolute;
+      inset: -8px;
+      border: 1px solid rgba(0, 229, 255, 0.2);
+      border-radius: 20px;
+      transition: border-color 0.5s;
+    }
+    .about-image-wrap:hover .about-image-border {
+      border-color: rgba(0, 229, 255, 0.5);
+    }
+    .about-glow {
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 60px;
+      background: radial-gradient(ellipse, rgba(0,229,255,0.15), transparent 70%);
+      filter: blur(20px);
+    }
+    .about-text p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 24px;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    .about-text strong { color: rgba(255,255,255,0.9); font-weight: 500; }
+    .about-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 14px 20px;
+      margin-top: 16px;
+      opacity: 0;
+    }
+    .about-badge img { width: 28px; height: 28px; }
+    .about-badge-text { font-size: 0.85rem; }
+    .about-badge-text .school { color: #fbbf24; font-weight: 600; }
+    .about-badge-text .degree { color: rgba(255,255,255,0.5); }
+
+    /* ============================================================
+       EXPERIENCE SECTION
+       ============================================================ */
+    .exp-list { display: flex; flex-direction: column; gap: 0; }
+    .exp-item {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 40px;
+      padding: 40px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      opacity: 0;
+      transform: translateY(30px);
+      cursor: default;
+      transition: background 0.3s;
+    }
+    .exp-item:first-child { border-top: 1px solid rgba(255,255,255,0.05); }
+    .exp-item:hover { background: rgba(255,255,255,0.015); }
+    @media (max-width: 768px) {
+      .exp-item { grid-template-columns: 1fr; gap: 8px; padding: 28px 0; }
+    }
+    .exp-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.3);
+      padding-top: 5px;
+    }
+    .exp-content h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 4px;
+      transition: color 0.3s;
+    }
+    .exp-item:hover .exp-content h3 { color: #00e5ff; }
+    .exp-role {
+      font-size: 0.85rem;
+      color: rgba(0, 229, 255, 0.6);
+      margin-bottom: 12px;
+    }
+    .exp-desc {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.4);
+    }
+    .exp-desc li {
+      list-style: none;
+      padding-left: 16px;
+      position: relative;
+      margin-bottom: 4px;
+    }
+    .exp-desc li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 4px;
+      height: 4px;
+      background: rgba(0, 229, 255, 0.4);
+      border-radius: 50%;
+    }
+
+    /* ============================================================
+       PROJECTS SECTION
+       ============================================================ */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    @media (max-width: 768px) {
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+    .project-card {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #0a0a0f;
+      border: 1px solid rgba(255,255,255,0.04);
+      opacity: 0;
+      transform: translateY(40px) scale(0.97);
+      transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+    .project-card:hover {
+      transform: translateY(-4px) scale(1);
+      border-color: rgba(0, 229, 255, 0.15);
+      box-shadow: 0 20px 60px rgba(0, 229, 255, 0.06);
+    }
+    .project-card.featured {
+      grid-column: 1 / -1;
+    }
+    .project-card.featured .project-card-inner {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+    }
+    @media (max-width: 768px) {
+      .project-card.featured .project-card-inner { grid-template-columns: 1fr; }
+    }
+    .project-media {
+      position: relative;
+      overflow: hidden;
+      background: #050508;
+    }
+    .project-media img,
+    .project-media video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.6s ease;
+    }
+    .project-card:hover .project-media img,
+    .project-card:hover .project-media video {
+      transform: scale(1.04);
+    }
+    .project-media-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 220px;
+      font-size: 3rem;
+    }
+    .project-info { padding: 32px; }
+    .project-featured-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #00e5ff;
+      background: rgba(0,229,255,0.08);
+      padding: 4px 10px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+    .project-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .project-desc {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 20px;
+    }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .project-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.35);
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: all 0.25s;
+    }
+    .project-card:hover .project-tag {
+      background: rgba(0,229,255,0.06);
+      color: rgba(0,229,255,0.7);
+      border-color: rgba(0,229,255,0.12);
+    }
+    .project-arrow {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.2);
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+    .project-card:hover .project-arrow {
+      border-color: #00e5ff;
+      color: #00e5ff;
+      transform: translate(3px, -3px);
+    }
+
+    /* ============================================================
+       TECH STACK SECTION
+       ============================================================ */
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 1024px) { .stack-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 768px) { .stack-grid { grid-template-columns: 1fr; } }
+    .stack-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 16px;
+      padding: 28px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .stack-card:hover {
+      border-color: rgba(0,229,255,0.15);
+      transform: translateY(-4px);
+    }
+    .stack-accent {
+      width: 100%;
+      height: 2px;
+      border-radius: 2px;
+      margin-bottom: 20px;
+    }
+    .stack-card-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+    .stack-group { margin-bottom: 16px; }
+    .stack-group:last-child { margin-bottom: 0; }
+    .stack-group-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+      margin-bottom: 8px;
+    }
+    .stack-pills { display: flex; flex-wrap: wrap; gap: 5px; }
+    .stack-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.4);
+      transition: all 0.25s;
+    }
+    .stack-card:hover .stack-pill {
+      background: rgba(0,229,255,0.06);
+      color: rgba(0,229,255,0.7);
+    }
+
+    /* ============================================================
+       AWARDS SECTION
+       ============================================================ */
+    .awards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 768px) { .awards-grid { grid-template-columns: 1fr; } }
+    .award-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-left: 2px solid #fbbf24;
+      border-radius: 12px;
+      padding: 28px 28px 28px 24px;
+      opacity: 0;
+      transform: translateX(-30px);
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .award-card:hover {
+      border-left-color: #00e5ff;
+      transform: translateX(4px);
+    }
+    .award-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .award-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: #fbbf24;
+      margin-bottom: 10px;
+    }
+    .award-desc {
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.4);
+    }
+    .award-desc li {
+      list-style: none;
+      padding-left: 14px;
+      position: relative;
+      margin-bottom: 4px;
+    }
+    .award-desc li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 9px;
+      width: 4px; height: 4px;
+      background: rgba(251,191,36,0.5);
+      border-radius: 50%;
+    }
+
+    /* ============================================================
+       CONTACT SECTION
+       ============================================================ */
+    #contact .section-inner {
+      text-align: center;
+      padding: 160px 40px;
+    }
+    .contact-heading {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.5rem, 7vw, 5rem);
+      line-height: 1.05;
+      margin-bottom: 24px;
+    }
+    .contact-heading .gradient {
+      background: linear-gradient(90deg, #00e5ff, #fbbf24, #00e5ff);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientShift 4s linear infinite;
+    }
+    @keyframes gradientShift {
+      0% { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+    .contact-sub {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.35);
+      max-width: 480px;
+      margin: 0 auto 48px;
+      line-height: 1.7;
+    }
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+    }
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 50px;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.6);
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-link::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0,229,255,0.1), rgba(251,191,36,0.05));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .contact-link:hover::before { opacity: 1; }
+    .contact-link:hover {
+      border-color: rgba(0,229,255,0.3);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,229,255,0.1);
+    }
+    .contact-link svg { position: relative; z-index: 1; }
+    .contact-link span { position: relative; z-index: 1; }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    footer {
+      text-align: center;
+      padding: 40px;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.15);
+      border-top: 1px solid rgba(255,255,255,0.03);
+      position: relative;
+      z-index: 2;
+      background: #000;
+    }
+
+    /* ============================================================
+       HORIZONTAL MARQUEE (between sections for flair)
+       ============================================================ */
+    .marquee-wrap {
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+      z-index: 2;
+      background: #000;
+      padding: 20px 0;
+      border-top: 1px solid rgba(255,255,255,0.03);
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+    .marquee-track {
+      display: inline-flex;
+      animation: marqueeScroll 30s linear infinite;
+    }
+    .marquee-track span {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.07);
+      padding: 0 40px;
+    }
+    @keyframes marqueeScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ============================================================
+       MAGNETIC BUTTON EFFECT
+       ============================================================ */
+    .magnetic { transition: transform 0.3s ease; }
+
+    /* ============================================================
+       REVEAL HELPERS
+       ============================================================ */
+    .char-reveal { display: inline-block; opacity: 0; transform: translateY(40px); }
+
+    /* ============================================================
+       SMOOTH SCROLLBAR TRACK
+       ============================================================ */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #000; }
+    ::-webkit-scrollbar-thumb { background: rgba(0,229,255,0.2); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(0,229,255,0.4); }
+  </style>
+</head>
+
+<body>
+
+<!-- ============================================================
+     LOADING SCREEN
+     ============================================================ -->
+<div id="loader">
+  <div class="loader-text">Initializing</div>
+  <div class="loader-bar-track">
+    <div class="loader-bar" id="loader-bar"></div>
+  </div>
+</div>
+
+<!-- NOISE OVERLAY -->
+<div class="noise-overlay"></div>
+
+<!-- CUSTOM CURSOR -->
+<div class="cursor-dot" id="cursor-dot"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<nav id="main-nav">
+  <a href="#hero" class="nav-logo magnetic">Ashrith.</a>
+  <div class="nav-links">
+    <a href="#about" class="magnetic">About</a>
+    <a href="#experience" class="magnetic">Experience</a>
+    <a href="#projects" class="magnetic">Projects</a>
+    <a href="#stack" class="magnetic">Stack</a>
+    <a href="#awards" class="magnetic">Awards</a>
+    <a href="#contact" class="magnetic">Contact</a>
+  </div>
+  <button class="nav-mobile-btn magnetic" id="mobile-toggle" aria-label="Menu">&#9776;</button>
+</nav>
+
+<!-- Mobile overlay -->
+<div class="mobile-overlay" id="mobile-overlay">
+  <a href="#about">About</a>
+  <a href="#experience">Experience</a>
+  <a href="#projects">Projects</a>
+  <a href="#stack">Stack</a>
+  <a href="#awards">Awards</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<!-- ============================================================
+     THREE.JS CANVAS
+     ============================================================ -->
+<canvas id="hero-canvas"></canvas>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section id="hero">
+  <div class="hero-content">
+    <p class="hero-sub">University of Michigan &mdash; Robotics Engineering</p>
+    <h1 class="hero-name">
+      <span class="line"><span class="line-inner">Ashrith</span></span>
+      <span class="line"><span class="line-inner">Edukulla</span></span>
+    </h1>
+    <p class="hero-tagline">Building intelligent systems that perceive, reason, and act.</p>
+  </div>
+  <div class="hero-scroll-indicator">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     MARQUEE
+     ============================================================ -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>SLAM</span><span>Perception</span><span>Control</span><span>Deep Learning</span>
+    <span>Computer Vision</span><span>State Estimation</span><span>Motion Planning</span>
+    <span>Embedded Systems</span><span>ROS 2</span><span>Sensor Fusion</span>
+    <span>Autonomous Systems</span><span>Robotics</span>
+    <span>SLAM</span><span>Perception</span><span>Control</span><span>Deep Learning</span>
+    <span>Computer Vision</span><span>State Estimation</span><span>Motion Planning</span>
+    <span>Embedded Systems</span><span>ROS 2</span><span>Sensor Fusion</span>
+    <span>Autonomous Systems</span><span>Robotics</span>
+  </div>
+</div>
+
+<!-- ============================================================
+     ABOUT
+     ============================================================ -->
+<section id="about" class="section-wrap">
+  <div class="section-inner">
+    <div class="section-label">01 / About</div>
+    <div class="section-title">
+      <span class="line"><span class="line-inner">Who I Am</span></span>
+    </div>
+    <div class="about-grid">
+      <div>
+        <div class="about-image-wrap">
+          <div class="about-image-border"></div>
+          <img src="../ashrith.jpg" alt="Ashrith Edukulla" class="about-image" />
+          <div class="about-glow"></div>
+        </div>
+        <div class="about-badge">
+          <img src="../michigan_logo.png" alt="UMich" />
+          <div class="about-badge-text">
+            <div class="school">University of Michigan</div>
+            <div class="degree">B.E. Robotics &middot; 3.96 GPA</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-text">
+        <p>
+          I'm a <strong>Robotics Engineering</strong> student at the University of Michigan,
+          focused on intelligent perception and learning for autonomous systems.
+        </p>
+        <p>
+          My interests lie in <strong>deep learning</strong>, <strong>SLAM</strong>,
+          <strong>computer vision</strong>, and probabilistic representations of the world.
+          I'm drawn to problems where robots need to understand complex, uncertain environments
+          and build structured internal models that support reliable decision-making.
+        </p>
+        <p>
+          I'm particularly interested in bridging geometric methods with learning-based systems &mdash;
+          combining classical state estimation with deep neural networks to create scalable and robust
+          autonomy stacks where mapping, localization, and visual understanding are core intelligence layers.
+        </p>
+        <p>
+          Long term, I want to contribute to autonomous systems that can perceive richly,
+          learn efficiently, and operate reliably in the real world.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAVE DIVIDER -->
+<div class="wave-divider section-wrap">
+  <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+    <path id="wave1" d="M0,60 C240,120 480,0 720,60 C960,120 1200,0 1440,60" />
+    <path id="wave2" d="M0,50 C360,100 720,10 1080,70 C1260,100 1380,30 1440,50" opacity="0.5" />
+  </svg>
+</div>
+
+<!-- ============================================================
+     EXPERIENCE
+     ============================================================ -->
+<section id="experience" class="section-wrap">
+  <div class="section-inner">
+    <div class="section-label">02 / Experience</div>
+    <div class="section-title">
+      <span class="line"><span class="line-inner">Where I've</span></span>
+      <span class="line"><span class="line-inner">Worked</span></span>
+    </div>
+    <div class="exp-list">
+
+      <div class="exp-item">
+        <div class="exp-date">Jan 2026 &ndash; May 2026</div>
+        <div class="exp-content">
+          <h3>EECS 467: Autonomous Robotics</h3>
+          <div class="exp-role">Instructional Aide &middot; University of Michigan</div>
+          <ul class="exp-desc">
+            <li>Assisted instruction in perception, SLAM, planning, and control.</li>
+            <li>Supported students with ROS-based labs and algorithm implementation.</li>
+            <li>Guided on multi-sensor fusion, navigation, and robot software architecture.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-date">Jan 2026 &ndash; Present</div>
+        <div class="exp-content">
+          <h3>Field Robotics Group (FRoG) Lab</h3>
+          <div class="exp-role">Undergraduate Researcher &mdash; Perception &amp; Planning</div>
+          <ul class="exp-desc">
+            <li>Research in robot perception and motion planning under uncertainty.</li>
+            <li>Developing planning algorithms informed by perception and environment models.</li>
+            <li>Contributing to robust, scalable autonomy for real-world systems.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-date">Aug &ndash; Dec 2025</div>
+        <div class="exp-content">
+          <h3>Synergic Adaptive Machinas (SAM) Lab</h3>
+          <div class="exp-role">Undergraduate Researcher</div>
+          <ul class="exp-desc">
+            <li>Researching macro/micro-scale robot swarms under Prof. Steven Ceron.</li>
+            <li>Developing decentralized control for physical reconfiguration.</li>
+            <li>Co-authoring paper on adaptive swarm behavior and distributed control.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-date">Aug &ndash; Dec 2025</div>
+        <div class="exp-content">
+          <h3>ROB 201: Robot Differential Equations</h3>
+          <div class="exp-role">Instructional Aide &middot; University of Michigan</div>
+          <ul class="exp-desc">
+            <li>ODE modeling, linear systems, and control instruction.</li>
+            <li>Led office hours with Julia notebooks and simulations.</li>
+            <li>Assisted with Laplace transforms, transfer functions, stability analysis.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-date">Nov 2024 &ndash; May 2025</div>
+        <div class="exp-content">
+          <h3>Michigan Mars Rover Team</h3>
+          <div class="exp-role">Embedded Software Engineer</div>
+          <ul class="exp-desc">
+            <li>STM32 firmware for servos, LEDs, and accelerometers.</li>
+            <li>Developed embedded drivers and ROS nodes for motor coordination.</li>
+            <li>Navigation and control tuning for dynamic rover environments.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-date">Apr &ndash; Jul 2023</div>
+        <div class="exp-content">
+          <h3>LeapLabs</h3>
+          <div class="exp-role">Robotics Assistant Intern</div>
+          <ul class="exp-desc">
+            <li>Mentored students in developing robotics prototypes.</li>
+            <li>Debugged hardware setups and taught robotics fundamentals.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-date">Sep 2022 &ndash; May 2023</div>
+        <div class="exp-content">
+          <h3>Pre-Indian Mathematical Society (PIMS)</h3>
+          <div class="exp-role">Founder &amp; Organizer</div>
+          <ul class="exp-desc">
+            <li>Founded and organized a large-scale student-led math camp.</li>
+            <li>Managed logistics, curriculum, and collaborations for 200+ participants.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WAVE DIVIDER -->
+<div class="wave-divider section-wrap">
+  <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+    <path d="M0,80 C360,20 720,120 1080,40 C1260,0 1380,80 1440,60" />
+    <path d="M0,70 C240,110 480,20 720,80 C960,30 1200,100 1440,50" opacity="0.4" />
+  </svg>
+</div>
+
+<!-- ============================================================
+     PROJECTS
+     ============================================================ -->
+<section id="projects" class="section-wrap">
+  <div class="section-inner">
+    <div class="section-label">03 / Projects</div>
+    <div class="section-title">
+      <span class="line"><span class="line-inner">Selected</span></span>
+      <span class="line"><span class="line-inner">Work</span></span>
+    </div>
+    <div class="projects-grid">
+
+      <!-- FEATURED: Full-Stack AV -->
+      <a href="../full_stack_av.html" class="project-card featured">
+        <div class="project-arrow">&nearr;</div>
+        <div class="project-card-inner">
+          <div class="project-media">
+            <div class="project-media-placeholder">&#x1F697;&#x1F4CD;</div>
+          </div>
+          <div class="project-info">
+            <div class="project-featured-badge">Featured Project</div>
+            <h3 class="project-title">Full-Stack AV: Localization Stack (IEKF)</h3>
+            <p class="project-desc">
+              Autonomous-vehicle localization pipeline using IEKF sensor fusion (IMU + wheel odometry + GNSS + stereo/mono VO + LiDAR),
+              with map-based corrections for drift-bounded pose tracking.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">IEKF</span>
+              <span class="project-tag">Sensor Fusion</span>
+              <span class="project-tag">GNSS</span>
+              <span class="project-tag">VIO/VO</span>
+              <span class="project-tag">LiDAR</span>
+              <span class="project-tag">ROS 2</span>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <!-- MBot SLAM -->
+      <div class="project-card">
+        <div class="project-media" style="height:220px">
+          <video src="../mbot_path.mp4" loop muted playsinline preload="none"></video>
+        </div>
+        <div class="project-info">
+          <h3 class="project-title">MBot Autonomous SLAM</h3>
+          <p class="project-desc">Full SLAM on MBot: laser localization, occupancy-grid mapping, autonomous exploration via frontier detection.</p>
+          <div class="project-tags">
+            <span class="project-tag">ROS 2</span>
+            <span class="project-tag">SLAM</span>
+            <span class="project-tag">Localization</span>
+            <span class="project-tag">A*</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SAM Motor UI -->
+      <div class="project-card">
+        <div class="project-media" style="height:220px">
+          <img src="../sam-motor-ui.png" alt="SAM Lab Motor UI" loading="lazy" />
+        </div>
+        <div class="project-info">
+          <h3 class="project-title">9-Motor Swarm Control UI</h3>
+          <p class="project-desc">C++ HTTP + serial bridge and browser UI for a 9-motor array with per-motor control and preset patterns.</p>
+          <div class="project-tags">
+            <span class="project-tag">C++</span>
+            <span class="project-tag">Embedded</span>
+            <span class="project-tag">WebUI</span>
+            <span class="project-tag">Serial</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Humanoid Leg -->
+      <div class="project-card">
+        <div class="project-media" style="height:220px">
+          <video src="../humanoid_simulation.webm" loop muted playsinline preload="none"></video>
+        </div>
+        <div class="project-info">
+          <h3 class="project-title">Humanoid Leg Dynamics</h3>
+          <p class="project-desc">MATLAB dynamic simulation of humanoid leg: joint torques, ground contact, gait for control analysis.</p>
+          <div class="project-tags">
+            <span class="project-tag">MATLAB</span>
+            <span class="project-tag">Dynamics</span>
+            <span class="project-tag">Simulation</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Robotic Limb -->
+      <div class="project-card">
+        <div class="project-media" style="height:220px">
+          <img src="../robotic_arm.jpg" alt="Robotic Arm" loading="lazy" />
+        </div>
+        <div class="project-info">
+          <h3 class="project-title">Motion-Sensing Robotic Limb</h3>
+          <p class="project-desc">Accelerometer-based robotic limb with real-time IMU finger tracking and precise motion control.</p>
+          <div class="project-tags">
+            <span class="project-tag">C++</span>
+            <span class="project-tag">STM32</span>
+            <span class="project-tag">IMU</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FROST -->
+      <div class="project-card">
+        <div class="project-media" style="height:220px">
+          <img src="../frost.png" alt="FROST" loading="lazy" />
+        </div>
+        <div class="project-info">
+          <h3 class="project-title">FROST</h3>
+          <p class="project-desc">Black ice detection robot using sensor fusion, alerts pedestrians via LEDs + audio module.</p>
+          <div class="project-tags">
+            <span class="project-tag">Sensor Fusion</span>
+            <span class="project-tag">Embedded</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- HighWay Go -->
+      <div class="project-card">
+        <div class="project-media" style="height:220px">
+          <img src="../highwaygo.png" alt="HighWay Go" loading="lazy" />
+        </div>
+        <div class="project-info">
+          <h3 class="project-title">HighWay Go</h3>
+          <p class="project-desc">Solar-powered robot that waters highway median plants using a robotic arm.</p>
+          <div class="project-tags">
+            <span class="project-tag">Solar</span>
+            <span class="project-tag">Embedded</span>
+            <span class="project-tag">Agritech</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SmartWheel -->
+      <div class="project-card">
+        <div class="project-media" style="height:220px">
+          <img src="../smartwheel.png" alt="SmartWheel" loading="lazy" />
+        </div>
+        <div class="project-info">
+          <h3 class="project-title">SmartWheel</h3>
+          <p class="project-desc">Dual-energy harvesting from pressure and heat to power EV batteries autonomously.</p>
+          <div class="project-tags">
+            <span class="project-tag">Energy</span>
+            <span class="project-tag">Power Systems</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- AutoFarm -->
+      <div class="project-card">
+        <div class="project-media" style="height:220px">
+          <img src="../autofarm.png" alt="AutoFarm" loading="lazy" />
+        </div>
+        <div class="project-info">
+          <h3 class="project-title">AutoFarm</h3>
+          <p class="project-desc">Agricultural robot to plough, sow, water, and accelerate indoor crop growth via artificial light.</p>
+          <div class="project-tags">
+            <span class="project-tag">Agritech</span>
+            <span class="project-tag">Automation</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE 2 -->
+<div class="marquee-wrap">
+  <div class="marquee-track" style="animation-direction: reverse;">
+    <span>C++</span><span>Python</span><span>Julia</span><span>MATLAB</span>
+    <span>ROS 2</span><span>STM32</span><span>Three.js</span><span>Linux</span>
+    <span>Git</span><span>CMake</span><span>Gazebo</span><span>SolidWorks</span>
+    <span>C++</span><span>Python</span><span>Julia</span><span>MATLAB</span>
+    <span>ROS 2</span><span>STM32</span><span>Three.js</span><span>Linux</span>
+    <span>Git</span><span>CMake</span><span>Gazebo</span><span>SolidWorks</span>
+  </div>
+</div>
+
+<!-- ============================================================
+     TECH STACK
+     ============================================================ -->
+<section id="stack" class="section-wrap">
+  <div class="section-inner">
+    <div class="section-label">04 / Stack</div>
+    <div class="section-title">
+      <span class="line"><span class="line-inner">Tech Stack</span></span>
+    </div>
+    <div class="stack-grid">
+
+      <div class="stack-card">
+        <div class="stack-accent" style="background: linear-gradient(90deg, #3b82f6, #6366f1);"></div>
+        <div class="stack-card-title">Programming</div>
+        <div class="stack-group">
+          <div class="stack-group-label">Languages</div>
+          <div class="stack-pills">
+            <span class="stack-pill">C++</span><span class="stack-pill">Python</span><span class="stack-pill">Julia</span><span class="stack-pill">MATLAB</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <div class="stack-group-label">Tools</div>
+          <div class="stack-pills">
+            <span class="stack-pill">Linux</span><span class="stack-pill">Git</span><span class="stack-pill">CMake</span><span class="stack-pill">gdb</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <div class="stack-group-label">Algorithms</div>
+          <div class="stack-pills">
+            <span class="stack-pill">A*</span><span class="stack-pill">Dijkstra</span><span class="stack-pill">DP</span><span class="stack-pill">STL</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="stack-card">
+        <div class="stack-accent" style="background: linear-gradient(90deg, #22c55e, #10b981);"></div>
+        <div class="stack-card-title">Robotics &amp; Embedded</div>
+        <div class="stack-group">
+          <div class="stack-group-label">Frameworks</div>
+          <div class="stack-pills">
+            <span class="stack-pill">ROS 2</span><span class="stack-pill">RViz</span><span class="stack-pill">Gazebo</span><span class="stack-pill">tf2</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <div class="stack-group-label">Hardware</div>
+          <div class="stack-pills">
+            <span class="stack-pill">STM32</span><span class="stack-pill">Arduino</span><span class="stack-pill">I2C</span><span class="stack-pill">IMUs</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <div class="stack-group-label">Planning</div>
+          <div class="stack-pills">
+            <span class="stack-pill">RRT</span><span class="stack-pill">Occupancy Grids</span><span class="stack-pill">Collision Check</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="stack-card">
+        <div class="stack-accent" style="background: linear-gradient(90deg, #00e5ff, #06b6d4);"></div>
+        <div class="stack-card-title">Perception &amp; Control</div>
+        <div class="stack-group">
+          <div class="stack-group-label">Control</div>
+          <div class="stack-pills">
+            <span class="stack-pill">State-Space</span><span class="stack-pill">PID</span><span class="stack-pill">LQR</span><span class="stack-pill">Stability</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <div class="stack-group-label">Localization</div>
+          <div class="stack-pills">
+            <span class="stack-pill">Particle Filters</span><span class="stack-pill">Bayes</span><span class="stack-pill">EKF</span><span class="stack-pill">SLAM</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <div class="stack-group-label">Planning</div>
+          <div class="stack-pills">
+            <span class="stack-pill">A*</span><span class="stack-pill">D*</span><span class="stack-pill">Trajectory Gen</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="stack-card">
+        <div class="stack-accent" style="background: linear-gradient(90deg, #fbbf24, #f59e0b);"></div>
+        <div class="stack-card-title">Math &amp; Modeling</div>
+        <div class="stack-group">
+          <div class="stack-group-label">Methods</div>
+          <div class="stack-pills">
+            <span class="stack-pill">Lin Algebra</span><span class="stack-pill">ODEs</span><span class="stack-pill">Optimization</span><span class="stack-pill">Jacobians</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <div class="stack-group-label">Design</div>
+          <div class="stack-pills">
+            <span class="stack-pill">SolidWorks</span><span class="stack-pill">Kinematics</span><span class="stack-pill">Linkages</span>
+          </div>
+        </div>
+        <div class="stack-group">
+          <div class="stack-group-label">Integration</div>
+          <div class="stack-pills">
+            <span class="stack-pill">HW/SW Sync</span><span class="stack-pill">Perf Tuning</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WAVE DIVIDER -->
+<div class="wave-divider section-wrap">
+  <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+    <path d="M0,40 C240,100 480,10 720,70 C960,120 1200,20 1440,80" />
+    <path d="M0,60 C360,10 720,110 1080,30 C1260,10 1380,70 1440,40" opacity="0.4" />
+  </svg>
+</div>
+
+<!-- ============================================================
+     AWARDS
+     ============================================================ -->
+<section id="awards" class="section-wrap">
+  <div class="section-inner">
+    <div class="section-label">05 / Recognition</div>
+    <div class="section-title">
+      <span class="line"><span class="line-inner">Awards</span></span>
+    </div>
+    <div class="awards-grid">
+
+      <div class="award-card">
+        <div class="award-title">World Robotics Olympiad</div>
+        <div class="award-sub">India Rank 3</div>
+        <p class="award-desc">Developed a piezoelectric energy harvesting system to convert automobile pressure into electricity for EVs.</p>
+      </div>
+
+      <div class="award-card">
+        <div class="award-title">International Youth Robotics Olympiad</div>
+        <div class="award-sub">1 Gold &middot; 2 Silver &middot; 1 Bronze</div>
+        <ul class="award-desc">
+          <li>Autonomous vehicle for watering plants with robotic arm &amp; soil detection.</li>
+          <li>Smart mini-farm with automated irrigation, planting, and sensing.</li>
+          <li>Greenhouse accelerating growth by 2.2x using controlled climate.</li>
+        </ul>
+      </div>
+
+      <div class="award-card">
+        <div class="award-title">American Math Competitions</div>
+        <div class="award-sub">2x USAMO &middot; 3x AIME</div>
+        <p class="award-desc">Qualified for USAMO (top 300 of 300,000 globally). AIME distinction holder across 3 years.</p>
+      </div>
+
+      <div class="award-card">
+        <div class="award-title">Other Olympiads</div>
+        <div class="award-sub">USAPhO &middot; ZIO</div>
+        <ul class="award-desc">
+          <li>Qualified for USA Physics Olympiad (USAPhO).</li>
+          <li>Cleared Indian Computing Olympiad (ZIO).</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTACT
+     ============================================================ -->
+<section id="contact" class="section-wrap">
+  <div class="section-inner">
+    <h2 class="contact-heading">
+      <span class="gradient">Let's Build</span><br/>
+      <span class="gradient">Something.</span>
+    </h2>
+    <p class="contact-sub">
+      Always open to collaborations, research opportunities, and conversations
+      about robotics, perception, and autonomous systems.
+    </p>
+    <div class="contact-links">
+      <a href="mailto:ashed@umich.edu" class="contact-link magnetic">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        <span>ashed@umich.edu</span>
+      </a>
+      <a href="https://www.linkedin.com/in/ashrith-edukulla-633b141a7/" target="_blank" class="contact-link magnetic">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        <span>LinkedIn</span>
+      </a>
+      <a href="https://github.com/ashrith5321" target="_blank" class="contact-link magnetic">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65S8.93 17.38 9 18v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+        <span>GitHub</span>
+      </a>
+      <a href="../resume.pdf" target="_blank" class="contact-link magnetic">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+        <span>Resume</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer>Ashrith Edukulla &mdash; 2026</footer>
+
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script>
+(function() {
+  'use strict';
+
+  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+  var isMobile = window.innerWidth < 768;
+
+  /* ===========================================================
+     LOADING SCREEN
+     =========================================================== */
+  var loaderBar = document.getElementById('loader-bar');
+  var loader = document.getElementById('loader');
+  var loadProgress = 0;
+  var loadInterval = setInterval(function() {
+    loadProgress += Math.random() * 15 + 5;
+    if (loadProgress > 100) loadProgress = 100;
+    loaderBar.style.width = loadProgress + '%';
+    if (loadProgress >= 100) {
+      clearInterval(loadInterval);
+      setTimeout(function() {
+        loader.classList.add('done');
+        startHeroAnimation();
+        setTimeout(function() { loader.style.display = 'none'; }, 800);
+      }, 400);
+    }
+  }, 120);
+
+  /* ===========================================================
+     CUSTOM CURSOR
+     =========================================================== */
+  if (!isMobile) {
+    var dot = document.getElementById('cursor-dot');
+    var ring = document.getElementById('cursor-ring');
+    var cx = 0, cy = 0, dx = 0, dy = 0;
+
+    document.addEventListener('mousemove', function(e) {
+      cx = e.clientX; cy = e.clientY;
+      dot.style.left = cx - 4 + 'px';
+      dot.style.top = cy - 4 + 'px';
+    });
+
+    (function cursorLoop() {
+      dx += (cx - dx) * 0.12;
+      dy += (cy - dy) * 0.12;
+      ring.style.left = dx - 20 + 'px';
+      ring.style.top = dy - 20 + 'px';
+      requestAnimationFrame(cursorLoop);
+    })();
+
+    // Hover detection
+    document.querySelectorAll('a, button, .project-card, .exp-item, .magnetic').forEach(function(el) {
+      el.addEventListener('mouseenter', function() {
+        dot.classList.add('hovering');
+        ring.classList.add('hovering');
+      });
+      el.addEventListener('mouseleave', function() {
+        dot.classList.remove('hovering');
+        ring.classList.remove('hovering');
+      });
+    });
+  } else {
+    var dotEl = document.getElementById('cursor-dot');
+    var ringEl = document.getElementById('cursor-ring');
+    if (dotEl) dotEl.style.display = 'none';
+    if (ringEl) ringEl.style.display = 'none';
+    document.body.style.cursor = 'auto';
+  }
+
+  /* ===========================================================
+     MAGNETIC BUTTON EFFECT
+     =========================================================== */
+  if (!isMobile) {
+    document.querySelectorAll('.magnetic').forEach(function(el) {
+      el.addEventListener('mousemove', function(e) {
+        var rect = el.getBoundingClientRect();
+        var mx = e.clientX - rect.left - rect.width / 2;
+        var my = e.clientY - rect.top - rect.height / 2;
+        el.style.transform = 'translate(' + mx * 0.2 + 'px, ' + my * 0.2 + 'px)';
+      });
+      el.addEventListener('mouseleave', function() {
+        el.style.transform = 'translate(0, 0)';
+      });
+    });
+  }
+
+  /* ===========================================================
+     MOBILE NAV
+     =========================================================== */
+  var mobileToggle = document.getElementById('mobile-toggle');
+  var mobileOverlay = document.getElementById('mobile-overlay');
+  if (mobileToggle && mobileOverlay) {
+    mobileToggle.addEventListener('click', function() {
+      mobileOverlay.classList.toggle('open');
+    });
+    mobileOverlay.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        mobileOverlay.classList.remove('open');
+      });
+    });
+  }
+
+  /* ===========================================================
+     SMOOTH NAV SCROLL
+     =========================================================== */
+  document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      e.preventDefault();
+      var target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        gsap.to(window, { scrollTo: { y: target, offsetY: 0 }, duration: 1.2, ease: 'power3.inOut' });
+      }
+    });
+  });
+
+  /* ===========================================================
+     THREE.JS — HERO 3D SCENE
+     =========================================================== */
+  var heroCanvas = document.getElementById('hero-canvas');
+  var scene, camera, renderer;
+  var wireIco, wireTorus, wireOcta;
+  var particles;
+  var mouseX = 0, mouseY = 0;
+  var threeRunning = true;
+
+  if (!isMobile && heroCanvas) {
+    scene = new THREE.Scene();
+    camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 40;
+
+    renderer = new THREE.WebGLRenderer({ canvas: heroCanvas, alpha: true, antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    // --- Wireframe Icosahedron (main centerpiece) ---
+    var icoGeo = new THREE.IcosahedronGeometry(8, 1);
+    var icoMat = new THREE.MeshBasicMaterial({ color: 0x00e5ff, wireframe: true, transparent: true, opacity: 0.12 });
+    wireIco = new THREE.Mesh(icoGeo, icoMat);
+    wireIco.position.set(0, 0, 0);
+    scene.add(wireIco);
+
+    // --- Wireframe Torus (orbiting) ---
+    var torusGeo = new THREE.TorusGeometry(14, 0.3, 16, 100);
+    var torusMat = new THREE.MeshBasicMaterial({ color: 0x00e5ff, wireframe: true, transparent: true, opacity: 0.06 });
+    wireTorus = new THREE.Mesh(torusGeo, torusMat);
+    wireTorus.rotation.x = Math.PI / 3;
+    scene.add(wireTorus);
+
+    // --- Wireframe Octahedron (secondary) ---
+    var octaGeo = new THREE.OctahedronGeometry(4, 0);
+    var octaMat = new THREE.MeshBasicMaterial({ color: 0xfbbf24, wireframe: true, transparent: true, opacity: 0.08 });
+    wireOcta = new THREE.Mesh(octaGeo, octaMat);
+    wireOcta.position.set(12, -6, -5);
+    scene.add(wireOcta);
+
+    // --- Particle cloud ---
+    var pCount = 2500;
+    var pGeo = new THREE.BufferGeometry();
+    var pPositions = new Float32Array(pCount * 3);
+    for (var i = 0; i < pCount; i++) {
+      pPositions[i * 3] = (Math.random() - 0.5) * 80;
+      pPositions[i * 3 + 1] = (Math.random() - 0.5) * 80;
+      pPositions[i * 3 + 2] = (Math.random() - 0.5) * 80;
+    }
+    pGeo.setAttribute('position', new THREE.BufferAttribute(pPositions, 3));
+    var pMat = new THREE.PointsMaterial({
+      color: 0x00e5ff,
+      size: 0.06,
+      transparent: true,
+      opacity: 0.4,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false
+    });
+    particles = new THREE.Points(pGeo, pMat);
+    scene.add(particles);
+
+    // Mouse tracking
+    document.addEventListener('mousemove', function(e) {
+      mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+      mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+    });
+
+    // Animation loop
+    var clock = new THREE.Clock();
+    function threeAnimate() {
+      if (!threeRunning) return;
+      requestAnimationFrame(threeAnimate);
+
+      var t = clock.getElapsedTime();
+
+      // Icosahedron: slow spin + mouse influence
+      wireIco.rotation.y = t * 0.15 + mouseX * 0.3;
+      wireIco.rotation.x = t * 0.1 + mouseY * 0.15;
+      // Breathing scale
+      var breathe = 1 + Math.sin(t * 0.8) * 0.05;
+      wireIco.scale.setScalar(breathe);
+
+      // Torus: orbit
+      wireTorus.rotation.z = t * 0.08;
+      wireTorus.rotation.y = t * 0.05;
+
+      // Octahedron: float
+      wireOcta.rotation.y = t * 0.3;
+      wireOcta.rotation.z = t * 0.2;
+      wireOcta.position.y = -6 + Math.sin(t * 0.7) * 2;
+
+      // Particles: slow drift
+      particles.rotation.y = t * 0.02 + mouseX * 0.05;
+      particles.rotation.x = mouseY * 0.03;
+
+      renderer.render(scene, camera);
+    }
+    threeAnimate();
+
+    // Resize
+    window.addEventListener('resize', function() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    // Pause when hero far off screen
+    ScrollTrigger.create({
+      trigger: '#hero',
+      start: 'top bottom',
+      end: 'bottom -50%',
+      onEnter: function() { threeRunning = true; threeAnimate(); },
+      onLeave: function() { threeRunning = false; },
+      onEnterBack: function() { threeRunning = true; threeAnimate(); },
+      onLeaveBack: function() { threeRunning = false; }
+    });
+
+    // Scroll: fade and push 3D objects
+    ScrollTrigger.create({
+      trigger: '#hero',
+      start: 'top top',
+      end: 'bottom top',
+      scrub: 1,
+      onUpdate: function(self) {
+        var p = self.progress;
+        // Fade icosahedron
+        icoMat.opacity = 0.12 * (1 - p);
+        torusMat.opacity = 0.06 * (1 - p);
+        octaMat.opacity = 0.08 * (1 - p);
+        pMat.opacity = 0.4 * (1 - p);
+        // Push camera
+        camera.position.z = 40 - p * 15;
+        // Spread particles
+        particles.scale.setScalar(1 + p * 0.8);
+      }
+    });
+  }
+
+  /* ===========================================================
+     HERO ENTRY ANIMATION
+     =========================================================== */
+  function startHeroAnimation() {
+    var tl = gsap.timeline();
+    tl.to('.hero-sub', { opacity: 1, duration: 1, ease: 'power3.out' }, 0.2)
+      .to('.hero-name .line-inner', { y: '0%', duration: 1.2, ease: 'power4.out', stagger: 0.12 }, 0.4)
+      .to('.hero-tagline', { opacity: 1, duration: 1, ease: 'power3.out' }, 1.0)
+      .to('.hero-scroll-indicator', { opacity: 1, duration: 0.8, ease: 'power2.out' }, 1.4);
+  }
+
+  /* ===========================================================
+     SECTION LABEL + TITLE REVEALS
+     =========================================================== */
+  gsap.utils.toArray('.section-label').forEach(function(el) {
+    gsap.to(el, {
+      scrollTrigger: { trigger: el, start: 'top 88%' },
+      opacity: 1, duration: 0.6, ease: 'power2.out'
+    });
+  });
+
+  gsap.utils.toArray('.section-title .line-inner').forEach(function(el) {
+    gsap.to(el, {
+      scrollTrigger: { trigger: el.parentElement.parentElement, start: 'top 82%' },
+      y: '0%', duration: 1, ease: 'power4.out'
+    });
+  });
+
+  /* ===========================================================
+     ABOUT ANIMATIONS
+     =========================================================== */
+  gsap.to('.about-image-wrap', {
+    scrollTrigger: { trigger: '.about-image-wrap', start: 'top 85%' },
+    opacity: 1, y: 0, duration: 0.9, ease: 'power3.out'
+  });
+
+  gsap.utils.toArray('.about-text p').forEach(function(p, i) {
+    gsap.to(p, {
+      scrollTrigger: { trigger: p, start: 'top 88%' },
+      opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', delay: i * 0.08
+    });
+  });
+
+  gsap.to('.about-badge', {
+    scrollTrigger: { trigger: '.about-badge', start: 'top 90%' },
+    opacity: 1, duration: 0.7, ease: 'power2.out'
+  });
+
+  // Image parallax
+  gsap.to('.about-image', {
+    scrollTrigger: { trigger: '#about', start: 'top bottom', end: 'bottom top', scrub: 1 },
+    y: -40, ease: 'none'
+  });
+
+  /* ===========================================================
+     EXPERIENCE ANIMATIONS
+     =========================================================== */
+  gsap.utils.toArray('.exp-item').forEach(function(item, i) {
+    gsap.to(item, {
+      scrollTrigger: { trigger: item, start: 'top 88%' },
+      opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', delay: i * 0.05
+    });
+  });
+
+  /* ===========================================================
+     PROJECT CARD ANIMATIONS
+     =========================================================== */
+  gsap.utils.toArray('.project-card').forEach(function(card) {
+    gsap.to(card, {
+      scrollTrigger: { trigger: card, start: 'top 90%' },
+      opacity: 1, y: 0, scale: 1, duration: 0.8, ease: 'power3.out'
+    });
+  });
+
+  // Video autoplay on scroll
+  document.querySelectorAll('video[preload="none"]').forEach(function(video) {
+    ScrollTrigger.create({
+      trigger: video,
+      start: 'top 95%',
+      onEnter: function() { video.play(); },
+      onLeave: function() { video.pause(); },
+      onEnterBack: function() { video.play(); },
+      onLeaveBack: function() { video.pause(); }
+    });
+  });
+
+  /* ===========================================================
+     STACK CARD ANIMATIONS
+     =========================================================== */
+  gsap.utils.toArray('.stack-card').forEach(function(card, i) {
+    gsap.to(card, {
+      scrollTrigger: { trigger: card, start: 'top 90%' },
+      opacity: 1, y: 0, duration: 0.7, ease: 'back.out(1.2)', delay: i * 0.08
+    });
+  });
+
+  /* ===========================================================
+     AWARD CARD ANIMATIONS
+     =========================================================== */
+  gsap.utils.toArray('.award-card').forEach(function(card, i) {
+    gsap.to(card, {
+      scrollTrigger: { trigger: card, start: 'top 88%' },
+      opacity: 1, x: 0, duration: 0.7, ease: 'power3.out', delay: i * 0.1
+    });
+  });
+
+  /* ===========================================================
+     CONTACT SECTION ANIMATIONS
+     =========================================================== */
+  gsap.from('.contact-heading', {
+    scrollTrigger: { trigger: '#contact', start: 'top 75%' },
+    opacity: 0, y: 50, duration: 1, ease: 'power3.out'
+  });
+  gsap.from('.contact-sub', {
+    scrollTrigger: { trigger: '#contact', start: 'top 70%' },
+    opacity: 0, y: 30, duration: 0.8, ease: 'power3.out', delay: 0.2
+  });
+  gsap.from('.contact-link', {
+    scrollTrigger: { trigger: '.contact-links', start: 'top 85%' },
+    opacity: 0, y: 20, duration: 0.6, ease: 'power3.out', stagger: 0.1
+  });
+
+  /* ===========================================================
+     WAVE SVG ANIMATION (morph-like on scroll)
+     =========================================================== */
+  gsap.utils.toArray('.wave-divider svg path').forEach(function(path) {
+    var original = path.getAttribute('d');
+    // Create a slightly different path for morphing
+    var morphed = original.replace(/(\d+)/g, function(match) {
+      var num = parseInt(match);
+      return num + Math.round((Math.random() - 0.5) * 30);
+    });
+
+    gsap.to(path, {
+      scrollTrigger: { trigger: path.closest('.wave-divider'), start: 'top 90%', end: 'bottom 10%', scrub: 2 },
+      attr: { d: morphed },
+      duration: 2,
+      ease: 'sine.inOut'
+    });
+  });
+
+  /* ===========================================================
+     PARALLAX ON 3D CANVAS (subtle)
+     =========================================================== */
+  if (!isMobile && heroCanvas) {
+    gsap.to(heroCanvas, {
+      scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true },
+      y: -100, ease: 'none'
+    });
+  }
+
+})();
+</script>
+
+</body>
+</html>
