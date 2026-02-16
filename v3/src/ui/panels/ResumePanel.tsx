@@ -50,7 +50,7 @@ export function ResumePanel() {
       </p>
 
       <a
-        href="./resume.pdf"
+        href="../resume.pdf"
         download
         style={styles.downloadBtn}
         onMouseEnter={(e) => {
@@ -71,7 +71,7 @@ export function ResumePanel() {
       </a>
 
       <iframe
-        src="./resume.pdf"
+        src="../resume.pdf"
         title="Resume"
         style={styles.iframe}
       />

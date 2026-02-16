@@ -67,7 +67,7 @@ export function AboutPanel() {
   return (
     <div style={styles.container}>
       <div style={styles.header}>
-        <img src="./ashrith.jpg" alt={aboutMe.name} style={styles.photo} />
+        <img src="../ashrith.jpg" alt={aboutMe.name} style={styles.photo} />
         <div style={styles.headerText}>
           <h2 style={styles.name}>{aboutMe.name}</h2>
           <p style={styles.tagline}>{aboutMe.tagline}</p>
