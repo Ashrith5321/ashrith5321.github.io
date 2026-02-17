@@ -7,59 +7,58 @@ export function SceneLighting() {
       {/* Hemisphere: warm sky above, warm floor bounce below */}
       <hemisphereLight args={['#c8daf0', '#d4b896', 0.8]} />
 
-      {/* Main sunlight through window — warm morning sun */}
+      {/* Main sunlight through windows — warm morning sun */}
       <directionalLight
-        position={[-6, 8, 2]}
+        position={[-12, 10, 4]}
         color="#fff4e0"
-        intensity={2}
+        intensity={2.5}
         castShadow
-        shadow-mapSize-width={1024}
-        shadow-mapSize-height={1024}
+        shadow-mapSize-width={2048}
+        shadow-mapSize-height={2048}
         shadow-bias={-0.0001}
+        shadow-camera-left={-12}
+        shadow-camera-right={12}
+        shadow-camera-top={10}
+        shadow-camera-bottom={-2}
       />
 
       {/* Secondary fill from right — cool sky bounce */}
       <directionalLight
-        position={[5, 5, 3]}
+        position={[10, 7, 5]}
         color="#e8ecf4"
         intensity={0.8}
       />
 
       {/* Back fill — prevents dark front faces */}
       <directionalLight
-        position={[0, 3, 6]}
+        position={[0, 5, 12]}
         color="#f0eee8"
         intensity={0.5}
       />
 
-      {/* Overhead room light — like a ceiling fixture */}
-      <pointLight
-        position={[0, 5.5, 0]}
-        color="#fff8f0"
-        intensity={15}
-        distance={14}
-        decay={2}
-      />
+      {/* Overhead workshop lights (fluorescent-style) */}
+      <pointLight position={[0, 7.5, -3]} color="#fff8f0" intensity={25} distance={18} decay={2} />
+      <pointLight position={[0, 7.5, 4]} color="#fff8f0" intensity={20} distance={18} decay={2} />
+      <pointLight position={[-6, 7.5, 0]} color="#fff8f0" intensity={18} distance={16} decay={2} />
+      <pointLight position={[6, 7.5, 0]} color="#fff8f0" intensity={18} distance={16} decay={2} />
 
-      {/* ============================================
-          SUBTLE NEON ACCENT STRIPS (decorative)
-          ============================================ */}
+      {/* ===== NEON ACCENT LIGHTS ===== */}
 
-      {/* Neon cyan strip - along ceiling edge (back wall) */}
+      {/* Cyan strip — ceiling edge along back wall */}
       <rectAreaLight
-        position={[0, 5.9, -3.85]}
+        position={[0, 7.9, -7.85]}
         rotation={[Math.PI / 2, 0, 0]}
-        width={9}
+        width={18}
         height={0.1}
         color="#00e5ff"
         intensity={3}
       />
 
-      {/* Neon cyan strip - along ceiling edge (right wall) */}
+      {/* Cyan strip — ceiling edge along right wall */}
       <rectAreaLight
-        position={[4.85, 5.9, 0]}
+        position={[9.85, 7.9, 0]}
         rotation={[Math.PI / 2, Math.PI / 2, 0]}
-        width={7}
+        width={14}
         height={0.1}
         color="#00e5ff"
         intensity={2}
@@ -67,7 +66,7 @@ export function SceneLighting() {
 
       {/* Under-desk accent */}
       <rectAreaLight
-        position={[0, 0.15, -2]}
+        position={[0, 0.15, -6]}
         rotation={[-Math.PI / 2, 0, 0]}
         width={4}
         height={0.1}
@@ -77,7 +76,7 @@ export function SceneLighting() {
 
       {/* Behind monitors accent */}
       <rectAreaLight
-        position={[0, 2.5, -3.85]}
+        position={[0, 2.5, -7.85]}
         rotation={[0, 0, 0]}
         width={3}
         height={1.5}
@@ -85,17 +84,17 @@ export function SceneLighting() {
         intensity={1.5}
       />
 
-      {/* ============================================
-          MONITOR & DEVICE GLOW
-          ============================================ */}
-      <pointLight position={[-0.8, 2.8, -3]} color="#4a8abf" intensity={5} distance={3} decay={2} />
-      <pointLight position={[0.8, 2.8, -3]} color="#3aaa5a" intensity={4} distance={3} decay={2} />
-      <pointLight position={[2.75, 1.9, -2.7]} color="#7c3aed" intensity={3} distance={2} decay={2} />
+      {/* ===== MONITOR & DEVICE GLOW ===== */}
+      <pointLight position={[-0.8, 2.8, -7]} color="#4a8abf" intensity={5} distance={3} decay={2} />
+      <pointLight position={[0.8, 2.8, -7]} color="#3aaa5a" intensity={4} distance={3} decay={2} />
+      <pointLight position={[2.75, 1.9, -6.7]} color="#7c3aed" intensity={3} distance={2} decay={2} />
 
-      {/* Robot accent glows */}
-      <pointLight position={[3.8, 2.3, 1.5]} color="#00e5ff" intensity={3} distance={3} decay={2} />
-      <pointLight position={[-3.2, 0.6, 2]} color="#f59e0b" intensity={2} distance={2} decay={2} />
-      <pointLight position={[-2, 3.5, 0.5]} color="#8b5cf6" intensity={3} distance={2} decay={2} />
+      {/* Robot accent glows — spread across larger workshop */}
+      <pointLight position={[7, 2.3, 1.5]} color="#00e5ff" intensity={3} distance={4} decay={2} />
+      <pointLight position={[-6, 0.6, 2]} color="#f59e0b" intensity={2} distance={3} decay={2} />
+      <pointLight position={[-4, 5, -3]} color="#8b5cf6" intensity={3} distance={4} decay={2} />
+      <pointLight position={[6, 0.5, 3]} color="#00e5ff" intensity={2} distance={3} decay={2} />
+      <pointLight position={[-5, 0.5, 5]} color="#22c55e" intensity={2} distance={3} decay={2} />
     </>
   );
 }

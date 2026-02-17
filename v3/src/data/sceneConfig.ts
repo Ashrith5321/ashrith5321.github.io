@@ -7,20 +7,20 @@ export interface CameraState {
 }
 
 export const DEFAULT_CAMERA: CameraState = {
-  position: [6, 4, 6],
-  target: [0, 1.5, -1],
+  position: [12, 6, 12],
+  target: [0, 2, -2],
   fov: 50,
 };
 
 export const CAMERA_TARGETS: Record<SectionId, CameraState> = {
-  about:      { position: [0.5, 3, 0],       target: [0, 2.5, -2],      fov: 40 },
-  education:  { position: [3.5, 2.2, -1],    target: [2.5, 1.8, -2.5],  fov: 35 },
-  projects:   { position: [0, 2.5, -1.5],    target: [0, 2.2, -3.5],    fov: 38 },
-  skills:     { position: [2, 2, 3],          target: [1, 1.5, 0.5],     fov: 45 },
-  experience: { position: [-3, 2.5, -2],      target: [-4.5, 2.5, -3.5], fov: 36 },
-  awards:     { position: [3, 3.2, -2.5],     target: [4.5, 3, -3.8],    fov: 34 },
-  contact:    { position: [-1.5, 2.2, -1.5],  target: [-1.5, 1.8, -3.5], fov: 38 },
-  resume:     { position: [2, 2.2, -1.5],     target: [1.5, 1.7, -3],    fov: 36 },
+  about:      { position: [1, 3, -4],         target: [0, 2.5, -6],       fov: 40 },
+  education:  { position: [4, 2.2, -5],       target: [2.5, 1.8, -6.5],   fov: 35 },
+  projects:   { position: [0, 2.5, -5.5],     target: [0, 2.2, -7.5],     fov: 38 },
+  skills:     { position: [4, 3, 4],           target: [0, 1.5, 0],        fov: 50 },
+  experience: { position: [-6, 2.5, -5],       target: [-8.5, 2.5, -7],    fov: 36 },
+  awards:     { position: [7, 3.2, -5.5],      target: [9.5, 3, -7.5],     fov: 34 },
+  contact:    { position: [-1.5, 2.2, -5.5],   target: [-1.5, 1.8, -7.5],  fov: 38 },
+  resume:     { position: [2, 2.2, -5.5],      target: [1.5, 1.7, -7],     fov: 36 },
 };
 
 export const SECTION_LABELS: Record<SectionId, string> = {
@@ -59,4 +59,8 @@ export const COLORS = {
   skinTone: '#c4956a',
   hoodie: '#2563eb',
   jeans: '#334155',
+  metal: '#888888',
+  darkMetal: '#444444',
+  workbenchWood: '#8b6914',
+  concrete: '#b0a898',
 } as const;

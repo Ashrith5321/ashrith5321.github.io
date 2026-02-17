@@ -10,10 +10,10 @@ export function FloatingParticles({ count = 150 }: { count?: number }) {
     const velocities = new Float32Array(count * 3);
 
     for (let i = 0; i < count; i++) {
-      // Concentrate particles around the desk lamp area
-      positions[i * 3] = (Math.random() - 0.5) * 5 - 0.5;
-      positions[i * 3 + 1] = Math.random() * 4 + 0.5;
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 4 - 1;
+      // Spread across the full workshop
+      positions[i * 3] = (Math.random() - 0.5) * 18;
+      positions[i * 3 + 1] = Math.random() * 7 + 0.5;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 14;
 
       velocities[i * 3] = (Math.random() - 0.5) * 0.002;
       velocities[i * 3 + 1] = Math.random() * 0.003 + 0.001;
@@ -34,10 +34,10 @@ export function FloatingParticles({ count = 150 }: { count?: number }) {
       arr[i * 3 + 2] += velocities[i * 3 + 2] + Math.cos(t + i * 0.7) * 0.0005;
 
       // Reset particle when it goes too high
-      if (arr[i * 3 + 1] > 5) {
-        arr[i * 3] = (Math.random() - 0.5) * 5 - 0.5;
+      if (arr[i * 3 + 1] > 7.5) {
+        arr[i * 3] = (Math.random() - 0.5) * 18;
         arr[i * 3 + 1] = 0.5;
-        arr[i * 3 + 2] = (Math.random() - 0.5) * 4 - 1;
+        arr[i * 3 + 2] = (Math.random() - 0.5) * 14;
       }
     }
     pos.needsUpdate = true;

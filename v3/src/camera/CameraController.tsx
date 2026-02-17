@@ -15,7 +15,7 @@ export function CameraController() {
 
   // Set initial camera position
   useEffect(() => {
-    camera.position.set(10, 7, 10);
+    camera.position.set(18, 10, 18);
     if (controlsRef.current) {
       controlsRef.current.target.set(...DEFAULT_CAMERA.target);
     }
@@ -93,12 +93,10 @@ export function CameraController() {
       enablePan={false}
       enableDamping
       dampingFactor={0.05}
-      minDistance={2}
-      maxDistance={12}
+      minDistance={3}
+      maxDistance={22}
       minPolarAngle={0.3}
       maxPolarAngle={Math.PI / 2.1}
-      maxAzimuthAngle={Math.PI / 1.5}
-      minAzimuthAngle={-Math.PI / 4}
     />
   );
 }
