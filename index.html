@@ -104,7 +104,7 @@
   <!-- Header Section (Stylized) -->
   <section id="intro" class="max-w-4xl mx-auto px-4 py-16 text-left">
     <div class="flex flex-col md:flex-row items-center gap-6">
-      <img src="ashrith.png" alt="Ashrith Edukulla" class="w-36 h-36 rounded-xl object-cover border border-gray-700 shadow-lg" />
+      <img src="ashrith.jpg" alt="Ashrith Edukulla" class="w-36 h-36 rounded-xl object-cover border border-gray-700 shadow-lg" />
       <div>
         <h1 class="text-4xl font-bold">Ashrith Edukulla</h1>
         <p class="text-xl text-gray-400 mt-1">Robotics @ University of Michigan</p>
@@ -351,9 +351,117 @@
 
 
 <!-- Projects Section -->
+
+
+
 <section id="projects" class="max-w-6xl mx-auto px-4 py-16">
   <h2 class="text-3xl font-bold mb-10 text-white">🔧 Projects</h2>
   <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+    <!-- Card 1: Habitat BC -->
+<div class="project-card bg-gray-900 rounded-2xl shadow-lg overflow-hidden group transform transition duration-300 hover:rotate-1 hover:scale-105 hover:shadow-[0_0_20px_rgba(0,255,255,0.3)]">
+  <div class="w-full h-48 bg-black flex items-center justify-center">
+    <div class="text-center px-6">
+      <div class="text-4xl mb-2">🤖🏠</div>
+      <div class="text-white font-semibold text-lg">ObjectNav Behavior Cloning</div>
+      <div class="text-gray-400 text-sm">ResNet18 + GRU · PIRLNav · HM3D</div>
+    </div>
+  </div>
+  <div class="p-5">
+    <h3 class="text-xl font-semibold mb-2 text-white">ObjectNav Behavior Cloning — HM3D</h3>
+    <p class="text-gray-300 mb-3">
+      Trained a ResNet18 + GRU navigation policy from 76K+ PIRLNav human VR demonstrations across 80 HM3D scenes.
+      Implemented TBPTT, 3.28× inflection weighting, and a custom dataset loader to bypass habitat's strict episode schema.
+    </p>
+    <div class="flex flex-wrap gap-2 text-xs font-semibold">
+      <span class="bg-blue-700 text-white px-2 py-1 rounded">#Python</span>
+      <span class="bg-indigo-700 text-white px-2 py-1 rounded">#PyTorch</span>
+      <span class="bg-teal-700 text-white px-2 py-1 rounded">#BehaviorCloning</span>
+      <span class="bg-purple-700 text-white px-2 py-1 rounded">#HabitatSim</span>
+      <span class="bg-gray-600 text-white px-2 py-1 rounded">#ObjectNav</span>
+      <span class="bg-green-700 text-white px-2 py-1 rounded">#EmbodiedAI</span>
+    </div>
+  </div>
+</div>
+
+<!-- Card 2: Ocean Frontier -->
+<div class="project-card bg-gray-900 rounded-2xl shadow-lg overflow-hidden group transform transition duration-300 hover:rotate-1 hover:scale-105 hover:shadow-[0_0_20px_rgba(0,255,255,0.3)]">
+  <div class="w-full h-48 bg-black flex items-center justify-center">
+    <div class="text-center px-6">
+      <div class="text-4xl mb-2">🌊🚢</div>
+      <div class="text-white font-semibold text-lg">Ocean Frontier Exploration</div>
+      <div class="text-gray-400 text-sm">BFS + NBVP · OctoMap · Isaac Sim</div>
+    </div>
+  </div>
+  <div class="p-5">
+    <h3 class="text-xl font-semibold mb-2 text-white">Ocean Frontier 3D Exploration — ROV Shipwreck Survey</h3>
+    <p class="text-gray-300 mb-3">
+      Autonomous 3-phase ROV mission: BFS sweep of unmapped voxels → RRT-biased centroid approach → full NBVP survey of the
+      wreck bounding volume. Detects shipwrecks via vertical column clustering; fuses stereo depth and sonar into real-time OctoMap.
+    </p>
+    <div class="flex flex-wrap gap-2 text-xs font-semibold">
+      <span class="bg-indigo-700 text-white px-2 py-1 rounded">#ROS2</span>
+      <span class="bg-blue-700 text-white px-2 py-1 rounded">#C++</span>
+      <span class="bg-teal-700 text-white px-2 py-1 rounded">#OctoMap</span>
+      <span class="bg-purple-700 text-white px-2 py-1 rounded">#NBVP</span>
+      <span class="bg-green-700 text-white px-2 py-1 rounded">#RRT</span>
+      <span class="bg-gray-600 text-white px-2 py-1 rounded">#IsaacSim</span>
+      <span class="bg-cyan-700 text-white px-2 py-1 rounded">#SensorFusion</span>
+    </div>
+  </div>
+</div>
+
+<!-- Card 3: CARLA SFF -->
+<div class="project-card bg-gray-900 rounded-2xl shadow-lg overflow-hidden group transform transition duration-300 hover:rotate-1 hover:scale-105 hover:shadow-[0_0_20px_rgba(0,255,255,0.3)]">
+  <div class="w-full h-48 bg-black flex items-center justify-center">
+    <div class="text-center px-6">
+      <div class="text-4xl mb-2">🚗🛡️</div>
+      <div class="text-white font-semibold text-lg">CARLA SFF — VLA Safety Eval</div>
+      <div class="text-gray-400 text-sm">Safety Force Field · Alpamayo VLA</div>
+    </div>
+  </div>
+  <div class="p-5">
+    <h3 class="text-xl font-semibold mb-2 text-white">CARLA SFF: VLA Safety Evaluation Stack</h3>
+    <p class="text-gray-300 mb-3">
+      Built a Dockerized CARLA/ROS 2 closed-loop eval stack for the Alpamayo VLA. Designed 10+ long-tail scenarios
+      (cut-ins, dooring, wrong-way vehicles). Refactored the safety layer to implement a formal Safety Force Field
+      (Nister et al., 2019); benchmarked on physical AIAV data with unit tests.
+    </p>
+    <div class="flex flex-wrap gap-2 text-xs font-semibold">
+      <span class="bg-indigo-700 text-white px-2 py-1 rounded">#CARLA</span>
+      <span class="bg-teal-700 text-white px-2 py-1 rounded">#ROS2</span>
+      <span class="bg-blue-700 text-white px-2 py-1 rounded">#Docker</span>
+      <span class="bg-purple-700 text-white px-2 py-1 rounded">#VLA</span>
+      <span class="bg-pink-700 text-white px-2 py-1 rounded">#SafetyForceField</span>
+      <span class="bg-gray-600 text-white px-2 py-1 rounded">#AVSafety</span>
+    </div>
+  </div>
+</div>
+
+<!-- Card 4: Satellite Event Camera -->
+<div class="project-card bg-gray-900 rounded-2xl shadow-lg overflow-hidden group transform transition duration-300 hover:rotate-1 hover:scale-105 hover:shadow-[0_0_20px_rgba(0,255,255,0.3)]">
+  <div class="w-full h-48 bg-black flex items-center justify-center">
+    <div class="text-center px-6">
+      <div class="text-4xl mb-2">🛰️📷</div>
+      <div class="text-white font-semibold text-lg">Satellite Detection</div>
+      <div class="text-gray-400 text-sm">Event Camera · Space Domain Awareness</div>
+    </div>
+  </div>
+  <div class="p-5">
+    <h3 class="text-xl font-semibold mb-2 text-white">Satellite Detection with Event Cameras</h3>
+    <p class="text-gray-300 mb-3">
+      Leveraged event camera microsecond temporal resolution and high dynamic range to detect low-observable satellite
+      streaks against star-field clutter using asynchronous spike-pattern processing for space domain awareness.
+    </p>
+    <div class="flex flex-wrap gap-2 text-xs font-semibold">
+      <span class="bg-indigo-700 text-white px-2 py-1 rounded">#EventCamera</span>
+      <span class="bg-blue-700 text-white px-2 py-1 rounded">#Python</span>
+      <span class="bg-purple-700 text-white px-2 py-1 rounded">#ComputerVision</span>
+      <span class="bg-gray-600 text-white px-2 py-1 rounded">#SpaceDA</span>
+      <span class="bg-teal-700 text-white px-2 py-1 rounded">#ObjectDetection</span>
+    </div>
+  </div>
+</div>
 
     <!-- Full-Stack AV Localization (IEKF Sensor Fusion) -->
 <a href="full_stack_av.html"
