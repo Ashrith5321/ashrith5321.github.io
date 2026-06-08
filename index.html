@@ -143,6 +143,12 @@
         background-color: #0f172a;
         background-image: radial-gradient(circle at 1px 1px, rgba(148, 163, 184, 0.16) 1px, transparent 0);
       }
+      /* Section background animation edge-fade (theme-aware) */
+      :root { --bg: #fafaf9; }   /* stone-50 */
+      .dark { --bg: #020617; }   /* slate-950 */
+      .bg-fade {
+        background: linear-gradient(to bottom, var(--bg), transparent 20%, transparent 80%, var(--bg));
+      }
     </style>
   </head>
 
@@ -161,12 +167,11 @@
         </a>
 
         <nav class="hidden md:flex items-center gap-6 text-sm text-slate-600 dark:text-slate-400">
+          <a href="#news" class="nav-link hover:text-slate-900 dark:hover:text-white">News</a>
           <a href="#about" class="nav-link hover:text-slate-900 dark:hover:text-white">About</a>
           <a href="#research" class="nav-link hover:text-slate-900 dark:hover:text-white">Research</a>
           <a href="#experience" class="nav-link hover:text-slate-900 dark:hover:text-white">Experience</a>
           <a href="#projects" class="nav-link hover:text-slate-900 dark:hover:text-white">Projects</a>
-          <a href="#skills" class="nav-link hover:text-slate-900 dark:hover:text-white">Skills</a>
-          <a href="#awards" class="nav-link hover:text-slate-900 dark:hover:text-white">Awards</a>
           <a href="#contact" class="nav-link hover:text-slate-900 dark:hover:text-white">Contact</a>
         </nav>
 
@@ -203,7 +208,7 @@
       <!-- Hero -->
       <section class="relative overflow-hidden pt-14 pb-10 sm:pt-20 sm:pb-14">
         <canvas id="hero-canvas" aria-hidden="true" class="pointer-events-none absolute inset-0 h-full w-full"></canvas>
-        <div aria-hidden="true" class="pointer-events-none absolute inset-0 bg-gradient-to-r from-stone-50 via-stone-50/85 to-stone-50/20 dark:from-slate-950 dark:via-slate-950/85 dark:to-slate-950/20"></div>
+        <div aria-hidden="true" class="pointer-events-none absolute inset-0 bg-gradient-to-r from-stone-50 from-20% via-stone-50/65 to-transparent dark:from-slate-950 dark:via-slate-950/65 dark:to-transparent"></div>
         <div class="relative z-10">
         <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-8">
           <div class="flex-1">
@@ -311,10 +316,38 @@
 
       <hr class="border-slate-200 dark:border-slate-800" />
 
+      <!-- News -->
+      <section id="news" class="py-12 sm:py-14 scroll-mt-20">
+        <div class="flex items-baseline gap-3 mb-6">
+          <span class="font-mono text-sm text-accent-light dark:text-accent-dark">01</span>
+          <h2 class="font-serif text-2xl font-semibold text-slate-900 dark:text-white">News</h2>
+        </div>
+        <ul class="space-y-3 max-w-2xl">
+          <li class="grid grid-cols-[5rem_1fr] sm:grid-cols-[6rem_1fr] gap-4 text-sm">
+            <span class="font-mono text-xs text-slate-400 dark:text-slate-500 pt-0.5">Jun 2026</span>
+            <span class="text-slate-600 dark:text-slate-400">Joined <span class="font-medium text-slate-900 dark:text-white">Nift</span> to work on autonomous driving with Vision-Language-Action models.</span>
+          </li>
+          <li class="grid grid-cols-[5rem_1fr] sm:grid-cols-[6rem_1fr] gap-4 text-sm">
+            <span class="font-mono text-xs text-slate-400 dark:text-slate-500 pt-0.5">May 2026</span>
+            <span class="text-slate-600 dark:text-slate-400">Began researching learning-based navigation models at the <span class="font-medium text-slate-900 dark:text-white">Scalable Spatial Intelligence Lab</span>.</span>
+          </li>
+          <li class="grid grid-cols-[5rem_1fr] sm:grid-cols-[6rem_1fr] gap-4 text-sm">
+            <span class="font-mono text-xs text-slate-400 dark:text-slate-500 pt-0.5">Jan 2026</span>
+            <span class="text-slate-600 dark:text-slate-400">Joined the <span class="font-medium text-slate-900 dark:text-white">Field Robotics Group (FRoG) Lab</span> and started as Instructional Aide for EECS 467 (Autonomous Robotics).</span>
+          </li>
+          <li class="grid grid-cols-[5rem_1fr] sm:grid-cols-[6rem_1fr] gap-4 text-sm">
+            <span class="font-mono text-xs text-slate-400 dark:text-slate-500 pt-0.5">Dec 2025</span>
+            <span class="text-slate-600 dark:text-slate-400">Wrapped a semester researching reconfigurable robot swarms at the <span class="font-medium text-slate-900 dark:text-white">SAM Lab</span> — paper in preparation.</span>
+          </li>
+        </ul>
+      </section>
+
+      <hr class="border-slate-200 dark:border-slate-800" />
+
       <!-- About -->
       <section id="about" class="py-12 sm:py-14 scroll-mt-20">
         <div class="flex items-baseline gap-3 mb-6">
-          <span class="font-mono text-sm text-accent-light dark:text-accent-dark">01</span>
+          <span class="font-mono text-sm text-accent-light dark:text-accent-dark">02</span>
           <h2 class="font-serif text-2xl font-semibold text-slate-900 dark:text-white">About</h2>
         </div>
         <div class="space-y-4 text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl">
@@ -349,7 +382,7 @@
       <!-- Research focus -->
       <section id="research" class="py-12 sm:py-14 scroll-mt-20">
         <div class="flex items-baseline gap-3 mb-6">
-          <span class="font-mono text-sm text-accent-light dark:text-accent-dark">02</span>
+          <span class="font-mono text-sm text-accent-light dark:text-accent-dark">03</span>
           <h2 class="font-serif text-2xl font-semibold text-slate-900 dark:text-white">Research focus</h2>
         </div>
         <div class="grid sm:grid-cols-2 gap-5">
@@ -381,7 +414,7 @@
       <!-- Education -->
       <section id="education" class="py-12 sm:py-14 scroll-mt-20">
         <div class="flex items-baseline gap-3 mb-6">
-          <span class="font-mono text-sm text-accent-light dark:text-accent-dark">03</span>
+          <span class="font-mono text-sm text-accent-light dark:text-accent-dark">04</span>
           <h2 class="font-serif text-2xl font-semibold text-slate-900 dark:text-white">Education</h2>
         </div>
         <div class="flex items-start gap-4">
@@ -412,9 +445,11 @@
       <!-- Experience -->
       <section id="experience" class="py-12 sm:py-14 scroll-mt-20">
         <div class="flex items-baseline gap-3 mb-8">
-          <span class="font-mono text-sm text-accent-light dark:text-accent-dark">04</span>
+          <span class="font-mono text-sm text-accent-light dark:text-accent-dark">05</span>
           <h2 class="font-serif text-2xl font-semibold text-slate-900 dark:text-white">Experience</h2>
         </div>
+
+        <h3 class="font-mono text-xs uppercase tracking-[0.18em] text-slate-500 dark:text-slate-500 mb-6">Research &amp; Industry</h3>
         <div class="space-y-9">
 
           <article class="grid sm:grid-cols-[1fr_auto] gap-1 sm:gap-6">
@@ -458,19 +493,6 @@
 
           <article class="grid sm:grid-cols-[1fr_auto] gap-1 sm:gap-6">
             <div>
-              <h3 class="text-base font-semibold text-slate-900 dark:text-white">EECS 467: Autonomous Robotics</h3>
-              <p class="text-sm text-slate-500 dark:text-slate-400">Instructional Aide · University of Michigan</p>
-              <ul class="mt-2 space-y-1 text-sm text-slate-600 dark:text-slate-400 list-disc list-outside pl-4">
-                <li>Supported instruction in perception, SLAM, planning, and control for autonomous robotics.</li>
-                <li>Helped students with ROS-based labs, system debugging, and algorithm implementation.</li>
-                <li>Held office hours on multi-sensor fusion, navigation, and robot software architecture.</li>
-              </ul>
-            </div>
-            <span class="text-sm text-slate-500 dark:text-slate-500 sm:text-right whitespace-nowrap">Jan 2026 – May 2026</span>
-          </article>
-
-          <article class="grid sm:grid-cols-[1fr_auto] gap-1 sm:gap-6">
-            <div>
               <h3 class="text-base font-semibold text-slate-900 dark:text-white">Synergic Adaptive Machines (SAM) Lab</h3>
               <p class="text-sm text-slate-500 dark:text-slate-400">Undergraduate Researcher · University of Michigan</p>
               <ul class="mt-2 space-y-1 text-sm text-slate-600 dark:text-slate-400 list-disc list-outside pl-4">
@@ -480,6 +502,37 @@
               </ul>
             </div>
             <span class="text-sm text-slate-500 dark:text-slate-500 sm:text-right whitespace-nowrap">Aug 2025 – Dec 2025</span>
+          </article>
+
+          <article class="grid sm:grid-cols-[1fr_auto] gap-1 sm:gap-6">
+            <div>
+              <h3 class="text-base font-semibold text-slate-900 dark:text-white">Michigan Mars Rover Team</h3>
+              <p class="text-sm text-slate-500 dark:text-slate-400">Embedded Software Engineer · Ann Arbor, MI</p>
+              <ul class="mt-2 space-y-1 text-sm text-slate-600 dark:text-slate-400 list-disc list-outside pl-4">
+                <li>Programmed STM32 firmware to control servos, LEDs, and accelerometers for subsystem actuation and feedback.</li>
+                <li>Developed embedded drivers and ROS nodes for motor coordination and sensor data handling.</li>
+                <li>Contributed to navigation and control tuning for reliable performance in dynamic rover environments.</li>
+              </ul>
+            </div>
+            <span class="text-sm text-slate-500 dark:text-slate-500 sm:text-right whitespace-nowrap">Nov 2024 – May 2025</span>
+          </article>
+
+        </div>
+
+        <h3 class="font-mono text-xs uppercase tracking-[0.18em] text-slate-500 dark:text-slate-500 mb-6 mt-12">Teaching</h3>
+        <div class="space-y-9">
+
+          <article class="grid sm:grid-cols-[1fr_auto] gap-1 sm:gap-6">
+            <div>
+              <h3 class="text-base font-semibold text-slate-900 dark:text-white">EECS 467: Autonomous Robotics</h3>
+              <p class="text-sm text-slate-500 dark:text-slate-400">Instructional Aide · University of Michigan</p>
+              <ul class="mt-2 space-y-1 text-sm text-slate-600 dark:text-slate-400 list-disc list-outside pl-4">
+                <li>Supported instruction in perception, SLAM, planning, and control for autonomous robotics.</li>
+                <li>Helped students with ROS-based labs, system debugging, and algorithm implementation.</li>
+                <li>Held office hours on multi-sensor fusion, navigation, and robot software architecture.</li>
+              </ul>
+            </div>
+            <span class="text-sm text-slate-500 dark:text-slate-500 sm:text-right whitespace-nowrap">Jan 2026 – May 2026</span>
           </article>
 
           <article class="grid sm:grid-cols-[1fr_auto] gap-1 sm:gap-6">
@@ -508,19 +561,6 @@
             <span class="text-sm text-slate-500 dark:text-slate-500 sm:text-right whitespace-nowrap">Jan 2025 – Apr 2025</span>
           </article>
 
-          <article class="grid sm:grid-cols-[1fr_auto] gap-1 sm:gap-6">
-            <div>
-              <h3 class="text-base font-semibold text-slate-900 dark:text-white">Michigan Mars Rover Team</h3>
-              <p class="text-sm text-slate-500 dark:text-slate-400">Embedded Software Engineer · Ann Arbor, MI</p>
-              <ul class="mt-2 space-y-1 text-sm text-slate-600 dark:text-slate-400 list-disc list-outside pl-4">
-                <li>Programmed STM32 firmware to control servos, LEDs, and accelerometers for subsystem actuation and feedback.</li>
-                <li>Developed embedded drivers and ROS nodes for motor coordination and sensor data handling.</li>
-                <li>Contributed to navigation and control tuning for reliable performance in dynamic rover environments.</li>
-              </ul>
-            </div>
-            <span class="text-sm text-slate-500 dark:text-slate-500 sm:text-right whitespace-nowrap">Nov 2024 – May 2025</span>
-          </article>
-
         </div>
       </section>
 
@@ -529,7 +569,7 @@
       <!-- Projects -->
       <section id="projects" class="py-12 sm:py-14 scroll-mt-20">
         <div class="flex items-baseline gap-3 mb-8">
-          <span class="font-mono text-sm text-accent-light dark:text-accent-dark">05</span>
+          <span class="font-mono text-sm text-accent-light dark:text-accent-dark">06</span>
           <h2 class="font-serif text-2xl font-semibold text-slate-900 dark:text-white">Projects</h2>
         </div>
 
@@ -891,7 +931,7 @@
       <!-- Skills -->
       <section id="skills" class="py-12 sm:py-14 scroll-mt-20">
         <div class="flex items-baseline gap-3 mb-8">
-          <span class="font-mono text-sm text-accent-light dark:text-accent-dark">06</span>
+          <span class="font-mono text-sm text-accent-light dark:text-accent-dark">07</span>
           <h2 class="font-serif text-2xl font-semibold text-slate-900 dark:text-white">Skills</h2>
         </div>
 
@@ -932,7 +972,7 @@
       <!-- Awards -->
       <section id="awards" class="py-12 sm:py-14 scroll-mt-20">
         <div class="flex items-baseline gap-3 mb-8">
-          <span class="font-mono text-sm text-accent-light dark:text-accent-dark">07</span>
+          <span class="font-mono text-sm text-accent-light dark:text-accent-dark">08</span>
           <h2 class="font-serif text-2xl font-semibold text-slate-900 dark:text-white">Awards &amp; Achievements</h2>
         </div>
         <div class="grid sm:grid-cols-2 gap-5">
@@ -978,7 +1018,7 @@
       <!-- Contact -->
       <section id="contact" class="py-12 sm:py-14 scroll-mt-20">
         <div class="flex items-baseline gap-3 mb-6">
-          <span class="font-mono text-sm text-accent-light dark:text-accent-dark">08</span>
+          <span class="font-mono text-sm text-accent-light dark:text-accent-dark">09</span>
           <h2 class="font-serif text-2xl font-semibold text-slate-900 dark:text-white">Contact</h2>
         </div>
         <p class="max-w-xl text-slate-600 dark:text-slate-400 leading-relaxed">
@@ -1063,94 +1103,393 @@
         });
       }
 
-      // Hero: animated RRT-style motion-planning graph (on-brand, lightweight, vanilla canvas)
+      // ---------------------------------------------------------------
+      // Section background animations (vanilla canvas, on-brand, themed)
+      // ---------------------------------------------------------------
       (function () {
-        var canvas = document.getElementById("hero-canvas");
-        if (!canvas || !canvas.getContext) return;
-        var ctx = canvas.getContext("2d");
-        var prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        var W = 0, H = 0, dpr = 1, nodes = [], running = false, last = 0;
-
-        function stroke(a) {
+        var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        function col(a) {
           return document.documentElement.classList.contains("dark")
             ? "rgba(96,165,250," + a + ")"
             : "rgba(29,78,216," + a + ")";
         }
-        function resize() {
-          var r = canvas.getBoundingClientRect();
-          W = r.width; H = r.height;
-          if (W === 0 || H === 0) return;
-          dpr = Math.min(window.devicePixelRatio || 1, 2);
-          canvas.width = Math.round(W * dpr);
-          canvas.height = Math.round(H * dpr);
-          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-          reset();
-        }
-        function reset() {
-          nodes = [{ x: W * 0.7, y: H * 0.55, p: -1 }];
-        }
-        function rand() { return ((Math.sin(nodes.length * 12.9898 + W * 0.123) * 43758.5453) % 1 + 1) % 1; }
-        function extend() {
-          // bias sampling toward the right half so the tree fills the area behind the photo
-          var tx = (0.35 + Math.random() * 0.65) * W;
-          var ty = Math.random() * H;
-          var bi = 0, bd = Infinity;
-          for (var i = 0; i < nodes.length; i++) {
-            var dx = nodes[i].x - tx, dy = nodes[i].y - ty, d = dx * dx + dy * dy;
-            if (d < bd) { bd = d; bi = i; }
-          }
-          var n = nodes[bi];
-          var ang = Math.atan2(ty - n.y, tx - n.x);
-          var stepLen = Math.min(28, Math.sqrt(bd) || 28);
-          var nx = n.x + Math.cos(ang) * stepLen;
-          var ny = n.y + Math.sin(ang) * stepLen;
-          if (nx < 0 || nx > W || ny < 0 || ny > H) return;
-          nodes.push({ x: nx, y: ny, p: bi });
-          if (nodes.length > 150) reset();
-        }
-        function draw() {
-          ctx.clearRect(0, 0, W, H);
-          ctx.lineWidth = 1;
-          ctx.strokeStyle = stroke(0.16);
-          ctx.beginPath();
-          for (var i = 1; i < nodes.length; i++) {
-            var n = nodes[i], p = nodes[n.p];
-            ctx.moveTo(p.x, p.y); ctx.lineTo(n.x, n.y);
-          }
-          ctx.stroke();
-          ctx.fillStyle = stroke(0.28);
-          for (var j = 0; j < nodes.length; j++) {
-            ctx.beginPath();
-            ctx.arc(nodes[j].x, nodes[j].y, j === 0 ? 3 : 1.4, 0, 6.2832);
-            ctx.fill();
-          }
-        }
-        function loop(t) {
-          if (!running) return;
-          if (t - last > 45) { extend(); extend(); last = t; }
-          draw();
-          requestAnimationFrame(loop);
-        }
-        function start() { if (!running) { running = true; requestAnimationFrame(loop); } }
-        function stop() { running = false; }
+        var TAU = 6.28318;
 
-        window.addEventListener("resize", resize);
-        document.addEventListener("visibilitychange", function () {
-          document.hidden ? stop() : start();
+        // ===== RRT (hero) — self-evolving, omnidirectional =====
+        function rrt() {
+          var W, H, nodes, lastGrow, fade, path, pathStart, nextGoal, MAX;
+          function nearest(x, y) {
+            var bi = 0, bd = Infinity;
+            for (var i = 0; i < nodes.length; i++) {
+              var dx = nodes[i].x - x, dy = nodes[i].y - y, d = dx * dx + dy * dy;
+              if (d < bd) { bd = d; bi = i; }
+            }
+            return bi;
+          }
+          function grow(t) {
+            var tx = Math.random() * W, ty = Math.random() * H;
+            var bi = nearest(tx, ty), n = nodes[bi];
+            var a = Math.atan2(ty - n.y, tx - n.x), dist = Math.hypot(tx - n.x, ty - n.y);
+            var st = Math.min(26, dist || 26);
+            var nx = n.x + Math.cos(a) * st, ny = n.y + Math.sin(a) * st;
+            if (nx < 2 || nx > W - 2 || ny < 2 || ny > H - 2) return;
+            nodes.push({ x: nx, y: ny, p: bi, born: t });
+          }
+          function goal(t) {
+            var i = nearest(Math.random() * W, Math.random() * H), c = [], g = 0;
+            while (i !== -1 && g++ < 4000) { c.push(nodes[i]); i = nodes[i].p; }
+            path = c; pathStart = t;
+          }
+          return {
+            reset: function (w, h) { W = w; H = h; nodes = [{ x: w * 0.46, y: h * 0.5, p: -1, born: 0 }]; fade = 1; path = null; nextGoal = 1500; lastGrow = 0; MAX = Math.max(160, Math.min(360, (w * h / 1500) | 0)); },
+            step: function (t) {
+              if (t - lastGrow > 26) { grow(t); grow(t); grow(t); lastGrow = t; }
+              if (nodes.length >= MAX) { fade -= 0.02; if (fade <= 0) { this.reset(W, H); } }
+              if (t > nextGoal && nodes.length > 30) { goal(t); nextGoal = t + 3000; }
+            },
+            draw: function (ctx, t) {
+              ctx.clearRect(0, 0, W, H);
+              var i, n, p;
+              ctx.strokeStyle = col(0.1 * fade); ctx.lineWidth = 1; ctx.beginPath();
+              for (i = 1; i < nodes.length; i++) { n = nodes[i]; p = nodes[n.p]; ctx.moveTo(p.x, p.y); ctx.lineTo(n.x, n.y); }
+              ctx.stroke();
+              for (i = 1; i < nodes.length; i++) {
+                n = nodes[i]; var age = t - n.born; if (age >= 650) continue;
+                var gl = 1 - age / 650; p = nodes[n.p];
+                ctx.strokeStyle = col((0.22 + 0.5 * gl) * fade); ctx.lineWidth = 1 + gl;
+                ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(n.x, n.y); ctx.stroke();
+              }
+              ctx.fillStyle = col(0.22 * fade); ctx.beginPath();
+              for (i = 1; i < nodes.length; i++) { ctx.moveTo(nodes[i].x + 1.5, nodes[i].y); ctx.arc(nodes[i].x, nodes[i].y, 1.5, 0, TAU); }
+              ctx.fill();
+              ctx.save(); ctx.shadowBlur = 16; ctx.shadowColor = col(0.8 * fade); ctx.fillStyle = col(0.9 * fade);
+              ctx.beginPath(); ctx.arc(nodes[0].x, nodes[0].y, 3.2, 0, TAU); ctx.fill(); ctx.restore();
+              if (path && path.length > 1) {
+                var pAge = t - pathStart, pa = pAge < 1700 ? 1 : Math.max(0, 1 - (pAge - 1700) / 900);
+                ctx.save(); ctx.shadowBlur = 10; ctx.shadowColor = col(0.5 * pa);
+                ctx.strokeStyle = col(0.85 * pa); ctx.lineWidth = 1.8; ctx.beginPath(); ctx.moveTo(path[0].x, path[0].y);
+                for (i = 1; i < path.length; i++) ctx.lineTo(path[i].x, path[i].y); ctx.stroke();
+                var prog = Math.min(1, pAge / 1100), idx = prog * (path.length - 1), sg = idx | 0, f = idx - sg;
+                if (sg < path.length - 1) {
+                  var ax = path[sg].x + (path[sg + 1].x - path[sg].x) * f, ay = path[sg].y + (path[sg + 1].y - path[sg].y) * f;
+                  ctx.shadowBlur = 14; ctx.fillStyle = col(0.95 * pa); ctx.beginPath(); ctx.arc(ax, ay, 3, 0, TAU); ctx.fill();
+                }
+                ctx.restore(); if (pa <= 0) path = null;
+              }
+            }
+          };
+        }
+
+        // ===== Neural network — forward-pass wave =====
+        function neural() {
+          var W, H, layers, nodes;
+          return {
+            reset: function (w, h) {
+              W = w; H = h; layers = [4, 6, 6, 5, 3]; nodes = [];
+              var n = layers.length, padX = w * 0.12, span = w - padX * 2;
+              for (var l = 0; l < n; l++) {
+                var cx = padX + span * (l / (n - 1)), k = layers[l], col0 = [];
+                for (var i = 0; i < k; i++) col0.push({ x: cx, y: h * 0.5 + (i - (k - 1) / 2) * Math.min(46, h / (k + 1)) });
+                nodes.push(col0);
+              }
+            },
+            step: function () {},
+            draw: function (ctx, t) {
+              ctx.clearRect(0, 0, W, H);
+              var front = ((t % 2600) / 2600) * (W * 1.2) - W * 0.1;
+              function gauss(x) { var d = (x - front) / 60; return Math.exp(-d * d); }
+              for (var l = 0; l < nodes.length - 1; l++) {
+                for (var i = 0; i < nodes[l].length; i++) {
+                  for (var j = 0; j < nodes[l + 1].length; j++) {
+                    var a = nodes[l][i], b = nodes[l + 1][j], g = gauss((a.x + b.x) / 2);
+                    ctx.strokeStyle = col(0.05 + 0.32 * g); ctx.lineWidth = 0.6 + g;
+                    ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+                  }
+                }
+              }
+              for (var L = 0; L < nodes.length; L++) {
+                for (var m = 0; m < nodes[L].length; m++) {
+                  var nd = nodes[L][m], gg = gauss(nd.x);
+                  ctx.save(); if (gg > 0.15) { ctx.shadowBlur = 12 * gg; ctx.shadowColor = col(0.7 * gg); }
+                  ctx.fillStyle = col(0.22 + 0.6 * gg); ctx.beginPath(); ctx.arc(nd.x, nd.y, 3 + 1.5 * gg, 0, TAU); ctx.fill(); ctx.restore();
+                }
+              }
+            }
+          };
+        }
+
+        // ===== World model — rollout with imagined branch =====
+        function worldmodel() {
+          var W, H, N, xs, y;
+          return {
+            reset: function (w, h) { W = w; H = h; N = 7; y = h * 0.56; xs = []; var pad = w * 0.12, span = w - pad * 2; for (var i = 0; i < N; i++) xs.push(pad + span * (i / (N - 1))); },
+            step: function () {},
+            draw: function (ctx, t) {
+              ctx.clearRect(0, 0, W, H);
+              var fr = ((t % 5200) / 5200) * (N - 1), cur = fr | 0;
+              function box(x, yy, a, fill) {
+                ctx.strokeStyle = col(a); ctx.lineWidth = 1.4;
+                if (fill) { ctx.fillStyle = col(a * 0.18); ctx.fillRect(x - 13, yy - 11, 26, 22); }
+                ctx.strokeRect(x - 13, yy - 11, 26, 22);
+                ctx.fillStyle = col(a); ctx.beginPath(); ctx.arc(x, yy, 2, 0, TAU); ctx.fill();
+              }
+              for (var i = 0; i < N - 1; i++) { ctx.strokeStyle = col(0.12); ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(xs[i] + 13, y); ctx.lineTo(xs[i + 1] - 13, y); ctx.stroke(); }
+              for (var k = 0; k < N; k++) { var obs = k <= cur; box(xs[k], y, obs ? 0.5 : 0.16, obs); }
+              // imagined branch forking up from current frontier
+              ctx.save(); ctx.setLineDash([4, 4]);
+              var bx = xs[cur], by = y, steps = Math.min(3, N - 1 - cur);
+              for (var s = 1; s <= 3; s++) {
+                var nx = bx + (W * 0.1), ny = by - 46;
+                ctx.strokeStyle = col(0.3); ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(bx, by); ctx.lineTo(nx, ny); ctx.stroke();
+                ctx.setLineDash([]); box(nx, ny, 0.32, false); ctx.setLineDash([4, 4]);
+                bx = nx; by = ny;
+              }
+              ctx.restore();
+              // frontier pulse
+              var px = xs[cur] + (xs[Math.min(N - 1, cur + 1)] - xs[cur]) * (fr - cur);
+              ctx.save(); ctx.shadowBlur = 14; ctx.shadowColor = col(0.7); ctx.fillStyle = col(0.9);
+              ctx.beginPath(); ctx.arc(px, y, 3, 0, TAU); ctx.fill(); ctx.restore();
+            }
+          };
+        }
+
+        // ===== Particle filter — perception under uncertainty =====
+        function probability() {
+          var W, H, P, lastResample;
+          function truePos(t) { return { x: W * (0.5 + 0.32 * Math.cos(t / 2600)), y: H * (0.5 + 0.28 * Math.sin(t / 1700)) }; }
+          return {
+            reset: function (w, h) { W = w; H = h; P = []; lastResample = 0; for (var i = 0; i < 90; i++) P.push({ x: Math.random() * w, y: Math.random() * h, w: 1 }); },
+            step: function (t) {
+              var tp = truePos(t), i, sum = 0;
+              for (i = 0; i < P.length; i++) {
+                P[i].x += (Math.random() - 0.5) * 6; P[i].y += (Math.random() - 0.5) * 6;
+                var dx = P[i].x - tp.x, dy = P[i].y - tp.y;
+                P[i].w = Math.exp(-(dx * dx + dy * dy) / (2 * 70 * 70)); sum += P[i].w;
+              }
+              if (t - lastResample > 850 && sum > 0) {
+                lastResample = t; var np = [];
+                for (i = 0; i < P.length; i++) {
+                  var r = Math.random() * sum, acc = 0, j = 0;
+                  for (; j < P.length; j++) { acc += P[j].w; if (acc >= r) break; }
+                  var src = P[Math.min(j, P.length - 1)];
+                  np.push({ x: src.x + (Math.random() - 0.5) * 22, y: src.y + (Math.random() - 0.5) * 22, w: 1 });
+                }
+                P = np;
+              }
+            },
+            draw: function (ctx, t) {
+              ctx.clearRect(0, 0, W, H);
+              var mx = 0, my = 0, i;
+              for (i = 0; i < P.length; i++) { mx += P[i].x; my += P[i].y; ctx.fillStyle = col(0.1 + 0.4 * P[i].w); ctx.beginPath(); ctx.arc(P[i].x, P[i].y, 1.6 + 2 * P[i].w, 0, TAU); ctx.fill(); }
+              mx /= P.length; my /= P.length;
+              ctx.strokeStyle = col(0.3); ctx.lineWidth = 1.2; ctx.beginPath(); ctx.arc(mx, my, 34, 0, TAU); ctx.stroke();
+              var tp = truePos(t);
+              ctx.save(); ctx.shadowBlur = 14; ctx.shadowColor = col(0.8); ctx.fillStyle = col(0.95);
+              ctx.beginPath(); ctx.arc(tp.x, tp.y, 3.4, 0, TAU); ctx.fill(); ctx.restore();
+            }
+          };
+        }
+
+        // ===== A* search on a grid =====
+        function astar() {
+          var W, H, cs, cols, rows, grid, openL, came, gS, fS, closed, path, done, doneAt, start, goalC, lastExp;
+          function key(c) { return c.x + "," + c.y; }
+          function build(w, h) {
+            cs = 26; cols = Math.max(6, (w / cs) | 0); rows = Math.max(4, (h / cs) | 0);
+            grid = []; for (var x = 0; x < cols; x++) { grid[x] = []; for (var y = 0; y < rows; y++) grid[x][y] = Math.random() < 0.22 ? 1 : 0; }
+            start = { x: 1, y: rows >> 1 }; goalC = { x: cols - 2, y: rows >> 1 };
+            grid[start.x][start.y] = 0; grid[goalC.x][goalC.y] = 0;
+            openL = [start]; came = {}; gS = {}; fS = {}; closed = {}; path = null; done = false; doneAt = 0;
+            gS[key(start)] = 0; fS[key(start)] = Math.abs(start.x - goalC.x) + Math.abs(start.y - goalC.y);
+          }
+          function expand() {
+            if (!openL.length) { done = true; return; }
+            var bi = 0; for (var i = 1; i < openL.length; i++) if ((fS[key(openL[i])] || 1e9) < (fS[key(openL[bi])] || 1e9)) bi = i;
+            var cur = openL.splice(bi, 1)[0];
+            if (cur.x === goalC.x && cur.y === goalC.y) {
+              var p = [], k = key(cur); while (k) { var pr = k.split(","); p.push({ x: +pr[0], y: +pr[1] }); k = came[k]; } path = p; done = true; return;
+            }
+            closed[key(cur)] = 1;
+            var nb = [[1, 0], [-1, 0], [0, 1], [0, -1]];
+            for (var n = 0; n < 4; n++) {
+              var nx = cur.x + nb[n][0], ny = cur.y + nb[n][1];
+              if (nx < 0 || ny < 0 || nx >= cols || ny >= rows || grid[nx][ny] || closed[nx + "," + ny]) continue;
+              var nk = nx + "," + ny, tg = (gS[key(cur)] || 0) + 1;
+              if (gS[nk] === undefined || tg < gS[nk]) {
+                came[nk] = key(cur); gS[nk] = tg; fS[nk] = tg + Math.abs(nx - goalC.x) + Math.abs(ny - goalC.y);
+                var inO = false; for (var o = 0; o < openL.length; o++) if (openL[o].x === nx && openL[o].y === ny) { inO = true; break; }
+                if (!inO) openL.push({ x: nx, y: ny });
+              }
+            }
+          }
+          return {
+            reset: function (w, h) { W = w; H = h; build(w, h); lastExp = 0; },
+            step: function (t) {
+              if (!done) { if (t - lastExp > 32) { expand(); expand(); lastExp = t; } }
+              else if (!doneAt) doneAt = t;
+              else if (t - doneAt > 2400) { build(W, H); }
+            },
+            draw: function (ctx) {
+              ctx.clearRect(0, 0, W, H);
+              var x, y, kk;
+              for (x = 0; x < cols; x++) for (y = 0; y < rows; y++) {
+                if (grid[x][y]) { ctx.fillStyle = col(0.07); ctx.fillRect(x * cs + 2, y * cs + 2, cs - 4, cs - 4); }
+              }
+              for (kk in closed) { var c1 = kk.split(","); ctx.fillStyle = col(0.12); ctx.fillRect(c1[0] * cs + 3, c1[1] * cs + 3, cs - 6, cs - 6); }
+              for (var i = 0; i < openL.length; i++) { ctx.fillStyle = col(0.28); ctx.fillRect(openL[i].x * cs + 4, openL[i].y * cs + 4, cs - 8, cs - 8); }
+              if (path) {
+                ctx.save(); ctx.shadowBlur = 8; ctx.shadowColor = col(0.5); ctx.strokeStyle = col(0.85); ctx.lineWidth = 2; ctx.beginPath();
+                for (var p = 0; p < path.length; p++) { var px = path[p].x * cs + cs / 2, py = path[p].y * cs + cs / 2; p ? ctx.lineTo(px, py) : ctx.moveTo(px, py); }
+                ctx.stroke(); ctx.restore();
+              }
+              ctx.fillStyle = col(0.9); ctx.beginPath(); ctx.arc(start.x * cs + cs / 2, start.y * cs + cs / 2, 4, 0, TAU); ctx.fill();
+              ctx.save(); ctx.shadowBlur = 12; ctx.shadowColor = col(0.8); ctx.fillStyle = col(0.95);
+              ctx.beginPath(); ctx.arc(goalC.x * cs + cs / 2, goalC.y * cs + cs / 2, 4, 0, TAU); ctx.fill(); ctx.restore();
+            }
+          };
+        }
+
+        // ===== Autonomous cars — top-down road with sensing =====
+        function cars() {
+          var W, H, lanes, cars1, ego;
+          return {
+            reset: function (w, h) {
+              W = w; H = h; lanes = [h * 0.5 - 26, h * 0.5, h * 0.5 + 26]; cars1 = [];
+              for (var i = 0; i < 6; i++) cars1.push({ x: Math.random() * w, lane: (Math.random() * 3) | 0, sp: 0.4 + Math.random() * 0.9, w: 30 });
+              ego = { x: w * 0.28, lane: 1, w: 34 };
+            },
+            step: function (t) { for (var i = 0; i < cars1.length; i++) { cars1[i].x += cars1[i].sp; if (cars1[i].x > W + 40) cars1[i].x = -40; } },
+            draw: function (ctx, t) {
+              ctx.clearRect(0, 0, W, H);
+              var top = lanes[0] - 18, bot = lanes[2] + 18;
+              ctx.strokeStyle = col(0.14); ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(0, top); ctx.lineTo(W, top); ctx.moveTo(0, bot); ctx.lineTo(W, bot); ctx.stroke();
+              ctx.save(); ctx.setLineDash([16, 14]); ctx.lineDashOffset = -(t / 26) % 30; ctx.strokeStyle = col(0.16);
+              ctx.beginPath(); ctx.moveTo(0, lanes[0] + 13); ctx.lineTo(W, lanes[0] + 13); ctx.moveTo(0, lanes[1] + 13); ctx.lineTo(W, lanes[1] + 13); ctx.stroke(); ctx.restore();
+              function car(x, y, w, hi) {
+                ctx.fillStyle = col(hi ? 0.5 : 0.26); ctx.strokeStyle = col(hi ? 0.85 : 0.4); ctx.lineWidth = 1.2;
+                ctx.beginPath(); var r = 4, ww = w, hh = 15, x0 = x - ww / 2, y0 = y - hh / 2;
+                ctx.moveTo(x0 + r, y0); ctx.arcTo(x0 + ww, y0, x0 + ww, y0 + hh, r); ctx.arcTo(x0 + ww, y0 + hh, x0, y0 + hh, r); ctx.arcTo(x0, y0 + hh, x0, y0, r); ctx.arcTo(x0, y0, x0 + ww, y0, r); ctx.fill(); ctx.stroke();
+              }
+              var i;
+              // ego sensor cone
+              var ey = lanes[ego.lane];
+              ctx.save(); ctx.fillStyle = col(0.08); ctx.beginPath(); ctx.moveTo(ego.x + 14, ey); ctx.lineTo(ego.x + 150, ey - 54); ctx.lineTo(ego.x + 150, ey + 54); ctx.closePath(); ctx.fill();
+              ctx.strokeStyle = col(0.18); ctx.lineWidth = 0.8;
+              for (var r = -2; r <= 2; r++) { ctx.beginPath(); ctx.moveTo(ego.x + 14, ey); ctx.lineTo(ego.x + 150, ey + r * 27); ctx.stroke(); } ctx.restore();
+              for (i = 0; i < cars1.length; i++) { var cy = lanes[cars1[i].lane]; car(cars1[i].x, cy, cars1[i].w, false); if (cars1[i].x > ego.x && cars1[i].x < ego.x + 150 && Math.abs(cy - ey) < 60) { ctx.strokeStyle = col(0.6); ctx.lineWidth = 1; ctx.strokeRect(cars1[i].x - cars1[i].w / 2 - 3, cy - 11, cars1[i].w + 6, 22); } }
+              car(ego.x, ey, ego.w, true);
+            }
+          };
+        }
+
+        // ===== Sorting bars — algorithms =====
+        function algorithms() {
+          var W, H, arr, i, j, sorted, pause, lastStep, N;
+          function shuffle() { arr = []; for (var k = 0; k < N; k++) arr.push(0.15 + Math.random() * 0.8); i = 0; j = 0; sorted = false; pause = 0; }
+          return {
+            reset: function (w, h) { W = w; H = h; N = Math.max(14, Math.min(46, (w / 16) | 0)); shuffle(); lastStep = 0; },
+            step: function (t) {
+              if (sorted) { if (!pause) pause = t; else if (t - pause > 1400) shuffle(); return; }
+              if (t - lastStep < 34) return; lastStep = t;
+              if (i < N) {
+                if (j < N - i - 1) { if (arr[j] > arr[j + 1]) { var tmp = arr[j]; arr[j] = arr[j + 1]; arr[j + 1] = tmp; } j++; }
+                else { j = 0; i++; }
+              } else sorted = true;
+            },
+            draw: function (ctx) {
+              ctx.clearRect(0, 0, W, H);
+              var bw = W / N, pad = bw * 0.2;
+              for (var k = 0; k < N; k++) {
+                var bh = arr[k] * H * 0.6, x = k * bw, y = H * 0.5 + H * 0.3 - bh;
+                var active = (!sorted && (k === j || k === j + 1));
+                ctx.fillStyle = col(active ? 0.6 : (sorted ? 0.3 : 0.15));
+                ctx.fillRect(x + pad, y, bw - pad * 2, bh);
+              }
+            }
+          };
+        }
+
+        // ===== Humanoid robot — gait cycle =====
+        function humanoid() {
+          var W, H, baseX;
+          return {
+            reset: function (w, h) { W = w; H = h; baseX = w * 0.2; },
+            step: function () {},
+            draw: function (ctx, t) {
+              ctx.clearRect(0, 0, W, H);
+              var ph = t / 360;
+              var x = (baseX + (t / 26)) % (W + 120) - 60;
+              var hipY = H * 0.5, len = Math.min(34, H * 0.14);
+              ctx.strokeStyle = col(0.4); ctx.lineWidth = 2.4; ctx.lineCap = "round";
+              function limb( ox, sign, swing ) {
+                var hipX = x + ox;
+                var kneeX = hipX + Math.sin(swing) * len * 0.5, kneeY = hipY + len * 0.7;
+                var footX = kneeX + Math.sin(swing - 0.6) * len * 0.5, footY = kneeY + len * 0.7;
+                ctx.beginPath(); ctx.moveTo(hipX, hipY); ctx.lineTo(kneeX, kneeY); ctx.lineTo(footX, footY); ctx.stroke();
+              }
+              function arm( ox, swing ) {
+                var shX = x + ox, shY = hipY - len * 1.1;
+                var elX = shX + Math.sin(swing) * len * 0.45, elY = shY + len * 0.6;
+                var haX = elX + Math.sin(swing + 0.4) * len * 0.45, haY = elY + len * 0.6;
+                ctx.beginPath(); ctx.moveTo(shX, shY); ctx.lineTo(elX, elY); ctx.lineTo(haX, haY); ctx.stroke();
+              }
+              // torso + head
+              ctx.strokeStyle = col(0.45); ctx.beginPath(); ctx.moveTo(x, hipY); ctx.lineTo(x, hipY - len * 1.2); ctx.stroke();
+              ctx.save(); ctx.shadowBlur = 10; ctx.shadowColor = col(0.5); ctx.fillStyle = col(0.55);
+              ctx.beginPath(); ctx.arc(x, hipY - len * 1.5, len * 0.28, 0, TAU); ctx.fill(); ctx.restore();
+              ctx.strokeStyle = col(0.4);
+              limb(0, 1, Math.sin(ph)); limb(0, -1, Math.sin(ph + Math.PI));
+              arm(0, Math.sin(ph + Math.PI)); arm(0, Math.sin(ph));
+              ctx.fillStyle = col(0.6); ctx.beginPath(); ctx.arc(x, hipY, 2.5, 0, TAU); ctx.fill();
+            }
+          };
+        }
+
+        var THEMES = { rrt: rrt, neural: neural, worldmodel: worldmodel, probability: probability, astar: astar, cars: cars, algorithms: algorithms, humanoid: humanoid };
+
+        function mount(canvas, name) {
+          if (!canvas || !canvas.getContext || !THEMES[name]) return;
+          var ctx = canvas.getContext("2d"), theme = THEMES[name](), W = 0, H = 0, dpr = 1, running = false, inView = true;
+          function resize() {
+            var r = canvas.getBoundingClientRect(); W = r.width; H = r.height; if (!W || !H) return;
+            dpr = Math.min(window.devicePixelRatio || 1, 2);
+            canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0); theme.reset(W, H);
+          }
+          function frame(t) { if (!running) return; theme.step(t); theme.draw(ctx, t); requestAnimationFrame(frame); }
+          function start() { if (!running && inView) { running = true; requestAnimationFrame(frame); } }
+          function stop() { running = false; }
+          window.addEventListener("resize", resize);
+          document.addEventListener("visibilitychange", function () { document.hidden ? stop() : start(); });
+          if ("IntersectionObserver" in window) {
+            new IntersectionObserver(function (e) { inView = e[0].isIntersecting; inView ? start() : stop(); }, { threshold: 0 }).observe(canvas);
+          }
+          resize();
+          if (reduced) { var tt = 0; for (var i = 0; i < 500; i++) { tt += 30; theme.step(tt); } theme.draw(ctx, tt); }
+          else start();
+        }
+
+        // Hero already has its canvas + overlay + content wrapper in the HTML.
+        var hero = document.getElementById("hero-canvas");
+        if (hero) mount(hero, "rrt");
+
+        // Inject themed backgrounds into the other sections.
+        var MAP = [
+          ["about", "neural"], ["research", "worldmodel"],
+          ["education", "astar"], ["experience", "cars"], ["skills", "algorithms"], ["awards", "humanoid"]
+        ];
+        MAP.forEach(function (pair) {
+          var sec = document.getElementById(pair[0]); if (!sec) return;
+          sec.style.position = "relative"; sec.style.overflow = "hidden";
+          var c = document.createElement("canvas"); c.setAttribute("aria-hidden", "true");
+          c.className = "pointer-events-none absolute inset-0 h-full w-full";
+          var ov = document.createElement("div"); ov.setAttribute("aria-hidden", "true");
+          ov.className = "bg-fade pointer-events-none absolute inset-0";
+          var wrap = document.createElement("div"); wrap.className = "relative z-10";
+          while (sec.firstChild) wrap.appendChild(sec.firstChild);
+          sec.appendChild(c); sec.appendChild(ov); sec.appendChild(wrap);
+          mount(c, pair[1]);
         });
-        if ("IntersectionObserver" in window) {
-          new IntersectionObserver(function (entries) {
-            entries[0].isIntersecting ? start() : stop();
-          }, { threshold: 0 }).observe(canvas);
-        }
-
-        resize();
-        if (prefersReduced) {
-          for (var k = 0; k < 130; k++) extend();
-          draw();
-        } else {
-          start();
-        }
       })();
     </script>
   </body>
