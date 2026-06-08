@@ -3,939 +3,1155 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ashrith Edukulla</title>
-    <meta name="description" content="Ashrith Edukulla | Robotics @ UMich | Projects, Resume, Contact" />
-      <!-- Replace this line -->
-  <link rel="icon" href="michigan_logo.png" type="image/png">
-    
-    <link rel="icon" href="ashrith-icon.png" type="image/png">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+    <title>Ashrith Edukulla — Robotics, University of Michigan</title>
+    <meta name="description" content="Ashrith Edukulla — Robotics researcher at the University of Michigan working on Vision-Language-Action models for navigation and autonomous driving. Perception, SLAM, planning, and learning for autonomous systems." />
+    <link rel="icon" href="michigan_logo.png" type="image/png" />
+
+    <!-- Social / link previews -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Ashrith Edukulla — Robotics Researcher" />
+    <meta property="og:description" content="VLAs for navigation and autonomous driving. Robotics @ Michigan — perception, SLAM, planning, and learning for autonomous systems." />
+    <meta property="og:image" content="ashrith.jpg" />
+    <meta property="og:url" content="https://ashrith5321.github.io" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ashrith Edukulla — Robotics Researcher" />
+    <meta name="twitter:description" content="VLAs for navigation and autonomous driving. Robotics @ Michigan." />
+    <meta name="twitter:image" content="ashrith.jpg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,16..72,400;0,16..72,500;0,16..72,600;1,16..72,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Set theme before paint to avoid a flash -->
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem("theme");
+          var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          if (stored === "dark" || (!stored && prefersDark)) {
+            document.documentElement.classList.add("dark");
+          }
+        } catch (e) {}
+      })();
+    </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "system-ui", "sans-serif"],
+              serif: ["Newsreader", "Georgia", "serif"],
+              mono: ["JetBrains Mono", "ui-monospace", "monospace"],
+            },
+            colors: {
+              accent: {
+                light: "#1d4ed8",
+                dark: "#60a5fa",
+              },
+            },
+          },
+        },
+      };
+    </script>
+
     <style>
       html {
         scroll-behavior: smooth;
-        font-family: 'Inter', sans-serif;
       }
-      h1, h2, h3, h4, h5, h6 {
-        font-family: 'Poppins', sans-serif;
+      body {
+        font-family: "Inter", system-ui, sans-serif;
       }
-      .theme-transition {
-        transition: background-color 0.5s, color 0.5s;
+      ::selection {
+        background: rgba(29, 78, 216, 0.15);
       }
-      .project-card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      .dark ::selection {
+        background: rgba(96, 165, 250, 0.25);
       }
-      .project-card:hover {
-        transform: translateY(-6px) scale(1.03);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-      }
-      @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-      .animate-fadeIn {
-        animation: fadeIn 0.8s ease-out both;
-      }
-      .glow-text {
-        text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
-      }
-      .scroll-progress {
+      /* Subtle scroll progress bar */
+      #progress {
         position: fixed;
         top: 0;
         left: 0;
-        height: 4px;
-        background: #3b82f6;
-        z-index: 9999;
+        height: 2px;
         width: 0%;
+        background: #1d4ed8;
+        z-index: 60;
+        transition: width 0.1s linear;
+      }
+      .dark #progress {
+        background: #60a5fa;
+      }
+      .card {
+        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      }
+      .card:hover {
+        transform: translateY(-3px);
+      }
+      a.nav-link {
+        position: relative;
+      }
+      a.nav-link::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        height: 1px;
+        width: 0;
+        background: currentColor;
+        transition: width 0.2s ease;
+      }
+      a.nav-link:hover::after {
+        width: 100%;
+      }
+      /* Scroll reveal */
+      .reveal {
+        opacity: 0;
+        transform: translateY(14px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+        will-change: opacity, transform;
+      }
+      .reveal.is-visible {
+        opacity: 1;
+        transform: none;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .reveal {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+      }
+      /* Terminal */
+      .terminal-dot {
+        height: 11px;
+        width: 11px;
+        border-radius: 9999px;
+      }
+      /* Dotted cover panel for media-less projects */
+      .dotgrid {
+        background-color: #f1f5f9;
+        background-image: radial-gradient(circle at 1px 1px, rgba(100, 116, 139, 0.22) 1px, transparent 0);
+        background-size: 16px 16px;
+      }
+      .dark .dotgrid {
+        background-color: #0f172a;
+        background-image: radial-gradient(circle at 1px 1px, rgba(148, 163, 184, 0.16) 1px, transparent 0);
       }
     </style>
   </head>
-  <body class="bg-black text-white theme-transition text-[0.8rem] md:text-[0.95rem] lg:text-[1rem]" id="pageBody">
 
-    <a href="/plan" class="text-sm text-sky-400 hover:text-sky-300">
-  📋 My Robotics & AI Roadmap
-</a>
-      <!-- Header Section with UMich Logo -->
-  <header class="flex items-center gap-4 px-6 py-4 bg-black">
-    <img src="michigan_logo.png" alt="UMich Logo" class="h-10 w-auto" />
-    <h1 class="text-2xl font-bold text-white">Ashrith Edukulla</h1>
-  </header>
-    <div class="scroll-progress" id="progressBar"></div>
+  <body
+    class="bg-stone-50 text-slate-700 dark:bg-slate-950 dark:text-slate-300 antialiased transition-colors duration-300"
+  >
+    <div id="progress"></div>
 
-    <script>
-      window.onscroll = function() {
-        var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-        var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        var scrolled = (winScroll / height) * 100;
-        document.getElementById("progressBar").style.width = scrolled + "%";
-      };
+    <!-- Top navigation -->
+    <header
+      class="sticky top-0 z-50 border-b border-slate-200/80 dark:border-slate-800 bg-stone-50/80 dark:bg-slate-950/80 backdrop-blur"
+    >
+      <div class="max-w-4xl mx-auto px-5 sm:px-6 h-14 flex items-center justify-between gap-4">
+        <a href="#top" class="font-serif text-lg font-semibold text-slate-900 dark:text-white tracking-tight">
+          Ashrith Edukulla
+        </a>
 
-      if (localStorage.getItem('theme') === 'dark') {
-        document.documentElement.classList.add('dark');
-      }
-    </script>
-
-    <section class="max-w-4xl mx-auto px-4 py-4 animate-fadeIn">
-      <div class="flex justify-between items-center">
-        <h2 class="text-2xl font-bold glow-text">Ashrith Edukulla</h2>
-        <span class="bg-yellow-800 text-yellow-300 px-3 py-1 rounded-full text-xs">🚧 Currently building: Motion Sensing Robotic Hand</span>
-      </div>
-    </section>
-
-    <!-- Continue your existing content here -->
-        <!-- Navigation -->
-    <header class="sticky top-0 z-50 bg-black shadow border-b border-gray-800 theme-transition">
-      <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-        <button id="menuToggle" aria-label="Toggle menu" title="Toggle menu" class="md:hidden text-xl px-2 py-1 rounded bg-gray-700 theme-transition">☰</button>
-        <nav id="navMenu" class="hidden md:flex flex-wrap gap-4 text-sm md:text-base items-center justify-center bg-gray-900 md:bg-transparent px-4 py-2 rounded-lg md:rounded-none theme-transition">
-          <a href="#intro" class="hover:underline">Intro</a>
-          <a href="#about" class="hover:underline">About</a>
-          <a href="#education" class="hover:underline">Education</a>
-          <a href="#experience" class="hover:underline">Work</a>
-          <a href="#projects" class="hover:underline">Projects</a>
-          <a href="#skills" class="hover:underline">Stack</a>
-          <a href="#upcoming-research" class="hover:underline">Research</a> <!-- NEW -->
-          <a href="#awards" class="hover:underline">Awards</a>
-          <a href="#contact" class="hover:underline">Contact</a>
+        <nav class="hidden md:flex items-center gap-6 text-sm text-slate-600 dark:text-slate-400">
+          <a href="#about" class="nav-link hover:text-slate-900 dark:hover:text-white">About</a>
+          <a href="#research" class="nav-link hover:text-slate-900 dark:hover:text-white">Research</a>
+          <a href="#experience" class="nav-link hover:text-slate-900 dark:hover:text-white">Experience</a>
+          <a href="#projects" class="nav-link hover:text-slate-900 dark:hover:text-white">Projects</a>
+          <a href="#skills" class="nav-link hover:text-slate-900 dark:hover:text-white">Skills</a>
+          <a href="#awards" class="nav-link hover:text-slate-900 dark:hover:text-white">Awards</a>
+          <a href="#contact" class="nav-link hover:text-slate-900 dark:hover:text-white">Contact</a>
         </nav>
+
+        <div class="flex items-center gap-2">
+          <a
+            href="resume.pdf"
+            target="_blank"
+            rel="noopener"
+            class="hidden sm:inline-flex items-center text-sm px-3 py-1.5 rounded-md border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-slate-400 dark:hover:border-slate-500 transition-colors"
+          >
+            CV
+          </a>
+          <button
+            id="themeToggle"
+            aria-label="Toggle color theme"
+            title="Toggle light / dark"
+            class="inline-flex items-center justify-center h-9 w-9 rounded-md border border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-slate-400 dark:hover:border-slate-500 transition-colors"
+          >
+            <!-- sun (shown in dark mode) -->
+            <svg class="hidden dark:block h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+            </svg>
+            <!-- moon (shown in light mode) -->
+            <svg class="block dark:hidden h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+        </div>
       </div>
     </header>
 
-  <!-- Header Section (Stylized) -->
-  <section id="intro" class="max-w-4xl mx-auto px-4 py-16 text-left">
-    <div class="flex flex-col md:flex-row items-center gap-6">
-      <img src="ashrith.jpg" alt="Ashrith Edukulla" class="w-36 h-36 rounded-xl object-cover border border-gray-700 shadow-lg" />
-      <div>
-        <h1 class="text-4xl font-bold">Ashrith Edukulla</h1>
-        <p class="text-xl text-gray-400 mt-1">Robotics @ University of Michigan</p>
-        <p class="text-md text-gray-400">📍 Ann Arbor, MI, US</p>
-        <p class="mt-1 text-green-400 text-md">● Building Intelligent Systems</p>
+    <main id="top" class="max-w-4xl mx-auto px-5 sm:px-6">
+      <!-- Hero -->
+      <section class="relative overflow-hidden pt-14 pb-10 sm:pt-20 sm:pb-14">
+        <canvas id="hero-canvas" aria-hidden="true" class="pointer-events-none absolute inset-0 h-full w-full"></canvas>
+        <div aria-hidden="true" class="pointer-events-none absolute inset-0 bg-gradient-to-r from-stone-50 via-stone-50/85 to-stone-50/20 dark:from-slate-950 dark:via-slate-950/85 dark:to-slate-950/20"></div>
+        <div class="relative z-10">
+        <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-8">
+          <div class="flex-1">
+            <p class="font-mono text-xs uppercase tracking-[0.2em] text-accent-light dark:text-accent-dark mb-3">
+              Robotics Researcher · VLAs · Autonomy
+            </p>
+            <h1 class="font-serif text-4xl sm:text-5xl font-semibold text-slate-900 dark:text-white tracking-tight">
+              Ashrith Edukulla
+            </h1>
+            <p class="mt-3 text-lg sm:text-xl text-slate-700 dark:text-slate-300 max-w-xl leading-snug">
+              I build <span class="font-medium text-slate-900 dark:text-white">Vision-Language-Action models</span>
+              for robot navigation and autonomous driving.
+            </p>
+            <p class="mt-2 text-sm text-slate-500 dark:text-slate-500">
+              Robotics Engineering, University of Michigan · Ann Arbor, MI
+            </p>
 
-        <div class="flex flex-wrap gap-4 mt-4 text-sm">
-          <a href="mailto:ashed@umich.edu" class="flex items-center gap-1 text-blue-400 underline"><span>📧</span>ashed@umich.edu</a>
-          <a href="mailto:eashrith@gmail.com" class="flex items-center gap-1 text-blue-400 underline"><span>📩</span>eashrith@gmail.com</a>
-          <a href="resume.pdf" target="_blank" class="flex items-center gap-1 text-blue-400 underline"><span>📄</span>Download CV</a>
-          <a href="https://github.com/ashrith5321" target="_blank" class="flex items-center gap-1 text-blue-400 underline"><span>🦁</span>GitHub</a>
-          <a href="https://linkedin.com/in/ashrith-edukulla-633b141a7" target="_blank" class="flex items-center gap-1 text-blue-400 underline"><span>🔗</span>LinkedIn</a>
-          <a href="https://x.com/AshrithEd" target="_blank" class="flex items-center gap-1 text-blue-400 underline"><span>🐦</span>X (Twitter)</a>
-        </div>
-      </div>
-    </div>
-  </section>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="inline-flex items-center rounded-full border border-slate-200 dark:border-slate-700 bg-white/60 dark:bg-slate-900/60 px-3 py-1 text-xs text-slate-600 dark:text-slate-400">B.E. Robotics · GPA 3.96/4.0</span>
+              <span class="inline-flex items-center rounded-full border border-slate-200 dark:border-slate-700 bg-white/60 dark:bg-slate-900/60 px-3 py-1 text-xs text-slate-600 dark:text-slate-400">AV / VLA @ Nift</span>
+              <span class="inline-flex items-center rounded-full border border-slate-200 dark:border-slate-700 bg-white/60 dark:bg-slate-900/60 px-3 py-1 text-xs text-slate-600 dark:text-slate-400">Scalable Spatial Intelligence Lab</span>
+              <span class="inline-flex items-center rounded-full border border-slate-200 dark:border-slate-700 bg-white/60 dark:bg-slate-900/60 px-3 py-1 text-xs text-slate-600 dark:text-slate-400">USAMO · Top 300</span>
+            </div>
 
+            <p class="mt-5 max-w-xl text-slate-600 dark:text-slate-400 leading-relaxed">
+              My work brings classical state estimation together with deep learning — from SLAM and sensor fusion
+              to language-conditioned policies — to make autonomy that holds up in the real world.
+            </p>
 
-  <!-- About Me Section -->
-  <section id="about" class="max-w-4xl mx-auto px-4 py-10">
-    <h2 class="text-2xl font-bold mb-4">About Me 👋</h2>
+            <div class="mt-6 flex flex-wrap items-center gap-3">
+              <a href="#projects" class="inline-flex items-center gap-2 rounded-md bg-slate-900 dark:bg-white px-4 py-2 text-sm font-medium text-white dark:text-slate-900 hover:opacity-90 transition-opacity">
+                View projects
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+              </a>
+              <a href="resume.pdf" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-md border border-slate-300 dark:border-slate-700 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 hover:border-slate-400 dark:hover:border-slate-500 transition-colors">
+                Download CV
+              </a>
+            </div>
 
-    <p class="text-gray-300 leading-relaxed">
-      I'm a <strong>Robotics Engineering</strong> student at the
-      <a href="https://umich.edu" target="_blank" class="text-blue-400 underline">University of Michigan</a>,
-      focused on intelligent perception and learning for autonomous systems.
-    </p>
+            <div class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm">
+              <a href="mailto:ashed@umich.edu" class="inline-flex items-center gap-2 text-accent-light dark:text-accent-dark hover:underline">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 6-10 7L2 6"></path></svg>
+                ashed@umich.edu
+              </a>
+              <a href="https://github.com/ashrith5321" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-accent-light dark:text-accent-dark hover:underline">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.575.106.785-.25.785-.555 0-.274-.01-1-.015-1.965-3.196.695-3.87-1.54-3.87-1.54-.523-1.33-1.278-1.683-1.278-1.683-1.044-.714.08-.7.08-.7 1.154.082 1.762 1.185 1.762 1.185 1.026 1.758 2.693 1.25 3.35.955.103-.743.402-1.25.73-1.538-2.552-.29-5.236-1.276-5.236-5.677 0-1.254.448-2.28 1.183-3.084-.119-.29-.513-1.46.112-3.042 0 0 .965-.309 3.163 1.178a11 11 0 0 1 5.76 0c2.197-1.487 3.16-1.178 3.16-1.178.627 1.582.233 2.752.114 3.042.737.804 1.182 1.83 1.182 3.084 0 4.412-2.688 5.384-5.248 5.668.413.355.78 1.057.78 2.13 0 1.538-.014 2.778-.014 3.156 0 .308.207.667.79.554A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"></path></svg>
+                GitHub
+              </a>
+              <a href="https://linkedin.com/in/ashrith-edukulla-633b141a7" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-accent-light dark:text-accent-dark hover:underline">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14C2.24 0 0 2.24 0 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5V5c0-2.76-2.24-5-5-5zM7.12 20.45H3.56V9h3.56v11.45zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28z"></path></svg>
+                LinkedIn
+              </a>
+              <a href="https://x.com/AshrithEd" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-accent-light dark:text-accent-dark hover:underline">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.657l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+                X
+              </a>
+              <a href="resume.pdf" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-accent-light dark:text-accent-dark hover:underline">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"></path></svg>
+                Resume
+              </a>
+            </div>
+          </div>
 
-    <br />
-
-    <p class="text-gray-300 leading-relaxed">
-      My interests lie in <strong>Path Planning</strong>,<strong>deep learning</strong>, <strong>SLAM</strong>, <strong>computer vision</strong>,
-      and probabilistic representations of the world. I'm drawn to problems where robots need to understand
-      complex, uncertain environments and build structured internal models that support reliable decision-making.
-      I care about how machines represent space, reason under uncertainty, and connect perception to action
-      in a principled way.
-    </p>
-
-    <br />
-
-    <p class="text-gray-300 leading-relaxed">
-      I'm particularly interested in modern approaches that bridge geometric methods with learning-based
-      systems — combining classical state estimation with deep neural networks to create scalable and robust
-      autonomy stacks. I enjoy working on systems where mapping, localization, and visual understanding are
-      not just components, but core intelligence layers.
-    </p>
-
-    <br />
-
-    <p class="text-gray-300 leading-relaxed">
-      Long term, I want to contribute to the development of autonomous systems that can perceive richly,
-      learn efficiently, and operate reliably in the real world.
-    </p>
-  </section>
-
-
-
-<!-- Education Section -->
-<section id="education" class="max-w-4xl mx-auto px-4 py-10">
-  <h2 class="text-2xl font-bold mb-10 text-cyan-400">Education 🎓</h2>
-
-  <div class="relative border-l border-gray-700 pl-6 space-y-12">
-    <!-- University of Michigan -->
-    <div class="relative">
-      <div class="absolute -left-3 top-1 w-3 h-3 bg-green-400 rounded-full"></div>
-
-      <div class="flex justify-between items-start md:items-center flex-col md:flex-row gap-4">
-        <!-- Logo + Degree Info -->
-        <div class="flex items-center gap-4">
-          <img src="michigan_logo.png" alt="UMich Logo" class="w-12 h-12 object-contain rounded-md">
-          <div>
-            <p class="text-lg font-bold text-yellow-300">University of Michigan, Ann Arbor</p>
-            <p class="italic text-sm text-gray-300">B.E. in Robotics Engineering — GPA: 3.96 / 4.0</p>
+          <div class="shrink-0">
+            <img
+              src="ashrith.jpg"
+              alt="Ashrith Edukulla"
+              class="w-32 h-32 sm:w-40 sm:h-40 rounded-2xl object-cover ring-1 ring-slate-200 dark:ring-slate-800 shadow-sm"
+            />
           </div>
         </div>
 
-        <!-- Location + Date -->
-        <div class="text-sm text-gray-400 mt-2 md:mt-0 text-right space-y-1">
-          <p>📍 Ann Arbor, MI, United States</p>
-          <p>📅 Aug 2024 – Dec 2026</p>
+        <!-- Status / now -->
+        <div class="mt-8 flex items-center gap-3 text-sm text-slate-500 dark:text-slate-400">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          Currently building autonomous-driving systems with VLAs at Nift, and researching navigation models at the Scalable Spatial Intelligence Lab.
         </div>
-      </div>
-
-      <!-- Honors / Awards -->
-      <p class="text-sm text-gray-300 mt-3">
-        <strong>Honors &amp; Awards:</strong> Ranked 3rd in World Robotics Olympiad • 
-        4× Medalist at International Youth Robotics Contest • 
-        3× AMC Qualifier • 2× AIME Qualifier
-      </p>
-
-      <!-- Coursework -->
-      <p class="text-sm text-gray-300 mt-3">
-        <strong>Current (Fall 2025):</strong> ROB 415 (Control of Robotic Systems), ROB 320 (Planning &amp; ROS Integration), 
-        ROB 330 (Localization &amp; Mapping), EECS 281 (Data Structures &amp; Algorithms)
-      </p>
-      <p class="text-sm text-gray-300">
-        <strong>Completed:</strong> Circuit Design, Robot Optimization, Simultaneous Localization &amp; Mapping, 
-        Linear Algebra, Robotic Differential Equations
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- Work Experience Section -->
-<section id="experience" class="max-w-4xl mx-auto px-4 py-10">
-  <h2 class="text-2xl font-bold mb-10">Work Experience 🏢</h2>
-
-  <div class="relative border-l border-gray-700 pl-6 space-y-12">
-
-
-    <!-- Robotics Software Engineering Intern -->
-    <!-- <div class="relative">
-      <div class="absolute -left-3 top-1 w-3 h-3 bg-green-400 rounded-full"></div>
-      <p class="text-sm text-gray-400">📍 Weston, FL / United States</p>
-      <div class="flex justify-between items-center">
-        <h3 class="text-lg font-semibold text-white">Stryker — Mako Robotics</h3>
-        <p class="text-sm text-gray-400">May 2026 – Aug 2026</p>
-      </div>
-      <p class="text-sm text-gray-300 mb-2">Incoming Robotics Software Engineering Intern</p>
-      <ul class="list-disc list-inside text-sm text-gray-300 space-y-1">
-        <li>Upcoming role developing robotics software for the Mako surgical robotics platform.</li>
-        <li>Contributing to perception, motion planning, and system-level software for real-world medical robots.</li>
-        <li>Collaborating with cross-functional R&amp;D teams to validate algorithms in simulation and on hardware.</li>
-      </ul>
-    </div> -->
-
-
-    <!-- EECS 467 IA -->
-    <div class="relative">
-      <div class="absolute -left-3 top-1 w-3 h-3 bg-green-400 rounded-full"></div>
-      <p class="text-sm text-gray-400">📍 University of Michigan, Ann Arbor, MI</p>
-      <div class="flex justify-between items-center">
-        <h3 class="text-lg font-semibold text-white">EECS 467: Autonomous Robotics</h3>
-        <p class="text-sm text-gray-400">Jan 2026 – May 2026</p>
-      </div>
-      <p class="text-sm text-gray-300 mb-2">Instructional Aide</p>
-      <ul class="list-disc list-inside text-sm text-gray-300 space-y-1">
-        <li>Assisted instruction in autonomous robotics, including perception, SLAM, planning, and control.</li>
-        <li>Supported students with ROS-based labs, system debugging, and algorithm implementation.</li>
-        <li>Held office hours and provided guidance on multi-sensor fusion, navigation, and robot software architecture.</li>
-      </ul>
-    </div>
-
-    <!-- FRoG Lab -->
-    <div class="relative">
-      <div class="absolute -left-3 top-1 w-3 h-3 bg-green-400 rounded-full"></div>
-      <p class="text-sm text-gray-400">📍 University of Michigan, Ann Arbor, MI</p>
-      <div class="flex justify-between items-center">
-        <h3 class="text-lg font-semibold text-white">Field Robotics Group (FRoG) Lab</h3>
-        <p class="text-sm text-gray-400">Jan 2026 – Present</p>
-      </div>
-      <p class="text-sm text-gray-300 mb-2">Undergraduate Researcher — Perception & Planning</p>
-      <ul class="list-disc list-inside text-sm text-gray-300 space-y-1">
-        <li>Conducting research in robot perception and motion planning under real-time and uncertainty constraints.</li>
-        <li>Developing and evaluating planning algorithms informed by perception outputs and environment representations.</li>
-        <li>Contributing to ongoing research projects aimed at robust, scalable autonomy for real-world robotic systems.</li>
-      </ul>
-    </div>
-
-
-    <!-- SAM Lab -->
-    <div class="relative">
-      <div class="absolute -left-3 top-1 w-3 h-3 bg-green-400 rounded-full"></div>
-      <p class="text-sm text-gray-400">📍 University of Michigan, Ann Arbor, MI</p>
-      <div class="flex justify-between items-center">
-        <h3 class="text-lg font-semibold text-white">Synergic Adaptive Machinas (SAM) Lab</h3>
-        <p class="text-sm text-gray-400">Aug 2025 – Dec 2025</p>
-      </div>
-      <p class="text-sm text-gray-300 mb-2">Undergraduate Researcher</p>
-      <ul class="list-disc list-inside text-sm text-gray-300 space-y-1">
-        <li>Researching macro- and micro-scale robot swarms under Prof. Steven Ceron to study collective motion and environmental interaction.</li>
-        <li>Developing decentralized control strategies for physical reconfiguration and emergent coordination.</li>
-        <li>Co-authoring a research paper on adaptive swarm behavior and distributed control in reconfigurable collectives.</li>
-      </ul>
-    </div>
-
-    <!-- ROB 201 IA -->
-    <div class="relative">
-      <div class="absolute -left-3 top-1 w-3 h-3 bg-green-400 rounded-full"></div>
-      <p class="text-sm text-gray-400">📍 University of Michigan, Ann Arbor, MI</p>
-      <div class="flex justify-between items-center">
-        <h3 class="text-lg font-semibold text-white">ROB 201: Robot Differential Equations</h3>
-        <p class="text-sm text-gray-400">Aug 2025 – Dec 2025</p>
-      </div>
-      <p class="text-sm text-gray-300 mb-2">Instructional Aide</p>
-      <ul class="list-disc list-inside text-sm text-gray-300 space-y-1">
-        <li>Supported instruction in ODE modeling, linear systems, and control for undergraduate robotics students.</li>
-        <li>Led weekly office hours and problem-solving sessions using Julia notebooks, simulations, and visualizations.</li>
-        <li>Assisted with labs, grading, and clarification of Laplace transforms, transfer functions, and stability analysis.</li>
-      </ul>
-    </div>
-
-    <!-- Michigan Mars Rover -->
-    <div class="relative">
-      <div class="absolute -left-3 top-1 w-3 h-3 bg-green-400 rounded-full"></div>
-      <p class="text-sm text-gray-400">📍 Ann Arbor, MI, United States</p>
-      <div class="flex justify-between items-center">
-        <h3 class="text-lg font-semibold text-white">Michigan Mars Rover Team</h3>
-        <p class="text-sm text-gray-400">Nov 2024 – May 2025</p>
-      </div>
-      <p class="text-sm text-gray-300 mb-2">Embedded Software Engineer</p>
-      <ul class="list-disc list-inside text-sm text-gray-300 space-y-1">
-        <li>Programmed STM32 firmware to control servos, LEDs, and accelerometers for subsystem actuation and feedback.</li>
-        <li>Developed embedded drivers and ROS nodes for motor coordination and sensor data handling.</li>
-        <li>Contributed to navigation and control tuning for reliable performance in dynamic rover environments.</li>
-      </ul>
-    </div>
-
-    <!-- LeapLabs -->
-    <div class="relative">
-      <div class="absolute -left-3 top-1 w-3 h-3 bg-green-400 rounded-full"></div>
-      <p class="text-sm text-gray-400">📍 Remote / India</p>
-      <div class="flex justify-between items-center">
-        <h3 class="text-lg font-semibold text-white">LeapLabs</h3>
-        <p class="text-sm text-gray-400">Apr 2023 – Jul 2023</p>
-      </div>
-      <p class="text-sm text-gray-300 mb-2">Robotics Assistant Intern</p>
-      <ul class="list-disc list-inside text-sm text-gray-300 space-y-1">
-        <li>Mentored students in developing robotics prototypes using sensors, actuators, and embedded systems.</li>
-        <li>Assisted in debugging hardware setups and delivering engaging lessons in robotics fundamentals.</li>
-      </ul>
-    </div>
-
-    <!-- PIMS -->
-    <div class="relative">
-      <div class="absolute -left-3 top-1 w-3 h-3 bg-green-400 rounded-full"></div>
-      <p class="text-sm text-gray-400">📍 India</p>
-      <div class="flex justify-between items-center">
-        <h3 class="text-lg font-semibold text-white">Pre-Indian Mathematical Society (PIMS)</h3>
-        <p class="text-sm text-gray-400">Sep 2022 – May 2023</p>
-      </div>
-      <p class="text-sm text-gray-300 mb-2">Founder & Organizer</p>
-      <ul class="list-disc list-inside text-sm text-gray-300 space-y-1">
-        <li>Founded and organized India’s largest student-led math camp and examination program.</li>
-        <li>Managed logistics, curriculum, and collaborations for a 200+ participant event.</li>
-      </ul>
-    </div>
-
-  </div>
-</section>
-
-
-
-
-<!-- Projects Section -->
-
-
-
-<section id="projects" class="max-w-6xl mx-auto px-4 py-16">
-  <h2 class="text-3xl font-bold mb-10 text-white">🔧 Projects</h2>
-  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-
-    <!-- Card 1: Habitat BC -->
-<div class="project-card bg-gray-900 rounded-2xl shadow-lg overflow-hidden group transform transition duration-300 hover:rotate-1 hover:scale-105 hover:shadow-[0_0_20px_rgba(0,255,255,0.3)]">
-  <div class="w-full h-48 bg-black flex items-center justify-center">
-    <div class="text-center px-6">
-      <div class="text-4xl mb-2">🤖🏠</div>
-      <div class="text-white font-semibold text-lg">ObjectNav Behavior Cloning</div>
-      <div class="text-gray-400 text-sm">ResNet18 + GRU · PIRLNav · HM3D</div>
-    </div>
-  </div>
-  <div class="p-5">
-    <h3 class="text-xl font-semibold mb-2 text-white">ObjectNav Behavior Cloning — HM3D</h3>
-    <p class="text-gray-300 mb-3">
-      Trained a ResNet18 + GRU navigation policy from 76K+ PIRLNav human VR demonstrations across 80 HM3D scenes.
-      Implemented TBPTT, 3.28× inflection weighting, and a custom dataset loader to bypass habitat's strict episode schema.
-    </p>
-    <div class="flex flex-wrap gap-2 text-xs font-semibold">
-      <span class="bg-blue-700 text-white px-2 py-1 rounded">#Python</span>
-      <span class="bg-indigo-700 text-white px-2 py-1 rounded">#PyTorch</span>
-      <span class="bg-teal-700 text-white px-2 py-1 rounded">#BehaviorCloning</span>
-      <span class="bg-purple-700 text-white px-2 py-1 rounded">#HabitatSim</span>
-      <span class="bg-gray-600 text-white px-2 py-1 rounded">#ObjectNav</span>
-      <span class="bg-green-700 text-white px-2 py-1 rounded">#EmbodiedAI</span>
-    </div>
-  </div>
-</div>
-
-<!-- Card 2: Ocean Frontier -->
-<div class="project-card bg-gray-900 rounded-2xl shadow-lg overflow-hidden group transform transition duration-300 hover:rotate-1 hover:scale-105 hover:shadow-[0_0_20px_rgba(0,255,255,0.3)]">
-  <div class="w-full h-48 bg-black flex items-center justify-center">
-    <div class="text-center px-6">
-      <div class="text-4xl mb-2">🌊🚢</div>
-      <div class="text-white font-semibold text-lg">Ocean Frontier Exploration</div>
-      <div class="text-gray-400 text-sm">BFS + NBVP · OctoMap · Isaac Sim</div>
-    </div>
-  </div>
-  <div class="p-5">
-    <h3 class="text-xl font-semibold mb-2 text-white">Ocean Frontier 3D Exploration — ROV Shipwreck Survey</h3>
-    <p class="text-gray-300 mb-3">
-      Autonomous 3-phase ROV mission: BFS sweep of unmapped voxels → RRT-biased centroid approach → full NBVP survey of the
-      wreck bounding volume. Detects shipwrecks via vertical column clustering; fuses stereo depth and sonar into real-time OctoMap.
-    </p>
-    <div class="flex flex-wrap gap-2 text-xs font-semibold">
-      <span class="bg-indigo-700 text-white px-2 py-1 rounded">#ROS2</span>
-      <span class="bg-blue-700 text-white px-2 py-1 rounded">#C++</span>
-      <span class="bg-teal-700 text-white px-2 py-1 rounded">#OctoMap</span>
-      <span class="bg-purple-700 text-white px-2 py-1 rounded">#NBVP</span>
-      <span class="bg-green-700 text-white px-2 py-1 rounded">#RRT</span>
-      <span class="bg-gray-600 text-white px-2 py-1 rounded">#IsaacSim</span>
-      <span class="bg-cyan-700 text-white px-2 py-1 rounded">#SensorFusion</span>
-    </div>
-  </div>
-</div>
-
-<!-- Card 3: CARLA SFF -->
-<div class="project-card bg-gray-900 rounded-2xl shadow-lg overflow-hidden group transform transition duration-300 hover:rotate-1 hover:scale-105 hover:shadow-[0_0_20px_rgba(0,255,255,0.3)]">
-  <div class="w-full h-48 bg-black flex items-center justify-center">
-    <div class="text-center px-6">
-      <div class="text-4xl mb-2">🚗🛡️</div>
-      <div class="text-white font-semibold text-lg">CARLA SFF — VLA Safety Eval</div>
-      <div class="text-gray-400 text-sm">Safety Force Field · Alpamayo VLA</div>
-    </div>
-  </div>
-  <div class="p-5">
-    <h3 class="text-xl font-semibold mb-2 text-white">CARLA SFF: VLA Safety Evaluation Stack</h3>
-    <p class="text-gray-300 mb-3">
-      Built a Dockerized CARLA/ROS 2 closed-loop eval stack for the Alpamayo VLA. Designed 10+ long-tail scenarios
-      (cut-ins, dooring, wrong-way vehicles). Refactored the safety layer to implement a formal Safety Force Field
-      (Nister et al., 2019); benchmarked on physical AIAV data with unit tests.
-    </p>
-    <div class="flex flex-wrap gap-2 text-xs font-semibold">
-      <span class="bg-indigo-700 text-white px-2 py-1 rounded">#CARLA</span>
-      <span class="bg-teal-700 text-white px-2 py-1 rounded">#ROS2</span>
-      <span class="bg-blue-700 text-white px-2 py-1 rounded">#Docker</span>
-      <span class="bg-purple-700 text-white px-2 py-1 rounded">#VLA</span>
-      <span class="bg-pink-700 text-white px-2 py-1 rounded">#SafetyForceField</span>
-      <span class="bg-gray-600 text-white px-2 py-1 rounded">#AVSafety</span>
-    </div>
-  </div>
-</div>
-
-<!-- Card 4: Satellite Event Camera -->
-<div class="project-card bg-gray-900 rounded-2xl shadow-lg overflow-hidden group transform transition duration-300 hover:rotate-1 hover:scale-105 hover:shadow-[0_0_20px_rgba(0,255,255,0.3)]">
-  <div class="w-full h-48 bg-black flex items-center justify-center">
-    <div class="text-center px-6">
-      <div class="text-4xl mb-2">🛰️📷</div>
-      <div class="text-white font-semibold text-lg">Satellite Detection</div>
-      <div class="text-gray-400 text-sm">Event Camera · Space Domain Awareness</div>
-    </div>
-  </div>
-  <div class="p-5">
-    <h3 class="text-xl font-semibold mb-2 text-white">Satellite Detection with Event Cameras</h3>
-    <p class="text-gray-300 mb-3">
-      Leveraged event camera microsecond temporal resolution and high dynamic range to detect low-observable satellite
-      streaks against star-field clutter using asynchronous spike-pattern processing for space domain awareness.
-    </p>
-    <div class="flex flex-wrap gap-2 text-xs font-semibold">
-      <span class="bg-indigo-700 text-white px-2 py-1 rounded">#EventCamera</span>
-      <span class="bg-blue-700 text-white px-2 py-1 rounded">#Python</span>
-      <span class="bg-purple-700 text-white px-2 py-1 rounded">#ComputerVision</span>
-      <span class="bg-gray-600 text-white px-2 py-1 rounded">#SpaceDA</span>
-      <span class="bg-teal-700 text-white px-2 py-1 rounded">#ObjectDetection</span>
-    </div>
-  </div>
-</div>
-
-    <!-- Full-Stack AV Localization (IEKF Sensor Fusion) -->
-<a href="full_stack_av.html"
-   class="project-card block bg-gray-900 rounded-2xl shadow-lg overflow-hidden group transform transition duration-300 hover:-rotate-1 hover:scale-105 hover:shadow-[0_0_20px_rgba(0,255,255,0.25)]">
-  <div class="w-full h-48 bg-black flex items-center justify-center">
-    <!-- Optional: replace with a poster image or a short demo video -->
-    <div class="text-center px-6">
-      <div class="text-4xl mb-2">🚗📍</div>
-      <div class="text-white font-semibold text-lg">Full-Stack AV</div>
-      <div class="text-gray-400 text-sm">Invariant EKF Localization + Map Alignment</div>
-    </div>
-  </div>
-
-  <div class="p-5">
-    <h3 class="text-xl font-semibold mb-2 text-white">Full-Stack AV: Localization Stack (IEKF)</h3>
-    <p class="text-gray-300 mb-3">
-      Built an autonomous-vehicle localization pipeline using IEKF sensor fusion (IMU + wheel odometry + GNSS + stereo/mono VO + LiDAR),
-      with map-based corrections for drift-bounded pose tracking.
-    </p>
-
-    <div class="flex flex-wrap gap-2 text-xs font-semibold">
-      <span class="bg-indigo-700 text-white px-2 py-1 rounded">#IEKF</span>
-      <span class="bg-green-700 text-white px-2 py-1 rounded">#SensorFusion</span>
-      <span class="bg-blue-700 text-white px-2 py-1 rounded">#GNSS</span>
-      <span class="bg-purple-700 text-white px-2 py-1 rounded">#VIO/VO</span>
-      <span class="bg-gray-600 text-white px-2 py-1 rounded">#LiDAR</span>
-      <span class="bg-pink-700 text-white px-2 py-1 rounded">#Mapping</span>
-      <span class="bg-teal-700 text-white px-2 py-1 rounded">#ROS2</span>
-    </div>
-  </div>
-</a>
-
-
-  <!-- MBot SLAM System -->
-  <div class="project-card bg-gray-900 rounded-2xl shadow-lg overflow-hidden group transform transition duration-300 hover:rotate-1 hover:scale-105 hover:shadow-[0_0_20px_rgba(0,255,255,0.3)]">
-    <div class="w-full h-48 bg-black">
-      <video
-        src="mbot_path.mp4"
-        class="w-full h-full object-contain"
-        autoplay
-        loop
-        muted
-        playsinline
-      ></video>
-    </div>
-    <div class="p-5">
-      <h3 class="text-xl font-semibold mb-2">MBot Autonomous SLAM System</h3>
-      <p class="text-gray-300 mb-3">
-        Implemented full SLAM on the MBot platform: laser-based localization, occupancy-grid
-        mapping, and autonomous exploration using frontier detection and path planning.
-      </p>
-      <div class="flex flex-wrap gap-2 text-xs font-semibold">
-        <span class="bg-indigo-700 text-white px-2 py-1 rounded">#ROS2</span>
-        <span class="bg-blue-700 text-white px-2 py-1 rounded">#SLAM</span>
-        <span class="bg-green-700 text-white px-2 py-1 rounded">#Localization</span>
-        <span class="bg-purple-700 text-white px-2 py-1 rounded">#PathPlanning</span>
-        <span class="bg-gray-600 text-white px-2 py-1 rounded">#A*</span>
-      </div>
-    </div>
-  </div>
-
-
-
-        <!-- SAM Lab Motor Array UI -->
-    <div class="project-card bg-gray-900 rounded-2xl shadow-lg overflow-hidden group transform transition duration-300 hover:rotate-1 hover:scale-105 hover:shadow-[0_0_20px_rgba(0,255,255,0.3)]">
-      <img src="sam-motor-ui.png" alt="SAM Lab Motor Array UI" class="w-full h-48 object-contain bg-black" />
-      <div class="p-5">
-        <h3 class="text-xl font-semibold mb-2">9-Motor Swarm Control UI (SAM Lab)</h3>
-        <p class="text-gray-300 mb-3">
-          Building a C++ HTTP + serial bridge and browser-based UI to control a 9-motor array for swarm robotics experiments, 
-          with per-motor speed/direction control, real-time feedback, and preset motion patterns.
-        </p>
-        <div class="flex flex-wrap gap-2 text-xs font-semibold">
-          <span class="bg-blue-700 text-white px-2 py-1 rounded">#C++</span>
-          <span class="bg-green-700 text-white px-2 py-1 rounded">#Embedded</span>
-          <span class="bg-purple-700 text-white px-2 py-1 rounded">#WebUI</span>
-          <span class="bg-gray-600 text-white px-2 py-1 rounded">#Serial</span>
         </div>
-      </div>
-    </div>
+      </section>
 
-
-            <!-- DSC Humanoid Leg Simulation (Video Card) -->
-    <div class="project-card bg-gray-900 rounded-2xl shadow-lg overflow-hidden group transform transition duration-300 hover:rotate-1 hover:scale-105 hover:shadow-[0_0_20px_rgba(0,255,255,0.3)]">
-      <div class="w-full h-48 bg-black">
-        <video
-          src="humanoid_simulation.webm"
-          class="w-full h-full object-contain"
-          autoplay
-          loop
-          muted
-          playsinline
-        ></video>
-      </div>
-      <div class="p-5">
-        <h3 class="text-xl font-semibold mb-2">Humanoid Leg Dynamics (DSC Lab)</h3>
-        <p class="text-gray-300 mb-3">
-          MATLAB-based dynamic simulation of a realistic humanoid leg, modeling joint torques,
-          ground contact, and human-like gait to study control and energy usage.
-        </p>
-        <div class="flex flex-wrap gap-2 text-xs font-semibold">
-          <span class="bg-blue-700 text-white px-2 py-1 rounded">#MATLAB</span>
-          <span class="bg-purple-700 text-white px-2 py-1 rounded">#HumanoidRobotics</span>
-          <span class="bg-green-700 text-white px-2 py-1 rounded">#Dynamics</span>
-          <span class="bg-gray-600 text-white px-2 py-1 rounded">#Simulation</span>
+      <!-- At a glance -->
+      <section aria-label="At a glance" class="pb-10">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-px rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-200 dark:bg-slate-800">
+          <div class="bg-stone-50 dark:bg-slate-950 p-5 text-center">
+            <div class="font-serif text-3xl font-semibold text-slate-900 dark:text-white">3.96<span class="text-xl text-slate-400 dark:text-slate-600">/4.0</span></div>
+            <div class="mt-1 text-xs text-slate-500 dark:text-slate-500">GPA · Robotics @ Michigan</div>
+          </div>
+          <div class="bg-stone-50 dark:bg-slate-950 p-5 text-center">
+            <div class="font-serif text-3xl font-semibold text-slate-900 dark:text-white">15+</div>
+            <div class="mt-1 text-xs text-slate-500 dark:text-slate-500">Robotics &amp; ML projects</div>
+          </div>
+          <div class="bg-stone-50 dark:bg-slate-950 p-5 text-center">
+            <div class="font-serif text-3xl font-semibold text-slate-900 dark:text-white">3<span class="text-xl text-slate-400 dark:text-slate-600">×</span></div>
+            <div class="mt-1 text-xs text-slate-500 dark:text-slate-500">Courses taught as IA</div>
+          </div>
+          <div class="bg-stone-50 dark:bg-slate-950 p-5 text-center">
+            <div class="font-serif text-3xl font-semibold text-slate-900 dark:text-white">Top 300</div>
+            <div class="mt-1 text-xs text-slate-500 dark:text-slate-500">USAMO · of ~300k</div>
+          </div>
         </div>
-      </div>
-    </div>
+      </section>
 
+      <hr class="border-slate-200 dark:border-slate-800" />
 
-
-    <!-- Project Card -->
-    <div class="project-card bg-gray-900 rounded-2xl shadow-lg overflow-hidden group transform transition duration-300 hover:rotate-1 hover:scale-105 hover:shadow-[0_0_20px_rgba(0,255,255,0.3)]">
-      <img src="robotic_arm.jpg" alt="Robotic Arm" class="w-full h-48 object-contain bg-black" />
-      <div class="p-5">
-        <h3 class="text-xl font-semibold mb-2">Motion-Sensing Robotic Limb</h3>
-        <p class="text-gray-300 mb-3">Built an accelerometer-based robotic limb with precise real-time finger control and motion sensing.</p>
-        <div class="flex flex-wrap gap-2 text-xs font-semibold">
-          <span class="bg-blue-700 text-white px-2 py-1 rounded">#RoboticArm</span>
-          <span class="bg-green-700 text-white px-2 py-1 rounded">#C++</span>
-          <span class="bg-yellow-600 text-white px-2 py-1 rounded">#STM32</span>
+      <!-- About -->
+      <section id="about" class="py-12 sm:py-14 scroll-mt-20">
+        <div class="flex items-baseline gap-3 mb-6">
+          <span class="font-mono text-sm text-accent-light dark:text-accent-dark">01</span>
+          <h2 class="font-serif text-2xl font-semibold text-slate-900 dark:text-white">About</h2>
         </div>
-      </div>
-    </div>
-
-
-
-    <!-- Project Card -->
-    <div class="project-card bg-gray-900 rounded-2xl shadow-lg overflow-hidden group transform transition duration-300 hover:rotate-1 hover:scale-105 hover:shadow-[0_0_20px_rgba(0,255,255,0.3)]">
-      <img src="frost.png" alt="FROST" class="w-full h-48 object-contain bg-black" />
-      <div class="p-5">
-        <h3 class="text-xl font-semibold mb-2">FROST</h3>
-        <p class="text-gray-300 mb-3">Black ice detection robot using sensor fusion, alerts pedestrians using LEDs + audio module.</p>
-        <div class="flex flex-wrap gap-2 text-xs font-semibold">
-          <span class="bg-indigo-700 text-white px-2 py-1 rounded">#SensorFusion</span>
-          <span class="bg-purple-700 text-white px-2 py-1 rounded">#Embedded</span>
-          <span class="bg-gray-600 text-white px-2 py-1 rounded">#Microcontroller</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Project Card -->
-    <div class="project-card bg-gray-900 rounded-2xl shadow-lg overflow-hidden group transform transition duration-300 hover:rotate-1 hover:scale-105 hover:shadow-[0_0_20px_rgba(0,255,255,0.3)]">
-      <img src="highwaygo.png" alt="HighWay Go" class="w-full h-48 object-contain bg-black" />
-      <div class="p-5">
-        <h3 class="text-xl font-semibold mb-2">HighWay Go</h3>
-        <p class="text-gray-300 mb-3">Solar-powered robot that waters plants on highway medians using a robotic arm.</p>
-        <div class="flex flex-wrap gap-2 text-xs font-semibold">
-          <span class="bg-yellow-700 text-white px-2 py-1 rounded">#SolarEnergy</span>
-          <span class="bg-green-700 text-white px-2 py-1 rounded">#Embedded</span>
-          <span class="bg-blue-700 text-white px-2 py-1 rounded">#Agritech</span>
-        </div>
-      </div>
-    </div>
-
-      <!-- Project Card -->
-    <div class="project-card bg-gray-900 rounded-2xl shadow-lg overflow-hidden group transform transition duration-300 hover:rotate-1 hover:scale-105 hover:shadow-[0_0_20px_rgba(0,255,255,0.3)]">
-      <img src="smartwheel.png" alt="SmartWheel" class="w-full h-48 object-contain bg-black" />
-      <div class="p-5">
-        <h3 class="text-xl font-semibold mb-2">SmartWheel</h3>
-        <p class="text-gray-300 mb-3">Developed a dual-energy harvesting system from pressure and heat to power EV batteries autonomously.</p>
-        <div class="flex flex-wrap gap-2 text-xs font-semibold">
-          <span class="bg-pink-700 text-white px-2 py-1 rounded">#EnergyHarvesting</span>
-          <span class="bg-red-600 text-white px-2 py-1 rounded">#PowerSystems</span>
-          <span class="bg-green-700 text-white px-2 py-1 rounded">#Sustainability</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Project Card -->
-    <div class="project-card bg-gray-900 rounded-2xl shadow-lg overflow-hidden group transform transition duration-300 hover:rotate-1 hover:scale-105 hover:shadow-[0_0_20px_rgba(0,255,255,0.3)]">
-      <img src="autofarm.png" alt="AutoFarm" class="w-full h-48 object-contain bg-black" />
-      <div class="p-5">
-        <h3 class="text-xl font-semibold mb-2">AutoFarm</h3>
-        <p class="text-gray-300 mb-3">Created an agricultural robot to plough, sow, water, and accelerate indoor crop growth via artificial light.</p>
-        <div class="flex flex-wrap gap-2 text-xs font-semibold">
-          <span class="bg-lime-600 text-white px-2 py-1 rounded">#Agritech</span>
-          <span class="bg-teal-700 text-white px-2 py-1 rounded">#Automation</span>
-          <span class="bg-orange-700 text-white px-2 py-1 rounded">#IndoorFarming</span>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- Tech Stack Section -->
-<section id="skills" class="max-w-6xl mx-auto px-4 py-10">
-  <h2 class="text-2xl font-bold mb-6">Tech Stack 🛠️</h2>
-  <div class="grid md:grid-cols-2 gap-6">
-
-    <!-- Programming & Core Tools -->
-    <div class="bg-[#111827] text-white p-6 rounded-xl shadow-md">
-      <h3 class="text-blue-400 font-semibold mb-4">💻 Programming & Tools</h3>
-      <p class="font-semibold">Languages</p>
-      <p class="text-sm mb-2">→ C++, Python, Julia, MATLAB</p>
-
-      <p class="font-semibold">Software & Dev Tools</p>
-      <p class="text-sm mb-2">
-        → Linux, Git, CMake, VS Code Remote, gdb, memory debugging, profiling
-      </p>
-
-      <p class="font-semibold">Algorithms & Data Structures (EECS 281)</p>
-      <p class="text-sm mb-2">
-        → Graph algorithms, shortest paths (Dijkstra, A*), dynamic programming, 
-        greedy methods, priority queues, balanced trees, hash maps, recursion, STL
-      </p>
-
-      <p class="font-semibold">Version Control & Collaboration</p>
-      <p class="text-sm">
-        → GitHub, project branching, CI-style builds, code reviews, reproducible builds
-      </p>
-    </div>
-
-    <!-- Robotics & Embedded Systems -->
-    <div class="bg-[#111827] text-white p-6 rounded-xl shadow-md">
-      <h3 class="text-green-400 font-semibold mb-4">🤖 Robotics & Embedded Systems</h3>
-
-      <p class="font-semibold">Frameworks & Platforms</p>
-      <p class="text-sm mb-2">
-        → ROS 2, RViz, Gazebo/Isaac Sim, colcon build, rosbag, transforms (tf2)
-      </p>
-
-      <p class="font-semibold">Hardware & Interfaces</p>
-      <p class="text-sm mb-2">
-        → Arduino, STM32, I²C, PWM, encoders, IMUs, sensor fusion integration
-      </p>
-
-      <p class="font-semibold">Planning & Integration (ROB 320)</p>
-      <p class="text-sm mb-2">
-        → Motion planning pipelines, collision checking, sampling-based planners (RRT),
-        occupancy grids, action models, ROS middleware, node graph design
-      </p>
-
-      <p class="font-semibold">Robot Development</p>
-      <p class="text-sm">
-        → Embedded control, actuator tuning, hardware bring-up, real-time debugging
-      </p>
-    </div>
-
-    <!-- Control, Perception & Algorithms -->
-    <div class="bg-[#0f172a] text-white p-6 rounded-xl shadow-md">
-      <h3 class="text-cyan-400 font-semibold mb-4">⚙️ Control, Perception & Algorithms</h3>
-
-      <p class="font-semibold">Control & Dynamics (ROB 415)</p>
-      <p class="text-sm mb-2">
-        → State-space modeling, linearization, controllability/observability,
-        PID tuning, LQR, feedback linearization, transfer functions, stability analysis
-      </p>
-
-      <p class="font-semibold">Localization & Mapping (ROB 330)</p>
-      <p class="text-sm mb-2">
-        → Particle filters, Bayes filters, sensor models, inverse sensor models,
-        coordinate transforms, odometry, Kalman filtering, mapping, probabilistic robotics
-      </p>
-
-      <p class="font-semibold">Planning & Robotics Algorithms</p>
-      <p class="text-sm">
-        → Graph search (A*, D*), RRT, occupancy mapping, path smoothing, 
-        trajectory generation, cost functions, multi-step prediction
-      </p>
-    </div>
-
-    <!-- Math, Modeling & Design -->
-    <div class="bg-[#0f172a] text-white p-6 rounded-xl shadow-md">
-      <h3 class="text-yellow-400 font-semibold mb-4">📘 Math, Modeling & Design</h3>
-
-      <p class="font-semibold">Analytical & Computational Methods</p>
-      <p class="text-sm mb-2">
-        → Linear algebra, ODEs/PDEs, optimization, numerical solvers,
-        eigenanalysis, Jacobians, least-squares estimation
-      </p>
-
-      <p class="font-semibold">Mechanical & CAD Design</p>
-      <p class="text-sm mb-2">
-        → SolidWorks, linkages & joint modeling, robot chassis design,
-        motion visualization, kinematics modeling
-      </p>
-
-      <p class="font-semibold">System Integration</p>
-      <p class="text-sm">
-        → Hardware–software synchronization, performance tuning,
-        testing workflows, reproducible experiments, robotics pipelines
-      </p>
-    </div>
-
-  </div>
-</section>
-
-
-
-
-<!-- Upcoming Research Section 
- 
-
-
-
--->
-
-
-
-  <!--acheivements and awards section-->
-  <section id="awards" class="max-w-6xl mx-auto px-4 py-12">
-    <h2 class="text-3xl font-bold mb-6 flex items-center gap-2">
-      🏆 Awards & Achievements
-    </h2>
-  
-    <div class="grid md:grid-cols-2 gap-6">
-      <!-- World Robotics Olympiad -->
-      <div class="bg-gray-900 rounded-xl p-6 shadow-md">
-        <h3 class="font-semibold text-lg mb-1">World Robotics Olympiad (India Rank 3)</h3>
-        <p class="text-sm text-gray-300">
-          Developed a piezoelectric energy harvesting system to convert automobile pressure into electricity for powering electric vehicles.
-        </p>
-      </div>
-  
-      <!-- International Youth Robotics Olympiad -->
-      <div class="bg-gray-900 rounded-xl p-6 shadow-md">
-        <h3 class="font-semibold text-lg mb-1">International Youth Robotics Olympiad</h3>
-        <p class="text-sm text-gray-300 italic mb-1">🏅 1 Gold, 2 Silver, 1 Bronze</p>
-        <ul class="text-sm list-disc list-inside text-gray-300 space-y-1">
-          <li><b>Developed</b> an autonomous vehicle for watering plants with robotic arm & soil detection.</li>
-          <li><b>Designed</b> a smart mini-farm with automated irrigation, planting, and sensing.</li>
-          <li><b>Created</b> a greenhouse accelerating growth by 2.2× using controlled climate.</li>
-        </ul>
-      </div>
-  
-      <!-- AMC / AIME / USAMO -->
-      <div class="bg-gray-900 rounded-xl p-6 shadow-md">
-        <h3 class="font-semibold text-lg mb-1">American Math Competitions (AMC)</h3>
-        <p class="text-sm text-gray-300 italic mb-1">2× USAMO Qualifier, 3× AIME Qualifier</p>
-        <p class="text-sm text-gray-300">
-          Qualified for the USAMO (top 300 of 300,000 globally). AIME distinction holder across 3 years.
-        </p>
-      </div>
-  
-      <!-- Physics & Computing Olympiads -->
-      <div class="bg-gray-900 rounded-xl p-6 shadow-md">
-        <h3 class="font-semibold text-lg mb-1">Other Olympiads</h3>
-        <ul class="text-sm list-disc list-inside text-gray-300 space-y-1">
-          <li><b>F=MA:</b> Qualified for USA Physics Olympiad (USAPhO), strong performance in mechanics.</li>
-          <li><b>ZIO:</b> Cleared Indian Computing Olympiad (ZIO), showcasing algorithmic and math reasoning.</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-  
-  
-  <section id="contact" class="max-w-5xl mx-auto px-4 py-12">
-    <h2 class="text-3xl font-bold text-blue-400 mb-8 flex items-center gap-2">📬 Contact Me</h2>
-  
-    <div class="bg-gray-900 rounded-xl shadow-lg p-6 sm:p-10 flex flex-col sm:flex-row sm:justify-between gap-6">
-      <!-- Contact Details -->
-      <div class="space-y-4 text-gray-300 text-sm sm:text-base">
-        <p>I'm always excited to connect with fellow innovators, collaborators, or just curious minds. Let's build something awesome together!</p>
-  
-        <div class="space-y-2">
+        <div class="space-y-4 text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl">
           <p>
-            📧 <strong>Email:</strong>
-            <a href="mailto:ashed@umich.edu" class="text-blue-500 underline">ashed@umich.edu</a>
-          </p><!DOCTYPE html>
-          <html lang="en" class="scroll-smooth">
-            <head>
-              <meta charset="UTF-8" />
-              <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-              <title>Ashrith Edukulla</title>
+            I am a Robotics Engineering student at the
+            <a href="https://umich.edu" target="_blank" rel="noopener" class="text-accent-light dark:text-accent-dark hover:underline">University of Michigan</a>,
+            focused on perception, navigation, and learning for autonomous systems. I am currently researching
+            navigation models at the Scalable Spatial Intelligence Lab.
+          </p>
+          <p>
+            My interests lie in path planning, deep learning, SLAM, computer vision, and probabilistic
+            representations of the world. I am drawn to problems where robots need to understand complex,
+            uncertain environments and build structured internal models that support reliable
+            decision-making — how machines represent space, reason under uncertainty, and connect
+            perception to action in a principled way.
+          </p>
+          <p>
+            I am especially interested in approaches that bridge geometric methods with learning-based
+            systems, combining classical state estimation with deep neural networks to create scalable,
+            robust autonomy stacks where mapping, localization, and visual understanding are core
+            intelligence layers rather than isolated components.
+          </p>
+          <p>
+            Long term, I want to contribute to autonomous systems that perceive richly, learn efficiently,
+            and operate reliably in the real world.
+          </p>
+        </div>
+      </section>
 
-              <meta name="description" content="Ashrith Edukulla | Robotics @ UMich | Projects, Resume, Contact" />
-              <link rel="icon" href="ashrith-icon.png" type="image/png">
-              <script src="https://cdn.tailwindcss.com"></script>
-              <style>
-                html {
-                  font-size: 100%;
-                }
-                .theme-transition {
-                  transition: background-color 0.5s, color 0.5s;
-                }
-                .project-card {
-                  transition: transform 0.3s ease, box-shadow 0.3s ease;
-                }
-                .project-card:hover {
-                  transform: translateY(-6px) scale(1.03);
-                  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-                }
-                @keyframes fadeIn {
-                  from { opacity: 0; transform: translateY(20px); }
-                  to { opacity: 1; transform: translateY(0); }
-                }
-                .animate-fadeIn {
-                  animation: fadeIn 0.8s ease-out both;
-                }
-                .glow-text {
-                  text-shadow: 0 0 12px rgba(0, 255, 255, 0.75);
-                  animation: pulseGlow 1.8s infinite alternate;
-                }
-                @keyframes pulseGlow {
-                  from { text-shadow: 0 0 6px rgba(0, 255, 255, 0.4); }
-                  to { text-shadow: 0 0 12px rgba(0, 255, 255, 1); }
-                }
-                .scroll-progress {
-                  position: fixed;
-                  top: 0;
-                  left: 0;
-                  height: 4px;
-                  background: #3b82f6;
-                  z-index: 9999;
-                  width: 0%;
-                }
-              </style>
-            </head>
-          
-            <body class="bg-black text-white theme-transition" id="pageBody">
-              <!-- Scroll Progress Bar -->
-              <div class="scroll-progress" id="progressBar"></div>
-          
-          
-              <!-- Hero Banner + Glow Name -->
-              <section class="max-w-4xl mx-auto px-4 py-4 animate-fadeIn">
-                <div class="flex justify-between items-center">
-                  <h2 class="text-2xl font-bold glow-text">Ashrith Edukulla</h2>
-                  <span class="bg-yellow-800 text-yellow-300 px-3 py-1 rounded-full text-xs">🚧 Currently building: Motion Sensing Robotic Hand</span>
+      <hr class="border-slate-200 dark:border-slate-800" />
+
+      <!-- Research focus -->
+      <section id="research" class="py-12 sm:py-14 scroll-mt-20">
+        <div class="flex items-baseline gap-3 mb-6">
+          <span class="font-mono text-sm text-accent-light dark:text-accent-dark">02</span>
+          <h2 class="font-serif text-2xl font-semibold text-slate-900 dark:text-white">Research focus</h2>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-5">
+          <div class="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5">
+            <h3 class="text-base font-semibold text-slate-900 dark:text-white">Vision-Language-Action Models</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Language-conditioned policies that perceive, reason, and act — for navigation and autonomous driving.</p>
+            <p class="mt-3 font-mono text-[11px] text-slate-400 dark:text-slate-500">Nift · DreamerVLA · CARLA SFF</p>
+          </div>
+          <div class="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5">
+            <h3 class="text-base font-semibold text-slate-900 dark:text-white">Navigation &amp; Embodied AI</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Learning navigation models and policies that generalize to unseen, uncertain environments.</p>
+            <p class="mt-3 font-mono text-[11px] text-slate-400 dark:text-slate-500">Scalable Spatial Intelligence Lab · ObjectNav BC</p>
+          </div>
+          <div class="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5">
+            <h3 class="text-base font-semibold text-slate-900 dark:text-white">SLAM &amp; State Estimation</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Probabilistic localization and mapping — invariant EKF, particle filters, and multi-sensor fusion.</p>
+            <p class="mt-3 font-mono text-[11px] text-slate-400 dark:text-slate-500">Full-Stack AV (IEKF) · MBot SLAM</p>
+          </div>
+          <div class="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5">
+            <h3 class="text-base font-semibold text-slate-900 dark:text-white">Planning &amp; Exploration</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Sampling-based and search planning under real-time and uncertainty constraints.</p>
+            <p class="mt-3 font-mono text-[11px] text-slate-400 dark:text-slate-500">FRoG Lab · Ocean Frontier (NBVP)</p>
+          </div>
+        </div>
+      </section>
+
+      <hr class="border-slate-200 dark:border-slate-800" />
+
+      <!-- Education -->
+      <section id="education" class="py-12 sm:py-14 scroll-mt-20">
+        <div class="flex items-baseline gap-3 mb-6">
+          <span class="font-mono text-sm text-accent-light dark:text-accent-dark">03</span>
+          <h2 class="font-serif text-2xl font-semibold text-slate-900 dark:text-white">Education</h2>
+        </div>
+        <div class="flex items-start gap-4">
+          <img src="michigan_logo.png" alt="University of Michigan" class="w-11 h-11 object-contain rounded-md shrink-0" />
+          <div class="flex-1">
+            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+              <h3 class="text-base font-semibold text-slate-900 dark:text-white">University of Michigan, Ann Arbor</h3>
+              <span class="text-sm text-slate-500 dark:text-slate-500">Aug 2024 – Dec 2026</span>
+            </div>
+            <p class="text-sm text-slate-600 dark:text-slate-400 mt-0.5">B.E. in Robotics Engineering — GPA 3.96 / 4.0</p>
+            <p class="text-sm text-slate-600 dark:text-slate-400 mt-3">
+              <span class="font-medium text-slate-700 dark:text-slate-300">Honors &amp; Awards:</span>
+              Ranked 3rd, World Robotics Olympiad · 4× medalist, International Youth Robotics Contest ·
+              3× AMC qualifier · 2× AIME qualifier
+            </p>
+            <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">
+              <span class="font-medium text-slate-700 dark:text-slate-300">Selected coursework:</span>
+              Control of Robotic Systems (ROB 415), Planning &amp; ROS Integration (ROB 320),
+              Localization &amp; Mapping (ROB 330), Data Structures &amp; Algorithms (EECS 281),
+              SLAM, Robot Optimization, Linear Algebra, Robot Differential Equations
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <hr class="border-slate-200 dark:border-slate-800" />
+
+      <!-- Experience -->
+      <section id="experience" class="py-12 sm:py-14 scroll-mt-20">
+        <div class="flex items-baseline gap-3 mb-8">
+          <span class="font-mono text-sm text-accent-light dark:text-accent-dark">04</span>
+          <h2 class="font-serif text-2xl font-semibold text-slate-900 dark:text-white">Experience</h2>
+        </div>
+        <div class="space-y-9">
+
+          <article class="grid sm:grid-cols-[1fr_auto] gap-1 sm:gap-6">
+            <div>
+              <h3 class="text-base font-semibold text-slate-900 dark:text-white">Nift</h3>
+              <p class="text-sm text-slate-500 dark:text-slate-400">Autonomous Vehicles — Vision-Language-Action Models</p>
+              <ul class="mt-2 space-y-1 text-sm text-slate-600 dark:text-slate-400 list-disc list-outside pl-4">
+                <li>Developing autonomous-driving autonomy driven by vision-language-action (VLA) models.</li>
+                <li>Connecting perception with language-conditioned policies to plan and act in real-world driving scenarios.</li>
+                <li>Building and evaluating VLA-based driving behaviors in simulation toward on-vehicle deployment.</li>
+              </ul>
+            </div>
+            <span class="text-sm text-slate-500 dark:text-slate-500 sm:text-right whitespace-nowrap">Jun 2026 – Present</span>
+          </article>
+
+          <article class="grid sm:grid-cols-[1fr_auto] gap-1 sm:gap-6">
+            <div>
+              <h3 class="text-base font-semibold text-slate-900 dark:text-white">Scalable Spatial Intelligence Lab</h3>
+              <p class="text-sm text-slate-500 dark:text-slate-400">Undergraduate Researcher — Navigation Models · University of Michigan</p>
+              <ul class="mt-2 space-y-1 text-sm text-slate-600 dark:text-slate-400 list-disc list-outside pl-4">
+                <li>Developing learning-based navigation models that let robots move through and reason about unseen environments.</li>
+                <li>Researching scalable spatial representations that connect perception to long-horizon navigation policies.</li>
+                <li>Building and evaluating models in simulation toward transfer onto real robotic platforms.</li>
+              </ul>
+            </div>
+            <span class="text-sm text-slate-500 dark:text-slate-500 sm:text-right whitespace-nowrap">May 2026 – Present</span>
+          </article>
+
+          <article class="grid sm:grid-cols-[1fr_auto] gap-1 sm:gap-6">
+            <div>
+              <h3 class="text-base font-semibold text-slate-900 dark:text-white">Field Robotics Group (FRoG) Lab</h3>
+              <p class="text-sm text-slate-500 dark:text-slate-400">Undergraduate Researcher — Perception &amp; Planning · University of Michigan</p>
+              <ul class="mt-2 space-y-1 text-sm text-slate-600 dark:text-slate-400 list-disc list-outside pl-4">
+                <li>Researching robot perception and motion planning under real-time and uncertainty constraints.</li>
+                <li>Developing and evaluating planning algorithms informed by perception outputs and environment representations.</li>
+                <li>Contributing to projects aimed at robust, scalable autonomy for real-world robotic systems.</li>
+              </ul>
+            </div>
+            <span class="text-sm text-slate-500 dark:text-slate-500 sm:text-right whitespace-nowrap">Jan 2026 – Present</span>
+          </article>
+
+          <article class="grid sm:grid-cols-[1fr_auto] gap-1 sm:gap-6">
+            <div>
+              <h3 class="text-base font-semibold text-slate-900 dark:text-white">EECS 467: Autonomous Robotics</h3>
+              <p class="text-sm text-slate-500 dark:text-slate-400">Instructional Aide · University of Michigan</p>
+              <ul class="mt-2 space-y-1 text-sm text-slate-600 dark:text-slate-400 list-disc list-outside pl-4">
+                <li>Supported instruction in perception, SLAM, planning, and control for autonomous robotics.</li>
+                <li>Helped students with ROS-based labs, system debugging, and algorithm implementation.</li>
+                <li>Held office hours on multi-sensor fusion, navigation, and robot software architecture.</li>
+              </ul>
+            </div>
+            <span class="text-sm text-slate-500 dark:text-slate-500 sm:text-right whitespace-nowrap">Jan 2026 – May 2026</span>
+          </article>
+
+          <article class="grid sm:grid-cols-[1fr_auto] gap-1 sm:gap-6">
+            <div>
+              <h3 class="text-base font-semibold text-slate-900 dark:text-white">Synergic Adaptive Machines (SAM) Lab</h3>
+              <p class="text-sm text-slate-500 dark:text-slate-400">Undergraduate Researcher · University of Michigan</p>
+              <ul class="mt-2 space-y-1 text-sm text-slate-600 dark:text-slate-400 list-disc list-outside pl-4">
+                <li>Researched macro- and micro-scale robot swarms under Prof. Steven Ceron to study collective motion and environmental interaction.</li>
+                <li>Developed decentralized control strategies for physical reconfiguration and emergent coordination.</li>
+                <li>Co-authoring a paper on adaptive swarm behavior and distributed control in reconfigurable collectives.</li>
+              </ul>
+            </div>
+            <span class="text-sm text-slate-500 dark:text-slate-500 sm:text-right whitespace-nowrap">Aug 2025 – Dec 2025</span>
+          </article>
+
+          <article class="grid sm:grid-cols-[1fr_auto] gap-1 sm:gap-6">
+            <div>
+              <h3 class="text-base font-semibold text-slate-900 dark:text-white">ROB 201: Robot Differential Equations</h3>
+              <p class="text-sm text-slate-500 dark:text-slate-400">Instructional Aide · University of Michigan</p>
+              <ul class="mt-2 space-y-1 text-sm text-slate-600 dark:text-slate-400 list-disc list-outside pl-4">
+                <li>Supported instruction in ODE modeling, linear systems, and control for undergraduate robotics students.</li>
+                <li>Led weekly office hours and problem sessions using Julia notebooks, simulations, and visualizations.</li>
+                <li>Assisted with labs and grading on Laplace transforms, transfer functions, and stability analysis.</li>
+              </ul>
+            </div>
+            <span class="text-sm text-slate-500 dark:text-slate-500 sm:text-right whitespace-nowrap">Aug 2025 – Dec 2025</span>
+          </article>
+
+          <article class="grid sm:grid-cols-[1fr_auto] gap-1 sm:gap-6">
+            <div>
+              <h3 class="text-base font-semibold text-slate-900 dark:text-white">ROB 101: Computational Linear Algebra</h3>
+              <p class="text-sm text-slate-500 dark:text-slate-400">Instructional Aide · University of Michigan</p>
+              <ul class="mt-2 space-y-1 text-sm text-slate-600 dark:text-slate-400 list-disc list-outside pl-4">
+                <li>Supported instruction in computational linear algebra — linear systems, least squares, and matrix factorizations — taught in Julia.</li>
+                <li>Held office hours and guided students through programming assignments and weekly problem sets.</li>
+                <li>Helped students connect linear-algebra foundations to robotics and autonomy applications.</li>
+              </ul>
+            </div>
+            <span class="text-sm text-slate-500 dark:text-slate-500 sm:text-right whitespace-nowrap">Jan 2025 – Apr 2025</span>
+          </article>
+
+          <article class="grid sm:grid-cols-[1fr_auto] gap-1 sm:gap-6">
+            <div>
+              <h3 class="text-base font-semibold text-slate-900 dark:text-white">Michigan Mars Rover Team</h3>
+              <p class="text-sm text-slate-500 dark:text-slate-400">Embedded Software Engineer · Ann Arbor, MI</p>
+              <ul class="mt-2 space-y-1 text-sm text-slate-600 dark:text-slate-400 list-disc list-outside pl-4">
+                <li>Programmed STM32 firmware to control servos, LEDs, and accelerometers for subsystem actuation and feedback.</li>
+                <li>Developed embedded drivers and ROS nodes for motor coordination and sensor data handling.</li>
+                <li>Contributed to navigation and control tuning for reliable performance in dynamic rover environments.</li>
+              </ul>
+            </div>
+            <span class="text-sm text-slate-500 dark:text-slate-500 sm:text-right whitespace-nowrap">Nov 2024 – May 2025</span>
+          </article>
+
+        </div>
+      </section>
+
+      <hr class="border-slate-200 dark:border-slate-800" />
+
+      <!-- Projects -->
+      <section id="projects" class="py-12 sm:py-14 scroll-mt-20">
+        <div class="flex items-baseline gap-3 mb-8">
+          <span class="font-mono text-sm text-accent-light dark:text-accent-dark">05</span>
+          <h2 class="font-serif text-2xl font-semibold text-slate-900 dark:text-white">Projects</h2>
+        </div>
+
+        <!-- Featured research -->
+        <h3 class="font-mono text-xs uppercase tracking-[0.18em] text-slate-500 dark:text-slate-500 mb-5">Featured research</h3>
+
+        <!-- Spotlight: ObjectNav BC -->
+        <article class="card mb-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden hover:shadow-md hover:border-slate-300 dark:hover:border-slate-700">
+          <div class="grid md:grid-cols-2">
+            <div class="dotgrid p-6 sm:p-8 flex flex-col justify-center gap-5 border-b md:border-b-0 md:border-r border-slate-200 dark:border-slate-800">
+              <span class="font-mono text-[11px] uppercase tracking-wider text-accent-light dark:text-accent-dark">Flagship · Embodied AI</span>
+              <div class="grid grid-cols-3 gap-3">
+                <div>
+                  <div class="font-serif text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">76K+</div>
+                  <div class="text-[11px] text-slate-500 dark:text-slate-500">VR demos</div>
                 </div>
-              </section>
-          
-              <!-- ALL YOUR FINALIZED CONTENT BELOW (Header, About, Education...) -->
-              <!-- Just paste your existing HTML starting from <header> to </html> here -->
-              <!-- That content is kept unchanged and will inherit all the new global styling above -->
-          
-              <!-- Scroll Bar Script -->
-              <script>
-                window.onscroll = function () {
-                  var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-                  var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                  var scrolled = (winScroll / height) * 100;
-                  document.getElementById("progressBar").style.width = scrolled + "%";
-                };
-              </script>
-          
+                <div>
+                  <div class="font-serif text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">80</div>
+                  <div class="text-[11px] text-slate-500 dark:text-slate-500">HM3D scenes</div>
+                </div>
+                <div>
+                  <div class="font-serif text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">3.28×</div>
+                  <div class="text-[11px] text-slate-500 dark:text-slate-500">inflection weighting</div>
+                </div>
+              </div>
+              <p class="font-mono text-xs text-slate-500 dark:text-slate-400">ResNet18 + GRU · PIRLNav · Habitat</p>
+            </div>
+            <div class="p-6 sm:p-8 flex flex-col justify-center">
+              <h4 class="text-lg font-semibold text-slate-900 dark:text-white">ObjectNav Behavior Cloning — HM3D</h4>
+              <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                Trained a ResNet18 + GRU navigation policy from 76K+ PIRLNav human VR demonstrations across 80 HM3D scenes.
+                Implemented truncated BPTT, 3.28× inflection weighting, and a custom dataset loader to bypass Habitat's strict
+                episode schema — an end-to-end embodied-AI pipeline from raw demonstrations to a deployable navigation policy.
+              </p>
+              <div class="mt-4 flex flex-wrap gap-1.5">
+                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">PyTorch</span>
+                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Behavior Cloning</span>
+                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Habitat Sim</span>
+                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Embodied AI</span>
+              </div>
+              <a href="https://github.com/Ashrith5321/habitat-behavior-cloning-hm3d" target="_blank" rel="noopener" class="group mt-4 inline-flex items-center gap-1.5 text-sm text-accent-light dark:text-accent-dark hover:underline">
+                View code on GitHub
+                <svg class="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg>
+              </a>
+            </div>
+          </div>
+        </article>
 
-          
-          <p>
-            📞 <strong>Phone:</strong>
-            <a href="tel:+12487343391" class="text-blue-500 underline">(248) 734-3391</a>
-          </p>
-          <p>
-            💼 <strong>LinkedIn:</strong>
-            <a href="https://www.linkedin.com/in/ashrith-edukulla-633b141a7/" target="_blank" class="text-blue-500 underline">ashrith-edukulla</a>
-          </p>
-          <p>
-            📄 <strong>Resume:</strong>
-            <a href="resume.pdf" target="_blank" class="text-blue-500 underline">View Resume</a>
-          </p>
+        <div class="grid sm:grid-cols-2 gap-5">
+
+          <!-- Ocean Frontier -->
+          <article class="card group flex flex-col rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden hover:shadow-md hover:border-slate-300 dark:hover:border-slate-700">
+            <div class="aspect-[16/9] dotgrid flex items-center justify-center px-6 text-center">
+              <span class="font-mono text-xs text-slate-500 dark:text-slate-400">BFS + NBVP · OctoMap · Isaac Sim</span>
+            </div>
+            <div class="flex flex-col flex-1 p-5">
+              <p class="font-mono text-[11px] uppercase tracking-wider text-accent-light dark:text-accent-dark mb-1.5">Exploration &amp; Planning</p>
+              <h4 class="text-base font-semibold text-slate-900 dark:text-white">Ocean Frontier 3D Exploration — ROV Shipwreck Survey</h4>
+              <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-3">
+                Autonomous three-phase ROV mission: BFS sweep of unmapped voxels, RRT-biased centroid approach, and full NBVP
+                survey. Detects wrecks via vertical column clustering; fuses stereo depth and sonar into a real-time OctoMap.
+              </p>
+              <div class="mt-auto pt-4 flex flex-wrap gap-1.5">
+                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">ROS 2</span>
+                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">C++</span>
+                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Sensor Fusion</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- CARLA SFF -->
+          <article class="card group flex flex-col rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden hover:shadow-md hover:border-slate-300 dark:hover:border-slate-700">
+            <div class="aspect-[16/9] dotgrid flex items-center justify-center px-6 text-center">
+              <span class="font-mono text-xs text-slate-500 dark:text-slate-400">Safety Force Field · Alpamayo VLA</span>
+            </div>
+            <div class="flex flex-col flex-1 p-5">
+              <p class="font-mono text-[11px] uppercase tracking-wider text-accent-light dark:text-accent-dark mb-1.5">AV Safety</p>
+              <h4 class="text-base font-semibold text-slate-900 dark:text-white">CARLA SFF: VLA Safety Evaluation Stack</h4>
+              <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-3">
+                A Dockerized CARLA / ROS 2 closed-loop evaluation stack for the Alpamayo VLA. Designed 10+ long-tail scenarios
+                and refactored the safety layer into a formal Safety Force Field (Nister et al., 2019), benchmarked with unit tests.
+              </p>
+              <div class="mt-auto pt-4 flex flex-wrap gap-1.5">
+                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">CARLA</span>
+                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Docker</span>
+                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">AV Safety</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Satellite Event Camera -->
+          <article class="card group flex flex-col rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden hover:shadow-md hover:border-slate-300 dark:hover:border-slate-700">
+            <div class="aspect-[16/9] dotgrid flex items-center justify-center px-6 text-center">
+              <span class="font-mono text-xs text-slate-500 dark:text-slate-400">Event Camera · Space Domain Awareness</span>
+            </div>
+            <div class="flex flex-col flex-1 p-5">
+              <p class="font-mono text-[11px] uppercase tracking-wider text-accent-light dark:text-accent-dark mb-1.5">Perception</p>
+              <h4 class="text-base font-semibold text-slate-900 dark:text-white">Satellite Detection with Event Cameras</h4>
+              <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-3">
+                Used event-camera microsecond temporal resolution and high dynamic range to detect low-observable satellite
+                streaks against star-field clutter, with asynchronous spike-pattern processing for space domain awareness.
+              </p>
+              <div class="mt-auto pt-4 flex flex-wrap gap-1.5">
+                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Event Camera</span>
+                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Computer Vision</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- MBot SLAM (video) -->
+          <article class="card group flex flex-col rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden hover:shadow-md hover:border-slate-300 dark:hover:border-slate-700">
+            <div class="aspect-[16/9] bg-slate-100 dark:bg-slate-800">
+              <video src="mbot_path.mp4" class="w-full h-full object-cover" autoplay loop muted playsinline></video>
+            </div>
+            <div class="flex flex-col flex-1 p-5">
+              <p class="font-mono text-[11px] uppercase tracking-wider text-accent-light dark:text-accent-dark mb-1.5">SLAM</p>
+              <h4 class="text-base font-semibold text-slate-900 dark:text-white">MBot Autonomous SLAM System</h4>
+              <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-3">
+                Full SLAM on the MBot platform: laser-based localization, occupancy-grid mapping, and autonomous exploration
+                using frontier detection and path planning.
+              </p>
+              <div class="mt-auto pt-4 flex flex-wrap gap-1.5">
+                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">ROS 2</span>
+                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">SLAM</span>
+                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">A*</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Full-Stack AV (links out) -->
+          <a href="full_stack_av.html" class="card group flex flex-col rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden hover:shadow-md hover:border-slate-300 dark:hover:border-slate-700">
+            <div class="aspect-[16/9] dotgrid flex items-center justify-center px-6 text-center">
+              <span class="font-mono text-xs text-slate-500 dark:text-slate-400">IEKF Localization + Map Alignment</span>
+            </div>
+            <div class="flex flex-col flex-1 p-5">
+              <p class="font-mono text-[11px] uppercase tracking-wider text-accent-light dark:text-accent-dark mb-1.5">Localization</p>
+              <h4 class="text-base font-semibold text-slate-900 dark:text-white inline-flex items-center gap-1.5">
+                Full-Stack AV: Localization Stack (IEKF)
+                <svg class="h-3.5 w-3.5 text-slate-400 group-hover:translate-x-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg>
+              </h4>
+              <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-3">
+                An autonomous-vehicle localization pipeline using IEKF sensor fusion (IMU, wheel odometry, GNSS, stereo/mono VO,
+                LiDAR), with map-based corrections for drift-bounded pose tracking. Read the full write-up.
+              </p>
+              <div class="mt-auto pt-4 flex flex-wrap gap-1.5">
+                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">IEKF</span>
+                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">LiDAR</span>
+                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Mapping</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- DreamerVLA -->
+          <a href="https://github.com/Ashrith5321/DreamerVLA" target="_blank" rel="noopener" class="card group flex flex-col rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden hover:shadow-md hover:border-slate-300 dark:hover:border-slate-700">
+            <div class="aspect-[16/9] dotgrid flex items-center justify-center px-6 text-center">
+              <span class="font-mono text-xs text-slate-500 dark:text-slate-400">Vision-Language-Action · Robot Control</span>
+            </div>
+            <div class="flex flex-col flex-1 p-5">
+              <p class="font-mono text-[11px] uppercase tracking-wider text-accent-light dark:text-accent-dark mb-1.5">Learning &amp; Navigation</p>
+              <h4 class="text-base font-semibold text-slate-900 dark:text-white inline-flex items-center gap-1.5">
+                DreamerVLA
+                <svg class="h-3.5 w-3.5 text-slate-400 group-hover:translate-x-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg>
+              </h4>
+              <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-3">
+                A vision-language-action (VLA) model for robot navigation and control, exploring how language-conditioned
+                policies can drive embodied agents toward goals. Code on GitHub.
+              </p>
+              <div class="mt-auto pt-4 flex flex-wrap gap-1.5">
+                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">VLA</span>
+                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">PyTorch</span>
+                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Navigation</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Microbot Planning & Mapping -->
+          <a href="https://github.com/Synergetic-Adaptive-Machinas-Lab/generalized_planning_mapping_microbots" target="_blank" rel="noopener" class="card group flex flex-col rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden hover:shadow-md hover:border-slate-300 dark:hover:border-slate-700">
+            <div class="aspect-[16/9] dotgrid flex items-center justify-center px-6 text-center">
+              <span class="font-mono text-xs text-slate-500 dark:text-slate-400">Microrobot Swarms · SAM Lab</span>
+            </div>
+            <div class="flex flex-col flex-1 p-5">
+              <p class="font-mono text-[11px] uppercase tracking-wider text-accent-light dark:text-accent-dark mb-1.5">Planning &amp; Mapping</p>
+              <h4 class="text-base font-semibold text-slate-900 dark:text-white inline-flex items-center gap-1.5">
+                Generalized Planning &amp; Mapping for Microbots
+                <svg class="h-3.5 w-3.5 text-slate-400 group-hover:translate-x-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg>
+              </h4>
+              <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-3">
+                Generalized planning and mapping for microrobot systems, developed in the Synergic Adaptive Machines Lab to
+                coordinate motion and reconstruct the environment across many small agents.
+              </p>
+              <div class="mt-auto pt-4 flex flex-wrap gap-1.5">
+                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Python</span>
+                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Planning</span>
+                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Swarm</span>
+              </div>
+            </div>
+          </a>
+
         </div>
-      </div>
-  
-      <!-- Optional Contact Buttons (for fun / accessibility) -->
-      <div class="flex flex-col gap-3">
-        <a href="mailto:ashed@umich.edu" class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 text-center transition">📧 Send an Email</a>
-        
-        <a href="https://www.linkedin.com/in/ashrith-edukulla-633b141a7/" target="_blank" class="bg-gray-800 text-white py-2 px-4 rounded-lg hover:bg-gray-700 text-center transition">🔗 LinkedIn Profile</a>
-      </div>
-    </div>
-  </section>
 
-    
-    <!-- Menu Script -->
+        <!-- More projects -->
+        <h3 class="font-mono text-xs uppercase tracking-[0.18em] text-slate-500 dark:text-slate-500 mb-5 mt-12">More projects</h3>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+          <!-- SAM Motor UI -->
+          <article class="card group rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden hover:shadow-md hover:border-slate-300 dark:hover:border-slate-700">
+            <div class="aspect-[16/9] bg-slate-100 dark:bg-slate-800">
+              <img src="sam-motor-ui.png" alt="9-motor swarm control UI" class="w-full h-full object-cover" />
+            </div>
+            <div class="p-4">
+              <p class="font-mono text-[11px] uppercase tracking-wider text-accent-light dark:text-accent-dark mb-1">Robotics Systems</p>
+              <h4 class="text-sm font-semibold text-slate-900 dark:text-white">9-Motor Swarm Control UI</h4>
+              <p class="mt-1.5 text-xs text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-2">
+                A C++ HTTP + serial bridge and browser UI controlling a 9-motor array with real-time feedback and preset motion patterns.
+              </p>
+            </div>
+          </article>
+
+          <!-- Humanoid Leg (video) -->
+          <article class="card group rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden hover:shadow-md hover:border-slate-300 dark:hover:border-slate-700">
+            <div class="aspect-[16/9] bg-slate-100 dark:bg-slate-800">
+              <video src="humanoid_simulation.webm" class="w-full h-full object-cover" autoplay loop muted playsinline></video>
+            </div>
+            <div class="p-4">
+              <p class="font-mono text-[11px] uppercase tracking-wider text-accent-light dark:text-accent-dark mb-1">Dynamics</p>
+              <h4 class="text-sm font-semibold text-slate-900 dark:text-white">Humanoid Leg Dynamics</h4>
+              <p class="mt-1.5 text-xs text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-2">
+                MATLAB dynamic simulation of a humanoid leg, modeling joint torques, ground contact, and human-like gait.
+              </p>
+            </div>
+          </article>
+
+          <!-- Robotic Limb -->
+          <article class="card group rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden hover:shadow-md hover:border-slate-300 dark:hover:border-slate-700">
+            <div class="aspect-[16/9] bg-slate-100 dark:bg-slate-800">
+              <img src="robotic_arm.jpg" alt="Motion-sensing robotic limb" class="w-full h-full object-cover" />
+            </div>
+            <div class="p-4">
+              <p class="font-mono text-[11px] uppercase tracking-wider text-accent-light dark:text-accent-dark mb-1">Embedded</p>
+              <h4 class="text-sm font-semibold text-slate-900 dark:text-white">Motion-Sensing Robotic Limb</h4>
+              <p class="mt-1.5 text-xs text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-2">
+                An accelerometer-based robotic limb with precise real-time finger control and motion sensing.
+              </p>
+            </div>
+          </article>
+
+          <!-- FROST -->
+          <article class="card group rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden hover:shadow-md hover:border-slate-300 dark:hover:border-slate-700">
+            <div class="aspect-[16/9] bg-slate-100 dark:bg-slate-800">
+              <img src="frost.png" alt="FROST black-ice detection robot" class="w-full h-full object-cover" />
+            </div>
+            <div class="p-4">
+              <p class="font-mono text-[11px] uppercase tracking-wider text-accent-light dark:text-accent-dark mb-1">Sensing</p>
+              <h4 class="text-sm font-semibold text-slate-900 dark:text-white">FROST</h4>
+              <p class="mt-1.5 text-xs text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-2">
+                Black-ice detection robot using sensor fusion; alerts pedestrians with LEDs and an audio module.
+              </p>
+            </div>
+          </article>
+
+          <!-- HighWay Go -->
+          <article class="card group rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden hover:shadow-md hover:border-slate-300 dark:hover:border-slate-700">
+            <div class="aspect-[16/9] bg-slate-100 dark:bg-slate-800">
+              <img src="highwaygo.png" alt="HighWay Go" class="w-full h-full object-cover" />
+            </div>
+            <div class="p-4">
+              <p class="font-mono text-[11px] uppercase tracking-wider text-accent-light dark:text-accent-dark mb-1">Robotics</p>
+              <h4 class="text-sm font-semibold text-slate-900 dark:text-white">HighWay Go</h4>
+              <p class="mt-1.5 text-xs text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-2">
+                Solar-powered robot that waters plants on highway medians using a robotic arm.
+              </p>
+            </div>
+          </article>
+
+          <!-- SmartWheel -->
+          <article class="card group rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden hover:shadow-md hover:border-slate-300 dark:hover:border-slate-700">
+            <div class="aspect-[16/9] bg-slate-100 dark:bg-slate-800">
+              <img src="smartwheel.png" alt="SmartWheel" class="w-full h-full object-cover" />
+            </div>
+            <div class="p-4">
+              <p class="font-mono text-[11px] uppercase tracking-wider text-accent-light dark:text-accent-dark mb-1">Energy</p>
+              <h4 class="text-sm font-semibold text-slate-900 dark:text-white">SmartWheel</h4>
+              <p class="mt-1.5 text-xs text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-2">
+                A dual energy-harvesting system drawing from pressure and heat to power EV batteries autonomously.
+              </p>
+            </div>
+          </article>
+
+          <!-- AutoFarm -->
+          <article class="card group rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden hover:shadow-md hover:border-slate-300 dark:hover:border-slate-700">
+            <div class="aspect-[16/9] bg-slate-100 dark:bg-slate-800">
+              <img src="autofarm.png" alt="AutoFarm" class="w-full h-full object-cover" />
+            </div>
+            <div class="p-4">
+              <p class="font-mono text-[11px] uppercase tracking-wider text-accent-light dark:text-accent-dark mb-1">Automation</p>
+              <h4 class="text-sm font-semibold text-slate-900 dark:text-white">AutoFarm</h4>
+              <p class="mt-1.5 text-xs text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-2">
+                An agricultural robot that ploughs, sows, and waters, accelerating indoor crop growth with artificial light.
+              </p>
+            </div>
+          </article>
+
+          <!-- ROS 2 VS Code Extension -->
+          <a href="https://github.com/Ashrith5321/vs_code_ros2_extension" target="_blank" rel="noopener" class="card group rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden hover:shadow-md hover:border-slate-300 dark:hover:border-slate-700">
+            <div class="aspect-[16/9] dotgrid flex items-center justify-center px-4 text-center">
+              <span class="font-mono text-[11px] text-slate-500 dark:text-slate-400">TypeScript · ROS 2 tooling</span>
+            </div>
+            <div class="p-4">
+              <p class="font-mono text-[11px] uppercase tracking-wider text-accent-light dark:text-accent-dark mb-1">Developer Tools</p>
+              <h4 class="text-sm font-semibold text-slate-900 dark:text-white inline-flex items-center gap-1.5">
+                ROS 2 VS Code Extension
+                <svg class="h-3 w-3 text-slate-400 group-hover:translate-x-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg>
+              </h4>
+              <p class="mt-1.5 text-xs text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-2">
+                A Visual Studio Code extension that streamlines ROS 2 development workflows inside the editor.
+              </p>
+            </div>
+          </a>
+
+          <!-- Adaptive Robotic Manipulator -->
+          <a href="https://github.com/Ashrith5321/Adaptive-robotic-manipulator" target="_blank" rel="noopener" class="card group rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden hover:shadow-md hover:border-slate-300 dark:hover:border-slate-700">
+            <div class="aspect-[16/9] dotgrid flex items-center justify-center px-4 text-center">
+              <span class="font-mono text-[11px] text-slate-500 dark:text-slate-400">See · Learn · Act</span>
+            </div>
+            <div class="p-4">
+              <p class="font-mono text-[11px] uppercase tracking-wider text-accent-light dark:text-accent-dark mb-1">Manipulation</p>
+              <h4 class="text-sm font-semibold text-slate-900 dark:text-white inline-flex items-center gap-1.5">
+                Adaptive Robotic Manipulator
+                <svg class="h-3 w-3 text-slate-400 group-hover:translate-x-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg>
+              </h4>
+              <p class="mt-1.5 text-xs text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-2">
+                A robotic arm that can see, learn, and act to manipulate a variety of objects.
+              </p>
+            </div>
+          </a>
+
+          <!-- Warehouse Robotics Swarm -->
+          <a href="https://github.com/Ashrith5321/warehouse-robotics-swarm" target="_blank" rel="noopener" class="card group rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden hover:shadow-md hover:border-slate-300 dark:hover:border-slate-700">
+            <div class="aspect-[16/9] dotgrid flex items-center justify-center px-4 text-center">
+              <span class="font-mono text-[11px] text-slate-500 dark:text-slate-400">Multi-Robot Logistics</span>
+            </div>
+            <div class="p-4">
+              <p class="font-mono text-[11px] uppercase tracking-wider text-accent-light dark:text-accent-dark mb-1">Swarm Robotics</p>
+              <h4 class="text-sm font-semibold text-slate-900 dark:text-white inline-flex items-center gap-1.5">
+                Warehouse Robotics Swarm
+                <svg class="h-3 w-3 text-slate-400 group-hover:translate-x-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg>
+              </h4>
+              <p class="mt-1.5 text-xs text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-2">
+                A multi-robot warehouse logistics system using swarm robotics for coordinated task allocation.
+              </p>
+            </div>
+          </a>
+
+        </div>
+      </section>
+
+      <hr class="border-slate-200 dark:border-slate-800" />
+
+      <!-- Skills -->
+      <section id="skills" class="py-12 sm:py-14 scroll-mt-20">
+        <div class="flex items-baseline gap-3 mb-8">
+          <span class="font-mono text-sm text-accent-light dark:text-accent-dark">06</span>
+          <h2 class="font-serif text-2xl font-semibold text-slate-900 dark:text-white">Skills</h2>
+        </div>
+
+        <div class="rounded-xl overflow-hidden border border-slate-800 bg-slate-900 shadow-sm">
+          <!-- window chrome -->
+          <div class="flex items-center gap-2 px-4 py-3 border-b border-slate-700/70 bg-slate-800/60">
+            <span class="terminal-dot bg-red-400"></span>
+            <span class="terminal-dot bg-yellow-400"></span>
+            <span class="terminal-dot bg-green-400"></span>
+            <span class="ml-3 font-mono text-xs text-slate-400">ashrith@umich: ~/skills</span>
+          </div>
+          <!-- body -->
+          <div class="p-5 sm:p-6 font-mono text-[13px] leading-relaxed overflow-x-auto whitespace-nowrap sm:whitespace-normal">
+            <p class="text-slate-500">// the stack I work in</p>
+
+            <p class="mt-3"><span class="text-emerald-400">ashrith@umich</span><span class="text-slate-500">:</span><span class="text-sky-400">~</span><span class="text-slate-500">$ </span><span class="text-slate-200">cat languages.txt</span></p>
+            <p class="text-slate-300">C++ · Python · Julia · MATLAB</p>
+
+            <p class="mt-3"><span class="text-emerald-400">ashrith@umich</span><span class="text-slate-500">:</span><span class="text-sky-400">~</span><span class="text-slate-500">$ </span><span class="text-slate-200">cat robotics.txt</span></p>
+            <p class="text-slate-300">ROS 2 · RViz · Gazebo / Isaac Sim · tf2 · rosbag · STM32 · Arduino · I²C · sensor fusion</p>
+
+            <p class="mt-3"><span class="text-emerald-400">ashrith@umich</span><span class="text-slate-500">:</span><span class="text-sky-400">~</span><span class="text-slate-500">$ </span><span class="text-slate-200">cat control_perception.txt</span></p>
+            <p class="text-slate-300">LQR · PID · particle &amp; Bayes filters · Kalman filtering · SLAM · A* / D* · RRT · occupancy mapping</p>
+
+            <p class="mt-3"><span class="text-emerald-400">ashrith@umich</span><span class="text-slate-500">:</span><span class="text-sky-400">~</span><span class="text-slate-500">$ </span><span class="text-slate-200">cat math_design.txt</span></p>
+            <p class="text-slate-300">linear algebra · ODEs/PDEs · optimization · least-squares · Jacobians · SolidWorks · kinematics</p>
+
+            <p class="mt-3"><span class="text-emerald-400">ashrith@umich</span><span class="text-slate-500">:</span><span class="text-sky-400">~</span><span class="text-slate-500">$ </span><span class="text-slate-200">cat dev_tools.txt</span></p>
+            <p class="text-slate-300">Linux · Git · CMake · gdb · profiling · reproducible builds</p>
+
+            <p class="mt-3"><span class="text-emerald-400">ashrith@umich</span><span class="text-slate-500">:</span><span class="text-sky-400">~</span><span class="text-slate-500">$ </span><span class="inline-block w-2 h-4 bg-slate-300 align-text-bottom animate-pulse"></span></p>
+          </div>
+        </div>
+      </section>
+
+      <hr class="border-slate-200 dark:border-slate-800" />
+
+      <!-- Awards -->
+      <section id="awards" class="py-12 sm:py-14 scroll-mt-20">
+        <div class="flex items-baseline gap-3 mb-8">
+          <span class="font-mono text-sm text-accent-light dark:text-accent-dark">07</span>
+          <h2 class="font-serif text-2xl font-semibold text-slate-900 dark:text-white">Awards &amp; Achievements</h2>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-5">
+
+          <div class="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5">
+            <h3 class="text-base font-semibold text-slate-900 dark:text-white">World Robotics Olympiad — India Rank 3</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+              Developed a piezoelectric energy-harvesting system converting automobile pressure into electricity to power electric vehicles.
+            </p>
+          </div>
+
+          <div class="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5">
+            <h3 class="text-base font-semibold text-slate-900 dark:text-white">International Youth Robotics Olympiad</h3>
+            <p class="mt-1 text-sm text-slate-500 dark:text-slate-500">1 Gold, 2 Silver, 1 Bronze</p>
+            <ul class="mt-2 space-y-1 text-sm text-slate-600 dark:text-slate-400 list-disc list-outside pl-4">
+              <li>Autonomous vehicle for watering plants with a robotic arm and soil detection.</li>
+              <li>Smart mini-farm with automated irrigation, planting, and sensing.</li>
+              <li>Greenhouse accelerating growth 2.2× using a controlled climate.</li>
+            </ul>
+          </div>
+
+          <div class="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5">
+            <h3 class="text-base font-semibold text-slate-900 dark:text-white">American Mathematics Competitions</h3>
+            <p class="mt-1 text-sm text-slate-500 dark:text-slate-500">2× USAMO qualifier, 3× AIME qualifier</p>
+            <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+              Qualified for the USAMO (top 300 of ~300,000 globally) and earned AIME distinction across three years.
+            </p>
+          </div>
+
+          <div class="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5">
+            <h3 class="text-base font-semibold text-slate-900 dark:text-white">Other Olympiads</h3>
+            <ul class="mt-2 space-y-1 text-sm text-slate-600 dark:text-slate-400 list-disc list-outside pl-4">
+              <li>F=MA: qualified for the USA Physics Olympiad (USAPhO), strong in mechanics.</li>
+              <li>ZIO: cleared the Indian Computing Olympiad, with algorithmic and mathematical reasoning.</li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+      <hr class="border-slate-200 dark:border-slate-800" />
+
+      <!-- Contact -->
+      <section id="contact" class="py-12 sm:py-14 scroll-mt-20">
+        <div class="flex items-baseline gap-3 mb-6">
+          <span class="font-mono text-sm text-accent-light dark:text-accent-dark">08</span>
+          <h2 class="font-serif text-2xl font-semibold text-slate-900 dark:text-white">Contact</h2>
+        </div>
+        <p class="max-w-xl text-slate-600 dark:text-slate-400 leading-relaxed">
+          I am always glad to connect with fellow researchers, collaborators, and curious minds.
+          Reach out and let's build something together.
+        </p>
+        <div class="mt-6 grid sm:grid-cols-2 gap-x-10 gap-y-3 text-sm max-w-xl">
+          <div class="flex justify-between border-b border-slate-200 dark:border-slate-800 py-2">
+            <span class="text-slate-500 dark:text-slate-500">Email</span>
+            <a href="mailto:ashed@umich.edu" class="text-accent-light dark:text-accent-dark hover:underline">ashed@umich.edu</a>
+          </div>
+          <div class="flex justify-between border-b border-slate-200 dark:border-slate-800 py-2">
+            <span class="text-slate-500 dark:text-slate-500">Email</span>
+            <a href="mailto:eashrith@gmail.com" class="text-accent-light dark:text-accent-dark hover:underline">eashrith@gmail.com</a>
+          </div>
+          <div class="flex justify-between border-b border-slate-200 dark:border-slate-800 py-2">
+            <span class="text-slate-500 dark:text-slate-500">Phone</span>
+            <a href="tel:+12487343391" class="text-accent-light dark:text-accent-dark hover:underline">(248) 734-3391</a>
+          </div>
+          <div class="flex justify-between border-b border-slate-200 dark:border-slate-800 py-2">
+            <span class="text-slate-500 dark:text-slate-500">LinkedIn</span>
+            <a href="https://www.linkedin.com/in/ashrith-edukulla-633b141a7/" target="_blank" rel="noopener" class="text-accent-light dark:text-accent-dark hover:underline">ashrith-edukulla</a>
+          </div>
+          <div class="flex justify-between border-b border-slate-200 dark:border-slate-800 py-2">
+            <span class="text-slate-500 dark:text-slate-500">GitHub</span>
+            <a href="https://github.com/ashrith5321" target="_blank" rel="noopener" class="text-accent-light dark:text-accent-dark hover:underline">ashrith5321</a>
+          </div>
+          <div class="flex justify-between border-b border-slate-200 dark:border-slate-800 py-2">
+            <span class="text-slate-500 dark:text-slate-500">Resume</span>
+            <a href="resume.pdf" target="_blank" rel="noopener" class="text-accent-light dark:text-accent-dark hover:underline">View PDF</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="border-t border-slate-200 dark:border-slate-800">
+      <div class="max-w-4xl mx-auto px-5 sm:px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500 dark:text-slate-500">
+        <span>Ashrith Edukulla · Ann Arbor, Michigan</span>
+        <a href="/plan" class="hover:text-slate-700 dark:hover:text-slate-300 transition-colors">Robotics &amp; AI roadmap</a>
+      </div>
+    </footer>
+
     <script>
-        const menuToggle = document.getElementById("menuToggle");
-        const navMenu = document.getElementById("navMenu");
+      // Theme toggle
+      var toggle = document.getElementById("themeToggle");
+      toggle.addEventListener("click", function () {
+        var isDark = document.documentElement.classList.toggle("dark");
+        try {
+          localStorage.setItem("theme", isDark ? "dark" : "light");
+        } catch (e) {}
+      });
 
-        menuToggle?.addEventListener("click", () => {
-          navMenu.classList.toggle("hidden");
+      // Scroll progress
+      var bar = document.getElementById("progress");
+      window.addEventListener("scroll", function () {
+        var top = document.documentElement.scrollTop;
+        var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        bar.style.width = (height > 0 ? (top / height) * 100 : 0) + "%";
+      });
+
+      // Scroll reveal (no flash for above-the-fold content)
+      var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!reduceMotion && "IntersectionObserver" in window) {
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) {
+                e.target.classList.add("is-visible");
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.08, rootMargin: "0px 0px -40px 0px" }
+        );
+        document.querySelectorAll("main section").forEach(function (s) {
+          s.classList.add("reveal");
+          if (s.getBoundingClientRect().top < window.innerHeight) {
+            s.classList.add("is-visible");
+          } else {
+            io.observe(s);
+          }
         });
-    </script>
+      }
 
+      // Hero: animated RRT-style motion-planning graph (on-brand, lightweight, vanilla canvas)
+      (function () {
+        var canvas = document.getElementById("hero-canvas");
+        if (!canvas || !canvas.getContext) return;
+        var ctx = canvas.getContext("2d");
+        var prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        var W = 0, H = 0, dpr = 1, nodes = [], running = false, last = 0;
+
+        function stroke(a) {
+          return document.documentElement.classList.contains("dark")
+            ? "rgba(96,165,250," + a + ")"
+            : "rgba(29,78,216," + a + ")";
+        }
+        function resize() {
+          var r = canvas.getBoundingClientRect();
+          W = r.width; H = r.height;
+          if (W === 0 || H === 0) return;
+          dpr = Math.min(window.devicePixelRatio || 1, 2);
+          canvas.width = Math.round(W * dpr);
+          canvas.height = Math.round(H * dpr);
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          reset();
+        }
+        function reset() {
+          nodes = [{ x: W * 0.7, y: H * 0.55, p: -1 }];
+        }
+        function rand() { return ((Math.sin(nodes.length * 12.9898 + W * 0.123) * 43758.5453) % 1 + 1) % 1; }
+        function extend() {
+          // bias sampling toward the right half so the tree fills the area behind the photo
+          var tx = (0.35 + Math.random() * 0.65) * W;
+          var ty = Math.random() * H;
+          var bi = 0, bd = Infinity;
+          for (var i = 0; i < nodes.length; i++) {
+            var dx = nodes[i].x - tx, dy = nodes[i].y - ty, d = dx * dx + dy * dy;
+            if (d < bd) { bd = d; bi = i; }
+          }
+          var n = nodes[bi];
+          var ang = Math.atan2(ty - n.y, tx - n.x);
+          var stepLen = Math.min(28, Math.sqrt(bd) || 28);
+          var nx = n.x + Math.cos(ang) * stepLen;
+          var ny = n.y + Math.sin(ang) * stepLen;
+          if (nx < 0 || nx > W || ny < 0 || ny > H) return;
+          nodes.push({ x: nx, y: ny, p: bi });
+          if (nodes.length > 150) reset();
+        }
+        function draw() {
+          ctx.clearRect(0, 0, W, H);
+          ctx.lineWidth = 1;
+          ctx.strokeStyle = stroke(0.16);
+          ctx.beginPath();
+          for (var i = 1; i < nodes.length; i++) {
+            var n = nodes[i], p = nodes[n.p];
+            ctx.moveTo(p.x, p.y); ctx.lineTo(n.x, n.y);
+          }
+          ctx.stroke();
+          ctx.fillStyle = stroke(0.28);
+          for (var j = 0; j < nodes.length; j++) {
+            ctx.beginPath();
+            ctx.arc(nodes[j].x, nodes[j].y, j === 0 ? 3 : 1.4, 0, 6.2832);
+            ctx.fill();
+          }
+        }
+        function loop(t) {
+          if (!running) return;
+          if (t - last > 45) { extend(); extend(); last = t; }
+          draw();
+          requestAnimationFrame(loop);
+        }
+        function start() { if (!running) { running = true; requestAnimationFrame(loop); } }
+        function stop() { running = false; }
+
+        window.addEventListener("resize", resize);
+        document.addEventListener("visibilitychange", function () {
+          document.hidden ? stop() : start();
+        });
+        if ("IntersectionObserver" in window) {
+          new IntersectionObserver(function (entries) {
+            entries[0].isIntersecting ? start() : stop();
+          }, { threshold: 0 }).observe(canvas);
+        }
+
+        resize();
+        if (prefersReduced) {
+          for (var k = 0; k < 130; k++) extend();
+          draw();
+        } else {
+          start();
+        }
+      })();
+    </script>
   </body>
 </html>
