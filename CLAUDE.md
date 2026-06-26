@@ -8,12 +8,11 @@ Clean, minimal research-style layout — no animations, no canvas scenes.
 
 ## Architecture
 The site is a single static file: `index.html`. No build step, no framework.
-- Tailwind via CDN (`cdn.tailwindcss.com`) with class-based dark mode
+- Tailwind via CDN (`cdn.tailwindcss.com`), light theme only (no dark mode)
 - Fonts: Inter / Newsreader (Google Fonts)
-- Minimal vanilla JS for: theme toggle, mobile menu, scroll-spy, project filter, back-to-top
+- Minimal vanilla JS for: mobile menu, scroll-spy, project filter, back-to-top
 
 ## Page features
-- Light/dark theme toggle (localStorage + prefers-color-scheme, flash-free)
 - Scroll-spy nav highlighting
 - Responsive mobile menu
 - Project filter pills (data-proj tags: embodied/av/slam/swarm/hw)
@@ -25,7 +24,7 @@ Education → Experience (Research & Teaching) → Projects (Featured + More) �
 Awards → Contact
 
 ## Conventions
-- Every visual must work in BOTH light and dark mode
+- Light theme only — no dark mode classes or toggle
 - Content edits: all portfolio text lives directly in `index.html` sections
 - Contact email: ashed@umich.edu · resume: `resume.pdf`
 

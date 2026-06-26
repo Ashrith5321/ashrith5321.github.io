@@ -20,26 +20,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,16..72,400;0,16..72,500;0,16..72,600;1,16..72,400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,16..72,400;0,16..72,500;0,16..72,600;1,16..72,400&display=swap"
       rel="stylesheet"
     />
-
-    <script>
-      (function () {
-        try {
-          var stored = localStorage.getItem("theme");
-          var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-          if (stored === "dark" || (!stored && prefersDark)) {
-            document.documentElement.classList.add("dark");
-          }
-        } catch (e) {}
-      })();
-    </script>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
-        darkMode: "class",
         theme: {
           extend: {
             fontFamily: {
@@ -48,8 +35,12 @@
             },
             colors: {
               accent: {
-                light: "#1d4ed8",
-                dark: "#60a5fa",
+                50: "#eff6ff",
+                100: "#dbeafe",
+                500: "#3b82f6",
+                600: "#2563eb",
+                700: "#1d4ed8",
+                800: "#1e40af",
               },
             },
           },
@@ -60,26 +51,30 @@
     <style>
       html { scroll-behavior: smooth; }
       body { font-family: "Inter", system-ui, sans-serif; }
-      ::selection { background: rgba(29, 78, 216, 0.15); }
-      .dark ::selection { background: rgba(96, 165, 250, 0.25); }
+      ::selection { background: rgba(37, 99, 235, 0.14); }
 
+      /* Nav */
       a.nav-link { position: relative; }
       a.nav-link::after {
         content: "";
         position: absolute;
         left: 0;
-        bottom: -2px;
-        height: 1px;
+        bottom: -4px;
+        height: 2px;
         width: 0;
-        background: currentColor;
-        transition: width 0.2s ease;
+        background: #2563eb;
+        border-radius: 1px;
+        transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
       }
       a.nav-link:hover::after { width: 100%; }
+      a.nav-link.active { color: #2563eb; font-weight: 500; }
+      a.nav-link.active::after { width: 100%; background: #2563eb; }
 
-      a.nav-link.active { color: #1d4ed8; }
-      .dark a.nav-link.active { color: #60a5fa; }
-      a.nav-link.active::after { width: 100%; }
+      /* Header shadow on scroll */
+      header { box-shadow: 0 0 0 0 rgba(0,0,0,0); transition: box-shadow 0.3s ease; }
+      header.scrolled { box-shadow: 0 1px 12px rgba(0,0,0,0.06); }
 
+      /* Mobile menu */
       #mobileMenu {
         max-height: 0;
         overflow: hidden;
@@ -87,220 +82,313 @@
       }
       #mobileMenu.open { max-height: 26rem; }
 
+      /* Back to top */
       #toTop {
         opacity: 0;
         pointer-events: none;
-        transition: opacity 0.25s ease;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        transform: translateY(8px);
       }
       #toTop.show {
         opacity: 1;
         pointer-events: auto;
+        transform: translateY(0);
       }
 
+      /* Cards */
+      .card {
+        border-radius: 12px;
+        border: 1px solid #e2e8f0;
+        background: #fff;
+        transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+      }
+      .card:hover {
+        box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+        border-color: #cbd5e1;
+        transform: translateY(-2px);
+      }
+
+      /* Project filter pills */
       .proj-pill {
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        font-size: 12px;
-        padding: 6px 14px;
+        font-size: 13px;
+        font-weight: 500;
+        padding: 7px 16px;
         border-radius: 9999px;
-        border: 1px solid rgba(100, 116, 139, 0.4);
-        color: #475569;
-        transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+        border: 1px solid #e2e8f0;
+        color: #64748b;
+        background: #fff;
+        cursor: pointer;
+        transition: all 0.2s ease;
       }
-      .dark .proj-pill { color: #94a3b8; border-color: rgba(71, 85, 105, 0.6); }
-      .proj-pill:hover { border-color: #1d4ed8; color: #1d4ed8; }
-      .dark .proj-pill:hover { border-color: #60a5fa; color: #60a5fa; }
-      .proj-pill.active { background: #0f172a; color: #fff; border-color: #0f172a; }
-      .dark .proj-pill.active { background: #fff; color: #0f172a; border-color: #fff; }
-      .proj-pill .pc { opacity: 0.5; font-size: 11px; }
+      .proj-pill:hover { border-color: #2563eb; color: #2563eb; background: #eff6ff; }
+      .proj-pill.active { background: #1e293b; color: #fff; border-color: #1e293b; }
+      .proj-pill .pc { opacity: 0.55; font-size: 11px; }
       .proj-hidden { display: none !important; }
+
+      /* Skill tags */
+      .skill-tag {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 6px;
+        font-size: 13px;
+        color: #475569;
+        background: #f1f5f9;
+        border: 1px solid #e2e8f0;
+      }
+
+      /* Tech chips on project cards */
+      .tech-chip {
+        font-size: 11px;
+        padding: 3px 10px;
+        border-radius: 6px;
+        background: #f8fafc;
+        color: #64748b;
+        border: 1px solid #f1f5f9;
+        font-weight: 500;
+      }
+
+      /* Section heading accent */
+      .section-heading {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .section-heading::before {
+        content: "";
+        display: block;
+        width: 3px;
+        height: 24px;
+        background: #2563eb;
+        border-radius: 2px;
+      }
+
+      /* Timeline dot */
+      .timeline-item { position: relative; padding-left: 24px; }
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 8px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #2563eb;
+        box-shadow: 0 0 0 3px #dbeafe;
+      }
+      .timeline-item::after {
+        content: "";
+        position: absolute;
+        left: 3.5px;
+        top: 20px;
+        bottom: -28px;
+        width: 1px;
+        background: #e2e8f0;
+      }
+      .timeline-item:last-child::after { display: none; }
+
+      /* News items */
+      .news-item {
+        position: relative;
+        padding-left: 20px;
+      }
+      .news-item::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 8px;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #2563eb;
+      }
+
+      /* Subtle link arrow animation */
+      .link-arrow { transition: transform 0.2s ease; }
+      a:hover .link-arrow { transform: translate(2px, -2px); }
     </style>
   </head>
 
-  <body class="bg-stone-50 text-slate-700 dark:bg-slate-950 dark:text-slate-300 antialiased transition-colors duration-300">
+  <body class="bg-white text-slate-600 antialiased">
 
     <!-- Navigation -->
-    <header class="sticky top-0 z-50 border-b border-slate-200/80 dark:border-slate-800 bg-stone-50/80 dark:bg-slate-950/80 backdrop-blur">
-      <div class="max-w-3xl mx-auto px-5 sm:px-6 h-14 flex items-center justify-between gap-4">
-        <a href="#top" class="font-serif text-lg font-semibold text-slate-900 dark:text-white tracking-tight">
+    <header id="siteHeader" class="sticky top-0 z-50 border-b border-slate-100 bg-white/85 backdrop-blur-md">
+      <div class="max-w-4xl mx-auto px-6 sm:px-8 h-16 flex items-center justify-between gap-4">
+        <a href="#top" class="font-serif text-lg font-semibold text-slate-900 tracking-tight hover:text-accent-700 transition-colors">
           Ashrith Edukulla
         </a>
 
-        <nav class="hidden md:flex items-center gap-6 text-sm text-slate-600 dark:text-slate-400">
-          <a href="#about" class="nav-link hover:text-slate-900 dark:hover:text-white">About</a>
-          <a href="#research" class="nav-link hover:text-slate-900 dark:hover:text-white">Research</a>
-          <a href="#experience" class="nav-link hover:text-slate-900 dark:hover:text-white">Experience</a>
-          <a href="#projects" class="nav-link hover:text-slate-900 dark:hover:text-white">Projects</a>
-          <a href="#contact" class="nav-link hover:text-slate-900 dark:hover:text-white">Contact</a>
+        <nav class="hidden md:flex items-center gap-8 text-sm text-slate-500">
+          <a href="#about" class="nav-link hover:text-slate-800">About</a>
+          <a href="#research" class="nav-link hover:text-slate-800">Research</a>
+          <a href="#experience" class="nav-link hover:text-slate-800">Experience</a>
+          <a href="#projects" class="nav-link hover:text-slate-800">Projects</a>
+          <a href="#contact" class="nav-link hover:text-slate-800">Contact</a>
         </nav>
 
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-3">
           <a
             href="resume.pdf"
             target="_blank"
             rel="noopener"
-            class="hidden sm:inline-flex items-center text-sm px-3 py-1.5 rounded-md border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-slate-400 dark:hover:border-slate-500 transition-colors"
+            class="hidden sm:inline-flex items-center gap-1.5 text-sm px-4 py-2 rounded-lg bg-accent-700 text-white font-medium hover:bg-accent-800 transition-colors"
           >
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
             CV
           </a>
           <button
             id="menuToggle"
             aria-label="Open menu"
             aria-expanded="false"
-            class="md:hidden inline-flex items-center justify-center h-9 w-9 rounded-md border border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-slate-400 dark:hover:border-slate-500 transition-colors"
+            class="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-lg border border-slate-200 text-slate-500 hover:bg-slate-50 hover:border-slate-300 transition-colors"
           >
             <svg id="menuIconOpen" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
             <svg id="menuIconClose" class="hidden h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"></path></svg>
-          </button>
-          <button
-            id="themeToggle"
-            aria-label="Toggle color theme"
-            title="Toggle light / dark"
-            class="inline-flex items-center justify-center h-9 w-9 rounded-md border border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-slate-400 dark:hover:border-slate-500 transition-colors"
-          >
-            <svg class="hidden dark:block h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="4"></circle>
-              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
-            </svg>
-            <svg class="block dark:hidden h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-            </svg>
           </button>
         </div>
       </div>
 
       <!-- Mobile menu -->
-      <div id="mobileMenu" class="md:hidden border-t border-slate-200/80 dark:border-slate-800 bg-stone-50 dark:bg-slate-950">
-        <nav class="max-w-3xl mx-auto px-5 sm:px-6 py-3 grid grid-cols-2 gap-x-4 gap-y-1 text-sm text-slate-600 dark:text-slate-400">
-          <a href="#about" class="mob-link py-2 hover:text-slate-900 dark:hover:text-white">About</a>
-          <a href="#research" class="mob-link py-2 hover:text-slate-900 dark:hover:text-white">Research</a>
-          <a href="#experience" class="mob-link py-2 hover:text-slate-900 dark:hover:text-white">Experience</a>
-          <a href="#projects" class="mob-link py-2 hover:text-slate-900 dark:hover:text-white">Projects</a>
-          <a href="#skills" class="mob-link py-2 hover:text-slate-900 dark:hover:text-white">Skills</a>
-          <a href="#contact" class="mob-link py-2 hover:text-slate-900 dark:hover:text-white">Contact</a>
-          <a href="resume.pdf" target="_blank" rel="noopener" class="col-span-2 mt-1 inline-flex items-center justify-center gap-2 rounded-md bg-slate-900 dark:bg-white px-4 py-2 text-sm font-medium text-white dark:text-slate-900">
+      <div id="mobileMenu" class="md:hidden border-t border-slate-100 bg-white">
+        <nav class="max-w-4xl mx-auto px-6 sm:px-8 py-4 grid grid-cols-2 gap-x-4 gap-y-1 text-sm text-slate-500">
+          <a href="#about" class="mob-link py-2.5 hover:text-slate-800 transition-colors">About</a>
+          <a href="#research" class="mob-link py-2.5 hover:text-slate-800 transition-colors">Research</a>
+          <a href="#experience" class="mob-link py-2.5 hover:text-slate-800 transition-colors">Experience</a>
+          <a href="#projects" class="mob-link py-2.5 hover:text-slate-800 transition-colors">Projects</a>
+          <a href="#skills" class="mob-link py-2.5 hover:text-slate-800 transition-colors">Skills</a>
+          <a href="#contact" class="mob-link py-2.5 hover:text-slate-800 transition-colors">Contact</a>
+          <a href="resume.pdf" target="_blank" rel="noopener" class="col-span-2 mt-2 inline-flex items-center justify-center gap-2 rounded-lg bg-accent-700 px-4 py-2.5 text-sm font-medium text-white hover:bg-accent-800 transition-colors">
             Download CV
           </a>
         </nav>
       </div>
     </header>
 
-    <main id="top" class="max-w-3xl mx-auto px-5 sm:px-6">
+    <main id="top" class="max-w-4xl mx-auto px-6 sm:px-8">
 
       <!-- Hero -->
-      <section class="pt-14 pb-10 sm:pt-20 sm:pb-14">
-        <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-8">
+      <section class="pt-16 pb-14 sm:pt-24 sm:pb-20">
+        <div class="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-10">
           <div class="flex-1">
-            <p class="text-sm uppercase tracking-[0.15em] text-accent-light dark:text-accent-dark mb-2">Robotics Researcher</p>
-            <h1 class="font-serif text-4xl sm:text-5xl font-semibold text-slate-900 dark:text-white tracking-tight">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-50 border border-accent-100 mb-4">
+              <span class="w-1.5 h-1.5 rounded-full bg-accent-500"></span>
+              <span class="text-xs font-medium text-accent-700 tracking-wide uppercase">Robotics Researcher</span>
+            </div>
+            <h1 class="font-serif text-4xl sm:text-5xl font-semibold text-slate-900 tracking-tight leading-[1.1]">
               Ashrith Edukulla
             </h1>
-            <p class="mt-3 text-lg text-slate-700 dark:text-slate-300 max-w-xl leading-snug">
-              I build <span class="font-medium text-slate-900 dark:text-white">Vision-Language-Action models</span>
+            <p class="mt-4 text-lg sm:text-xl text-slate-600 max-w-xl leading-relaxed">
+              I build <span class="font-semibold text-slate-800">Vision-Language-Action models</span>
               for robot navigation and autonomous driving.
             </p>
-            <p class="mt-2 text-sm text-slate-500 dark:text-slate-500">
+            <p class="mt-2 text-sm text-slate-400">
               Robotics Engineering, University of Michigan &middot; Ann Arbor, MI
             </p>
 
-            <p class="mt-5 max-w-xl text-slate-600 dark:text-slate-400 leading-relaxed">
+            <p class="mt-6 max-w-xl text-slate-500 leading-relaxed">
               My work brings classical state estimation together with deep learning — from SLAM and sensor fusion
               to language-conditioned policies — to make autonomy that holds up in the real world.
             </p>
 
-            <div class="mt-6 flex flex-wrap items-center gap-3">
-              <a href="#projects" class="inline-flex items-center gap-2 rounded-md bg-slate-900 dark:bg-white px-4 py-2 text-sm font-medium text-white dark:text-slate-900 hover:opacity-90 transition-opacity">
+            <div class="mt-8 flex flex-wrap items-center gap-3">
+              <a href="#projects" class="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-5 py-2.5 text-sm font-medium text-white hover:bg-slate-800 transition-colors shadow-sm">
                 View projects
                 <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
               </a>
-              <a href="resume.pdf" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-md border border-slate-300 dark:border-slate-700 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 hover:border-slate-400 dark:hover:border-slate-500 transition-colors">
+              <a href="resume.pdf" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-lg border border-slate-200 px-5 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:border-slate-300 transition-colors">
                 Download CV
               </a>
             </div>
 
-            <div class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm">
-              <a href="mailto:ashed@umich.edu" class="inline-flex items-center gap-2 text-accent-light dark:text-accent-dark hover:underline">
+            <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
+              <a href="mailto:ashed@umich.edu" class="inline-flex items-center gap-2 text-slate-500 hover:text-accent-700 transition-colors">
                 <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 6-10 7L2 6"></path></svg>
                 ashed@umich.edu
               </a>
-              <a href="https://github.com/ashrith5321" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-accent-light dark:text-accent-dark hover:underline">
+              <a href="https://github.com/ashrith5321" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-slate-500 hover:text-accent-700 transition-colors">
                 <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.575.106.785-.25.785-.555 0-.274-.01-1-.015-1.965-3.196.695-3.87-1.54-3.87-1.54-.523-1.33-1.278-1.683-1.278-1.683-1.044-.714.08-.7.08-.7 1.154.082 1.762 1.185 1.762 1.185 1.026 1.758 2.693 1.25 3.35.955.103-.743.402-1.25.73-1.538-2.552-.29-5.236-1.276-5.236-5.677 0-1.254.448-2.28 1.183-3.084-.119-.29-.513-1.46.112-3.042 0 0 .965-.309 3.163 1.178a11 11 0 0 1 5.76 0c2.197-1.487 3.16-1.178 3.16-1.178.627 1.582.233 2.752.114 3.042.737.804 1.182 1.83 1.182 3.084 0 4.412-2.688 5.384-5.248 5.668.413.355.78 1.057.78 2.13 0 1.538-.014 2.778-.014 3.156 0 .308.207.667.79.554A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"></path></svg>
                 GitHub
               </a>
-              <a href="https://linkedin.com/in/ashrith-edukulla-633b141a7" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-accent-light dark:text-accent-dark hover:underline">
+              <a href="https://linkedin.com/in/ashrith-edukulla-633b141a7" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-slate-500 hover:text-accent-700 transition-colors">
                 <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14C2.24 0 0 2.24 0 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5V5c0-2.76-2.24-5-5-5zM7.12 20.45H3.56V9h3.56v11.45zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28z"></path></svg>
                 LinkedIn
               </a>
             </div>
           </div>
 
-          <div class="shrink-0">
+          <div class="shrink-0 relative">
+            <div class="absolute -inset-4 bg-gradient-to-br from-accent-100/60 to-blue-50/40 rounded-3xl -z-10"></div>
             <img
               src="ashrith.jpg"
               alt="Ashrith Edukulla"
-              class="w-32 h-32 sm:w-40 sm:h-40 rounded-2xl object-cover ring-1 ring-slate-200 dark:ring-slate-800"
+              class="w-36 h-36 sm:w-44 sm:h-44 rounded-2xl object-cover ring-2 ring-white shadow-lg"
             />
           </div>
         </div>
       </section>
 
       <!-- At a glance -->
-      <section aria-label="At a glance" class="pb-10">
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-px rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-200 dark:bg-slate-800">
-          <div class="bg-stone-50 dark:bg-slate-950 p-5 text-center">
-            <div class="font-serif text-3xl font-semibold text-slate-900 dark:text-white">3.96<span class="text-xl text-slate-400 dark:text-slate-600">/4.0</span></div>
-            <div class="mt-1 text-xs text-slate-500 dark:text-slate-500">GPA &middot; Robotics @ Michigan</div>
+      <section aria-label="At a glance" class="pb-14">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div class="rounded-xl bg-gradient-to-br from-slate-50 to-white border border-slate-100 p-5 text-center">
+            <div class="font-serif text-3xl font-bold text-slate-900">3.96<span class="text-lg font-normal text-slate-300">/4.0</span></div>
+            <div class="mt-1.5 text-xs font-medium text-slate-400 uppercase tracking-wide">GPA &middot; Robotics</div>
           </div>
-          <div class="bg-stone-50 dark:bg-slate-950 p-5 text-center">
-            <div class="font-serif text-3xl font-semibold text-slate-900 dark:text-white">15+</div>
-            <div class="mt-1 text-xs text-slate-500 dark:text-slate-500">Robotics &amp; ML projects</div>
+          <div class="rounded-xl bg-gradient-to-br from-slate-50 to-white border border-slate-100 p-5 text-center">
+            <div class="font-serif text-3xl font-bold text-slate-900">15+</div>
+            <div class="mt-1.5 text-xs font-medium text-slate-400 uppercase tracking-wide">Projects</div>
           </div>
-          <div class="bg-stone-50 dark:bg-slate-950 p-5 text-center">
-            <div class="font-serif text-3xl font-semibold text-slate-900 dark:text-white">3</div>
-            <div class="mt-1 text-xs text-slate-500 dark:text-slate-500">Courses taught as IA</div>
+          <div class="rounded-xl bg-gradient-to-br from-slate-50 to-white border border-slate-100 p-5 text-center">
+            <div class="font-serif text-3xl font-bold text-slate-900">3</div>
+            <div class="mt-1.5 text-xs font-medium text-slate-400 uppercase tracking-wide">Courses as IA</div>
           </div>
-          <div class="bg-stone-50 dark:bg-slate-950 p-5 text-center">
-            <div class="font-serif text-3xl font-semibold text-slate-900 dark:text-white">Top 300</div>
-            <div class="mt-1 text-xs text-slate-500 dark:text-slate-500">USAMO &middot; of ~300k</div>
+          <div class="rounded-xl bg-gradient-to-br from-slate-50 to-white border border-slate-100 p-5 text-center">
+            <div class="font-serif text-3xl font-bold text-slate-900">Top 300</div>
+            <div class="mt-1.5 text-xs font-medium text-slate-400 uppercase tracking-wide">USAMO</div>
           </div>
         </div>
       </section>
 
-      <hr class="border-slate-200 dark:border-slate-800" />
-
       <!-- News -->
-      <section id="news" class="py-12 sm:py-14 scroll-mt-20">
-        <h2 class="font-serif text-2xl font-semibold text-slate-900 dark:text-white mb-6">News</h2>
-        <ul class="space-y-3 max-w-2xl">
-          <li class="grid grid-cols-[5rem_1fr] sm:grid-cols-[6rem_1fr] gap-4 text-sm">
-            <span class="text-xs text-slate-400 dark:text-slate-500 pt-0.5">Jun 2026</span>
-            <span class="text-slate-600 dark:text-slate-400">Joined <span class="font-medium text-slate-900 dark:text-white">Nift</span> to work on autonomous driving with Vision-Language-Action models.</span>
+      <section id="news" class="py-16 scroll-mt-20 border-t border-slate-100">
+        <h2 class="font-serif text-2xl font-semibold text-slate-900 mb-8 section-heading">News</h2>
+        <ul class="space-y-4 max-w-2xl">
+          <li class="news-item">
+            <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+              <span class="text-xs font-medium text-accent-600 whitespace-nowrap">Jun 2026</span>
+              <span class="text-sm text-slate-600">Joined <span class="font-semibold text-slate-800">Nift</span> to work on autonomous driving with Vision-Language-Action models.</span>
+            </div>
           </li>
-          <li class="grid grid-cols-[5rem_1fr] sm:grid-cols-[6rem_1fr] gap-4 text-sm">
-            <span class="text-xs text-slate-400 dark:text-slate-500 pt-0.5">May 2026</span>
-            <span class="text-slate-600 dark:text-slate-400">Began researching learning-based navigation models at the <span class="font-medium text-slate-900 dark:text-white">Scalable Spatial Intelligence Lab</span>.</span>
+          <li class="news-item">
+            <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+              <span class="text-xs font-medium text-accent-600 whitespace-nowrap">May 2026</span>
+              <span class="text-sm text-slate-600">Began researching learning-based navigation models at the <span class="font-semibold text-slate-800">Scalable Spatial Intelligence Lab</span>.</span>
+            </div>
           </li>
-          <li class="grid grid-cols-[5rem_1fr] sm:grid-cols-[6rem_1fr] gap-4 text-sm">
-            <span class="text-xs text-slate-400 dark:text-slate-500 pt-0.5">Jan 2026</span>
-            <span class="text-slate-600 dark:text-slate-400">Joined the <span class="font-medium text-slate-900 dark:text-white">Field Robotics Group (FRoG) Lab</span> and started as Instructional Aide for EECS 467 (Autonomous Robotics).</span>
+          <li class="news-item">
+            <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+              <span class="text-xs font-medium text-accent-600 whitespace-nowrap">Jan 2026</span>
+              <span class="text-sm text-slate-600">Joined the <span class="font-semibold text-slate-800">Field Robotics Group (FRoG) Lab</span> and started as Instructional Aide for EECS 467.</span>
+            </div>
           </li>
-          <li class="grid grid-cols-[5rem_1fr] sm:grid-cols-[6rem_1fr] gap-4 text-sm">
-            <span class="text-xs text-slate-400 dark:text-slate-500 pt-0.5">Dec 2025</span>
-            <span class="text-slate-600 dark:text-slate-400">Wrapped a semester researching reconfigurable robot swarms at the <span class="font-medium text-slate-900 dark:text-white">SAM Lab</span> — paper in preparation.</span>
+          <li class="news-item">
+            <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
+              <span class="text-xs font-medium text-accent-600 whitespace-nowrap">Dec 2025</span>
+              <span class="text-sm text-slate-600">Wrapped a semester researching reconfigurable robot swarms at the <span class="font-semibold text-slate-800">SAM Lab</span> — paper in preparation.</span>
+            </div>
           </li>
         </ul>
       </section>
 
-      <hr class="border-slate-200 dark:border-slate-800" />
-
       <!-- About -->
-      <section id="about" class="py-12 sm:py-14 scroll-mt-20">
-        <h2 class="font-serif text-2xl font-semibold text-slate-900 dark:text-white mb-6">About</h2>
-        <div class="space-y-4 text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl">
+      <section id="about" class="py-16 scroll-mt-20 border-t border-slate-100">
+        <h2 class="font-serif text-2xl font-semibold text-slate-900 mb-8 section-heading">About</h2>
+        <div class="space-y-4 text-slate-500 leading-[1.8] max-w-2xl">
           <p>
             I am a Robotics Engineering student at the
-            <a href="https://umich.edu" target="_blank" rel="noopener" class="text-accent-light dark:text-accent-dark hover:underline">University of Michigan</a>,
+            <a href="https://umich.edu" target="_blank" rel="noopener" class="text-accent-700 hover:text-accent-800 underline underline-offset-2 decoration-accent-200 hover:decoration-accent-400 transition-colors">University of Michigan</a>,
             focused on perception, navigation, and learning for autonomous systems. I am currently researching
             navigation models at the Scalable Spatial Intelligence Lab.
           </p>
@@ -324,55 +412,51 @@
         </div>
       </section>
 
-      <hr class="border-slate-200 dark:border-slate-800" />
-
       <!-- Research focus -->
-      <section id="research" class="py-12 sm:py-14 scroll-mt-20">
-        <h2 class="font-serif text-2xl font-semibold text-slate-900 dark:text-white mb-6">Research Focus</h2>
+      <section id="research" class="py-16 scroll-mt-20 border-t border-slate-100">
+        <h2 class="font-serif text-2xl font-semibold text-slate-900 mb-8 section-heading">Research Focus</h2>
         <div class="grid sm:grid-cols-2 gap-5">
-          <div class="rounded-xl border border-slate-200 dark:border-slate-800 p-5">
-            <h3 class="text-base font-semibold text-slate-900 dark:text-white">Vision-Language-Action Models</h3>
-            <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Language-conditioned policies that perceive, reason, and act — for navigation and autonomous driving.</p>
-            <p class="mt-3 text-[11px] text-slate-400 dark:text-slate-500">Nift &middot; DreamerVLA &middot; CARLA SFF</p>
+          <div class="card p-6 border-l-[3px] border-l-accent-500">
+            <h3 class="text-base font-bold text-slate-800">Vision-Language-Action Models</h3>
+            <p class="mt-2 text-sm text-slate-500 leading-relaxed">Language-conditioned policies that perceive, reason, and act — for navigation and autonomous driving.</p>
+            <p class="mt-4 text-[11px] font-medium text-slate-400 tracking-wide">Nift &middot; DreamerVLA &middot; CARLA SFF</p>
           </div>
-          <div class="rounded-xl border border-slate-200 dark:border-slate-800 p-5">
-            <h3 class="text-base font-semibold text-slate-900 dark:text-white">Navigation &amp; Embodied AI</h3>
-            <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Learning navigation models and policies that generalize to unseen, uncertain environments.</p>
-            <p class="mt-3 text-[11px] text-slate-400 dark:text-slate-500">Scalable Spatial Intelligence Lab &middot; ObjectNav BC</p>
+          <div class="card p-6 border-l-[3px] border-l-emerald-500">
+            <h3 class="text-base font-bold text-slate-800">Navigation &amp; Embodied AI</h3>
+            <p class="mt-2 text-sm text-slate-500 leading-relaxed">Learning navigation models and policies that generalize to unseen, uncertain environments.</p>
+            <p class="mt-4 text-[11px] font-medium text-slate-400 tracking-wide">Scalable Spatial Intelligence Lab &middot; ObjectNav BC</p>
           </div>
-          <div class="rounded-xl border border-slate-200 dark:border-slate-800 p-5">
-            <h3 class="text-base font-semibold text-slate-900 dark:text-white">SLAM &amp; State Estimation</h3>
-            <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Probabilistic localization and mapping — invariant EKF, particle filters, and multi-sensor fusion.</p>
-            <p class="mt-3 text-[11px] text-slate-400 dark:text-slate-500">Full-Stack AV (IEKF) &middot; MBot SLAM</p>
+          <div class="card p-6 border-l-[3px] border-l-violet-500">
+            <h3 class="text-base font-bold text-slate-800">SLAM &amp; State Estimation</h3>
+            <p class="mt-2 text-sm text-slate-500 leading-relaxed">Probabilistic localization and mapping — invariant EKF, particle filters, and multi-sensor fusion.</p>
+            <p class="mt-4 text-[11px] font-medium text-slate-400 tracking-wide">Full-Stack AV (IEKF) &middot; MBot SLAM</p>
           </div>
-          <div class="rounded-xl border border-slate-200 dark:border-slate-800 p-5">
-            <h3 class="text-base font-semibold text-slate-900 dark:text-white">Planning &amp; Exploration</h3>
-            <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Sampling-based and search planning under real-time and uncertainty constraints.</p>
-            <p class="mt-3 text-[11px] text-slate-400 dark:text-slate-500">FRoG Lab &middot; Ocean Frontier (NBVP)</p>
+          <div class="card p-6 border-l-[3px] border-l-amber-500">
+            <h3 class="text-base font-bold text-slate-800">Planning &amp; Exploration</h3>
+            <p class="mt-2 text-sm text-slate-500 leading-relaxed">Sampling-based and search planning under real-time and uncertainty constraints.</p>
+            <p class="mt-4 text-[11px] font-medium text-slate-400 tracking-wide">FRoG Lab &middot; Ocean Frontier (NBVP)</p>
           </div>
         </div>
       </section>
 
-      <hr class="border-slate-200 dark:border-slate-800" />
-
       <!-- Education -->
-      <section id="education" class="py-12 sm:py-14 scroll-mt-20">
-        <h2 class="font-serif text-2xl font-semibold text-slate-900 dark:text-white mb-6">Education</h2>
-        <div class="flex items-start gap-4">
-          <img src="michigan_logo.png" alt="University of Michigan" class="w-11 h-11 object-contain rounded-md shrink-0" />
+      <section id="education" class="py-16 scroll-mt-20 border-t border-slate-100">
+        <h2 class="font-serif text-2xl font-semibold text-slate-900 mb-8 section-heading">Education</h2>
+        <div class="card p-6 sm:p-8 flex items-start gap-5">
+          <img src="michigan_logo.png" alt="University of Michigan" class="w-12 h-12 object-contain rounded-lg shrink-0 bg-slate-50 p-1" />
           <div class="flex-1">
             <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-              <h3 class="text-base font-semibold text-slate-900 dark:text-white">University of Michigan, Ann Arbor</h3>
-              <span class="text-sm text-slate-500 dark:text-slate-500">Aug 2024 – Dec 2026</span>
+              <h3 class="text-base font-bold text-slate-800">University of Michigan, Ann Arbor</h3>
+              <span class="text-sm font-medium text-slate-400">Aug 2024 – Dec 2026</span>
             </div>
-            <p class="text-sm text-slate-600 dark:text-slate-400 mt-0.5">B.E. in Robotics Engineering — GPA 3.96 / 4.0</p>
-            <p class="text-sm text-slate-600 dark:text-slate-400 mt-3">
-              <span class="font-medium text-slate-700 dark:text-slate-300">Honors &amp; Awards:</span>
+            <p class="text-sm text-slate-500 mt-1">B.E. in Robotics Engineering — <span class="font-semibold text-slate-700">GPA 3.96 / 4.0</span></p>
+            <p class="text-sm text-slate-500 mt-4">
+              <span class="font-semibold text-slate-700">Honors &amp; Awards:</span>
               Ranked 3rd, World Robotics Olympiad &middot; 4x medalist, International Youth Robotics Contest &middot;
               3x AMC qualifier &middot; 2x AIME qualifier
             </p>
-            <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">
-              <span class="font-medium text-slate-700 dark:text-slate-300">Selected coursework:</span>
+            <p class="text-sm text-slate-500 mt-3">
+              <span class="font-semibold text-slate-700">Selected coursework:</span>
               Control of Robotic Systems (ROB 415), Planning &amp; ROS Integration (ROB 320),
               Localization &amp; Mapping (ROB 330), Data Structures &amp; Algorithms (EECS 281),
               SLAM, Robot Optimization, Linear Algebra, Robot Differential Equations
@@ -381,136 +465,132 @@
         </div>
       </section>
 
-      <hr class="border-slate-200 dark:border-slate-800" />
-
       <!-- Experience -->
-      <section id="experience" class="py-12 sm:py-14 scroll-mt-20">
-        <h2 class="font-serif text-2xl font-semibold text-slate-900 dark:text-white mb-8">Experience</h2>
+      <section id="experience" class="py-16 scroll-mt-20 border-t border-slate-100">
+        <h2 class="font-serif text-2xl font-semibold text-slate-900 mb-10 section-heading">Experience</h2>
 
-        <h3 class="text-xs uppercase tracking-[0.18em] text-slate-500 dark:text-slate-500 mb-6">Research &amp; Industry</h3>
-        <div class="space-y-9">
+        <h3 class="text-xs uppercase tracking-[0.2em] font-semibold text-accent-600 mb-8">Research &amp; Industry</h3>
+        <div class="space-y-10">
 
-          <article class="grid sm:grid-cols-[1fr_auto] gap-1 sm:gap-6">
-            <div>
-              <h3 class="text-base font-semibold text-slate-900 dark:text-white">Nift</h3>
-              <p class="text-sm text-slate-500 dark:text-slate-400">Autonomous Vehicles — Vision-Language-Action Models</p>
-              <ul class="mt-2 space-y-1 text-sm text-slate-600 dark:text-slate-400 list-disc list-outside pl-4">
-                <li>Developing autonomous-driving autonomy driven by vision-language-action (VLA) models.</li>
-                <li>Connecting perception with language-conditioned policies to plan and act in real-world driving scenarios.</li>
-                <li>Building and evaluating VLA-based driving behaviors in simulation toward on-vehicle deployment.</li>
-              </ul>
+          <article class="timeline-item">
+            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1">
+              <h3 class="text-base font-bold text-slate-800">Nift</h3>
+              <span class="text-sm font-medium text-slate-400">Jun 2026 – Present</span>
             </div>
-            <span class="text-sm text-slate-500 dark:text-slate-500 sm:text-right whitespace-nowrap">Jun 2026 – Present</span>
+            <p class="text-sm text-slate-400 mb-2">Autonomous Vehicles — Vision-Language-Action Models</p>
+            <ul class="space-y-1.5 text-sm text-slate-500 list-disc list-outside pl-4">
+              <li>Developing autonomous-driving autonomy driven by vision-language-action (VLA) models.</li>
+              <li>Connecting perception with language-conditioned policies to plan and act in real-world driving scenarios.</li>
+              <li>Building and evaluating VLA-based driving behaviors in simulation toward on-vehicle deployment.</li>
+            </ul>
           </article>
 
-          <article class="grid sm:grid-cols-[1fr_auto] gap-1 sm:gap-6">
-            <div>
-              <h3 class="text-base font-semibold text-slate-900 dark:text-white">Scalable Spatial Intelligence Lab</h3>
-              <p class="text-sm text-slate-500 dark:text-slate-400">Undergraduate Researcher — Navigation Models &middot; University of Michigan</p>
-              <ul class="mt-2 space-y-1 text-sm text-slate-600 dark:text-slate-400 list-disc list-outside pl-4">
-                <li>Developing learning-based navigation models that let robots move through and reason about unseen environments.</li>
-                <li>Researching scalable spatial representations that connect perception to long-horizon navigation policies.</li>
-                <li>Building and evaluating models in simulation toward transfer onto real robotic platforms.</li>
-              </ul>
+          <article class="timeline-item">
+            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1">
+              <h3 class="text-base font-bold text-slate-800">Scalable Spatial Intelligence Lab</h3>
+              <span class="text-sm font-medium text-slate-400">May 2026 – Present</span>
             </div>
-            <span class="text-sm text-slate-500 dark:text-slate-500 sm:text-right whitespace-nowrap">May 2026 – Present</span>
+            <p class="text-sm text-slate-400 mb-2">Undergraduate Researcher — Navigation Models &middot; University of Michigan</p>
+            <ul class="space-y-1.5 text-sm text-slate-500 list-disc list-outside pl-4">
+              <li>Developing learning-based navigation models that let robots move through and reason about unseen environments.</li>
+              <li>Researching scalable spatial representations that connect perception to long-horizon navigation policies.</li>
+              <li>Building and evaluating models in simulation toward transfer onto real robotic platforms.</li>
+            </ul>
           </article>
 
-          <article class="grid sm:grid-cols-[1fr_auto] gap-1 sm:gap-6">
-            <div>
-              <h3 class="text-base font-semibold text-slate-900 dark:text-white">Field Robotics Group (FRoG) Lab</h3>
-              <p class="text-sm text-slate-500 dark:text-slate-400">Undergraduate Researcher — Perception &amp; Planning &middot; University of Michigan</p>
-              <ul class="mt-2 space-y-1 text-sm text-slate-600 dark:text-slate-400 list-disc list-outside pl-4">
-                <li>Researching robot perception and motion planning under real-time and uncertainty constraints.</li>
-                <li>Developing and evaluating planning algorithms informed by perception outputs and environment representations.</li>
-                <li>Contributing to projects aimed at robust, scalable autonomy for real-world robotic systems.</li>
-              </ul>
+          <article class="timeline-item">
+            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1">
+              <h3 class="text-base font-bold text-slate-800">Field Robotics Group (FRoG) Lab</h3>
+              <span class="text-sm font-medium text-slate-400">Jan 2026 – Present</span>
             </div>
-            <span class="text-sm text-slate-500 dark:text-slate-500 sm:text-right whitespace-nowrap">Jan 2026 – Present</span>
+            <p class="text-sm text-slate-400 mb-2">Undergraduate Researcher — Perception &amp; Planning &middot; University of Michigan</p>
+            <ul class="space-y-1.5 text-sm text-slate-500 list-disc list-outside pl-4">
+              <li>Researching robot perception and motion planning under real-time and uncertainty constraints.</li>
+              <li>Developing and evaluating planning algorithms informed by perception outputs and environment representations.</li>
+              <li>Contributing to projects aimed at robust, scalable autonomy for real-world robotic systems.</li>
+            </ul>
           </article>
 
-          <article class="grid sm:grid-cols-[1fr_auto] gap-1 sm:gap-6">
-            <div>
-              <h3 class="text-base font-semibold text-slate-900 dark:text-white">Synergic Adaptive Machines (SAM) Lab</h3>
-              <p class="text-sm text-slate-500 dark:text-slate-400">Undergraduate Researcher &middot; University of Michigan</p>
-              <ul class="mt-2 space-y-1 text-sm text-slate-600 dark:text-slate-400 list-disc list-outside pl-4">
-                <li>Researched macro- and micro-scale robot swarms under Prof. Steven Ceron to study collective motion and environmental interaction.</li>
-                <li>Developed decentralized control strategies for physical reconfiguration and emergent coordination.</li>
-                <li>Co-authoring a paper on adaptive swarm behavior and distributed control in reconfigurable collectives.</li>
-              </ul>
+          <article class="timeline-item">
+            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1">
+              <h3 class="text-base font-bold text-slate-800">Synergic Adaptive Machines (SAM) Lab</h3>
+              <span class="text-sm font-medium text-slate-400">Aug 2025 – Dec 2025</span>
             </div>
-            <span class="text-sm text-slate-500 dark:text-slate-500 sm:text-right whitespace-nowrap">Aug 2025 – Dec 2025</span>
+            <p class="text-sm text-slate-400 mb-2">Undergraduate Researcher &middot; University of Michigan</p>
+            <ul class="space-y-1.5 text-sm text-slate-500 list-disc list-outside pl-4">
+              <li>Researched macro- and micro-scale robot swarms under Prof. Steven Ceron to study collective motion and environmental interaction.</li>
+              <li>Developed decentralized control strategies for physical reconfiguration and emergent coordination.</li>
+              <li>Co-authoring a paper on adaptive swarm behavior and distributed control in reconfigurable collectives.</li>
+            </ul>
           </article>
 
-          <article class="grid sm:grid-cols-[1fr_auto] gap-1 sm:gap-6">
-            <div>
-              <h3 class="text-base font-semibold text-slate-900 dark:text-white">Michigan Mars Rover Team</h3>
-              <p class="text-sm text-slate-500 dark:text-slate-400">Embedded Software Engineer &middot; Ann Arbor, MI</p>
-              <ul class="mt-2 space-y-1 text-sm text-slate-600 dark:text-slate-400 list-disc list-outside pl-4">
-                <li>Programmed STM32 firmware to control servos, LEDs, and accelerometers for subsystem actuation and feedback.</li>
-                <li>Developed embedded drivers and ROS nodes for motor coordination and sensor data handling.</li>
-                <li>Contributed to navigation and control tuning for reliable performance in dynamic rover environments.</li>
-              </ul>
+          <article class="timeline-item">
+            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1">
+              <h3 class="text-base font-bold text-slate-800">Michigan Mars Rover Team</h3>
+              <span class="text-sm font-medium text-slate-400">Nov 2024 – May 2025</span>
             </div>
-            <span class="text-sm text-slate-500 dark:text-slate-500 sm:text-right whitespace-nowrap">Nov 2024 – May 2025</span>
+            <p class="text-sm text-slate-400 mb-2">Embedded Software Engineer &middot; Ann Arbor, MI</p>
+            <ul class="space-y-1.5 text-sm text-slate-500 list-disc list-outside pl-4">
+              <li>Programmed STM32 firmware to control servos, LEDs, and accelerometers for subsystem actuation and feedback.</li>
+              <li>Developed embedded drivers and ROS nodes for motor coordination and sensor data handling.</li>
+              <li>Contributed to navigation and control tuning for reliable performance in dynamic rover environments.</li>
+            </ul>
           </article>
         </div>
 
-        <h3 class="text-xs uppercase tracking-[0.18em] text-slate-500 dark:text-slate-500 mb-6 mt-12">Teaching</h3>
-        <div class="space-y-9">
+        <h3 class="text-xs uppercase tracking-[0.2em] font-semibold text-accent-600 mb-8 mt-14">Teaching</h3>
+        <div class="space-y-10">
 
-          <article class="grid sm:grid-cols-[1fr_auto] gap-1 sm:gap-6">
-            <div>
-              <h3 class="text-base font-semibold text-slate-900 dark:text-white">EECS 467: Autonomous Robotics</h3>
-              <p class="text-sm text-slate-500 dark:text-slate-400">Instructional Aide &middot; University of Michigan</p>
-              <ul class="mt-2 space-y-1 text-sm text-slate-600 dark:text-slate-400 list-disc list-outside pl-4">
-                <li>Supported instruction in perception, SLAM, planning, and control for autonomous robotics.</li>
-                <li>Helped students with ROS-based labs, system debugging, and algorithm implementation.</li>
-                <li>Held office hours on multi-sensor fusion, navigation, and robot software architecture.</li>
-              </ul>
+          <article class="timeline-item">
+            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1">
+              <h3 class="text-base font-bold text-slate-800">EECS 467: Autonomous Robotics</h3>
+              <span class="text-sm font-medium text-slate-400">Jan 2026 – May 2026</span>
             </div>
-            <span class="text-sm text-slate-500 dark:text-slate-500 sm:text-right whitespace-nowrap">Jan 2026 – May 2026</span>
+            <p class="text-sm text-slate-400 mb-2">Instructional Aide &middot; University of Michigan</p>
+            <ul class="space-y-1.5 text-sm text-slate-500 list-disc list-outside pl-4">
+              <li>Supported instruction in perception, SLAM, planning, and control for autonomous robotics.</li>
+              <li>Helped students with ROS-based labs, system debugging, and algorithm implementation.</li>
+              <li>Held office hours on multi-sensor fusion, navigation, and robot software architecture.</li>
+            </ul>
           </article>
 
-          <article class="grid sm:grid-cols-[1fr_auto] gap-1 sm:gap-6">
-            <div>
-              <h3 class="text-base font-semibold text-slate-900 dark:text-white">ROB 201: Robot Differential Equations</h3>
-              <p class="text-sm text-slate-500 dark:text-slate-400">Instructional Aide &middot; University of Michigan</p>
-              <ul class="mt-2 space-y-1 text-sm text-slate-600 dark:text-slate-400 list-disc list-outside pl-4">
-                <li>Supported instruction in ODE modeling, linear systems, and control for undergraduate robotics students.</li>
-                <li>Led weekly office hours and problem sessions using Julia notebooks, simulations, and visualizations.</li>
-                <li>Assisted with labs and grading on Laplace transforms, transfer functions, and stability analysis.</li>
-              </ul>
+          <article class="timeline-item">
+            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1">
+              <h3 class="text-base font-bold text-slate-800">ROB 201: Robot Differential Equations</h3>
+              <span class="text-sm font-medium text-slate-400">Aug 2025 – Dec 2025</span>
             </div>
-            <span class="text-sm text-slate-500 dark:text-slate-500 sm:text-right whitespace-nowrap">Aug 2025 – Dec 2025</span>
+            <p class="text-sm text-slate-400 mb-2">Instructional Aide &middot; University of Michigan</p>
+            <ul class="space-y-1.5 text-sm text-slate-500 list-disc list-outside pl-4">
+              <li>Supported instruction in ODE modeling, linear systems, and control for undergraduate robotics students.</li>
+              <li>Led weekly office hours and problem sessions using Julia notebooks, simulations, and visualizations.</li>
+              <li>Assisted with labs and grading on Laplace transforms, transfer functions, and stability analysis.</li>
+            </ul>
           </article>
 
-          <article class="grid sm:grid-cols-[1fr_auto] gap-1 sm:gap-6">
-            <div>
-              <h3 class="text-base font-semibold text-slate-900 dark:text-white">ROB 101: Computational Linear Algebra</h3>
-              <p class="text-sm text-slate-500 dark:text-slate-400">Instructional Aide &middot; University of Michigan</p>
-              <ul class="mt-2 space-y-1 text-sm text-slate-600 dark:text-slate-400 list-disc list-outside pl-4">
-                <li>Supported instruction in computational linear algebra — linear systems, least squares, and matrix factorizations — taught in Julia.</li>
-                <li>Held office hours and guided students through programming assignments and weekly problem sets.</li>
-                <li>Helped students connect linear-algebra foundations to robotics and autonomy applications.</li>
-              </ul>
+          <article class="timeline-item">
+            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1">
+              <h3 class="text-base font-bold text-slate-800">ROB 101: Computational Linear Algebra</h3>
+              <span class="text-sm font-medium text-slate-400">Jan 2025 – Apr 2025</span>
             </div>
-            <span class="text-sm text-slate-500 dark:text-slate-500 sm:text-right whitespace-nowrap">Jan 2025 – Apr 2025</span>
+            <p class="text-sm text-slate-400 mb-2">Instructional Aide &middot; University of Michigan</p>
+            <ul class="space-y-1.5 text-sm text-slate-500 list-disc list-outside pl-4">
+              <li>Supported instruction in computational linear algebra — linear systems, least squares, and matrix factorizations — taught in Julia.</li>
+              <li>Held office hours and guided students through programming assignments and weekly problem sets.</li>
+              <li>Helped students connect linear-algebra foundations to robotics and autonomy applications.</li>
+            </ul>
           </article>
         </div>
       </section>
 
-      <hr class="border-slate-200 dark:border-slate-800" />
-
       <!-- Projects -->
-      <section id="projects" class="py-12 sm:py-14 scroll-mt-20">
-        <h2 class="font-serif text-2xl font-semibold text-slate-900 dark:text-white mb-3">Projects</h2>
-        <p class="mb-6 max-w-2xl text-sm text-slate-500 dark:text-slate-400">
+      <section id="projects" class="py-16 scroll-mt-20 border-t border-slate-100">
+        <h2 class="font-serif text-2xl font-semibold text-slate-900 mb-3 section-heading">Projects</h2>
+        <p class="mb-8 max-w-2xl text-sm text-slate-400 ml-[15px]">
           Selected work across embodied AI, autonomous driving, SLAM, and multi-robot systems.
         </p>
 
         <!-- Filter pills -->
-        <div id="projFilters" class="mb-8 flex flex-wrap gap-2" role="tablist" aria-label="Filter projects">
+        <div id="projFilters" class="mb-10 flex flex-wrap gap-2" role="tablist" aria-label="Filter projects">
           <button data-filter="all" class="proj-pill active">All <span class="pc">18</span></button>
           <button data-filter="embodied" class="proj-pill">Embodied AI <span class="pc">3</span></button>
           <button data-filter="av" class="proj-pill">Autonomous Driving <span class="pc">2</span></button>
@@ -520,45 +600,45 @@
         </div>
 
         <!-- Featured -->
-        <h3 class="text-xs uppercase tracking-[0.18em] text-slate-500 dark:text-slate-500 mb-5">Featured Research</h3>
+        <h3 class="text-xs uppercase tracking-[0.2em] font-semibold text-accent-600 mb-6">Featured Research</h3>
 
         <!-- Spotlight: ObjectNav BC -->
-        <article data-proj="embodied" class="mb-5 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+        <article data-proj="embodied" class="mb-6 card overflow-hidden">
           <div class="grid md:grid-cols-2">
-            <div class="bg-slate-100 dark:bg-slate-900 p-6 sm:p-8 flex flex-col justify-center gap-5 border-b md:border-b-0 md:border-r border-slate-200 dark:border-slate-800">
-              <span class="text-[11px] uppercase tracking-wider text-accent-light dark:text-accent-dark">Flagship &middot; Embodied AI</span>
-              <div class="grid grid-cols-3 gap-3">
+            <div class="bg-gradient-to-br from-slate-50 to-accent-50/30 p-7 sm:p-9 flex flex-col justify-center gap-5 border-b md:border-b-0 md:border-r border-slate-100">
+              <span class="text-[11px] uppercase tracking-wider font-semibold text-accent-600">Flagship &middot; Embodied AI</span>
+              <div class="grid grid-cols-3 gap-4">
                 <div>
-                  <div class="font-serif text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">76K+</div>
-                  <div class="text-[11px] text-slate-500 dark:text-slate-500">VR demos</div>
+                  <div class="font-serif text-2xl sm:text-3xl font-bold text-slate-900">76K+</div>
+                  <div class="text-[11px] text-slate-400 font-medium">VR demos</div>
                 </div>
                 <div>
-                  <div class="font-serif text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">80</div>
-                  <div class="text-[11px] text-slate-500 dark:text-slate-500">HM3D scenes</div>
+                  <div class="font-serif text-2xl sm:text-3xl font-bold text-slate-900">80</div>
+                  <div class="text-[11px] text-slate-400 font-medium">HM3D scenes</div>
                 </div>
                 <div>
-                  <div class="font-serif text-2xl sm:text-3xl font-semibold text-slate-900 dark:text-white">3.28x</div>
-                  <div class="text-[11px] text-slate-500 dark:text-slate-500">inflection weighting</div>
+                  <div class="font-serif text-2xl sm:text-3xl font-bold text-slate-900">3.28x</div>
+                  <div class="text-[11px] text-slate-400 font-medium">inflection weighting</div>
                 </div>
               </div>
-              <p class="text-xs text-slate-500 dark:text-slate-400">ResNet18 + GRU &middot; PIRLNav &middot; Habitat</p>
+              <p class="text-xs text-slate-400 font-medium">ResNet18 + GRU &middot; PIRLNav &middot; Habitat</p>
             </div>
-            <div class="p-6 sm:p-8 flex flex-col justify-center">
-              <h4 class="text-lg font-semibold text-slate-900 dark:text-white">ObjectNav Behavior Cloning — HM3D</h4>
-              <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+            <div class="p-7 sm:p-9 flex flex-col justify-center">
+              <h4 class="text-lg font-bold text-slate-800">ObjectNav Behavior Cloning — HM3D</h4>
+              <p class="mt-3 text-sm text-slate-500 leading-relaxed">
                 Trained a ResNet18 + GRU navigation policy from 76K+ PIRLNav human VR demonstrations across 80 HM3D scenes.
                 Implemented truncated BPTT, 3.28x inflection weighting, and a custom dataset loader to bypass Habitat's strict
                 episode schema — an end-to-end embodied-AI pipeline from raw demonstrations to a deployable navigation policy.
               </p>
               <div class="mt-4 flex flex-wrap gap-1.5">
-                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">PyTorch</span>
-                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Behavior Cloning</span>
-                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Habitat Sim</span>
-                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Embodied AI</span>
+                <span class="tech-chip">PyTorch</span>
+                <span class="tech-chip">Behavior Cloning</span>
+                <span class="tech-chip">Habitat Sim</span>
+                <span class="tech-chip">Embodied AI</span>
               </div>
-              <a href="https://github.com/Ashrith5321/habitat-behavior-cloning-hm3d" target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-1.5 text-sm text-accent-light dark:text-accent-dark hover:underline">
+              <a href="https://github.com/Ashrith5321/habitat-behavior-cloning-hm3d" target="_blank" rel="noopener" class="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-accent-700 hover:text-accent-800 transition-colors">
                 View code on GitHub
-                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg>
+                <svg class="h-3.5 w-3.5 link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg>
               </a>
             </div>
           </div>
@@ -567,275 +647,275 @@
         <div class="grid sm:grid-cols-2 gap-5">
 
           <!-- Ocean Frontier -->
-          <article data-proj="slam" class="flex flex-col rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
-            <div class="p-5 flex flex-col flex-1">
-              <p class="text-[11px] uppercase tracking-wider text-accent-light dark:text-accent-dark mb-1.5">Exploration &amp; Planning</p>
-              <h4 class="text-base font-semibold text-slate-900 dark:text-white">Ocean Frontier 3D Exploration — ROV Shipwreck Survey</h4>
-              <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+          <article data-proj="slam" class="card flex flex-col overflow-hidden">
+            <div class="p-6 flex flex-col flex-1">
+              <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-2">Exploration &amp; Planning</p>
+              <h4 class="text-base font-bold text-slate-800">Ocean Frontier 3D Exploration — ROV Shipwreck Survey</h4>
+              <p class="mt-2 text-sm text-slate-500 leading-relaxed">
                 Autonomous three-phase ROV mission: BFS sweep of unmapped voxels, RRT-biased centroid approach, and full NBVP
                 survey. Detects wrecks via vertical column clustering; fuses stereo depth and sonar into a real-time OctoMap.
               </p>
               <div class="mt-auto pt-4 flex flex-wrap gap-1.5">
-                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">ROS 2</span>
-                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">C++</span>
-                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Sensor Fusion</span>
+                <span class="tech-chip">ROS 2</span>
+                <span class="tech-chip">C++</span>
+                <span class="tech-chip">Sensor Fusion</span>
               </div>
             </div>
           </article>
 
           <!-- CARLA SFF -->
-          <article data-proj="av" class="flex flex-col rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
-            <div class="p-5 flex flex-col flex-1">
-              <p class="text-[11px] uppercase tracking-wider text-accent-light dark:text-accent-dark mb-1.5">AV Safety</p>
-              <h4 class="text-base font-semibold text-slate-900 dark:text-white">CARLA SFF: VLA Safety Evaluation Stack</h4>
-              <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+          <article data-proj="av" class="card flex flex-col overflow-hidden">
+            <div class="p-6 flex flex-col flex-1">
+              <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-2">AV Safety</p>
+              <h4 class="text-base font-bold text-slate-800">CARLA SFF: VLA Safety Evaluation Stack</h4>
+              <p class="mt-2 text-sm text-slate-500 leading-relaxed">
                 A Dockerized CARLA / ROS 2 closed-loop evaluation stack for the Alpamayo VLA. Designed 10+ long-tail scenarios
                 and refactored the safety layer into a formal Safety Force Field (Nister et al., 2019), benchmarked with unit tests.
               </p>
               <div class="mt-auto pt-4 flex flex-wrap gap-1.5">
-                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">CARLA</span>
-                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Docker</span>
-                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">AV Safety</span>
+                <span class="tech-chip">CARLA</span>
+                <span class="tech-chip">Docker</span>
+                <span class="tech-chip">AV Safety</span>
               </div>
             </div>
           </article>
 
           <!-- Satellite Event Camera -->
-          <article data-proj="slam" class="flex flex-col rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
-            <div class="p-5 flex flex-col flex-1">
-              <p class="text-[11px] uppercase tracking-wider text-accent-light dark:text-accent-dark mb-1.5">Perception</p>
-              <h4 class="text-base font-semibold text-slate-900 dark:text-white">Satellite Detection with Event Cameras</h4>
-              <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+          <article data-proj="slam" class="card flex flex-col overflow-hidden">
+            <div class="p-6 flex flex-col flex-1">
+              <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-2">Perception</p>
+              <h4 class="text-base font-bold text-slate-800">Satellite Detection with Event Cameras</h4>
+              <p class="mt-2 text-sm text-slate-500 leading-relaxed">
                 Used event-camera microsecond temporal resolution and high dynamic range to detect low-observable satellite
                 streaks against star-field clutter, with asynchronous spike-pattern processing for space domain awareness.
               </p>
               <div class="mt-auto pt-4 flex flex-wrap gap-1.5">
-                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Event Camera</span>
-                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Computer Vision</span>
+                <span class="tech-chip">Event Camera</span>
+                <span class="tech-chip">Computer Vision</span>
               </div>
             </div>
           </article>
 
           <!-- MBot SLAM -->
-          <article data-proj="slam" class="flex flex-col rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
-            <div class="aspect-[16/9] bg-slate-100 dark:bg-slate-800 overflow-hidden">
+          <article data-proj="slam" class="card flex flex-col overflow-hidden">
+            <div class="aspect-[16/9] bg-slate-100 overflow-hidden">
               <video src="mbot_path.mp4" class="w-full h-full object-cover" autoplay loop muted playsinline></video>
             </div>
-            <div class="p-5 flex flex-col flex-1">
-              <p class="text-[11px] uppercase tracking-wider text-accent-light dark:text-accent-dark mb-1.5">SLAM</p>
-              <h4 class="text-base font-semibold text-slate-900 dark:text-white">MBot Autonomous SLAM System</h4>
-              <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+            <div class="p-6 flex flex-col flex-1">
+              <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-2">SLAM</p>
+              <h4 class="text-base font-bold text-slate-800">MBot Autonomous SLAM System</h4>
+              <p class="mt-2 text-sm text-slate-500 leading-relaxed">
                 Full SLAM on the MBot platform: laser-based localization, occupancy-grid mapping, and autonomous exploration
                 using frontier detection and path planning.
               </p>
               <div class="mt-auto pt-4 flex flex-wrap gap-1.5">
-                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">ROS 2</span>
-                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">SLAM</span>
-                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">A*</span>
+                <span class="tech-chip">ROS 2</span>
+                <span class="tech-chip">SLAM</span>
+                <span class="tech-chip">A*</span>
               </div>
             </div>
           </article>
 
           <!-- Full-Stack AV -->
-          <a href="full_stack_av.html" data-proj="av" class="flex flex-col rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden hover:border-slate-300 dark:hover:border-slate-700 transition-colors">
-            <div class="p-5 flex flex-col flex-1">
-              <p class="text-[11px] uppercase tracking-wider text-accent-light dark:text-accent-dark mb-1.5">Localization</p>
-              <h4 class="text-base font-semibold text-slate-900 dark:text-white inline-flex items-center gap-1.5">
+          <a href="full_stack_av.html" data-proj="av" class="card flex flex-col overflow-hidden group">
+            <div class="p-6 flex flex-col flex-1">
+              <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-2">Localization</p>
+              <h4 class="text-base font-bold text-slate-800 inline-flex items-center gap-1.5">
                 Full-Stack AV: Localization Stack (IEKF)
-                <svg class="h-3.5 w-3.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg>
+                <svg class="h-3.5 w-3.5 text-slate-300 link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg>
               </h4>
-              <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              <p class="mt-2 text-sm text-slate-500 leading-relaxed">
                 An autonomous-vehicle localization pipeline using IEKF sensor fusion (IMU, wheel odometry, GNSS, stereo/mono VO,
-                LiDAR), with map-based corrections for drift-bounded pose tracking. Read the full write-up.
+                LiDAR), with map-based corrections for drift-bounded pose tracking.
               </p>
               <div class="mt-auto pt-4 flex flex-wrap gap-1.5">
-                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">IEKF</span>
-                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">LiDAR</span>
-                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Mapping</span>
+                <span class="tech-chip">IEKF</span>
+                <span class="tech-chip">LiDAR</span>
+                <span class="tech-chip">Mapping</span>
               </div>
             </div>
           </a>
 
           <!-- DreamerVLA -->
-          <a href="https://github.com/Ashrith5321/DreamerVLA" target="_blank" rel="noopener" data-proj="embodied" class="flex flex-col rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden hover:border-slate-300 dark:hover:border-slate-700 transition-colors">
-            <div class="p-5 flex flex-col flex-1">
-              <p class="text-[11px] uppercase tracking-wider text-accent-light dark:text-accent-dark mb-1.5">Learning &amp; Navigation</p>
-              <h4 class="text-base font-semibold text-slate-900 dark:text-white inline-flex items-center gap-1.5">
+          <a href="https://github.com/Ashrith5321/DreamerVLA" target="_blank" rel="noopener" data-proj="embodied" class="card flex flex-col overflow-hidden group">
+            <div class="p-6 flex flex-col flex-1">
+              <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-2">Learning &amp; Navigation</p>
+              <h4 class="text-base font-bold text-slate-800 inline-flex items-center gap-1.5">
                 DreamerVLA
-                <svg class="h-3.5 w-3.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg>
+                <svg class="h-3.5 w-3.5 text-slate-300 link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg>
               </h4>
-              <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              <p class="mt-2 text-sm text-slate-500 leading-relaxed">
                 A vision-language-action (VLA) model for robot navigation and control, exploring how language-conditioned
-                policies can drive embodied agents toward goals. Code on GitHub.
+                policies can drive embodied agents toward goals.
               </p>
               <div class="mt-auto pt-4 flex flex-wrap gap-1.5">
-                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">VLA</span>
-                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">PyTorch</span>
-                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Navigation</span>
+                <span class="tech-chip">VLA</span>
+                <span class="tech-chip">PyTorch</span>
+                <span class="tech-chip">Navigation</span>
               </div>
             </div>
           </a>
 
           <!-- Microbot Planning -->
-          <a href="https://github.com/Synergetic-Adaptive-Machinas-Lab/generalized_planning_mapping_microbots" target="_blank" rel="noopener" data-proj="swarm" class="flex flex-col rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden hover:border-slate-300 dark:hover:border-slate-700 transition-colors">
-            <div class="p-5 flex flex-col flex-1">
-              <p class="text-[11px] uppercase tracking-wider text-accent-light dark:text-accent-dark mb-1.5">Planning &amp; Mapping</p>
-              <h4 class="text-base font-semibold text-slate-900 dark:text-white inline-flex items-center gap-1.5">
+          <a href="https://github.com/Synergetic-Adaptive-Machinas-Lab/generalized_planning_mapping_microbots" target="_blank" rel="noopener" data-proj="swarm" class="card flex flex-col overflow-hidden group">
+            <div class="p-6 flex flex-col flex-1">
+              <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-2">Planning &amp; Mapping</p>
+              <h4 class="text-base font-bold text-slate-800 inline-flex items-center gap-1.5">
                 Generalized Planning &amp; Mapping for Microbots
-                <svg class="h-3.5 w-3.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg>
+                <svg class="h-3.5 w-3.5 text-slate-300 link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg>
               </h4>
-              <p class="mt-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              <p class="mt-2 text-sm text-slate-500 leading-relaxed">
                 Generalized planning and mapping for microrobot systems, developed in the Synergic Adaptive Machines Lab to
                 coordinate motion and reconstruct the environment across many small agents.
               </p>
               <div class="mt-auto pt-4 flex flex-wrap gap-1.5">
-                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Python</span>
-                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Planning</span>
-                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Swarm</span>
+                <span class="tech-chip">Python</span>
+                <span class="tech-chip">Planning</span>
+                <span class="tech-chip">Swarm</span>
               </div>
             </div>
           </a>
         </div>
 
         <!-- More projects -->
-        <h3 class="text-xs uppercase tracking-[0.18em] text-slate-500 dark:text-slate-500 mb-5 mt-12">More Projects</h3>
+        <h3 class="text-xs uppercase tracking-[0.2em] font-semibold text-accent-600 mb-6 mt-14">More Projects</h3>
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
 
           <!-- SAM Motor UI -->
-          <article data-proj="swarm" class="rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
-            <div class="aspect-[16/9] bg-slate-100 dark:bg-slate-800 overflow-hidden">
+          <article data-proj="swarm" class="card overflow-hidden">
+            <div class="aspect-[16/9] bg-slate-50 overflow-hidden">
               <img src="sam-motor-ui.png" alt="9-motor swarm control UI" class="w-full h-full object-cover" />
             </div>
-            <div class="p-4">
-              <p class="text-[11px] uppercase tracking-wider text-accent-light dark:text-accent-dark mb-1">Robotics Systems</p>
-              <h4 class="text-sm font-semibold text-slate-900 dark:text-white">9-Motor Swarm Control UI</h4>
-              <p class="mt-1.5 text-xs text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-2">
+            <div class="p-5">
+              <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-1">Robotics Systems</p>
+              <h4 class="text-sm font-bold text-slate-800">9-Motor Swarm Control UI</h4>
+              <p class="mt-1.5 text-xs text-slate-500 leading-relaxed line-clamp-2">
                 A C++ HTTP + serial bridge and browser UI controlling a 9-motor array with real-time feedback and preset motion patterns.
               </p>
             </div>
           </article>
 
           <!-- Humanoid Leg -->
-          <article data-proj="hw" class="rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
-            <div class="aspect-[16/9] bg-slate-100 dark:bg-slate-800 overflow-hidden">
+          <article data-proj="hw" class="card overflow-hidden">
+            <div class="aspect-[16/9] bg-slate-50 overflow-hidden">
               <video src="humanoid_simulation.webm" class="w-full h-full object-cover" autoplay loop muted playsinline></video>
             </div>
-            <div class="p-4">
-              <p class="text-[11px] uppercase tracking-wider text-accent-light dark:text-accent-dark mb-1">Dynamics</p>
-              <h4 class="text-sm font-semibold text-slate-900 dark:text-white">Humanoid Leg Dynamics</h4>
-              <p class="mt-1.5 text-xs text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-2">
+            <div class="p-5">
+              <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-1">Dynamics</p>
+              <h4 class="text-sm font-bold text-slate-800">Humanoid Leg Dynamics</h4>
+              <p class="mt-1.5 text-xs text-slate-500 leading-relaxed line-clamp-2">
                 MATLAB dynamic simulation of a humanoid leg, modeling joint torques, ground contact, and human-like gait.
               </p>
             </div>
           </article>
 
           <!-- Robotic Limb -->
-          <article data-proj="hw" class="rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
-            <div class="aspect-[16/9] bg-slate-100 dark:bg-slate-800 overflow-hidden">
+          <article data-proj="hw" class="card overflow-hidden">
+            <div class="aspect-[16/9] bg-slate-50 overflow-hidden">
               <img src="robotic_arm.jpg" alt="Motion-sensing robotic limb" class="w-full h-full object-cover" />
             </div>
-            <div class="p-4">
-              <p class="text-[11px] uppercase tracking-wider text-accent-light dark:text-accent-dark mb-1">Embedded</p>
-              <h4 class="text-sm font-semibold text-slate-900 dark:text-white">Motion-Sensing Robotic Limb</h4>
-              <p class="mt-1.5 text-xs text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-2">
+            <div class="p-5">
+              <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-1">Embedded</p>
+              <h4 class="text-sm font-bold text-slate-800">Motion-Sensing Robotic Limb</h4>
+              <p class="mt-1.5 text-xs text-slate-500 leading-relaxed line-clamp-2">
                 An accelerometer-based robotic limb with precise real-time finger control and motion sensing.
               </p>
             </div>
           </article>
 
           <!-- FROST -->
-          <article data-proj="hw" class="rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
-            <div class="aspect-[16/9] bg-slate-100 dark:bg-slate-800 overflow-hidden">
+          <article data-proj="hw" class="card overflow-hidden">
+            <div class="aspect-[16/9] bg-slate-50 overflow-hidden">
               <img src="frost.png" alt="FROST black-ice detection robot" class="w-full h-full object-cover" />
             </div>
-            <div class="p-4">
-              <p class="text-[11px] uppercase tracking-wider text-accent-light dark:text-accent-dark mb-1">Sensing</p>
-              <h4 class="text-sm font-semibold text-slate-900 dark:text-white">FROST</h4>
-              <p class="mt-1.5 text-xs text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-2">
+            <div class="p-5">
+              <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-1">Sensing</p>
+              <h4 class="text-sm font-bold text-slate-800">FROST</h4>
+              <p class="mt-1.5 text-xs text-slate-500 leading-relaxed line-clamp-2">
                 Black-ice detection robot using sensor fusion; alerts pedestrians with LEDs and an audio module.
               </p>
             </div>
           </article>
 
           <!-- HighWay Go -->
-          <article data-proj="hw" class="rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
-            <div class="aspect-[16/9] bg-slate-100 dark:bg-slate-800 overflow-hidden">
+          <article data-proj="hw" class="card overflow-hidden">
+            <div class="aspect-[16/9] bg-slate-50 overflow-hidden">
               <img src="highwaygo.png" alt="HighWay Go" class="w-full h-full object-cover" />
             </div>
-            <div class="p-4">
-              <p class="text-[11px] uppercase tracking-wider text-accent-light dark:text-accent-dark mb-1">Robotics</p>
-              <h4 class="text-sm font-semibold text-slate-900 dark:text-white">HighWay Go</h4>
-              <p class="mt-1.5 text-xs text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-2">
+            <div class="p-5">
+              <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-1">Robotics</p>
+              <h4 class="text-sm font-bold text-slate-800">HighWay Go</h4>
+              <p class="mt-1.5 text-xs text-slate-500 leading-relaxed line-clamp-2">
                 Solar-powered robot that waters plants on highway medians using a robotic arm.
               </p>
             </div>
           </article>
 
           <!-- SmartWheel -->
-          <article data-proj="hw" class="rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
-            <div class="aspect-[16/9] bg-slate-100 dark:bg-slate-800 overflow-hidden">
+          <article data-proj="hw" class="card overflow-hidden">
+            <div class="aspect-[16/9] bg-slate-50 overflow-hidden">
               <img src="smartwheel.png" alt="SmartWheel" class="w-full h-full object-cover" />
             </div>
-            <div class="p-4">
-              <p class="text-[11px] uppercase tracking-wider text-accent-light dark:text-accent-dark mb-1">Energy</p>
-              <h4 class="text-sm font-semibold text-slate-900 dark:text-white">SmartWheel</h4>
-              <p class="mt-1.5 text-xs text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-2">
+            <div class="p-5">
+              <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-1">Energy</p>
+              <h4 class="text-sm font-bold text-slate-800">SmartWheel</h4>
+              <p class="mt-1.5 text-xs text-slate-500 leading-relaxed line-clamp-2">
                 A dual energy-harvesting system drawing from pressure and heat to power EV batteries autonomously.
               </p>
             </div>
           </article>
 
           <!-- AutoFarm -->
-          <article data-proj="hw" class="rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
-            <div class="aspect-[16/9] bg-slate-100 dark:bg-slate-800 overflow-hidden">
+          <article data-proj="hw" class="card overflow-hidden">
+            <div class="aspect-[16/9] bg-slate-50 overflow-hidden">
               <img src="autofarm.png" alt="AutoFarm" class="w-full h-full object-cover" />
             </div>
-            <div class="p-4">
-              <p class="text-[11px] uppercase tracking-wider text-accent-light dark:text-accent-dark mb-1">Automation</p>
-              <h4 class="text-sm font-semibold text-slate-900 dark:text-white">AutoFarm</h4>
-              <p class="mt-1.5 text-xs text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-2">
+            <div class="p-5">
+              <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-1">Automation</p>
+              <h4 class="text-sm font-bold text-slate-800">AutoFarm</h4>
+              <p class="mt-1.5 text-xs text-slate-500 leading-relaxed line-clamp-2">
                 An agricultural robot that ploughs, sows, and waters, accelerating indoor crop growth with artificial light.
               </p>
             </div>
           </article>
 
           <!-- ROS 2 VS Code Extension -->
-          <a href="https://github.com/Ashrith5321/vs_code_ros2_extension" target="_blank" rel="noopener" data-proj="hw" class="rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden hover:border-slate-300 dark:hover:border-slate-700 transition-colors">
-            <div class="p-4">
-              <p class="text-[11px] uppercase tracking-wider text-accent-light dark:text-accent-dark mb-1">Developer Tools</p>
-              <h4 class="text-sm font-semibold text-slate-900 dark:text-white inline-flex items-center gap-1.5">
+          <a href="https://github.com/Ashrith5321/vs_code_ros2_extension" target="_blank" rel="noopener" data-proj="hw" class="card overflow-hidden group">
+            <div class="p-5">
+              <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-1">Developer Tools</p>
+              <h4 class="text-sm font-bold text-slate-800 inline-flex items-center gap-1.5">
                 ROS 2 VS Code Extension
-                <svg class="h-3 w-3 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg>
+                <svg class="h-3 w-3 text-slate-300 link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg>
               </h4>
-              <p class="mt-1.5 text-xs text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-2">
+              <p class="mt-1.5 text-xs text-slate-500 leading-relaxed line-clamp-2">
                 A Visual Studio Code extension that streamlines ROS 2 development workflows inside the editor.
               </p>
             </div>
           </a>
 
           <!-- Adaptive Robotic Manipulator -->
-          <a href="https://github.com/Ashrith5321/Adaptive-robotic-manipulator" target="_blank" rel="noopener" data-proj="embodied" class="rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden hover:border-slate-300 dark:hover:border-slate-700 transition-colors">
-            <div class="p-4">
-              <p class="text-[11px] uppercase tracking-wider text-accent-light dark:text-accent-dark mb-1">Manipulation</p>
-              <h4 class="text-sm font-semibold text-slate-900 dark:text-white inline-flex items-center gap-1.5">
+          <a href="https://github.com/Ashrith5321/Adaptive-robotic-manipulator" target="_blank" rel="noopener" data-proj="embodied" class="card overflow-hidden group">
+            <div class="p-5">
+              <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-1">Manipulation</p>
+              <h4 class="text-sm font-bold text-slate-800 inline-flex items-center gap-1.5">
                 Adaptive Robotic Manipulator
-                <svg class="h-3 w-3 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg>
+                <svg class="h-3 w-3 text-slate-300 link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg>
               </h4>
-              <p class="mt-1.5 text-xs text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-2">
+              <p class="mt-1.5 text-xs text-slate-500 leading-relaxed line-clamp-2">
                 A robotic arm that can see, learn, and act to manipulate a variety of objects.
               </p>
             </div>
           </a>
 
           <!-- Warehouse Robotics Swarm -->
-          <a href="https://github.com/Ashrith5321/warehouse-robotics-swarm" target="_blank" rel="noopener" data-proj="swarm" class="rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden hover:border-slate-300 dark:hover:border-slate-700 transition-colors">
-            <div class="p-4">
-              <p class="text-[11px] uppercase tracking-wider text-accent-light dark:text-accent-dark mb-1">Swarm Robotics</p>
-              <h4 class="text-sm font-semibold text-slate-900 dark:text-white inline-flex items-center gap-1.5">
+          <a href="https://github.com/Ashrith5321/warehouse-robotics-swarm" target="_blank" rel="noopener" data-proj="swarm" class="card overflow-hidden group">
+            <div class="p-5">
+              <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-1">Swarm Robotics</p>
+              <h4 class="text-sm font-bold text-slate-800 inline-flex items-center gap-1.5">
                 Warehouse Robotics Swarm
-                <svg class="h-3 w-3 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg>
+                <svg class="h-3 w-3 text-slate-300 link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg>
               </h4>
-              <p class="mt-1.5 text-xs text-slate-600 dark:text-slate-400 leading-relaxed line-clamp-2">
+              <p class="mt-1.5 text-xs text-slate-500 leading-relaxed line-clamp-2">
                 A multi-robot warehouse logistics system using swarm robotics for coordinated task allocation.
               </p>
             </div>
@@ -843,66 +923,101 @@
         </div>
       </section>
 
-      <hr class="border-slate-200 dark:border-slate-800" />
-
       <!-- Skills -->
-      <section id="skills" class="py-12 sm:py-14 scroll-mt-20">
-        <h2 class="font-serif text-2xl font-semibold text-slate-900 dark:text-white mb-6">Skills</h2>
-        <div class="space-y-4 max-w-2xl">
+      <section id="skills" class="py-16 scroll-mt-20 border-t border-slate-100">
+        <h2 class="font-serif text-2xl font-semibold text-slate-900 mb-8 section-heading">Skills</h2>
+        <div class="space-y-6 max-w-3xl">
           <div>
-            <h3 class="text-sm font-medium text-slate-900 dark:text-white">Languages</h3>
-            <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">C++ &middot; Python &middot; Julia &middot; MATLAB</p>
+            <h3 class="text-xs uppercase tracking-[0.2em] font-semibold text-slate-400 mb-3">Languages</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-tag">C++</span>
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">Julia</span>
+              <span class="skill-tag">MATLAB</span>
+            </div>
           </div>
           <div>
-            <h3 class="text-sm font-medium text-slate-900 dark:text-white">Robotics</h3>
-            <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">ROS 2 &middot; RViz &middot; Gazebo / Isaac Sim &middot; tf2 &middot; rosbag &middot; STM32 &middot; Arduino &middot; I2C &middot; sensor fusion</p>
+            <h3 class="text-xs uppercase tracking-[0.2em] font-semibold text-slate-400 mb-3">Robotics</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-tag">ROS 2</span>
+              <span class="skill-tag">RViz</span>
+              <span class="skill-tag">Gazebo / Isaac Sim</span>
+              <span class="skill-tag">tf2</span>
+              <span class="skill-tag">rosbag</span>
+              <span class="skill-tag">STM32</span>
+              <span class="skill-tag">Arduino</span>
+              <span class="skill-tag">I2C</span>
+              <span class="skill-tag">Sensor Fusion</span>
+            </div>
           </div>
           <div>
-            <h3 class="text-sm font-medium text-slate-900 dark:text-white">Control &amp; Perception</h3>
-            <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">LQR &middot; PID &middot; particle &amp; Bayes filters &middot; Kalman filtering &middot; SLAM &middot; A* / D* &middot; RRT &middot; occupancy mapping</p>
+            <h3 class="text-xs uppercase tracking-[0.2em] font-semibold text-slate-400 mb-3">Control &amp; Perception</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-tag">LQR</span>
+              <span class="skill-tag">PID</span>
+              <span class="skill-tag">Particle &amp; Bayes Filters</span>
+              <span class="skill-tag">Kalman Filtering</span>
+              <span class="skill-tag">SLAM</span>
+              <span class="skill-tag">A* / D*</span>
+              <span class="skill-tag">RRT</span>
+              <span class="skill-tag">Occupancy Mapping</span>
+            </div>
           </div>
           <div>
-            <h3 class="text-sm font-medium text-slate-900 dark:text-white">Math &amp; Design</h3>
-            <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">linear algebra &middot; ODEs/PDEs &middot; optimization &middot; least-squares &middot; Jacobians &middot; SolidWorks &middot; kinematics</p>
+            <h3 class="text-xs uppercase tracking-[0.2em] font-semibold text-slate-400 mb-3">Math &amp; Design</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-tag">Linear Algebra</span>
+              <span class="skill-tag">ODEs/PDEs</span>
+              <span class="skill-tag">Optimization</span>
+              <span class="skill-tag">Least Squares</span>
+              <span class="skill-tag">Jacobians</span>
+              <span class="skill-tag">SolidWorks</span>
+              <span class="skill-tag">Kinematics</span>
+            </div>
           </div>
           <div>
-            <h3 class="text-sm font-medium text-slate-900 dark:text-white">Dev Tools</h3>
-            <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">Linux &middot; Git &middot; CMake &middot; gdb &middot; profiling &middot; reproducible builds</p>
+            <h3 class="text-xs uppercase tracking-[0.2em] font-semibold text-slate-400 mb-3">Dev Tools</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-tag">Linux</span>
+              <span class="skill-tag">Git</span>
+              <span class="skill-tag">CMake</span>
+              <span class="skill-tag">gdb</span>
+              <span class="skill-tag">Profiling</span>
+              <span class="skill-tag">Reproducible Builds</span>
+            </div>
           </div>
         </div>
       </section>
 
-      <hr class="border-slate-200 dark:border-slate-800" />
-
       <!-- Awards -->
-      <section id="awards" class="py-12 sm:py-14 scroll-mt-20">
-        <h2 class="font-serif text-2xl font-semibold text-slate-900 dark:text-white mb-6">Awards &amp; Achievements</h2>
+      <section id="awards" class="py-16 scroll-mt-20 border-t border-slate-100">
+        <h2 class="font-serif text-2xl font-semibold text-slate-900 mb-8 section-heading">Awards &amp; Achievements</h2>
         <div class="grid sm:grid-cols-2 gap-5">
-          <div class="rounded-xl border border-slate-200 dark:border-slate-800 p-5">
-            <h3 class="text-base font-semibold text-slate-900 dark:text-white">World Robotics Olympiad — India Rank 3</h3>
-            <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+          <div class="card p-6">
+            <h3 class="text-base font-bold text-slate-800">World Robotics Olympiad — India Rank 3</h3>
+            <p class="mt-2 text-sm text-slate-500 leading-relaxed">
               Developed a piezoelectric energy-harvesting system converting automobile pressure into electricity to power electric vehicles.
             </p>
           </div>
-          <div class="rounded-xl border border-slate-200 dark:border-slate-800 p-5">
-            <h3 class="text-base font-semibold text-slate-900 dark:text-white">International Youth Robotics Olympiad</h3>
-            <p class="mt-1 text-sm text-slate-500 dark:text-slate-500">1 Gold, 2 Silver, 1 Bronze</p>
-            <ul class="mt-2 space-y-1 text-sm text-slate-600 dark:text-slate-400 list-disc list-outside pl-4">
+          <div class="card p-6">
+            <h3 class="text-base font-bold text-slate-800">International Youth Robotics Olympiad</h3>
+            <p class="mt-1 text-sm font-medium text-accent-600">1 Gold, 2 Silver, 1 Bronze</p>
+            <ul class="mt-2 space-y-1 text-sm text-slate-500 list-disc list-outside pl-4">
               <li>Autonomous vehicle for watering plants with a robotic arm and soil detection.</li>
               <li>Smart mini-farm with automated irrigation, planting, and sensing.</li>
               <li>Greenhouse accelerating growth 2.2x using a controlled climate.</li>
             </ul>
           </div>
-          <div class="rounded-xl border border-slate-200 dark:border-slate-800 p-5">
-            <h3 class="text-base font-semibold text-slate-900 dark:text-white">American Mathematics Competitions</h3>
-            <p class="mt-1 text-sm text-slate-500 dark:text-slate-500">2x USAMO qualifier, 3x AIME qualifier</p>
-            <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+          <div class="card p-6">
+            <h3 class="text-base font-bold text-slate-800">American Mathematics Competitions</h3>
+            <p class="mt-1 text-sm font-medium text-accent-600">2x USAMO qualifier, 3x AIME qualifier</p>
+            <p class="mt-2 text-sm text-slate-500 leading-relaxed">
               Qualified for the USAMO (top 300 of ~300,000 globally) and earned AIME distinction across three years.
             </p>
           </div>
-          <div class="rounded-xl border border-slate-200 dark:border-slate-800 p-5">
-            <h3 class="text-base font-semibold text-slate-900 dark:text-white">Other Olympiads</h3>
-            <ul class="mt-2 space-y-1 text-sm text-slate-600 dark:text-slate-400 list-disc list-outside pl-4">
+          <div class="card p-6">
+            <h3 class="text-base font-bold text-slate-800">Other Olympiads</h3>
+            <ul class="mt-2 space-y-1 text-sm text-slate-500 list-disc list-outside pl-4">
               <li>F=MA: qualified for the USA Physics Olympiad (USAPhO), strong in mechanics.</li>
               <li>ZIO: cleared the Indian Computing Olympiad, with algorithmic and mathematical reasoning.</li>
             </ul>
@@ -910,48 +1025,48 @@
         </div>
       </section>
 
-      <hr class="border-slate-200 dark:border-slate-800" />
-
       <!-- Contact -->
-      <section id="contact" class="py-12 sm:py-14 scroll-mt-20">
-        <h2 class="font-serif text-2xl font-semibold text-slate-900 dark:text-white mb-6">Contact</h2>
-        <p class="max-w-xl text-slate-600 dark:text-slate-400 leading-relaxed">
-          I am always glad to connect with fellow researchers, collaborators, and curious minds.
-          Reach out and let's build something together.
-        </p>
-        <div class="mt-6 grid sm:grid-cols-2 gap-x-10 gap-y-3 text-sm max-w-xl">
-          <div class="flex justify-between border-b border-slate-200 dark:border-slate-800 py-2">
-            <span class="text-slate-500 dark:text-slate-500">Email</span>
-            <a href="mailto:ashed@umich.edu" class="text-accent-light dark:text-accent-dark hover:underline">ashed@umich.edu</a>
-          </div>
-          <div class="flex justify-between border-b border-slate-200 dark:border-slate-800 py-2">
-            <span class="text-slate-500 dark:text-slate-500">Email</span>
-            <a href="mailto:eashrith@gmail.com" class="text-accent-light dark:text-accent-dark hover:underline">eashrith@gmail.com</a>
-          </div>
-          <div class="flex justify-between border-b border-slate-200 dark:border-slate-800 py-2">
-            <span class="text-slate-500 dark:text-slate-500">Phone</span>
-            <a href="tel:+12487343391" class="text-accent-light dark:text-accent-dark hover:underline">(248) 734-3391</a>
-          </div>
-          <div class="flex justify-between border-b border-slate-200 dark:border-slate-800 py-2">
-            <span class="text-slate-500 dark:text-slate-500">LinkedIn</span>
-            <a href="https://www.linkedin.com/in/ashrith-edukulla-633b141a7/" target="_blank" rel="noopener" class="text-accent-light dark:text-accent-dark hover:underline">ashrith-edukulla</a>
-          </div>
-          <div class="flex justify-between border-b border-slate-200 dark:border-slate-800 py-2">
-            <span class="text-slate-500 dark:text-slate-500">GitHub</span>
-            <a href="https://github.com/ashrith5321" target="_blank" rel="noopener" class="text-accent-light dark:text-accent-dark hover:underline">ashrith5321</a>
-          </div>
-          <div class="flex justify-between border-b border-slate-200 dark:border-slate-800 py-2">
-            <span class="text-slate-500 dark:text-slate-500">Resume</span>
-            <a href="resume.pdf" target="_blank" rel="noopener" class="text-accent-light dark:text-accent-dark hover:underline">View PDF</a>
+      <section id="contact" class="py-16 scroll-mt-20 border-t border-slate-100">
+        <div class="rounded-2xl bg-gradient-to-br from-slate-50 to-accent-50/20 border border-slate-100 p-8 sm:p-12">
+          <h2 class="font-serif text-2xl font-semibold text-slate-900 mb-4">Let's connect</h2>
+          <p class="max-w-xl text-slate-500 leading-relaxed">
+            I am always glad to connect with fellow researchers, collaborators, and curious minds.
+            Reach out and let's build something together.
+          </p>
+          <div class="mt-8 grid sm:grid-cols-2 gap-x-12 gap-y-4 text-sm max-w-xl">
+            <div class="flex justify-between items-center border-b border-slate-200/60 py-3">
+              <span class="text-slate-400 font-medium">Email</span>
+              <a href="mailto:ashed@umich.edu" class="text-accent-700 hover:text-accent-800 font-medium transition-colors">ashed@umich.edu</a>
+            </div>
+            <div class="flex justify-between items-center border-b border-slate-200/60 py-3">
+              <span class="text-slate-400 font-medium">Email</span>
+              <a href="mailto:eashrith@gmail.com" class="text-accent-700 hover:text-accent-800 font-medium transition-colors">eashrith@gmail.com</a>
+            </div>
+            <div class="flex justify-between items-center border-b border-slate-200/60 py-3">
+              <span class="text-slate-400 font-medium">Phone</span>
+              <a href="tel:+12487343391" class="text-accent-700 hover:text-accent-800 font-medium transition-colors">(248) 734-3391</a>
+            </div>
+            <div class="flex justify-between items-center border-b border-slate-200/60 py-3">
+              <span class="text-slate-400 font-medium">LinkedIn</span>
+              <a href="https://www.linkedin.com/in/ashrith-edukulla-633b141a7/" target="_blank" rel="noopener" class="text-accent-700 hover:text-accent-800 font-medium transition-colors">ashrith-edukulla</a>
+            </div>
+            <div class="flex justify-between items-center border-b border-slate-200/60 py-3">
+              <span class="text-slate-400 font-medium">GitHub</span>
+              <a href="https://github.com/ashrith5321" target="_blank" rel="noopener" class="text-accent-700 hover:text-accent-800 font-medium transition-colors">ashrith5321</a>
+            </div>
+            <div class="flex justify-between items-center border-b border-slate-200/60 py-3">
+              <span class="text-slate-400 font-medium">Resume</span>
+              <a href="resume.pdf" target="_blank" rel="noopener" class="text-accent-700 hover:text-accent-800 font-medium transition-colors">View PDF</a>
+            </div>
           </div>
         </div>
       </section>
     </main>
 
-    <footer class="border-t border-slate-200 dark:border-slate-800">
-      <div class="max-w-3xl mx-auto px-5 sm:px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500 dark:text-slate-500">
+    <footer class="border-t border-slate-100">
+      <div class="max-w-4xl mx-auto px-6 sm:px-8 py-10 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-400">
         <span>Ashrith Edukulla &middot; Ann Arbor, Michigan</span>
-        <a href="/plan" class="hover:text-slate-700 dark:hover:text-slate-300 transition-colors">Robotics &amp; AI roadmap</a>
+        <a href="/plan" class="hover:text-accent-700 transition-colors font-medium">Robotics &amp; AI roadmap</a>
       </div>
     </footer>
 
@@ -960,26 +1075,22 @@
       id="toTop"
       aria-label="Back to top"
       title="Back to top"
-      class="fixed bottom-5 right-5 z-40 inline-flex items-center justify-center h-10 w-10 rounded-full border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 shadow-md"
+      class="fixed bottom-6 right-6 z-40 inline-flex items-center justify-center h-11 w-11 rounded-full bg-white text-slate-600 shadow-lg border border-slate-200 hover:bg-accent-50 hover:text-accent-700 hover:border-accent-200 transition-all"
     >
       <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"></path></svg>
     </button>
 
     <script>
-      // Theme toggle
-      document.getElementById("themeToggle").addEventListener("click", function () {
-        var isDark = document.documentElement.classList.toggle("dark");
-        try { localStorage.setItem("theme", isDark ? "dark" : "light"); } catch (e) {}
+      // Header shadow on scroll
+      var header = document.getElementById("siteHeader");
+      window.addEventListener("scroll", function () {
+        header.classList.toggle("scrolled", window.scrollY > 10);
       });
 
       // Back to top
       var toTop = document.getElementById("toTop");
       window.addEventListener("scroll", function () {
-        if (window.scrollY > 400) {
-          toTop.classList.add("show");
-        } else {
-          toTop.classList.remove("show");
-        }
+        toTop.classList.toggle("show", window.scrollY > 400);
       });
       toTop.addEventListener("click", function () {
         window.scrollTo({ top: 0, behavior: "smooth" });
