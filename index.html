@@ -3,18 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ashrith Edukulla — Robotics, University of Michigan</title>
-    <meta name="description" content="Ashrith Edukulla — Robotics researcher at the University of Michigan working on Vision-Language-Action models for navigation and autonomous driving. Perception, SLAM, planning, and learning for autonomous systems." />
+    <title>Ashrith Edukulla | Robotics Software Engineer</title>
+    <meta name="description" content="Ashrith Edukulla is a robotics software engineer studying B.S.E. Robotics at the University of Michigan (expected May 2027). Currently building underwater perception at Moby Robotics, autonomous-driving VLA models at Nift, and world-model navigation at the Scalable Spatial Intelligence Lab. C++ and Python across sensor fusion, SLAM, planning, and real-time inference on edge hardware." />
     <link rel="icon" href="michigan_logo.png" type="image/png" />
 
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Ashrith Edukulla — Robotics Researcher" />
-    <meta property="og:description" content="VLAs for navigation and autonomous driving. Robotics @ Michigan — perception, SLAM, planning, and learning for autonomous systems." />
+    <meta property="og:title" content="Ashrith Edukulla | Robotics Software Engineer" />
+    <meta property="og:description" content="Perception, navigation, and autonomy systems in C++ and Python. B.S.E. Robotics at Michigan, expected May 2027. Sensor fusion, world models, SLAM, and real-time inference on edge hardware." />
     <meta property="og:image" content="ashrith.jpg" />
     <meta property="og:url" content="https://ashrith5321.github.io" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Ashrith Edukulla — Robotics Researcher" />
-    <meta name="twitter:description" content="VLAs for navigation and autonomous driving. Robotics @ Michigan." />
+    <meta name="twitter:title" content="Ashrith Edukulla | Robotics Software Engineer" />
+    <meta name="twitter:description" content="Perception, navigation, and autonomy systems in C++ and Python. B.S.E. Robotics at Michigan, expected May 2027." />
     <meta name="twitter:image" content="ashrith.jpg" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -80,7 +80,7 @@
         overflow: hidden;
         transition: max-height 0.3s ease;
       }
-      #mobileMenu.open { max-height: 26rem; }
+      #mobileMenu.open { max-height: 30rem; }
 
       /* Back to top */
       #toTop {
@@ -220,11 +220,12 @@
           Ashrith Edukulla
         </a>
 
-        <nav class="hidden md:flex items-center gap-8 text-sm text-slate-500">
+        <nav class="hidden md:flex items-center gap-7 text-sm text-slate-500">
           <a href="#about" class="nav-link hover:text-slate-800">About</a>
-          <a href="#research" class="nav-link hover:text-slate-800">Research</a>
           <a href="#experience" class="nav-link hover:text-slate-800">Experience</a>
           <a href="#projects" class="nav-link hover:text-slate-800">Projects</a>
+          <a href="#publications" class="nav-link hover:text-slate-800">Papers</a>
+          <a href="#skills" class="nav-link hover:text-slate-800">Skills</a>
           <a href="#contact" class="nav-link hover:text-slate-800">Contact</a>
         </nav>
 
@@ -236,7 +237,7 @@
             class="hidden sm:inline-flex items-center gap-1.5 text-sm px-4 py-2 rounded-lg bg-accent-700 text-white font-medium hover:bg-accent-800 transition-colors"
           >
             <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-            CV
+            Resume
           </a>
           <button
             id="menuToggle"
@@ -254,13 +255,13 @@
       <div id="mobileMenu" class="md:hidden border-t border-slate-100 bg-white">
         <nav class="max-w-4xl mx-auto px-6 sm:px-8 py-4 grid grid-cols-2 gap-x-4 gap-y-1 text-sm text-slate-500">
           <a href="#about" class="mob-link py-2.5 hover:text-slate-800 transition-colors">About</a>
-          <a href="#research" class="mob-link py-2.5 hover:text-slate-800 transition-colors">Research</a>
           <a href="#experience" class="mob-link py-2.5 hover:text-slate-800 transition-colors">Experience</a>
           <a href="#projects" class="mob-link py-2.5 hover:text-slate-800 transition-colors">Projects</a>
+          <a href="#publications" class="mob-link py-2.5 hover:text-slate-800 transition-colors">Papers</a>
           <a href="#skills" class="mob-link py-2.5 hover:text-slate-800 transition-colors">Skills</a>
           <a href="#contact" class="mob-link py-2.5 hover:text-slate-800 transition-colors">Contact</a>
           <a href="resume.pdf" target="_blank" rel="noopener" class="col-span-2 mt-2 inline-flex items-center justify-center gap-2 rounded-lg bg-accent-700 px-4 py-2.5 text-sm font-medium text-white hover:bg-accent-800 transition-colors">
-            Download CV
+            Download Resume
           </a>
         </nav>
       </div>
@@ -274,22 +275,24 @@
           <div class="flex-1">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-50 border border-accent-100 mb-4">
               <span class="w-1.5 h-1.5 rounded-full bg-accent-500"></span>
-              <span class="text-xs font-medium text-accent-700 tracking-wide uppercase">Robotics Researcher</span>
+              <span class="text-xs font-medium text-accent-700 tracking-wide uppercase">Robotics Software Engineer</span>
             </div>
             <h1 class="font-serif text-4xl sm:text-5xl font-semibold text-slate-900 tracking-tight leading-[1.1]">
               Ashrith Edukulla
             </h1>
             <p class="mt-4 text-lg sm:text-xl text-slate-600 max-w-xl leading-relaxed">
-              I build <span class="font-semibold text-slate-800">Vision-Language-Action models</span>
-              for robot navigation and autonomous driving.
+              I build <span class="font-semibold text-slate-800">perception systems</span> for robots
+              that operate where the data is messy.
             </p>
             <p class="mt-2 text-sm text-slate-400">
-              Robotics Engineering, University of Michigan &middot; Ann Arbor, MI
+              B.S.E. Robotics, University of Michigan &middot; Expected May 2027 &middot; Ann Arbor, MI
             </p>
 
             <p class="mt-6 max-w-xl text-slate-500 leading-relaxed">
-              My work brings classical state estimation together with deep learning — from SLAM and sensor fusion
-              to language-conditioned policies — to make autonomy that holds up in the real world.
+              Open-set detection underwater, multi-camera fusion into 3D, and learned navigation policies
+              that hold up in environments they haven't seen. I care about the measurable part: 30% over
+              baseline, 79% success rate, or it didn't work. It's all C++ and Python, profiled and tested
+              down to the edge device it runs on.
             </p>
 
             <div class="mt-8 flex flex-wrap items-center gap-3">
@@ -298,7 +301,7 @@
                 <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
               </a>
               <a href="resume.pdf" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-lg border border-slate-200 px-5 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:border-slate-300 transition-colors">
-                Download CV
+                Download resume
               </a>
             </div>
 
@@ -331,22 +334,18 @@
 
       <!-- At a glance -->
       <section aria-label="At a glance" class="pb-14">
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          <div class="rounded-xl bg-gradient-to-br from-slate-50 to-white border border-slate-100 p-5 text-center">
-            <div class="font-serif text-3xl font-bold text-slate-900">3.96<span class="text-lg font-normal text-slate-300">/4.0</span></div>
-            <div class="mt-1.5 text-xs font-medium text-slate-400 uppercase tracking-wide">GPA &middot; Robotics</div>
+        <div class="grid grid-cols-3 gap-3 sm:gap-4">
+          <div class="rounded-xl bg-gradient-to-br from-slate-50 to-white border border-slate-100 p-4 sm:p-5 text-center">
+            <div class="font-serif text-2xl sm:text-3xl font-bold text-slate-900">3.8<span class="text-base sm:text-lg font-normal text-slate-300">/4.0</span></div>
+            <div class="mt-1.5 text-[10px] sm:text-xs font-medium text-slate-400 uppercase tracking-wide">GPA &middot; Robotics</div>
           </div>
-          <div class="rounded-xl bg-gradient-to-br from-slate-50 to-white border border-slate-100 p-5 text-center">
-            <div class="font-serif text-3xl font-bold text-slate-900">15+</div>
-            <div class="mt-1.5 text-xs font-medium text-slate-400 uppercase tracking-wide">Projects</div>
+          <div class="rounded-xl bg-gradient-to-br from-slate-50 to-white border border-slate-100 p-4 sm:p-5 text-center">
+            <div class="font-serif text-2xl sm:text-3xl font-bold text-slate-900">3</div>
+            <div class="mt-1.5 text-[10px] sm:text-xs font-medium text-slate-400 uppercase tracking-wide">Papers</div>
           </div>
-          <div class="rounded-xl bg-gradient-to-br from-slate-50 to-white border border-slate-100 p-5 text-center">
-            <div class="font-serif text-3xl font-bold text-slate-900">3</div>
-            <div class="mt-1.5 text-xs font-medium text-slate-400 uppercase tracking-wide">Courses as IA</div>
-          </div>
-          <div class="rounded-xl bg-gradient-to-br from-slate-50 to-white border border-slate-100 p-5 text-center">
-            <div class="font-serif text-3xl font-bold text-slate-900">Top 300</div>
-            <div class="mt-1.5 text-xs font-medium text-slate-400 uppercase tracking-wide">USAMO</div>
+          <div class="rounded-xl bg-gradient-to-br from-slate-50 to-white border border-slate-100 p-4 sm:p-5 text-center">
+            <div class="font-serif text-2xl sm:text-3xl font-bold text-slate-900">3</div>
+            <div class="mt-1.5 text-[10px] sm:text-xs font-medium text-slate-400 uppercase tracking-wide">Courses as IA</div>
           </div>
         </div>
       </section>
@@ -358,25 +357,25 @@
           <li class="news-item">
             <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
               <span class="text-xs font-medium text-accent-600 whitespace-nowrap">Jun 2026</span>
-              <span class="text-sm text-slate-600">Joined <span class="font-semibold text-slate-800">Nift</span> to work on autonomous driving with Vision-Language-Action models.</span>
+              <span class="text-sm text-slate-600">Joined <span class="font-semibold text-slate-800">Moby Robotics</span> as a Perception ML Engineer, building underwater perception for at-sea deployments.</span>
             </div>
           </li>
           <li class="news-item">
             <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
-              <span class="text-xs font-medium text-accent-600 whitespace-nowrap">May 2026</span>
-              <span class="text-sm text-slate-600">Began researching learning-based navigation models at the <span class="font-semibold text-slate-800">Scalable Spatial Intelligence Lab</span>.</span>
+              <span class="text-xs font-medium text-accent-600 whitespace-nowrap">Jun 2026</span>
+              <span class="text-sm text-slate-600"><span class="font-semibold text-slate-800">OceanSim 2.0</span>, an underwater robotics simulator, is headed to <span class="font-semibold text-slate-800">OCEANS 2026</span>.</span>
             </div>
           </li>
           <li class="news-item">
             <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
-              <span class="text-xs font-medium text-accent-600 whitespace-nowrap">Jan 2026</span>
-              <span class="text-sm text-slate-600">Joined the <span class="font-semibold text-slate-800">Field Robotics Group (FRoG) Lab</span> and started as Instructional Aide for EECS 467.</span>
+              <span class="text-xs font-medium text-accent-600 whitespace-nowrap">Mar 2026</span>
+              <span class="text-sm text-slate-600">Started building latent world-model navigation at the <span class="font-semibold text-slate-800">Scalable Spatial Intelligence Lab</span>, reaching 79% ObjectNav success on HM3D.</span>
             </div>
           </li>
           <li class="news-item">
             <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
               <span class="text-xs font-medium text-accent-600 whitespace-nowrap">Dec 2025</span>
-              <span class="text-sm text-slate-600">Wrapped a semester researching reconfigurable robot swarms at the <span class="font-semibold text-slate-800">SAM Lab</span> — paper in preparation.</span>
+              <span class="text-sm text-slate-600">Joined the <span class="font-semibold text-slate-800">Field Robotics Group (FRoG) Lab</span> to work on multimodal coverage planning for shipwreck inspection.</span>
             </div>
           </li>
         </ul>
@@ -387,54 +386,55 @@
         <h2 class="font-serif text-2xl font-semibold text-slate-900 mb-8 section-heading">About</h2>
         <div class="space-y-4 text-slate-500 leading-[1.8] max-w-2xl">
           <p>
-            I am a Robotics Engineering student at the
-            <a href="https://umich.edu" target="_blank" rel="noopener" class="text-accent-700 hover:text-accent-800 underline underline-offset-2 decoration-accent-200 hover:decoration-accent-400 transition-colors">University of Michigan</a>,
-            focused on perception, navigation, and learning for autonomous systems. I am currently researching
-            navigation models at the Scalable Spatial Intelligence Lab.
+            I am a Robotics undergraduate at the
+            <a href="https://umich.edu" target="_blank" rel="noopener" class="text-accent-700 hover:text-accent-800 underline underline-offset-2 decoration-accent-200 hover:decoration-accent-400 transition-colors">University of Michigan</a>
+            who spends most of his time writing the software that makes robots see, decide, and move. Right now
+            that means underwater perception at Moby Robotics and world-model navigation at the Scalable Spatial
+            Intelligence Lab.
           </p>
           <p>
-            My interests lie in path planning, deep learning, SLAM, computer vision, and probabilistic
-            representations of the world. I am drawn to problems where robots need to understand complex,
-            uncertain environments and build structured internal models that support reliable
-            decision-making — how machines represent space, reason under uncertainty, and connect
-            perception to action in a principled way.
+            I like the parts of the problem where correctness is measurable. A detector is 30% better than the
+            baseline or it isn't; a navigation policy hits 79% success on held-out scenes or it doesn't; inference
+            fits the latency and memory budget of the edge device or it doesn't ship. So a lot of my work is
+            evaluation infrastructure, benchmarking harnesses, and profiling: the scaffolding that turns a
+            promising idea into a claim you can defend.
           </p>
           <p>
-            I am especially interested in approaches that bridge geometric methods with learning-based
-            systems, combining classical state estimation with deep neural networks to create scalable,
-            robust autonomy stacks where mapping, localization, and visual understanding are core
-            intelligence layers rather than isolated components.
+            The systems I enjoy most cut across layers: a multi-camera fusion pipeline that has to reconcile 360°
+            imagery with stereo depth, a planner that switches sensing modes based on what it can currently
+            observe, a safety layer that must deterministically override a learned policy. Getting those right is
+            as much software engineering (interfaces, tests, reproducible environments) as it is robotics.
           </p>
           <p>
-            Long term, I want to contribute to autonomous systems that perceive richly, learn efficiently,
-            and operate reliably in the real world.
+            I've also taught three robotics courses as an Instructional Aide, which has made me a much better
+            debugger of other people's systems and a much clearer writer about my own.
           </p>
         </div>
       </section>
 
-      <!-- Research focus -->
-      <section id="research" class="py-16 scroll-mt-20 border-t border-slate-100">
-        <h2 class="font-serif text-2xl font-semibold text-slate-900 mb-8 section-heading">Research Focus</h2>
+      <!-- Focus areas -->
+      <section id="focus" class="py-16 scroll-mt-20 border-t border-slate-100">
+        <h2 class="font-serif text-2xl font-semibold text-slate-900 mb-8 section-heading">What I Work On</h2>
         <div class="grid sm:grid-cols-2 gap-5">
           <div class="card p-6 border-l-[3px] border-l-accent-500">
-            <h3 class="text-base font-bold text-slate-800">Vision-Language-Action Models</h3>
-            <p class="mt-2 text-sm text-slate-500 leading-relaxed">Language-conditioned policies that perceive, reason, and act — for navigation and autonomous driving.</p>
-            <p class="mt-4 text-[11px] font-medium text-slate-400 tracking-wide">Nift &middot; DreamerVLA &middot; CARLA SFF</p>
+            <h3 class="text-base font-bold text-slate-800">Perception &amp; Computer Vision</h3>
+            <p class="mt-2 text-sm text-slate-500 leading-relaxed">Open-set detection, multi-camera sensor fusion, stereo depth, and 3D reconstruction from real field data.</p>
+            <p class="mt-4 text-[11px] font-medium text-slate-400 tracking-wide">Moby Robotics &middot; Event-Optical Fusion</p>
           </div>
           <div class="card p-6 border-l-[3px] border-l-emerald-500">
-            <h3 class="text-base font-bold text-slate-800">Navigation &amp; Embodied AI</h3>
-            <p class="mt-2 text-sm text-slate-500 leading-relaxed">Learning navigation models and policies that generalize to unseen, uncertain environments.</p>
-            <p class="mt-4 text-[11px] font-medium text-slate-400 tracking-wide">Scalable Spatial Intelligence Lab &middot; ObjectNav BC</p>
+            <h3 class="text-base font-bold text-slate-800">Navigation &amp; World Models</h3>
+            <p class="mt-2 text-sm text-slate-500 leading-relaxed">Long-horizon navigation with spatial memory, language-conditioned goals, and predictive representations.</p>
+            <p class="mt-4 text-[11px] font-medium text-slate-400 tracking-wide">Scalable Spatial Intelligence Lab &middot; ObjectNav</p>
           </div>
           <div class="card p-6 border-l-[3px] border-l-violet-500">
-            <h3 class="text-base font-bold text-slate-800">SLAM &amp; State Estimation</h3>
-            <p class="mt-2 text-sm text-slate-500 leading-relaxed">Probabilistic localization and mapping — invariant EKF, particle filters, and multi-sensor fusion.</p>
-            <p class="mt-4 text-[11px] font-medium text-slate-400 tracking-wide">Full-Stack AV (IEKF) &middot; MBot SLAM</p>
+            <h3 class="text-base font-bold text-slate-800">Planning &amp; SLAM</h3>
+            <p class="mt-2 text-sm text-slate-500 leading-relaxed">Coverage and frontier exploration, occupancy mapping, and state estimation under partial observability.</p>
+            <p class="mt-4 text-[11px] font-medium text-slate-400 tracking-wide">FRoG Lab &middot; MBot SLAM</p>
           </div>
           <div class="card p-6 border-l-[3px] border-l-amber-500">
-            <h3 class="text-base font-bold text-slate-800">Planning &amp; Exploration</h3>
-            <p class="mt-2 text-sm text-slate-500 leading-relaxed">Sampling-based and search planning under real-time and uncertainty constraints.</p>
-            <p class="mt-4 text-[11px] font-medium text-slate-400 tracking-wide">FRoG Lab &middot; Ocean Frontier (NBVP)</p>
+            <h3 class="text-base font-bold text-slate-800">Systems &amp; Infrastructure</h3>
+            <p class="mt-2 text-sm text-slate-500 leading-relaxed">ROS 2 and Dockerized evaluation stacks, reproducible benchmarks, profiling, and real-time edge deployment.</p>
+            <p class="mt-4 text-[11px] font-medium text-slate-400 tracking-wide">CARLA SFF &middot; Habitat pipelines</p>
           </div>
         </div>
       </section>
@@ -447,19 +447,17 @@
           <div class="flex-1">
             <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
               <h3 class="text-base font-bold text-slate-800">University of Michigan, Ann Arbor</h3>
-              <span class="text-sm font-medium text-slate-400">Aug 2024 – Dec 2026</span>
+              <span class="text-sm font-medium text-slate-400">Aug 2024 – May 2027 (expected)</span>
             </div>
-            <p class="text-sm text-slate-500 mt-1">B.E. in Robotics Engineering — <span class="font-semibold text-slate-700">GPA 3.96 / 4.0</span></p>
+            <p class="text-sm text-slate-500 mt-1">B.S.E. in Robotics &middot; <span class="font-semibold text-slate-700">GPA 3.8 / 4.0</span></p>
             <p class="text-sm text-slate-500 mt-4">
-              <span class="font-semibold text-slate-700">Honors &amp; Awards:</span>
-              Ranked 3rd, World Robotics Olympiad &middot; 4x medalist, International Youth Robotics Contest &middot;
-              3x AMC qualifier &middot; 2x AIME qualifier
+              <span class="font-semibold text-slate-700">Honors:</span>
+              4&times; University Honors &middot; 4&times; Dean's List &middot; Academic Excellence Award
             </p>
             <p class="text-sm text-slate-500 mt-3">
-              <span class="font-semibold text-slate-700">Selected coursework:</span>
-              Control of Robotic Systems (ROB 415), Planning &amp; ROS Integration (ROB 320),
-              Localization &amp; Mapping (ROB 330), Data Structures &amp; Algorithms (EECS 281),
-              SLAM, Robot Optimization, Linear Algebra, Robot Differential Equations
+              <span class="font-semibold text-slate-700">Coursework:</span>
+              Data Structures &amp; Algorithms, Deep Learning, Computer Vision, SLAM &amp; Navigation,
+              Controls, Robot Operating Systems, Dynamics &amp; Vibration, Intro to Electrical Circuits
             </p>
           </div>
         </div>
@@ -469,17 +467,17 @@
       <section id="experience" class="py-16 scroll-mt-20 border-t border-slate-100">
         <h2 class="font-serif text-2xl font-semibold text-slate-900 mb-10 section-heading">Experience</h2>
 
-        <h3 class="text-xs uppercase tracking-[0.2em] font-semibold text-accent-600 mb-8">Research &amp; Industry</h3>
+        <h3 class="text-xs uppercase tracking-[0.2em] font-semibold text-accent-600 mb-8">Industry &amp; Research</h3>
         <div class="space-y-10">
 
           <article class="timeline-item">
             <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1">
               <h3 class="text-base font-bold text-slate-800">Nift</h3>
-              <span class="text-sm font-medium text-slate-400">Jun 2026 – Present</span>
+              <span class="text-sm font-medium text-slate-400">Aug 2026 – Present</span>
             </div>
-            <p class="text-sm text-slate-400 mb-2">Autonomous Vehicles — Vision-Language-Action Models</p>
+            <p class="text-sm text-slate-400 mb-2">Autonomous Vehicles &middot; Vision-Language-Action Models</p>
             <ul class="space-y-1.5 text-sm text-slate-500 list-disc list-outside pl-4">
-              <li>Developing autonomous-driving autonomy driven by vision-language-action (VLA) models.</li>
+              <li>Developing autonomous-driving behavior driven by vision-language-action (VLA) models.</li>
               <li>Connecting perception with language-conditioned policies to plan and act in real-world driving scenarios.</li>
               <li>Building and evaluating VLA-based driving behaviors in simulation toward on-vehicle deployment.</li>
             </ul>
@@ -487,27 +485,41 @@
 
           <article class="timeline-item">
             <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1">
-              <h3 class="text-base font-bold text-slate-800">Scalable Spatial Intelligence Lab</h3>
-              <span class="text-sm font-medium text-slate-400">May 2026 – Present</span>
+              <h3 class="text-base font-bold text-slate-800">Moby Robotics</h3>
+              <span class="text-sm font-medium text-slate-400">Jun 2026 – Present</span>
             </div>
-            <p class="text-sm text-slate-400 mb-2">Undergraduate Researcher — Navigation Models &middot; University of Michigan</p>
+            <p class="text-sm text-slate-400 mb-2">Perception Machine Learning Engineer</p>
             <ul class="space-y-1.5 text-sm text-slate-500 list-disc list-outside pl-4">
-              <li>Developing learning-based navigation models that let robots move through and reason about unseen environments.</li>
-              <li>Researching scalable spatial representations that connect perception to long-horizon navigation policies.</li>
-              <li>Building and evaluating models in simulation toward transfer onto real robotic platforms.</li>
+              <li>Built underwater perception systems for nodules, marine life, and open-set objects, reaching <span class="font-medium text-slate-600">30% better detection</span> than a vanilla VLM baseline, trained on real field data collected during at-sea deployments.</li>
+              <li>Developed a multi-camera sensor-fusion pipeline combining 360° imagery, stereo depth, and 3D reconstruction to improve spatial consistency for autonomous underwater mapping and navigation.</li>
+              <li>Profiled and optimized perception workloads on resource-constrained edge compute, balancing detection accuracy, inference latency, and memory for real-time deployment on embedded systems.</li>
+            </ul>
+          </article>
+
+          <article class="timeline-item">
+            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1">
+              <h3 class="text-base font-bold text-slate-800">Scalable Spatial Intelligence Lab</h3>
+              <span class="text-sm font-medium text-slate-400">Mar 2026 – Present</span>
+            </div>
+            <p class="text-sm text-slate-400 mb-2">Researcher &middot; Navigation &middot; Michigan Robotics</p>
+            <ul class="space-y-1.5 text-sm text-slate-500 list-disc list-outside pl-4">
+              <li>Developed a latent world-model navigation system reaching <span class="font-medium text-slate-600">79% ObjectNav success on HM3D</span>, improving generalization over the OpenFrontier baseline through spatial memory and learned planning decisions.</li>
+              <li>Implemented a long-horizon navigation stack combining visual observations, language-conditioned goals, episodic memory, and predictive world-model representations for sequential decision-making.</li>
+              <li>Built Habitat evaluation pipelines benchmarking agents across unseen environments on success rate, path efficiency, and compute-performance tradeoffs, for fair and reproducible comparison.</li>
             </ul>
           </article>
 
           <article class="timeline-item">
             <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1">
               <h3 class="text-base font-bold text-slate-800">Field Robotics Group (FRoG) Lab</h3>
-              <span class="text-sm font-medium text-slate-400">Jan 2026 – Present</span>
+              <span class="text-sm font-medium text-slate-400">Dec 2025 – May 2026</span>
             </div>
-            <p class="text-sm text-slate-400 mb-2">Undergraduate Researcher — Perception &amp; Planning &middot; University of Michigan</p>
+            <p class="text-sm text-slate-400 mb-2">Researcher &middot; Perception &amp; Planning &middot; Michigan Robotics</p>
             <ul class="space-y-1.5 text-sm text-slate-500 list-disc list-outside pl-4">
-              <li>Researching robot perception and motion planning under real-time and uncertainty constraints.</li>
-              <li>Developing and evaluating planning algorithms informed by perception outputs and environment representations.</li>
-              <li>Contributing to projects aimed at robust, scalable autonomy for real-world robotic systems.</li>
+              <li>Implemented hierarchical coverage planning for shipwreck inspection using BFS global search with locally biased RRT sampling, improving exploration efficiency.</li>
+              <li>Developed occupancy-grid and frontier-exploration algorithms to update coverage state and reduce redundant traversal under partial observability and noisy underwater sensing.</li>
+              <li>Built a multimodal mapping pipeline fusing sonar and stereo vision into a unified spatial representation, improving robustness of 3D scene understanding across varying conditions.</li>
+              <li>Designed state-driven switching between long-range sonar exploration and close-range stereo inspection, balancing global coverage against high-resolution local reconstruction.</li>
             </ul>
           </article>
 
@@ -520,7 +532,7 @@
             <ul class="space-y-1.5 text-sm text-slate-500 list-disc list-outside pl-4">
               <li>Researched macro- and micro-scale robot swarms under Prof. Steven Ceron to study collective motion and environmental interaction.</li>
               <li>Developed decentralized control strategies for physical reconfiguration and emergent coordination.</li>
-              <li>Co-authoring a paper on adaptive swarm behavior and distributed control in reconfigurable collectives.</li>
+              <li>Built a C++ HTTP and serial control bridge with a browser UI for driving a 9-motor experimental array with real-time feedback.</li>
             </ul>
           </article>
 
@@ -548,9 +560,8 @@
             </div>
             <p class="text-sm text-slate-400 mb-2">Instructional Aide &middot; University of Michigan</p>
             <ul class="space-y-1.5 text-sm text-slate-500 list-disc list-outside pl-4">
-              <li>Supported instruction in perception, SLAM, planning, and control for autonomous robotics.</li>
-              <li>Helped students with ROS-based labs, system debugging, and algorithm implementation.</li>
-              <li>Held office hours on multi-sensor fusion, navigation, and robot software architecture.</li>
+              <li>Mentored students through C++/Python/ROS labs covering perception, SLAM, sensor fusion, planning, and control.</li>
+              <li>Debugged end-to-end robot systems during labs and office hours, diagnosing software, algorithmic, sensor, and integration failures across the hardware/software stack.</li>
             </ul>
           </article>
 
@@ -563,21 +574,58 @@
             <ul class="space-y-1.5 text-sm text-slate-500 list-disc list-outside pl-4">
               <li>Supported instruction in ODE modeling, linear systems, and control for undergraduate robotics students.</li>
               <li>Led weekly office hours and problem sessions using Julia notebooks, simulations, and visualizations.</li>
-              <li>Assisted with labs and grading on Laplace transforms, transfer functions, and stability analysis.</li>
             </ul>
           </article>
 
           <article class="timeline-item">
             <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1">
               <h3 class="text-base font-bold text-slate-800">ROB 101: Computational Linear Algebra</h3>
-              <span class="text-sm font-medium text-slate-400">Jan 2025 – Apr 2025</span>
+              <span class="text-sm font-medium text-slate-400">Dec 2024 – Apr 2025</span>
             </div>
             <p class="text-sm text-slate-400 mb-2">Instructional Aide &middot; University of Michigan</p>
             <ul class="space-y-1.5 text-sm text-slate-500 list-disc list-outside pl-4">
-              <li>Supported instruction in computational linear algebra — linear systems, least squares, and matrix factorizations — taught in Julia.</li>
+              <li>Supported instruction in computational linear algebra (linear systems, least squares, and matrix factorizations), taught in Julia.</li>
               <li>Held office hours and guided students through programming assignments and weekly problem sets.</li>
-              <li>Helped students connect linear-algebra foundations to robotics and autonomy applications.</li>
             </ul>
+          </article>
+        </div>
+      </section>
+
+      <!-- Publications -->
+      <section id="publications" class="py-16 scroll-mt-20 border-t border-slate-100">
+        <h2 class="font-serif text-2xl font-semibold text-slate-900 mb-8 section-heading">Papers</h2>
+        <div class="space-y-4">
+          <article class="card p-6">
+            <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+              <h3 class="text-base font-bold text-slate-800">Multi-Map Navigation World Action Models</h3>
+              <span class="shrink-0 text-[11px] font-semibold uppercase tracking-wider text-slate-400 border border-slate-200 rounded-full px-2.5 py-1">In preparation</span>
+            </div>
+            <p class="mt-2 text-sm font-medium text-accent-700">First author</p>
+            <p class="mt-2 text-sm text-slate-500 leading-relaxed">
+              Latent world models for long-horizon, language-conditioned navigation across multiple maps.
+            </p>
+          </article>
+
+          <article class="card p-6">
+            <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+              <h3 class="text-base font-bold text-slate-800">Multimodal Sensor Fusion for Shipwreck Coverage Planning</h3>
+              <span class="shrink-0 text-[11px] font-semibold uppercase tracking-wider text-slate-400 border border-slate-200 rounded-full px-2.5 py-1">In preparation</span>
+            </div>
+            <p class="mt-2 text-sm font-medium text-accent-700">Co-first author</p>
+            <p class="mt-2 text-sm text-slate-500 leading-relaxed">
+              Fusing sonar and stereo vision into a unified representation to drive hierarchical coverage planning for autonomous underwater inspection.
+            </p>
+          </article>
+
+          <article class="card p-6">
+            <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+              <h3 class="text-base font-bold text-slate-800">OceanSim 2.0: Underwater Robotics Simulator</h3>
+              <span class="shrink-0 text-[11px] font-semibold uppercase tracking-wider text-accent-700 bg-accent-50 border border-accent-100 rounded-full px-2.5 py-1">OCEANS 2026</span>
+            </div>
+            <p class="mt-2 text-sm font-medium text-accent-700">Third author</p>
+            <p class="mt-2 text-sm text-slate-500 leading-relaxed">
+              An Isaac Sim extension for underwater robotics research, adding subsea sensing, dynamics, and scene generation for repeatable experiments.
+            </p>
           </article>
         </div>
       </section>
@@ -586,74 +634,112 @@
       <section id="projects" class="py-16 scroll-mt-20 border-t border-slate-100">
         <h2 class="font-serif text-2xl font-semibold text-slate-900 mb-3 section-heading">Projects</h2>
         <p class="mb-8 max-w-2xl text-sm text-slate-400 ml-[15px]">
-          Selected work across embodied AI, autonomous driving, SLAM, and multi-robot systems.
+          Selected work across perception, autonomous driving, navigation, SLAM, and multi-robot systems.
         </p>
 
         <!-- Filter pills -->
         <div id="projFilters" class="mb-10 flex flex-wrap gap-2" role="tablist" aria-label="Filter projects">
           <button data-filter="all" class="proj-pill active">All <span class="pc">18</span></button>
-          <button data-filter="embodied" class="proj-pill">Embodied AI <span class="pc">3</span></button>
+          <button data-filter="perception" class="proj-pill">Perception <span class="pc">2</span></button>
           <button data-filter="av" class="proj-pill">Autonomous Driving <span class="pc">2</span></button>
-          <button data-filter="slam" class="proj-pill">SLAM <span class="pc">3</span></button>
+          <button data-filter="nav" class="proj-pill">Navigation <span class="pc">2</span></button>
+          <button data-filter="slam" class="proj-pill">SLAM &amp; Planning <span class="pc">2</span></button>
           <button data-filter="swarm" class="proj-pill">Swarms <span class="pc">3</span></button>
-          <button data-filter="hw" class="proj-pill">Hardware <span class="pc">7</span></button>
+          <button data-filter="hw" class="proj-pill">Tools &amp; Hardware <span class="pc">7</span></button>
         </div>
 
         <!-- Featured -->
-        <h3 class="text-xs uppercase tracking-[0.2em] font-semibold text-accent-600 mb-6">Featured Research</h3>
+        <h3 id="featuredHeading" class="proj-group-heading text-xs uppercase tracking-[0.2em] font-semibold text-accent-600 mb-6">Featured Work</h3>
 
-        <!-- Spotlight: ObjectNav BC -->
-        <article data-proj="embodied" class="mb-6 card overflow-hidden">
+        <!-- Spotlight: VLA Safety Force Field -->
+        <article data-proj="av" data-group="featured" class="mb-6 card overflow-hidden">
           <div class="grid md:grid-cols-2">
             <div class="bg-gradient-to-br from-slate-50 to-accent-50/30 p-7 sm:p-9 flex flex-col justify-center gap-5 border-b md:border-b-0 md:border-r border-slate-100">
-              <span class="text-[11px] uppercase tracking-wider font-semibold text-accent-600">Flagship &middot; Embodied AI</span>
+              <span class="text-[11px] uppercase tracking-wider font-semibold text-accent-600">Flagship &middot; AV Safety</span>
               <div class="grid grid-cols-3 gap-4">
                 <div>
-                  <div class="font-serif text-2xl sm:text-3xl font-bold text-slate-900">76K+</div>
-                  <div class="text-[11px] text-slate-400 font-medium">VR demos</div>
+                  <div class="font-serif text-2xl sm:text-3xl font-bold text-slate-900">10+</div>
+                  <div class="text-[11px] text-slate-400 font-medium">long-tail scenarios</div>
                 </div>
                 <div>
-                  <div class="font-serif text-2xl sm:text-3xl font-bold text-slate-900">80</div>
-                  <div class="text-[11px] text-slate-400 font-medium">HM3D scenes</div>
+                  <div class="font-serif text-2xl sm:text-3xl font-bold text-slate-900">SFF</div>
+                  <div class="text-[11px] text-slate-400 font-medium">deterministic override</div>
                 </div>
                 <div>
-                  <div class="font-serif text-2xl sm:text-3xl font-bold text-slate-900">3.28x</div>
-                  <div class="text-[11px] text-slate-400 font-medium">inflection weighting</div>
+                  <div class="font-serif text-2xl sm:text-3xl font-bold text-slate-900">ROS 2</div>
+                  <div class="text-[11px] text-slate-400 font-medium">closed-loop eval</div>
                 </div>
               </div>
-              <p class="text-xs text-slate-400 font-medium">ResNet18 + GRU &middot; PIRLNav &middot; Habitat</p>
+              <p class="text-xs text-slate-400 font-medium">CARLA &middot; Docker &middot; Safety Force Field</p>
             </div>
             <div class="p-7 sm:p-9 flex flex-col justify-center">
-              <h4 class="text-lg font-bold text-slate-800">ObjectNav Behavior Cloning — HM3D</h4>
+              <h4 class="text-lg font-bold text-slate-800">Vision-Language-Action Model: Safety Force Field</h4>
               <p class="mt-3 text-sm text-slate-500 leading-relaxed">
-                Trained a ResNet18 + GRU navigation policy from 76K+ PIRLNav human VR demonstrations across 80 HM3D scenes.
-                Implemented truncated BPTT, 3.28x inflection weighting, and a custom dataset loader to bypass Habitat's strict
-                episode schema — an end-to-end embodied-AI pipeline from raw demonstrations to a deployable navigation policy.
+                Integrated a learned driving policy with a deterministic Safety Force Field that overrides unsafe
+                actions in multi-agent scenarios using collision-risk constraints. Implemented the potential-field
+                safety algorithms plus unit tests validating deterministic behavior across diverse driving
+                conditions, and wrapped it all in a Dockerized ROS 2 stack for closed-loop, reproducible evaluation
+                with synchronized simulator and sensor interfaces.
               </p>
               <div class="mt-4 flex flex-wrap gap-1.5">
-                <span class="tech-chip">PyTorch</span>
-                <span class="tech-chip">Behavior Cloning</span>
-                <span class="tech-chip">Habitat Sim</span>
-                <span class="tech-chip">Embodied AI</span>
+                <span class="tech-chip">CARLA</span>
+                <span class="tech-chip">ROS 2</span>
+                <span class="tech-chip">Docker</span>
+                <span class="tech-chip">AV Safety</span>
               </div>
-              <a href="https://github.com/Ashrith5321/habitat-behavior-cloning-hm3d" target="_blank" rel="noopener" class="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-accent-700 hover:text-accent-800 transition-colors">
-                View code on GitHub
-                <svg class="h-3.5 w-3.5 link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg>
-              </a>
             </div>
           </div>
         </article>
 
         <div class="grid sm:grid-cols-2 gap-5">
 
+          <!-- Event-Optical Fusion -->
+          <article data-proj="perception" data-group="featured" class="card flex flex-col overflow-hidden">
+            <div class="p-6 flex flex-col flex-1">
+              <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-2">Perception &amp; Multimodal ML</p>
+              <h4 class="text-base font-bold text-slate-800">Event-Optical Fusion for Space Object Classification</h4>
+              <p class="mt-2 text-sm text-slate-500 leading-relaxed">
+                Multimodal DarkNet53 + PointNet++ fusion for satellite detection, scoring <span class="font-medium text-slate-600">0.944 auPR</span>.
+                Paired with a spatiotemporal 3D CNN for trajectory prediction at ~91 ms batch inference.
+              </p>
+              <div class="mt-auto pt-4 flex flex-wrap gap-1.5">
+                <span class="tech-chip">PyTorch</span>
+                <span class="tech-chip">Event Cameras</span>
+                <span class="tech-chip">3D CNN</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- ObjectNav BC -->
+          <a href="https://github.com/Ashrith5321/habitat-behavior-cloning-hm3d" target="_blank" rel="noopener" data-proj="nav" data-group="featured" class="card flex flex-col overflow-hidden group">
+            <div class="p-6 flex flex-col flex-1">
+              <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-2">Embodied AI</p>
+              <h4 class="text-base font-bold text-slate-800 inline-flex items-center gap-1.5">
+                ObjectNav Behavior Cloning on HM3D
+                <svg class="h-3.5 w-3.5 text-slate-300 link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg>
+              </h4>
+              <p class="mt-2 text-sm text-slate-500 leading-relaxed">
+                A ResNet18 + GRU navigation policy trained from 76K+ PIRLNav human VR demonstrations across 80 HM3D
+                scenes, with truncated BPTT, 3.28x inflection weighting, and a custom dataset loader that bypasses
+                Habitat's strict episode schema.
+              </p>
+              <div class="mt-auto pt-4 flex flex-wrap gap-1.5">
+                <span class="tech-chip">PyTorch</span>
+                <span class="tech-chip">Habitat Sim</span>
+                <span class="tech-chip">Behavior Cloning</span>
+              </div>
+            </div>
+          </a>
+
           <!-- Ocean Frontier -->
-          <article data-proj="slam" class="card flex flex-col overflow-hidden">
+          <article data-proj="slam" data-group="featured" class="card flex flex-col overflow-hidden">
             <div class="p-6 flex flex-col flex-1">
               <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-2">Exploration &amp; Planning</p>
-              <h4 class="text-base font-bold text-slate-800">Ocean Frontier 3D Exploration — ROV Shipwreck Survey</h4>
+              <h4 class="text-base font-bold text-slate-800">Ocean Frontier 3D Exploration: ROV Shipwreck Survey</h4>
               <p class="mt-2 text-sm text-slate-500 leading-relaxed">
-                Autonomous three-phase ROV mission: BFS sweep of unmapped voxels, RRT-biased centroid approach, and full NBVP
-                survey. Detects wrecks via vertical column clustering; fuses stereo depth and sonar into a real-time OctoMap.
+                A three-phase autonomous ROV mission: BFS sweep of unmapped voxels, RRT-biased centroid approach, and
+                full next-best-view survey. Detects wrecks via vertical column clustering and fuses stereo depth with
+                sonar into a real-time OctoMap.
               </p>
               <div class="mt-auto pt-4 flex flex-wrap gap-1.5">
                 <span class="tech-chip">ROS 2</span>
@@ -663,50 +749,17 @@
             </div>
           </article>
 
-          <!-- CARLA SFF -->
-          <article data-proj="av" class="card flex flex-col overflow-hidden">
-            <div class="p-6 flex flex-col flex-1">
-              <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-2">AV Safety</p>
-              <h4 class="text-base font-bold text-slate-800">CARLA SFF: VLA Safety Evaluation Stack</h4>
-              <p class="mt-2 text-sm text-slate-500 leading-relaxed">
-                A Dockerized CARLA / ROS 2 closed-loop evaluation stack for the Alpamayo VLA. Designed 10+ long-tail scenarios
-                and refactored the safety layer into a formal Safety Force Field (Nister et al., 2019), benchmarked with unit tests.
-              </p>
-              <div class="mt-auto pt-4 flex flex-wrap gap-1.5">
-                <span class="tech-chip">CARLA</span>
-                <span class="tech-chip">Docker</span>
-                <span class="tech-chip">AV Safety</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Satellite Event Camera -->
-          <article data-proj="slam" class="card flex flex-col overflow-hidden">
-            <div class="p-6 flex flex-col flex-1">
-              <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-2">Perception</p>
-              <h4 class="text-base font-bold text-slate-800">Satellite Detection with Event Cameras</h4>
-              <p class="mt-2 text-sm text-slate-500 leading-relaxed">
-                Used event-camera microsecond temporal resolution and high dynamic range to detect low-observable satellite
-                streaks against star-field clutter, with asynchronous spike-pattern processing for space domain awareness.
-              </p>
-              <div class="mt-auto pt-4 flex flex-wrap gap-1.5">
-                <span class="tech-chip">Event Camera</span>
-                <span class="tech-chip">Computer Vision</span>
-              </div>
-            </div>
-          </article>
-
           <!-- MBot SLAM -->
-          <article data-proj="slam" class="card flex flex-col overflow-hidden">
+          <article data-proj="slam" data-group="featured" class="card flex flex-col overflow-hidden">
             <div class="aspect-[16/9] bg-slate-100 overflow-hidden">
-              <video src="mbot_path.mp4" class="w-full h-full object-cover" autoplay loop muted playsinline></video>
+              <video data-src="mbot_path.mp4" class="lazy-video w-full h-full object-cover" preload="none" loop muted playsinline></video>
             </div>
             <div class="p-6 flex flex-col flex-1">
               <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-2">SLAM</p>
               <h4 class="text-base font-bold text-slate-800">MBot Autonomous SLAM System</h4>
               <p class="mt-2 text-sm text-slate-500 leading-relaxed">
-                Full SLAM on the MBot platform: laser-based localization, occupancy-grid mapping, and autonomous exploration
-                using frontier detection and path planning.
+                Full SLAM on the MBot platform: laser-based localization, occupancy-grid mapping, and autonomous
+                exploration using frontier detection and A* path planning.
               </p>
               <div class="mt-auto pt-4 flex flex-wrap gap-1.5">
                 <span class="tech-chip">ROS 2</span>
@@ -717,16 +770,17 @@
           </article>
 
           <!-- Full-Stack AV -->
-          <a href="full_stack_av.html" data-proj="av" class="card flex flex-col overflow-hidden group">
+          <a href="full_stack_av.html" data-proj="av" data-group="featured" class="card flex flex-col overflow-hidden group">
             <div class="p-6 flex flex-col flex-1">
-              <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-2">Localization</p>
+              <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-2">Localization &middot; Design Doc</p>
               <h4 class="text-base font-bold text-slate-800 inline-flex items-center gap-1.5">
                 Full-Stack AV: Localization Stack (IEKF)
                 <svg class="h-3.5 w-3.5 text-slate-300 link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg>
               </h4>
               <p class="mt-2 text-sm text-slate-500 leading-relaxed">
-                An autonomous-vehicle localization pipeline using IEKF sensor fusion (IMU, wheel odometry, GNSS, stereo/mono VO,
-                LiDAR), with map-based corrections for drift-bounded pose tracking.
+                An architecture write-up for an AV localization pipeline built on IEKF sensor fusion (IMU, wheel
+                odometry, GNSS, stereo/mono VO, LiDAR), with learned uncertainty calibration and map-based
+                corrections for drift-bounded pose tracking.
               </p>
               <div class="mt-auto pt-4 flex flex-wrap gap-1.5">
                 <span class="tech-chip">IEKF</span>
@@ -737,7 +791,7 @@
           </a>
 
           <!-- DreamerVLA -->
-          <a href="https://github.com/Ashrith5321/DreamerVLA" target="_blank" rel="noopener" data-proj="embodied" class="card flex flex-col overflow-hidden group">
+          <a href="https://github.com/Ashrith5321/DreamerVLA" target="_blank" rel="noopener" data-proj="nav" data-group="featured" class="card flex flex-col overflow-hidden group">
             <div class="p-6 flex flex-col flex-1">
               <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-2">Learning &amp; Navigation</p>
               <h4 class="text-base font-bold text-slate-800 inline-flex items-center gap-1.5">
@@ -745,8 +799,8 @@
                 <svg class="h-3.5 w-3.5 text-slate-300 link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg>
               </h4>
               <p class="mt-2 text-sm text-slate-500 leading-relaxed">
-                A vision-language-action (VLA) model for robot navigation and control, exploring how language-conditioned
-                policies can drive embodied agents toward goals.
+                A vision-language-action model for robot navigation and control, exploring how language-conditioned
+                policies drive embodied agents toward goals.
               </p>
               <div class="mt-auto pt-4 flex flex-wrap gap-1.5">
                 <span class="tech-chip">VLA</span>
@@ -757,7 +811,7 @@
           </a>
 
           <!-- Microbot Planning -->
-          <a href="https://github.com/Synergetic-Adaptive-Machinas-Lab/generalized_planning_mapping_microbots" target="_blank" rel="noopener" data-proj="swarm" class="card flex flex-col overflow-hidden group">
+          <a href="https://github.com/Synergetic-Adaptive-Machinas-Lab/generalized_planning_mapping_microbots" target="_blank" rel="noopener" data-proj="swarm" data-group="featured" class="card flex flex-col overflow-hidden group">
             <div class="p-6 flex flex-col flex-1">
               <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-2">Planning &amp; Mapping</p>
               <h4 class="text-base font-bold text-slate-800 inline-flex items-center gap-1.5">
@@ -765,8 +819,8 @@
                 <svg class="h-3.5 w-3.5 text-slate-300 link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg>
               </h4>
               <p class="mt-2 text-sm text-slate-500 leading-relaxed">
-                Generalized planning and mapping for microrobot systems, developed in the Synergic Adaptive Machines Lab to
-                coordinate motion and reconstruct the environment across many small agents.
+                Generalized planning and mapping for microrobot systems, built in the Synergic Adaptive Machines Lab
+                to coordinate motion and reconstruct the environment across many small agents.
               </p>
               <div class="mt-auto pt-4 flex flex-wrap gap-1.5">
                 <span class="tech-chip">Python</span>
@@ -778,13 +832,55 @@
         </div>
 
         <!-- More projects -->
-        <h3 class="text-xs uppercase tracking-[0.2em] font-semibold text-accent-600 mb-6 mt-14">More Projects</h3>
+        <h3 id="moreHeading" class="proj-group-heading text-xs uppercase tracking-[0.2em] font-semibold text-accent-600 mb-6 mt-14">More Projects</h3>
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
 
+          <!-- ROS 2 VS Code Extension -->
+          <a href="https://github.com/Ashrith5321/vs_code_ros2_extension" target="_blank" rel="noopener" data-proj="hw" data-group="more" class="card overflow-hidden group">
+            <div class="p-5">
+              <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-1">Developer Tools</p>
+              <h4 class="text-sm font-bold text-slate-800 inline-flex items-center gap-1.5">
+                ROS 2 VS Code Extension
+                <svg class="h-3 w-3 text-slate-300 link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg>
+              </h4>
+              <p class="mt-1.5 text-xs text-slate-500 leading-relaxed">
+                A Visual Studio Code extension that streamlines ROS 2 development workflows inside the editor.
+              </p>
+            </div>
+          </a>
+
+          <!-- Adaptive Robotic Manipulator -->
+          <a href="https://github.com/Ashrith5321/Adaptive-robotic-manipulator" target="_blank" rel="noopener" data-proj="perception" data-group="more" class="card overflow-hidden group">
+            <div class="p-5">
+              <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-1">Manipulation</p>
+              <h4 class="text-sm font-bold text-slate-800 inline-flex items-center gap-1.5">
+                Adaptive Robotic Manipulator
+                <svg class="h-3 w-3 text-slate-300 link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg>
+              </h4>
+              <p class="mt-1.5 text-xs text-slate-500 leading-relaxed">
+                A robotic arm that sees, learns, and acts to manipulate a variety of objects.
+              </p>
+            </div>
+          </a>
+
+          <!-- Warehouse Robotics Swarm -->
+          <a href="https://github.com/Ashrith5321/warehouse-robotics-swarm" target="_blank" rel="noopener" data-proj="swarm" data-group="more" class="card overflow-hidden group">
+            <div class="p-5">
+              <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-1">Swarm Robotics</p>
+              <h4 class="text-sm font-bold text-slate-800 inline-flex items-center gap-1.5">
+                Warehouse Robotics Swarm
+                <svg class="h-3 w-3 text-slate-300 link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg>
+              </h4>
+              <p class="mt-1.5 text-xs text-slate-500 leading-relaxed">
+                A multi-robot warehouse logistics system using swarm coordination for task allocation.
+              </p>
+            </div>
+          </a>
+
           <!-- SAM Motor UI -->
-          <article data-proj="swarm" class="card overflow-hidden">
+          <article data-proj="swarm" data-group="more" class="card overflow-hidden">
             <div class="aspect-[16/9] bg-slate-50 overflow-hidden">
-              <img src="sam-motor-ui.png" alt="9-motor swarm control UI" class="w-full h-full object-cover" />
+              <img src="sam-motor-ui.png" alt="9-motor swarm control UI" loading="lazy" class="w-full h-full object-cover" />
             </div>
             <div class="p-5">
               <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-1">Robotics Systems</p>
@@ -796,9 +892,9 @@
           </article>
 
           <!-- Humanoid Leg -->
-          <article data-proj="hw" class="card overflow-hidden">
+          <article data-proj="hw" data-group="more" class="card overflow-hidden">
             <div class="aspect-[16/9] bg-slate-50 overflow-hidden">
-              <video src="humanoid_simulation.webm" class="w-full h-full object-cover" autoplay loop muted playsinline></video>
+              <video data-src="humanoid_simulation.webm" class="lazy-video w-full h-full object-cover" preload="none" loop muted playsinline></video>
             </div>
             <div class="p-5">
               <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-1">Dynamics</p>
@@ -810,9 +906,9 @@
           </article>
 
           <!-- Robotic Limb -->
-          <article data-proj="hw" class="card overflow-hidden">
+          <article data-proj="hw" data-group="more" class="card overflow-hidden">
             <div class="aspect-[16/9] bg-slate-50 overflow-hidden">
-              <img src="robotic_arm.jpg" alt="Motion-sensing robotic limb" class="w-full h-full object-cover" />
+              <img src="robotic_arm.jpg" alt="Motion-sensing robotic limb" loading="lazy" class="w-full h-full object-cover" />
             </div>
             <div class="p-5">
               <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-1">Embedded</p>
@@ -824,9 +920,9 @@
           </article>
 
           <!-- FROST -->
-          <article data-proj="hw" class="card overflow-hidden">
+          <article data-proj="hw" data-group="more" class="card overflow-hidden">
             <div class="aspect-[16/9] bg-slate-50 overflow-hidden">
-              <img src="frost.png" alt="FROST black-ice detection robot" class="w-full h-full object-cover" />
+              <img src="frost.png" alt="FROST black-ice detection robot" loading="lazy" class="w-full h-full object-cover" />
             </div>
             <div class="p-5">
               <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-1">Sensing</p>
@@ -838,9 +934,9 @@
           </article>
 
           <!-- HighWay Go -->
-          <article data-proj="hw" class="card overflow-hidden">
+          <article data-proj="hw" data-group="more" class="card overflow-hidden">
             <div class="aspect-[16/9] bg-slate-50 overflow-hidden">
-              <img src="highwaygo.png" alt="HighWay Go" class="w-full h-full object-cover" />
+              <img src="highwaygo.png" alt="HighWay Go" loading="lazy" class="w-full h-full object-cover" />
             </div>
             <div class="p-5">
               <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-1">Robotics</p>
@@ -852,9 +948,9 @@
           </article>
 
           <!-- SmartWheel -->
-          <article data-proj="hw" class="card overflow-hidden">
+          <article data-proj="hw" data-group="more" class="card overflow-hidden">
             <div class="aspect-[16/9] bg-slate-50 overflow-hidden">
-              <img src="smartwheel.png" alt="SmartWheel" class="w-full h-full object-cover" />
+              <img src="smartwheel.png" alt="SmartWheel" loading="lazy" class="w-full h-full object-cover" />
             </div>
             <div class="p-5">
               <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-1">Energy</p>
@@ -866,9 +962,9 @@
           </article>
 
           <!-- AutoFarm -->
-          <article data-proj="hw" class="card overflow-hidden">
+          <article data-proj="hw" data-group="more" class="card overflow-hidden">
             <div class="aspect-[16/9] bg-slate-50 overflow-hidden">
-              <img src="autofarm.png" alt="AutoFarm" class="w-full h-full object-cover" />
+              <img src="autofarm.png" alt="AutoFarm" loading="lazy" class="w-full h-full object-cover" />
             </div>
             <div class="p-5">
               <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-1">Automation</p>
@@ -878,49 +974,9 @@
               </p>
             </div>
           </article>
-
-          <!-- ROS 2 VS Code Extension -->
-          <a href="https://github.com/Ashrith5321/vs_code_ros2_extension" target="_blank" rel="noopener" data-proj="hw" class="card overflow-hidden group">
-            <div class="p-5">
-              <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-1">Developer Tools</p>
-              <h4 class="text-sm font-bold text-slate-800 inline-flex items-center gap-1.5">
-                ROS 2 VS Code Extension
-                <svg class="h-3 w-3 text-slate-300 link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg>
-              </h4>
-              <p class="mt-1.5 text-xs text-slate-500 leading-relaxed line-clamp-2">
-                A Visual Studio Code extension that streamlines ROS 2 development workflows inside the editor.
-              </p>
-            </div>
-          </a>
-
-          <!-- Adaptive Robotic Manipulator -->
-          <a href="https://github.com/Ashrith5321/Adaptive-robotic-manipulator" target="_blank" rel="noopener" data-proj="embodied" class="card overflow-hidden group">
-            <div class="p-5">
-              <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-1">Manipulation</p>
-              <h4 class="text-sm font-bold text-slate-800 inline-flex items-center gap-1.5">
-                Adaptive Robotic Manipulator
-                <svg class="h-3 w-3 text-slate-300 link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg>
-              </h4>
-              <p class="mt-1.5 text-xs text-slate-500 leading-relaxed line-clamp-2">
-                A robotic arm that can see, learn, and act to manipulate a variety of objects.
-              </p>
-            </div>
-          </a>
-
-          <!-- Warehouse Robotics Swarm -->
-          <a href="https://github.com/Ashrith5321/warehouse-robotics-swarm" target="_blank" rel="noopener" data-proj="swarm" class="card overflow-hidden group">
-            <div class="p-5">
-              <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-1">Swarm Robotics</p>
-              <h4 class="text-sm font-bold text-slate-800 inline-flex items-center gap-1.5">
-                Warehouse Robotics Swarm
-                <svg class="h-3 w-3 text-slate-300 link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg>
-              </h4>
-              <p class="mt-1.5 text-xs text-slate-500 leading-relaxed line-clamp-2">
-                A multi-robot warehouse logistics system using swarm robotics for coordinated task allocation.
-              </p>
-            </div>
-          </a>
         </div>
+
+        <p id="projEmpty" class="hidden mt-6 text-sm text-slate-400">No projects in this category.</p>
       </section>
 
       <!-- Skills -->
@@ -928,62 +984,60 @@
         <h2 class="font-serif text-2xl font-semibold text-slate-900 mb-8 section-heading">Skills</h2>
         <div class="space-y-6 max-w-3xl">
           <div>
-            <h3 class="text-xs uppercase tracking-[0.2em] font-semibold text-slate-400 mb-3">Languages</h3>
+            <h3 class="text-xs uppercase tracking-[0.2em] font-semibold text-slate-400 mb-3">Languages &amp; Systems</h3>
             <div class="flex flex-wrap gap-2">
               <span class="skill-tag">C++</span>
               <span class="skill-tag">Python</span>
-              <span class="skill-tag">Julia</span>
+              <span class="skill-tag">Linux</span>
+              <span class="skill-tag">Git</span>
+              <span class="skill-tag">Docker</span>
+              <span class="skill-tag">ROS 2</span>
               <span class="skill-tag">MATLAB</span>
+              <span class="skill-tag">Julia</span>
             </div>
           </div>
           <div>
-            <h3 class="text-xs uppercase tracking-[0.2em] font-semibold text-slate-400 mb-3">Robotics</h3>
+            <h3 class="text-xs uppercase tracking-[0.2em] font-semibold text-slate-400 mb-3">ML &amp; Computer Vision</h3>
             <div class="flex flex-wrap gap-2">
-              <span class="skill-tag">ROS 2</span>
-              <span class="skill-tag">RViz</span>
-              <span class="skill-tag">Gazebo / Isaac Sim</span>
-              <span class="skill-tag">tf2</span>
-              <span class="skill-tag">rosbag</span>
+              <span class="skill-tag">PyTorch</span>
+              <span class="skill-tag">OpenCV</span>
+              <span class="skill-tag">NumPy</span>
+              <span class="skill-tag">Stereo Vision</span>
+              <span class="skill-tag">Visual Odometry</span>
+              <span class="skill-tag">Multi-View Stereo</span>
+              <span class="skill-tag">3D Gaussian Splatting</span>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-xs uppercase tracking-[0.2em] font-semibold text-slate-400 mb-3">Algorithms</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-tag">A*</span>
+              <span class="skill-tag">RRT</span>
+              <span class="skill-tag">Particle Filters</span>
+              <span class="skill-tag">EKF / UKF</span>
+              <span class="skill-tag">Occupancy Grids</span>
+              <span class="skill-tag">Frontier Exploration</span>
+              <span class="skill-tag">Trajectory Optimization</span>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-xs uppercase tracking-[0.2em] font-semibold text-slate-400 mb-3">Simulation</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="skill-tag">CARLA</span>
+              <span class="skill-tag">Isaac Sim</span>
+              <span class="skill-tag">Habitat</span>
+              <span class="skill-tag">Gazebo</span>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-xs uppercase tracking-[0.2em] font-semibold text-slate-400 mb-3">Embedded &amp; Tooling</h3>
+            <div class="flex flex-wrap gap-2">
               <span class="skill-tag">STM32</span>
               <span class="skill-tag">Arduino</span>
               <span class="skill-tag">I2C</span>
-              <span class="skill-tag">Sensor Fusion</span>
-            </div>
-          </div>
-          <div>
-            <h3 class="text-xs uppercase tracking-[0.2em] font-semibold text-slate-400 mb-3">Control &amp; Perception</h3>
-            <div class="flex flex-wrap gap-2">
-              <span class="skill-tag">LQR</span>
-              <span class="skill-tag">PID</span>
-              <span class="skill-tag">Particle &amp; Bayes Filters</span>
-              <span class="skill-tag">Kalman Filtering</span>
-              <span class="skill-tag">SLAM</span>
-              <span class="skill-tag">A* / D*</span>
-              <span class="skill-tag">RRT</span>
-              <span class="skill-tag">Occupancy Mapping</span>
-            </div>
-          </div>
-          <div>
-            <h3 class="text-xs uppercase tracking-[0.2em] font-semibold text-slate-400 mb-3">Math &amp; Design</h3>
-            <div class="flex flex-wrap gap-2">
-              <span class="skill-tag">Linear Algebra</span>
-              <span class="skill-tag">ODEs/PDEs</span>
-              <span class="skill-tag">Optimization</span>
-              <span class="skill-tag">Least Squares</span>
-              <span class="skill-tag">Jacobians</span>
-              <span class="skill-tag">SolidWorks</span>
-              <span class="skill-tag">Kinematics</span>
-            </div>
-          </div>
-          <div>
-            <h3 class="text-xs uppercase tracking-[0.2em] font-semibold text-slate-400 mb-3">Dev Tools</h3>
-            <div class="flex flex-wrap gap-2">
-              <span class="skill-tag">Linux</span>
-              <span class="skill-tag">Git</span>
               <span class="skill-tag">CMake</span>
               <span class="skill-tag">gdb</span>
               <span class="skill-tag">Profiling</span>
-              <span class="skill-tag">Reproducible Builds</span>
             </div>
           </div>
         </div>
@@ -991,36 +1045,28 @@
 
       <!-- Awards -->
       <section id="awards" class="py-16 scroll-mt-20 border-t border-slate-100">
-        <h2 class="font-serif text-2xl font-semibold text-slate-900 mb-8 section-heading">Awards &amp; Achievements</h2>
-        <div class="grid sm:grid-cols-2 gap-5">
+        <h2 class="font-serif text-2xl font-semibold text-slate-900 mb-8 section-heading">Awards</h2>
+        <div class="grid sm:grid-cols-3 gap-5">
           <div class="card p-6">
-            <h3 class="text-base font-bold text-slate-800">World Robotics Olympiad — India Rank 3</h3>
+            <p class="font-serif text-2xl font-bold text-slate-900">4&times;</p>
+            <h3 class="mt-1 text-base font-bold text-slate-800">University Honors</h3>
             <p class="mt-2 text-sm text-slate-500 leading-relaxed">
-              Developed a piezoelectric energy-harvesting system converting automobile pressure into electricity to power electric vehicles.
+              Awarded every eligible term at the University of Michigan.
             </p>
           </div>
           <div class="card p-6">
-            <h3 class="text-base font-bold text-slate-800">International Youth Robotics Olympiad</h3>
-            <p class="mt-1 text-sm font-medium text-accent-600">1 Gold, 2 Silver, 1 Bronze</p>
-            <ul class="mt-2 space-y-1 text-sm text-slate-500 list-disc list-outside pl-4">
-              <li>Autonomous vehicle for watering plants with a robotic arm and soil detection.</li>
-              <li>Smart mini-farm with automated irrigation, planting, and sensing.</li>
-              <li>Greenhouse accelerating growth 2.2x using a controlled climate.</li>
-            </ul>
-          </div>
-          <div class="card p-6">
-            <h3 class="text-base font-bold text-slate-800">American Mathematics Competitions</h3>
-            <p class="mt-1 text-sm font-medium text-accent-600">2x USAMO qualifier, 3x AIME qualifier</p>
+            <p class="font-serif text-2xl font-bold text-slate-900">4&times;</p>
+            <h3 class="mt-1 text-base font-bold text-slate-800">Dean's List</h3>
             <p class="mt-2 text-sm text-slate-500 leading-relaxed">
-              Qualified for the USAMO (top 300 of ~300,000 globally) and earned AIME distinction across three years.
+              College of Engineering recognition for term academic standing.
             </p>
           </div>
           <div class="card p-6">
-            <h3 class="text-base font-bold text-slate-800">Other Olympiads</h3>
-            <ul class="mt-2 space-y-1 text-sm text-slate-500 list-disc list-outside pl-4">
-              <li>F=MA: qualified for the USA Physics Olympiad (USAPhO), strong in mechanics.</li>
-              <li>ZIO: cleared the Indian Computing Olympiad, with algorithmic and mathematical reasoning.</li>
-            </ul>
+            <p class="font-serif text-2xl font-bold text-slate-900">&#9733;</p>
+            <h3 class="mt-1 text-base font-bold text-slate-800">Academic Excellence Award</h3>
+            <p class="mt-2 text-sm text-slate-500 leading-relaxed">
+              University of Michigan, College of Engineering.
+            </p>
           </div>
         </div>
       </section>
@@ -1030,16 +1076,16 @@
         <div class="rounded-2xl bg-gradient-to-br from-slate-50 to-accent-50/20 border border-slate-100 p-8 sm:p-12">
           <h2 class="font-serif text-2xl font-semibold text-slate-900 mb-4">Let's connect</h2>
           <p class="max-w-xl text-slate-500 leading-relaxed">
-            I am always glad to connect with fellow researchers, collaborators, and curious minds.
-            Reach out and let's build something together.
+            I'm always glad to hear from engineers, researchers, and teams building autonomy.
+            The fastest way to reach me is email.
           </p>
           <div class="mt-8 grid sm:grid-cols-2 gap-x-12 gap-y-4 text-sm max-w-xl">
             <div class="flex justify-between items-center border-b border-slate-200/60 py-3">
-              <span class="text-slate-400 font-medium">Email</span>
+              <span class="text-slate-400 font-medium">Email &middot; school</span>
               <a href="mailto:ashed@umich.edu" class="text-accent-700 hover:text-accent-800 font-medium transition-colors">ashed@umich.edu</a>
             </div>
             <div class="flex justify-between items-center border-b border-slate-200/60 py-3">
-              <span class="text-slate-400 font-medium">Email</span>
+              <span class="text-slate-400 font-medium">Email &middot; personal</span>
               <a href="mailto:eashrith@gmail.com" class="text-accent-700 hover:text-accent-800 font-medium transition-colors">eashrith@gmail.com</a>
             </div>
             <div class="flex justify-between items-center border-b border-slate-200/60 py-3">
@@ -1066,7 +1112,7 @@
     <footer class="border-t border-slate-100">
       <div class="max-w-4xl mx-auto px-6 sm:px-8 py-10 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-400">
         <span>Ashrith Edukulla &middot; Ann Arbor, Michigan</span>
-        <a href="/plan" class="hover:text-accent-700 transition-colors font-medium">Robotics &amp; AI roadmap</a>
+        <span>US Citizen &middot; Open to SWE internships and new-grad roles</span>
       </div>
     </footer>
 
@@ -1081,17 +1127,41 @@
     </button>
 
     <script>
-      // Header shadow on scroll
+      // Header shadow + back-to-top, in one scroll handler
       var header = document.getElementById("siteHeader");
-      window.addEventListener("scroll", function () {
-        header.classList.toggle("scrolled", window.scrollY > 10);
+      var toTop = document.getElementById("toTop");
+      var navLinks = document.querySelectorAll("a.nav-link");
+
+      // Only spy on sections the nav actually links to, so scrolling through
+      // News/Education/Awards keeps the nearest preceding link highlighted.
+      var spySections = [];
+      navLinks.forEach(function (link) {
+        var el = document.querySelector(link.getAttribute("href"));
+        if (el) spySections.push({ el: el, link: link });
       });
 
-      // Back to top
-      var toTop = document.getElementById("toTop");
-      window.addEventListener("scroll", function () {
+      function updateSpy() {
+        // Sort by document position, not nav order; the two can differ.
+        spySections.sort(function (a, b) { return a.el.offsetTop - b.el.offsetTop; });
+        var probe = window.scrollY + window.innerHeight * 0.35;
+        var current = null;
+        spySections.forEach(function (s) {
+          if (s.el.offsetTop <= probe) current = s.link;
+        });
+        navLinks.forEach(function (link) {
+          link.classList.toggle("active", link === current);
+        });
+      }
+
+      function onScroll() {
+        header.classList.toggle("scrolled", window.scrollY > 10);
         toTop.classList.toggle("show", window.scrollY > 400);
-      });
+        updateSpy();
+      }
+      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("resize", updateSpy);
+      onScroll();
+
       toTop.addEventListener("click", function () {
         window.scrollTo({ top: 0, behavior: "smooth" });
       });
@@ -1116,37 +1186,54 @@
         });
       });
 
-      // Scroll-spy for nav links
-      var sections = document.querySelectorAll("section[id]");
-      var navLinks = document.querySelectorAll("a.nav-link");
-      var spyObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            navLinks.forEach(function (link) {
-              link.classList.toggle("active", link.getAttribute("href") === "#" + entry.target.id);
-            });
-          }
-        });
-      }, { rootMargin: "-30% 0px -60% 0px" });
-      sections.forEach(function (s) { spyObserver.observe(s); });
-
-      // Project filter
+      // Project filter, which also hides group headings that end up empty
       var filterBtns = document.querySelectorAll("#projFilters button");
       var projCards = document.querySelectorAll("[data-proj]");
+      var groupHeadings = {
+        featured: document.getElementById("featuredHeading"),
+        more: document.getElementById("moreHeading"),
+      };
+      var emptyMsg = document.getElementById("projEmpty");
+
       filterBtns.forEach(function (btn) {
         btn.addEventListener("click", function () {
           var filter = btn.getAttribute("data-filter");
           filterBtns.forEach(function (b) { b.classList.remove("active"); });
           btn.classList.add("active");
+
+          var visible = { featured: 0, more: 0 };
           projCards.forEach(function (card) {
-            if (filter === "all" || card.getAttribute("data-proj") === filter) {
-              card.classList.remove("proj-hidden");
-            } else {
-              card.classList.add("proj-hidden");
-            }
+            var show = filter === "all" || card.getAttribute("data-proj") === filter;
+            card.classList.toggle("proj-hidden", !show);
+            if (show) visible[card.getAttribute("data-group")]++;
           });
+
+          Object.keys(groupHeadings).forEach(function (g) {
+            if (groupHeadings[g]) groupHeadings[g].classList.toggle("proj-hidden", visible[g] === 0);
+          });
+          emptyMsg.classList.toggle("hidden", visible.featured + visible.more > 0);
         });
       });
+
+      // Load project videos only when they scroll into view (they are large files)
+      var lazyVideos = document.querySelectorAll("video.lazy-video");
+      if ("IntersectionObserver" in window) {
+        var videoObserver = new IntersectionObserver(function (entries, obs) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            var v = entry.target;
+            v.src = v.getAttribute("data-src");
+            v.play().catch(function () {});
+            obs.unobserve(v);
+          });
+        }, { rootMargin: "200px 0px" });
+        lazyVideos.forEach(function (v) { videoObserver.observe(v); });
+      } else {
+        lazyVideos.forEach(function (v) {
+          v.src = v.getAttribute("data-src");
+          v.play().catch(function () {});
+        });
+      }
     </script>
   </body>
 </html>
