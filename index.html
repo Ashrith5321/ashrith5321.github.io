@@ -334,17 +334,13 @@
 
       <!-- At a glance -->
       <section aria-label="At a glance" class="pb-14">
-        <div class="grid grid-cols-3 gap-3 sm:gap-4">
+        <div class="grid grid-cols-2 gap-3 sm:gap-4 max-w-md">
           <div class="rounded-xl bg-gradient-to-br from-slate-50 to-white border border-slate-100 p-4 sm:p-5 text-center">
             <div class="font-serif text-2xl sm:text-3xl font-bold text-slate-900">3.8<span class="text-base sm:text-lg font-normal text-slate-300">/4.0</span></div>
             <div class="mt-1.5 text-[10px] sm:text-xs font-medium text-slate-400 uppercase tracking-wide">GPA &middot; Robotics</div>
           </div>
           <div class="rounded-xl bg-gradient-to-br from-slate-50 to-white border border-slate-100 p-4 sm:p-5 text-center">
-            <div class="font-serif text-2xl sm:text-3xl font-bold text-slate-900">3</div>
-            <div class="mt-1.5 text-[10px] sm:text-xs font-medium text-slate-400 uppercase tracking-wide">Papers</div>
-          </div>
-          <div class="rounded-xl bg-gradient-to-br from-slate-50 to-white border border-slate-100 p-4 sm:p-5 text-center">
-            <div class="font-serif text-2xl sm:text-3xl font-bold text-slate-900">3</div>
+            <div class="font-serif text-2xl sm:text-3xl font-bold text-slate-900">4</div>
             <div class="mt-1.5 text-[10px] sm:text-xs font-medium text-slate-400 uppercase tracking-wide">Courses as IA</div>
           </div>
         </div>
@@ -639,13 +635,13 @@
 
         <!-- Filter pills -->
         <div id="projFilters" class="mb-10 flex flex-wrap gap-2" role="tablist" aria-label="Filter projects">
-          <button data-filter="all" class="proj-pill active">All <span class="pc">18</span></button>
-          <button data-filter="perception" class="proj-pill">Perception <span class="pc">2</span></button>
-          <button data-filter="av" class="proj-pill">Autonomous Driving <span class="pc">2</span></button>
-          <button data-filter="nav" class="proj-pill">Navigation <span class="pc">2</span></button>
+          <button data-filter="all" class="proj-pill active">All <span class="pc">12</span></button>
+          <button data-filter="perception" class="proj-pill">Perception <span class="pc">1</span></button>
+          <button data-filter="av" class="proj-pill">Autonomous Driving <span class="pc">1</span></button>
+          <button data-filter="nav" class="proj-pill">Navigation <span class="pc">1</span></button>
           <button data-filter="slam" class="proj-pill">SLAM &amp; Planning <span class="pc">2</span></button>
-          <button data-filter="swarm" class="proj-pill">Swarms <span class="pc">3</span></button>
-          <button data-filter="hw" class="proj-pill">Tools &amp; Hardware <span class="pc">7</span></button>
+          <button data-filter="swarm" class="proj-pill">Swarms <span class="pc">1</span></button>
+          <button data-filter="hw" class="proj-pill">Hardware <span class="pc">6</span></button>
         </div>
 
         <!-- Featured -->
@@ -769,113 +765,11 @@
             </div>
           </article>
 
-          <!-- Full-Stack AV -->
-          <a href="full_stack_av.html" data-proj="av" data-group="featured" class="card flex flex-col overflow-hidden group">
-            <div class="p-6 flex flex-col flex-1">
-              <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-2">Localization &middot; Design Doc</p>
-              <h4 class="text-base font-bold text-slate-800 inline-flex items-center gap-1.5">
-                Full-Stack AV: Localization Stack (IEKF)
-                <svg class="h-3.5 w-3.5 text-slate-300 link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg>
-              </h4>
-              <p class="mt-2 text-sm text-slate-500 leading-relaxed">
-                An architecture write-up for an AV localization pipeline built on IEKF sensor fusion (IMU, wheel
-                odometry, GNSS, stereo/mono VO, LiDAR), with learned uncertainty calibration and map-based
-                corrections for drift-bounded pose tracking.
-              </p>
-              <div class="mt-auto pt-4 flex flex-wrap gap-1.5">
-                <span class="tech-chip">IEKF</span>
-                <span class="tech-chip">LiDAR</span>
-                <span class="tech-chip">Mapping</span>
-              </div>
-            </div>
-          </a>
-
-          <!-- DreamerVLA -->
-          <a href="https://github.com/Ashrith5321/DreamerVLA" target="_blank" rel="noopener" data-proj="nav" data-group="featured" class="card flex flex-col overflow-hidden group">
-            <div class="p-6 flex flex-col flex-1">
-              <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-2">Learning &amp; Navigation</p>
-              <h4 class="text-base font-bold text-slate-800 inline-flex items-center gap-1.5">
-                DreamerVLA
-                <svg class="h-3.5 w-3.5 text-slate-300 link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg>
-              </h4>
-              <p class="mt-2 text-sm text-slate-500 leading-relaxed">
-                A vision-language-action model for robot navigation and control, exploring how language-conditioned
-                policies drive embodied agents toward goals.
-              </p>
-              <div class="mt-auto pt-4 flex flex-wrap gap-1.5">
-                <span class="tech-chip">VLA</span>
-                <span class="tech-chip">PyTorch</span>
-                <span class="tech-chip">Navigation</span>
-              </div>
-            </div>
-          </a>
-
-          <!-- Microbot Planning -->
-          <a href="https://github.com/Synergetic-Adaptive-Machinas-Lab/generalized_planning_mapping_microbots" target="_blank" rel="noopener" data-proj="swarm" data-group="featured" class="card flex flex-col overflow-hidden group">
-            <div class="p-6 flex flex-col flex-1">
-              <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-2">Planning &amp; Mapping</p>
-              <h4 class="text-base font-bold text-slate-800 inline-flex items-center gap-1.5">
-                Generalized Planning &amp; Mapping for Microbots
-                <svg class="h-3.5 w-3.5 text-slate-300 link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg>
-              </h4>
-              <p class="mt-2 text-sm text-slate-500 leading-relaxed">
-                Generalized planning and mapping for microrobot systems, built in the Synergic Adaptive Machines Lab
-                to coordinate motion and reconstruct the environment across many small agents.
-              </p>
-              <div class="mt-auto pt-4 flex flex-wrap gap-1.5">
-                <span class="tech-chip">Python</span>
-                <span class="tech-chip">Planning</span>
-                <span class="tech-chip">Swarm</span>
-              </div>
-            </div>
-          </a>
         </div>
 
         <!-- More projects -->
         <h3 id="moreHeading" class="proj-group-heading text-xs uppercase tracking-[0.2em] font-semibold text-accent-600 mb-6 mt-14">More Projects</h3>
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-
-          <!-- ROS 2 VS Code Extension -->
-          <a href="https://github.com/Ashrith5321/vs_code_ros2_extension" target="_blank" rel="noopener" data-proj="hw" data-group="more" class="card overflow-hidden group">
-            <div class="p-5">
-              <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-1">Developer Tools</p>
-              <h4 class="text-sm font-bold text-slate-800 inline-flex items-center gap-1.5">
-                ROS 2 VS Code Extension
-                <svg class="h-3 w-3 text-slate-300 link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg>
-              </h4>
-              <p class="mt-1.5 text-xs text-slate-500 leading-relaxed">
-                A Visual Studio Code extension that streamlines ROS 2 development workflows inside the editor.
-              </p>
-            </div>
-          </a>
-
-          <!-- Adaptive Robotic Manipulator -->
-          <a href="https://github.com/Ashrith5321/Adaptive-robotic-manipulator" target="_blank" rel="noopener" data-proj="perception" data-group="more" class="card overflow-hidden group">
-            <div class="p-5">
-              <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-1">Manipulation</p>
-              <h4 class="text-sm font-bold text-slate-800 inline-flex items-center gap-1.5">
-                Adaptive Robotic Manipulator
-                <svg class="h-3 w-3 text-slate-300 link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg>
-              </h4>
-              <p class="mt-1.5 text-xs text-slate-500 leading-relaxed">
-                A robotic arm that sees, learns, and acts to manipulate a variety of objects.
-              </p>
-            </div>
-          </a>
-
-          <!-- Warehouse Robotics Swarm -->
-          <a href="https://github.com/Ashrith5321/warehouse-robotics-swarm" target="_blank" rel="noopener" data-proj="swarm" data-group="more" class="card overflow-hidden group">
-            <div class="p-5">
-              <p class="text-[11px] uppercase tracking-wider font-semibold text-accent-600 mb-1">Swarm Robotics</p>
-              <h4 class="text-sm font-bold text-slate-800 inline-flex items-center gap-1.5">
-                Warehouse Robotics Swarm
-                <svg class="h-3 w-3 text-slate-300 link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"></path></svg>
-              </h4>
-              <p class="mt-1.5 text-xs text-slate-500 leading-relaxed">
-                A multi-robot warehouse logistics system using swarm coordination for task allocation.
-              </p>
-            </div>
-          </a>
 
           <!-- SAM Motor UI -->
           <article data-proj="swarm" data-group="more" class="card overflow-hidden">
