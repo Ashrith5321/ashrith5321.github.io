@@ -168,28 +168,6 @@
       }
 
       /* Timeline dot */
-      .timeline-item { position: relative; padding-left: 24px; }
-      .timeline-item::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 8px;
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: #2563eb;
-        box-shadow: 0 0 0 3px #dbeafe;
-      }
-      .timeline-item::after {
-        content: "";
-        position: absolute;
-        left: 3.5px;
-        top: 20px;
-        bottom: -28px;
-        width: 1px;
-        background: #e2e8f0;
-      }
-      .timeline-item:last-child::after { display: none; }
 
       /* News items */
       .news-item {
@@ -480,9 +458,11 @@
         <h2 class="font-serif text-2xl font-semibold text-slate-900 mb-10 section-heading">Experience</h2>
 
         <h3 class="text-xs uppercase tracking-[0.2em] font-semibold text-accent-600 mb-8">Industry &amp; Research</h3>
-        <div class="space-y-10">
+        <div class="space-y-8">
 
-          <article class="timeline-item">
+          <article class="flex gap-4">
+            <div class="shrink-0 h-12 w-12 rounded-lg bg-accent-50 border border-accent-100 flex items-center justify-center mt-0.5"><span class="font-serif text-lg font-bold text-accent-700 leading-none">N</span></div>
+            <div class="flex-1 min-w-0">
             <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1">
               <h3 class="text-base font-bold text-slate-800">NiFT</h3>
               <span class="text-sm font-medium text-slate-400">Aug 2026 – Present</span>
@@ -493,9 +473,12 @@
               <li>Lead deployment and real-time optimization of NVIDIA Alpamayo 1.5/2, accelerating VLA inference via TensorRT Edge-LLM, FP8/INT8 quantization, CUDA Graphs, KV-cache tuning, and zero-copy pipelines.</li>
               <li>Integrate Alpamayo into planning and control, linking multi-camera perception and 6.4 s waypoint trajectories to deterministic tracking, safety controls, and p50/p95/p99 latency profiling.</li>
             </ul>
+            </div>
           </article>
 
-          <article class="timeline-item">
+          <article class="flex gap-4">
+            <div class="shrink-0 h-12 w-12 rounded-lg bg-accent-50 border border-accent-100 flex items-center justify-center mt-0.5"><span class="font-serif text-lg font-bold text-accent-700 leading-none">M</span></div>
+            <div class="flex-1 min-w-0">
             <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1">
               <h3 class="text-base font-bold text-slate-800">Moby Robotics</h3>
               <span class="text-sm font-medium text-slate-400">Jun 2026 – Aug 2026</span>
@@ -506,9 +489,12 @@
               <li>Developed a multi-camera sensor-fusion pipeline combining 360° imagery, stereo depth, and 3D reconstruction to improve spatial consistency for autonomous underwater mapping and navigation.</li>
               <li>Profiled and optimized perception workloads on resource-constrained edge compute, balancing detection accuracy, inference latency, and memory for real-time deployment on embedded systems.</li>
             </ul>
+            </div>
           </article>
 
-          <article class="timeline-item">
+          <article class="flex gap-4">
+            <div class="shrink-0 h-12 w-12 rounded-lg bg-emerald-50 border border-emerald-100 flex items-center justify-center mt-0.5"><span class="font-serif text-lg font-bold text-emerald-700 leading-none">S</span></div>
+            <div class="flex-1 min-w-0">
             <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1">
               <h3 class="text-base font-bold text-slate-800">Scalable Spatial Intelligence Lab</h3>
               <span class="text-sm font-medium text-slate-400">Mar 2026 – Present</span>
@@ -519,9 +505,12 @@
               <li>Implemented a long-horizon navigation stack combining visual observations, language-conditioned goals, episodic memory, and predictive world-model representations for sequential decision-making.</li>
               <li>Built Habitat evaluation pipelines benchmarking agents across unseen environments on success rate, path efficiency, and compute-performance tradeoffs, for fair and reproducible comparison.</li>
             </ul>
+            </div>
           </article>
 
-          <article class="timeline-item">
+          <article class="flex gap-4">
+            <div class="shrink-0 h-12 w-12 rounded-lg bg-emerald-50 border border-emerald-100 flex items-center justify-center mt-0.5"><span class="font-serif text-lg font-bold text-emerald-700 leading-none">F</span></div>
+            <div class="flex-1 min-w-0">
             <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1">
               <h3 class="text-base font-bold text-slate-800">Field Robotics Group (FRoG) Lab</h3>
               <span class="text-sm font-medium text-slate-400">Dec 2025 – May 2026</span>
@@ -533,9 +522,12 @@
               <li>Built a multimodal mapping pipeline fusing sonar and stereo vision into a unified spatial representation, improving robustness of 3D scene understanding across varying conditions.</li>
               <li>Designed state-driven switching between long-range sonar exploration and close-range stereo inspection, balancing global coverage against high-resolution local reconstruction.</li>
             </ul>
+            </div>
           </article>
 
-          <article class="timeline-item">
+          <article class="flex gap-4">
+            <div class="shrink-0 h-12 w-12 rounded-lg bg-emerald-50 border border-emerald-100 flex items-center justify-center mt-0.5"><span class="font-serif text-xs font-bold text-emerald-700 leading-none">SA</span></div>
+            <div class="flex-1 min-w-0">
             <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1">
               <h3 class="text-base font-bold text-slate-800">Synergic Adaptive Machines (SAM) Lab</h3>
               <span class="text-sm font-medium text-slate-400">Aug 2025 – Dec 2025</span>
@@ -546,9 +538,12 @@
               <li>Developed decentralized control strategies for physical reconfiguration and emergent coordination.</li>
               <li>Built a C++ HTTP and serial control bridge with a browser UI for driving a 9-motor experimental array with real-time feedback.</li>
             </ul>
+            </div>
           </article>
 
-          <article class="timeline-item">
+          <article class="flex gap-4">
+            <div class="shrink-0 h-12 w-12 rounded-lg bg-accent-50 border border-accent-100 flex items-center justify-center mt-0.5"><span class="font-serif text-xs font-bold text-accent-700 leading-none">MR</span></div>
+            <div class="flex-1 min-w-0">
             <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1">
               <h3 class="text-base font-bold text-slate-800">Michigan Mars Rover Team</h3>
               <span class="text-sm font-medium text-slate-400">Nov 2024 – May 2025</span>
@@ -559,13 +554,16 @@
               <li>Developed embedded drivers and ROS nodes for motor coordination and sensor data handling.</li>
               <li>Contributed to navigation and control tuning for reliable performance in dynamic rover environments.</li>
             </ul>
+            </div>
           </article>
         </div>
 
         <h3 class="text-xs uppercase tracking-[0.2em] font-semibold text-accent-600 mb-8 mt-14">Teaching</h3>
-        <div class="space-y-10">
+        <div class="space-y-8">
 
-          <article class="timeline-item">
+          <article class="flex gap-4">
+            <div class="shrink-0 h-12 w-12 rounded-lg bg-violet-50 border border-violet-100 flex items-center justify-center mt-0.5"><span class="font-serif text-[11px] font-bold text-violet-700 leading-none">330</span></div>
+            <div class="flex-1 min-w-0">
             <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1">
               <h3 class="text-base font-bold text-slate-800">ROB 330</h3>
               <span class="text-sm font-medium text-slate-400">Aug 2026 – Present</span>
@@ -575,9 +573,12 @@
               <li>Support MBot lab work in ROS 2 covering SLAM, localization, mapping, and waypoint navigation.</li>
               <li>Debug full-stack robot systems with students, from sensor drivers and TF trees up through planning and control.</li>
             </ul>
+            </div>
           </article>
 
-          <article class="timeline-item">
+          <article class="flex gap-4">
+            <div class="shrink-0 h-12 w-12 rounded-lg bg-violet-50 border border-violet-100 flex items-center justify-center mt-0.5"><span class="font-serif text-[11px] font-bold text-violet-700 leading-none">467</span></div>
+            <div class="flex-1 min-w-0">
             <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1">
               <h3 class="text-base font-bold text-slate-800">EECS 467: Autonomous Robotics</h3>
               <span class="text-sm font-medium text-slate-400">Jan 2026 – May 2026</span>
@@ -587,9 +588,12 @@
               <li>Mentored students through C++/Python/ROS labs covering perception, SLAM, sensor fusion, planning, and control.</li>
               <li>Debugged end-to-end robot systems during labs and office hours, diagnosing software, algorithmic, sensor, and integration failures across the hardware/software stack.</li>
             </ul>
+            </div>
           </article>
 
-          <article class="timeline-item">
+          <article class="flex gap-4">
+            <div class="shrink-0 h-12 w-12 rounded-lg bg-violet-50 border border-violet-100 flex items-center justify-center mt-0.5"><span class="font-serif text-[11px] font-bold text-violet-700 leading-none">201</span></div>
+            <div class="flex-1 min-w-0">
             <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1">
               <h3 class="text-base font-bold text-slate-800">ROB 201: Robot Differential Equations</h3>
               <span class="text-sm font-medium text-slate-400">Aug 2025 – Dec 2025</span>
@@ -599,9 +603,12 @@
               <li>Supported instruction in ODE modeling, linear systems, and control for undergraduate robotics students.</li>
               <li>Led weekly office hours and problem sessions using Julia notebooks, simulations, and visualizations.</li>
             </ul>
+            </div>
           </article>
 
-          <article class="timeline-item">
+          <article class="flex gap-4">
+            <div class="shrink-0 h-12 w-12 rounded-lg bg-violet-50 border border-violet-100 flex items-center justify-center mt-0.5"><span class="font-serif text-[11px] font-bold text-violet-700 leading-none">101</span></div>
+            <div class="flex-1 min-w-0">
             <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-1">
               <h3 class="text-base font-bold text-slate-800">ROB 101: Computational Linear Algebra</h3>
               <span class="text-sm font-medium text-slate-400">Dec 2024 – Apr 2025</span>
@@ -611,6 +618,7 @@
               <li>Supported instruction in computational linear algebra (linear systems, least squares, and matrix factorizations), taught in Julia.</li>
               <li>Held office hours and guided students through programming assignments and weekly problem sets.</li>
             </ul>
+            </div>
           </article>
         </div>
       </section>
