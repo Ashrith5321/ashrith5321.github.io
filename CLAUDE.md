@@ -29,19 +29,28 @@ Education → Experience (Industry & Research, then Teaching) → Papers → Pro
 Skills → Awards → Contact
 
 ## Color
-Palette is drawn from the University of Michigan official brand guidelines
-(brand.umich.edu/design-resources/colors), not from framework defaults.
+**The page is monochrome. There is no accent hue.** Modeled on Vercel's Geist system
+(vercel.com/geist), whose rule is "design in monochrome, use color only when it adds
+significant meaning" and which has no brand accent at all: the ink is the brand.
 
-- Accent: **Tappan Red #9A3324** (U-M secondary palette), ramped 50/100/500/600/700/800
-- Ground: warm paper **#FAF7F2**, a tint of UMMA Tan #CFC096. Never pure white.
-- Cards: #FFFDFA on a #E5DFD4 border
-- Neutrals: warm stone, never Tailwind `slate-*` (slate is blue-grey and reads synthetic)
+Documented Geist values in use: `#FAFAFA` `#F5F5F5` `#EBEBEB` `#4D4D4D` `#171717`.
+Intermediate steps are interpolated; every text-bearing step is pinned to at least
+4.5:1 on white (`stone-400` is `#757575`, not Geist's `#A1A1A1`, which fails as text).
 
-**Do not reintroduce blue/indigo accents or any gradient.** Tailwind's default indigo-500
-plus indigo-to-purple gradients are the documented "AI-generated site" tell, which is
-exactly what this palette was chosen to get away from. There are zero `bg-gradient-*`
-classes on the page; keep it that way. Colour should come from the real logos and project
-photography, not from UI chrome.
+- Ink / headings `#171717` · body `#4D4D4D` · muted `#757575`
+- Canvas `#FFFFFF` · soft surfaces `#FAFAFA` / `#F5F5F5` · hairlines `#EBEBEB`
+- `accent-*` is retained as a token name but resolves to ink, so links read as ink
+
+**All color on the page comes from the real logos and project photography**, never from
+UI chrome. That is the whole idea: against a neutral page the NiFT orange, Moby coral,
+FRoG yellow, and Michigan maize are the only chromatic things on screen.
+
+**Do not add an accent hue, and do not add a gradient.** Three earlier attempts at a
+themed accent (Tailwind blue, then terracotta/teal/indigo, then U-M Tappan Red) were all
+rejected as looking AI-generated. The problem was not the particular hue: any decorative
+theme color reads as inherited rather than chosen. Tailwind's default indigo plus
+indigo-to-purple gradients are the documented AI-template tell. There are zero
+`bg-gradient-*` classes and zero chromatic hex values in the file; keep it that way.
 
 ## Conventions
 - Light theme only, with no dark mode classes or toggle. This applies to `full_stack_av.html` too.

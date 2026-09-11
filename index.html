@@ -37,12 +37,26 @@
             },
             colors: {
               accent: {
-                50: "#FBF3F1",
-                100: "#F1DCD7",
-                500: "#B8422F",
-                600: "#9A3324",
-                700: "#7E2A1E",
-                800: "#642118",
+                50: "#FAFAFA",
+                100: "#EBEBEB",
+                200: "#E0E0E0",
+                400: "#757575",
+                500: "#4D4D4D",
+                600: "#171717",
+                700: "#171717",
+                800: "#000000",
+              },
+              stone: {
+                50: "#FAFAFA",
+                100: "#F5F5F5",
+                200: "#EBEBEB",
+                300: "#E0E0E0",
+                400: "#757575",
+                500: "#4D4D4D",
+                600: "#3D3D3D",
+                700: "#2B2B2B",
+                800: "#171717",
+                900: "#0A0A0A",
               },
             },
           },
@@ -53,7 +67,7 @@
     <style>
       html { scroll-behavior: smooth; }
       body { font-family: "Inter", system-ui, sans-serif; }
-      ::selection { background: #F1DCD7; }
+      ::selection { background: #EBEBEB; }
 
       /* Nav */
       a.nav-link { position: relative; }
@@ -64,13 +78,13 @@
         bottom: -4px;
         height: 2px;
         width: 0;
-        background: #9A3324;
+        background: #171717;
         border-radius: 1px;
         transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
       }
       a.nav-link:hover::after { width: 100%; }
-      a.nav-link.active { color: #9A3324; font-weight: 500; }
-      a.nav-link.active::after { width: 100%; background: #9A3324; }
+      a.nav-link.active { color: #171717; font-weight: 500; }
+      a.nav-link.active::after { width: 100%; background: #171717; }
 
       /* Header shadow on scroll */
       header { box-shadow: 0 0 0 0 rgba(0,0,0,0); transition: box-shadow 0.3s ease; }
@@ -100,13 +114,13 @@
       /* Cards */
       .card {
         border-radius: 12px;
-        border: 1px solid #E5DFD4;
-        background: #FFFDFA;
+        border: 1px solid #EBEBEB;
+        background: #FFFFFF;
         transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
       }
       .card:hover {
         box-shadow: 0 4px 24px rgba(0,0,0,0.06);
-        border-color: #CFC6B8;
+        border-color: #E0E0E0;
         transform: translateY(-2px);
       }
 
@@ -119,14 +133,14 @@
         font-weight: 500;
         padding: 7px 16px;
         border-radius: 9999px;
-        border: 1px solid #E5DFD4;
-        color: #6B635C;
+        border: 1px solid #EBEBEB;
+        color: #757575;
         background: #fff;
         cursor: pointer;
         transition: all 0.2s ease;
       }
-      .proj-pill:hover { border-color: #9A3324; color: #9A3324; background: #FBF3F1; }
-      .proj-pill.active { background: #292524; color: #fff; border-color: #292524; }
+      .proj-pill:hover { border-color: #171717; color: #171717; background: #FAFAFA; }
+      .proj-pill.active { background: #171717; color: #fff; border-color: #171717; }
       .proj-pill .pc { opacity: 0.55; font-size: 11px; }
       .proj-hidden { display: none !important; }
 
@@ -136,9 +150,9 @@
         padding: 4px 12px;
         border-radius: 6px;
         font-size: 13px;
-        color: #57534E;
-        background: #F1EDE6;
-        border: 1px solid #E5DFD4;
+        color: #4D4D4D;
+        background: #F5F5F5;
+        border: 1px solid #EBEBEB;
       }
 
       /* Tech chips on project cards */
@@ -146,9 +160,9 @@
         font-size: 11px;
         padding: 3px 10px;
         border-radius: 6px;
-        background: #F7F4EF;
-        color: #6B635C;
-        border: 1px solid #F1EDE6;
+        background: #FAFAFA;
+        color: #757575;
+        border: 1px solid #F5F5F5;
         font-weight: 500;
       }
 
@@ -163,7 +177,7 @@
         display: block;
         width: 3px;
         height: 24px;
-        background: #9A3324;
+        background: #171717;
         border-radius: 2px;
       }
 
@@ -182,7 +196,7 @@
         width: 6px;
         height: 6px;
         border-radius: 50%;
-        background: #9A3324;
+        background: #171717;
       }
 
       /* Subtle link arrow animation */
@@ -191,10 +205,10 @@
     </style>
   </head>
 
-  <body class="text-stone-600 antialiased" style="background:#FAF7F2">
+  <body class="text-stone-600 antialiased" style="background:#FFFFFF">
 
     <!-- Navigation -->
-    <header id="siteHeader" class="sticky top-0 z-50 border-b border-stone-100 bg-[#FAF7F2]/90 backdrop-blur-md">
+    <header id="siteHeader" class="sticky top-0 z-50 border-b border-stone-100 bg-[#FFFFFF]/90 backdrop-blur-md">
       <div class="max-w-4xl mx-auto px-6 sm:px-8 h-16 flex items-center justify-between gap-4">
         <a href="#top" class="font-serif text-lg font-semibold text-stone-900 tracking-tight hover:text-accent-700 transition-colors">
           Ashrith Edukulla
@@ -373,7 +387,7 @@
         <div class="space-y-4 text-stone-500 leading-[1.8] max-w-2xl">
           <p>
             I am a Robotics undergraduate at the
-            <a href="https://umich.edu" target="_blank" rel="noopener" class="text-accent-700 hover:text-accent-800 underline underline-offset-2 decoration-accent-200 hover:decoration-accent-400 transition-colors">University of Michigan</a>
+            <a href="https://umich.edu" target="_blank" rel="noopener" class="text-accent-600 hover:text-accent-800 underline underline-offset-2 decoration-stone-300 hover:decoration-stone-500 transition-colors">University of Michigan</a>
             who spends most of his time writing the software that makes robots see, decide, and move. Right now
             that means an end-to-end autonomous driving stack at NiFT and world-model navigation at the Scalable
             Spatial Intelligence Lab, after a summer building underwater perception at Moby Robotics.
@@ -686,7 +700,7 @@
         <!-- Spotlight: VLA Safety Force Field -->
         <article data-proj="av" data-group="featured" class="mb-6 card overflow-hidden">
           <div class="grid md:grid-cols-2">
-            <div class="bg-[#F3EFE7] p-7 sm:p-9 flex flex-col justify-center gap-5 border-b md:border-b-0 md:border-r border-stone-100">
+            <div class="bg-[#FAFAFA] p-7 sm:p-9 flex flex-col justify-center gap-5 border-b md:border-b-0 md:border-r border-stone-100">
               <span class="text-[11px] uppercase tracking-wider font-semibold text-accent-600">Flagship &middot; AV Safety</span>
               <div class="grid grid-cols-3 gap-4">
                 <div>
@@ -1011,7 +1025,7 @@
 
       <!-- Contact -->
       <section id="contact" class="py-16 scroll-mt-20 border-t border-stone-100">
-        <div class="rounded-2xl bg-[#F3EFE7] border border-stone-100 p-8 sm:p-12">
+        <div class="rounded-2xl bg-[#FAFAFA] border border-stone-100 p-8 sm:p-12">
           <h2 class="font-serif text-2xl font-semibold text-stone-900 mb-4">Let's connect</h2>
           <p class="max-w-xl text-stone-500 leading-relaxed">
             I'm always glad to hear from engineers, researchers, and teams building autonomy.
