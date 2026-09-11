@@ -1,7 +1,7 @@
 # Ashrith Edukulla: Portfolio Site
 
 ## Project Overview
-Personal portfolio of Ashrith Edukulla (B.S.E. Robotics @ University of Michigan, GPA 3.8, expected May 2027).
+Personal portfolio of Ashrith Edukulla (B.S.E. Robotics @ University of Michigan, GPA 3.8, expected December 2027).
 Clean, minimal layout with no animations and no canvas scenes. Framed for **software engineering** roles:
 perception/navigation systems, C++/Python, systems and infrastructure work up front.
 
