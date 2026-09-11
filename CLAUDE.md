@@ -28,6 +28,21 @@ Hero (photo, links, intro) → At a Glance (stats) → News → About → What I
 Education → Experience (Industry & Research, then Teaching) → Papers → Projects (Featured + More) →
 Skills → Awards → Contact
 
+## Color
+Palette is drawn from the University of Michigan official brand guidelines
+(brand.umich.edu/design-resources/colors), not from framework defaults.
+
+- Accent: **Tappan Red #9A3324** (U-M secondary palette), ramped 50/100/500/600/700/800
+- Ground: warm paper **#FAF7F2**, a tint of UMMA Tan #CFC096. Never pure white.
+- Cards: #FFFDFA on a #E5DFD4 border
+- Neutrals: warm stone, never Tailwind `slate-*` (slate is blue-grey and reads synthetic)
+
+**Do not reintroduce blue/indigo accents or any gradient.** Tailwind's default indigo-500
+plus indigo-to-purple gradients are the documented "AI-generated site" tell, which is
+exactly what this palette was chosen to get away from. There are zero `bg-gradient-*`
+classes on the page; keep it that way. Colour should come from the real logos and project
+photography, not from UI chrome.
+
 ## Conventions
 - Light theme only, with no dark mode classes or toggle. This applies to `full_stack_av.html` too.
 - Content edits: all portfolio text lives directly in `index.html` sections
